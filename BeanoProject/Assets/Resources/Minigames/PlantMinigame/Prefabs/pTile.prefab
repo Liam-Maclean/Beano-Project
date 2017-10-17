@@ -32,16 +32,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1599321646}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4588ddeff618cc84ca6d52bef3b4825a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d071aa9b0309794797bacf5e73ab117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantType: 0
-  changedType: 0
-  bActive: 1
-  normalSprite: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc, type: 3}
-  bonusSprite: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc, type: 3}
-  dirtSprite: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc, type: 3}
-  waterSprite: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 1715d9d956a7f7849bf931eebaec390c, type: 3}
+  - {fileID: 21300000, guid: 4ca108f93abb2cb4fad4abb3853c88e3, type: 3}
+  - {fileID: 21300000, guid: 3771b25aec3190e44831fb6c24650a7d, type: 3}
+  - {fileID: 21300000, guid: e470cd54cd104df47abc99dedc2e4eed, type: 3}
+  - {fileID: 21300000, guid: 30e83786e3ef1f04dad2cb16c8824b59, type: 3}
+  - {fileID: 21300000, guid: a5f1efa66214d1546b4f69d95fbb5cab, type: 3}
+  - {fileID: 21300000, guid: 0929e5c046c08a9448d260aa7c874be7, type: 3}
+  - {fileID: 21300000, guid: 8409dfaed31d21244aab4d26560a89ba, type: 3}
+  - {fileID: 21300000, guid: 78f06223753868e4f882e2431ec5610b, type: 3}
+  - {fileID: 21300000, guid: 6b45ce8cad6821c4daeed10cd39b08d0, type: 3}
+  - {fileID: 21300000, guid: 8ccfd5c74238b884c9cb088de9568af5, type: 3}
+  - {fileID: 21300000, guid: 68376c160645e9c4f9bb5e40466ac727, type: 3}
 --- !u!212 &21235580
 SpriteRenderer:
   m_ObjectHideFlags: 1

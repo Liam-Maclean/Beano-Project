@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class ManagerScript : MonoBehaviour {
 
 	PlantGrid pGrid = new PlantGrid();
-	public int height, width;
+	public int height, width, backgroundHeight, backgroundWidth;
 
 	void Start()
 	{
-		pGrid.CreateGrd (width, height);
+		Screen.orientation = ScreenOrientation.Portrait;
+		pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
 	}
 
 
@@ -28,7 +30,6 @@ public class ManagerScript : MonoBehaviour {
 
 			if (hit) {
 				if (hit.collider.gameObject.tag == "Plant") {
-					hit.transform.GetComponent<PlantScript> ().bActive = false;
 				}
 			}
 		}
