@@ -11,7 +11,7 @@ public class TileTextureManager : MonoBehaviour {
 	void Start () {
 		sr = this.gameObject.GetComponent<SpriteRenderer> ();
 
-		sr.sprite = sprites[Random.Range (0, sprites.Length)];
+		sr.sprite = sprites[Random.Range (0, 6)];
 	}
 	
 	// Update is called once per frame
