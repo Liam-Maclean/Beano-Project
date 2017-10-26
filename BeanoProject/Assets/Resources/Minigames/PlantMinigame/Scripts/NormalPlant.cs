@@ -4,14 +4,6 @@ using System.Collections.Specialized;
 using UnityEngine;
 
 
-public enum PlantType
-{
-	normal,
-	bonus,
-	water,
-	dirt
-}
-
 public class NormalPlant : BasePlant {
 	public Sprite[] sprites;
 	private SpriteRenderer sr;
