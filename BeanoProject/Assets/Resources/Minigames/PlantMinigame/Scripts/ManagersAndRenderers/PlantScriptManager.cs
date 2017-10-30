@@ -17,11 +17,24 @@ using UnityEngine;
 // Liam MacLean - 25/10/2017 03:39
 
 
+enum PlantComponentType
+{
+	//Enums must be indexed for RNG
+	NORMALPLANT = 0,
+	DOUBLESCOREPLANT = 1,
+	DEBUFFPLANT = 2,
+	DISABLEPLANT = 3
+}
+
+
 public class PlantScriptManager : MonoBehaviour 
 {
+	PlantComponentType plantComponentType;
+
     //Plant type component
 	NormalPlant ps;
-
+    DoubleScorePlant dsp;
+	DebuffPlant dbp;
     //all the sprites the respawner requires
 	public Sprite[] sprites;
 
@@ -39,11 +52,29 @@ public class PlantScriptManager : MonoBehaviour
 	//add randomised plant component
 	public void AddNewPlantComponent()
 	{
-        //gameObject.AddComponent<NormalPlant>();
-        ps = gameObject.AddComponent<NormalPlant> ();
-		ps.SetSprite (sprites [0]);
+		plantComponentType = (PlantComponentType) Random.Range (0, 3);
+
+		switch (plantComponentType) {
+		case PlantComponentType.NORMALPLANT:
+			ps = gameObject.AddComponent<NormalPlant> ();
+			ps.SetSprite (sprites [0]);
+			break;
+		case PlantComponentType.DOUBLESCOREPLANT:
+			dsp = gameObject.AddComponent<DoubleScorePlant> ();
+			dsp.SetSprite (sprites [1]);
+			break;
+		case PlantComponentType.DEBUFFPLANT:
+			dbp = gameObject.AddComponent<DebuffPlant> ();
+			dbp.SetSprite (sprites [2]);
+			break;
+		case PlantComponentType.DISABLEPLANT:
+			break;
+		}
+
+        
 	
 	}
+
 
     //if tile is swiped over
     public int Swiped()
@@ -57,10 +88,10 @@ public class PlantScriptManager : MonoBehaviour
     //update
 	void Update()
 	{
-		if (!ps.GetActive ()) {  
-            ps.SetSprite(sprites[3]);
-            StartTimer ();
-		}
+		//if (!ps.GetActive ()) {  
+        //    ps.SetSprite(sprites[3]);
+        //    StartTimer ();
+		//}
     }
 
     //starts the timer to remove plant component
@@ -69,6 +100,22 @@ public class PlantScriptManager : MonoBehaviour
 		timer += Time.deltaTime;
 
 		if (timer > 2.0f) {
+
+			switch (plantComponentType) {
+			case PlantComponentType.NORMALPLANT:
+				ps.RemoveComponent ();
+				break;
+			case PlantComponentType.DOUBLESCOREPLANT:
+				dsp.RemoveComponent();
+				break;
+			case PlantComponentType.DISABLEPLANT:
+				dbp.RemoveComponent ();
+				break;
+			case PlantComponentType.DEBUFFPLANT:
+				///Debuff remove component
+				break;
+			}
+
             ps.RemoveComponent();
             AddNewPlantComponent();
 			timer = 0f;
