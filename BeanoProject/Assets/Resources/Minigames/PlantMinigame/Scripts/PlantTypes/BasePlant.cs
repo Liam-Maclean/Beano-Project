@@ -17,7 +17,7 @@ public class BasePlant : MonoBehaviour
 {
 	//set if the plant is active or not 
 	private bool bActive = true;
-	private SpriteRenderer sr;
+	protected SpriteRenderer sr;
 
 	//getter
 	public bool GetActive()
@@ -47,8 +47,6 @@ public class BasePlant : MonoBehaviour
 	{
 		Destroy (this);
 	}
-
-
 
 	void Awake()
 	{

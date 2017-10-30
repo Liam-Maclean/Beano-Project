@@ -5,8 +5,7 @@ using UnityEngine;
 
 
 public class NormalPlant : BasePlant {
-	public Sprite[] sprites;
-	private SpriteRenderer sr;
+
 	public int score = 1;
 
 		
@@ -18,7 +17,6 @@ public class NormalPlant : BasePlant {
 
 	public override void ActivatePlant()
 	{
-		score++;
 		base.ActivatePlant ();
 	}
 }
