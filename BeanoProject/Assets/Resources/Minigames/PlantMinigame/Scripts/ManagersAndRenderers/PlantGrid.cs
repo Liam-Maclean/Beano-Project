@@ -26,7 +26,7 @@ public class PlantGrid : MonoBehaviour{
                 if (y == backgroundHeight - 9)
                 {
                     m_tileGrid[y, x].GetComponent<TileTextureManager>().SetTexture(6);
-
+				
                     
                 }
             }

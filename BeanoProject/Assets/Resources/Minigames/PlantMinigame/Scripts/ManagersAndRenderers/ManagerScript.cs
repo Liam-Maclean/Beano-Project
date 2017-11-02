@@ -29,7 +29,7 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
-        ScoreText.text = "Score: " + PlayerScore.ToString();
+        //ScoreText.text = "Score: " + PlayerScore.ToString();
 		Screen.orientation = ScreenOrientation.Landscape;
 		pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
 	}
@@ -43,9 +43,9 @@ public class ManagerScript : MonoBehaviour {
     //update function
 	void Update()
 	{
-        ScoreText.text = "Score: " + PlayerScore.ToString();
-
-        OnTileClick ();
+        //ScoreText.text = "Score: " + PlayerScore.ToString();
+		//
+        //OnTileClick ();
 	}
 
     //mouse input class
