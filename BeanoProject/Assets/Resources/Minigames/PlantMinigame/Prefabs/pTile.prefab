@@ -1,53 +1,94 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-215042558
-MonoBehaviour:
+--- !u!1001 &100100000
+Prefab:
   m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1964141653562166}
+  m_IsPrefabParent: 1
+--- !u!1 &1964141653562166
+GameObject:
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9f5f89818f3e9499374491a9f036ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &417890
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4834619067460874}
+  - component: {fileID: 114108997198143678}
+  - component: {fileID: 61547443376336890}
+  - component: {fileID: 212316770518963536}
+  m_Layer: 0
+  m_Name: pTile
+  m_TagString: Plant
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4834619067460874
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1599321646}
+  m_GameObject: {fileID: 1964141653562166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.73, y: 2.72, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &11454740
+--- !u!61 &61547443376336890
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964141653562166}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1.1171429, y: 1.3214285}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &114108997198143678
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1599321646}
+  m_GameObject: {fileID: 1964141653562166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4588ddeff618cc84ca6d52bef3b4825a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d071aa9b0309794797bacf5e73ab117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantType: 0
-  changedType: 0
-  bActive: 1
-  normalSprite: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc, type: 3}
-  bonusSprite: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc, type: 3}
-  dirtSprite: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc, type: 3}
-  waterSprite: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc, type: 3}
---- !u!212 &21235580
+  sprites:
+  - {fileID: 21300000, guid: c76039584ba9d404b98fb286dc00ac39, type: 3}
+  - {fileID: 21300000, guid: a01fccb647d78174e9a9de4fc20873a8, type: 3}
+  - {fileID: 21300000, guid: a5139e6406b2a1247ba9f300a1f14eb3, type: 3}
+  - {fileID: 21300000, guid: 1332fc248b15bef439f206b72237a153, type: 3}
+--- !u!212 &212316770518963536
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1599321646}
+  m_GameObject: {fileID: 1964141653562166}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -74,120 +115,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c76039584ba9d404b98fb286dc00ac39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.1171429, y: 1.3214285}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: normalSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc,
-        type: 3}
-    - target: {fileID: 0}
-      propertyPath: bonusSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc,
-        type: 3}
-    - target: {fileID: 0}
-      propertyPath: dirtSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc,
-        type: 3}
-    - target: {fileID: 0}
-      propertyPath: waterSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 67b95823847a77d4f810e89cf603ebdc,
-        type: 3}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 0}
-  m_IsPrefabParent: 1
---- !u!1 &1599321646
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 417890}
-  - component: {fileID: 21235580}
-  - component: {fileID: 11454740}
-  - component: {fileID: 114116696866698524}
-  - component: {fileID: 114212724627674042}
-  m_Layer: 0
-  m_Name: pTile
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &114116696866698524
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1599321646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 81
-    i1: 246
-    i2: 201
-    i3: 205
-    i4: 217
-    i5: 154
-    i6: 53
-    i7: 180
-    i8: 75
-    i9: 194
-    i10: 10
-    i11: 125
-    i12: 126
-    i13: 105
-    i14: 247
-    i15: 128
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114212724627674042
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1599321646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
