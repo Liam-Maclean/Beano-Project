@@ -30,7 +30,7 @@ public class ManagerScript : MonoBehaviour {
 	void Start()
 	{
         ScoreText.text = "Score: " + PlayerScore.ToString();
-		Screen.orientation = ScreenOrientation.Portrait;
+		Screen.orientation = ScreenOrientation.Landscape;
 		pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
 	}
 
