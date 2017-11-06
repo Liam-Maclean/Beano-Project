@@ -63,7 +63,7 @@ public class TouchScript : MonoBehaviour
                 break;
 
                 //if the touch has ended
-                case TouchPhase.Ended:
+				case TouchPhase.Ended:
                 {
                         //store the end position
                         m_touchEnd = touch.position;
@@ -99,7 +99,7 @@ public class TouchScript : MonoBehaviour
                             m_combinedScore += m_plantScore[i];
                         }
                         m_combinedScore *= m_plantScore.Count;
-                        manager.IncrementScore(m_combinedScore);
+                        //manager.IncrementScore(m_combinedScore);
                         m_combinedScore = 0;
                         m_plantScore.Clear();
                 }

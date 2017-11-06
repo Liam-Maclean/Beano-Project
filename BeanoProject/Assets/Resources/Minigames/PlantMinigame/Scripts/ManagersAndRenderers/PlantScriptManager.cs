@@ -52,7 +52,9 @@ public class PlantScriptManager : MonoBehaviour
 	//add randomised plant component
 	public void AddNewPlantComponent()
 	{
-		plantComponentType = (PlantComponentType) Random.Range (0, 3);
+		//plantComponentType = (PlantComponentType) Random.Range (0, 3);
+
+		plantComponentType = 0;
 
 		switch (plantComponentType) {
 		case PlantComponentType.NORMALPLANT:
@@ -88,10 +90,10 @@ public class PlantScriptManager : MonoBehaviour
     //update
 	void Update()
 	{
-		//if (!ps.GetActive ()) {  
-        //    ps.SetSprite(sprites[3]);
-        //    StartTimer ();
-		//}
+		if (!ps.GetActive ()) {  
+            ps.SetSprite(sprites[3]);
+            StartTimer ();
+		}
     }
 
     //starts the timer to remove plant component
