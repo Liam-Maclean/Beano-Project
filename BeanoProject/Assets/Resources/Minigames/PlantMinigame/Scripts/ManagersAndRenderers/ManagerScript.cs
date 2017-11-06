@@ -18,55 +18,114 @@ using UnityEngine.UI;
 
 public class ManagerScript : MonoBehaviour {
 
+	//multiplayer local player info
+	PlayerInfo LocalPlayerInfo;
+	private PortaitScript LocalPlayerStats;
+
+
     //grid for background and plants
 	PlantGrid pGrid = new PlantGrid();
 	public int height, width, backgroundHeight, backgroundWidth;
 
-    public int PlayerScore = 0;
+	//calcualting score for plants
+	private int m_combinedScore;
+	private List<int> m_plantScore = new List<int>();
 
-    public Text ScoreText;
+	//raycast stuff
+	private Vector3 StartDrag, EndDrag;
+	private bool oldMouseDown = false, newMouseDown = false;
+
+	//Score stuff
+	public GameObject Player1, Player2, Player3, Player4;
+	private PortaitScript Player1Stats, Player2Stats, Player3Stats, Player4Stats;
 
     //start function
 	void Start()
 	{
-        //ScoreText.text = "Score: " + PlayerScore.ToString();
+		//set up screen orientation and plant grid
 		Screen.orientation = ScreenOrientation.Landscape;
 		pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
+
+		//get the component stuff from the portait prefabs
+		Player1Stats = Player1.GetComponent<PortaitScript> ();
+		Player2Stats = Player2.GetComponent<PortaitScript> ();
+		Player3Stats = Player3.GetComponent<PortaitScript> ();
+		Player4Stats = Player4.GetComponent<PortaitScript> ();
 	}
 
-    //increment score method
-    public void IncrementScore(int value)
-    {
-        PlayerScore += value;
-    }
+	//set up local multiplayer info so score only goes up on the local player
+	void SetUpLocalPlayer()
+	{
+		switch (LocalPlayerInfo.multiplayerIndex) {
+		case 1:
+			LocalPlayerStats = Player1Stats;
+			break;
+		case 2:
+			LocalPlayerStats = Player2Stats;
+			break;
+		case 3: 
+			LocalPlayerStats = Player3Stats;
+			break;
+		case 4: 
+			LocalPlayerStats = Player4Stats;
+			break;
+		}
+	}
 
     //update function
 	void Update()
 	{
-        //ScoreText.text = "Score: " + PlayerScore.ToString();
+        //ScoreText.text = "Score: "
 		//
-        //OnTileClick ();
+        OnTileClick ();
 	}
-
+		
     //mouse input class
 	void OnTileClick()
 	{
-        ////if left mouse button is down
-		//if (Input.GetMouseButtonDown(0))
-		//{
-        //    //shoot a ray from the mouse position to the screen
-		//	Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //
-        //    //create a raycast
-		//	RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction, Mathf.Infinity);
-        //
-        //
-        //    //if that raycast hit's something that's to do with plants
-		//    if (hit.collider.gameObject.tag == "Plant") {
-        //        //that plant has been "swiped" (TESTING PURPOSES ONLY)
-        //        hit.collider.gameObject.GetComponent<PlantScriptManager>().Swiped();
-		//    }
-		//	
-		//}
+		newMouseDown = Input.GetMouseButton (0);
+
+        //if left mouse button is down
+		if (newMouseDown == true && oldMouseDown == false)
+		{
+            //shoot a ray from the mouse position to the screen
+			StartDrag = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			StartDrag.z = 0;
+		}
+		if (newMouseDown == false && oldMouseDown == true)
+		{
+			EndDrag =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			EndDrag.z = 0;
+
+			Vector2 direction = (EndDrag - StartDrag).normalized;
+
+
+			RaycastHit2D[] hits = Physics2D.RaycastAll (StartDrag, direction);
+			//Gizmos.DrawLine (new Vector3(StartDrag.x, StartDrag.y, -5), new Vector3(EndDrag.x, EndDrag.y, -5));
+			//Debug.DrawLine (new Vector3(StartDrag.x, StartDrag.y, 0), new Vector3(EndDrag.x, EndDrag.y, 0), Color.green, 100.0f);
+			for (int i = 0; i < hits.Length; i++) {
+				//check if any of them are plants, if they are
+				if (hits[i].collider.tag == "Plant")
+				{
+					//Get that plants script and set it to swiped
+					PlantScriptManager tempPlantScript = hits[i].collider.gameObject.GetComponent<PlantScriptManager>();
+
+					//add the plants score to the list of scores
+					m_plantScore.Add(tempPlantScript.Swiped());
+				}
+			}
+
+			//for each score swiped
+			for (int i = 0; i < m_plantScore.Count; i++)
+			{
+				//add that to the game score (DO SOMETHING FUNKY WITH MULTIPLIERS HERE)
+				m_combinedScore += m_plantScore[i];
+			}
+			m_combinedScore *= m_plantScore.Count;
+			Player1Stats.IncrementScore (m_combinedScore);
+			m_combinedScore = 0;
+			m_plantScore.Clear();
+		}
+		oldMouseDown = newMouseDown;
 	}
 }

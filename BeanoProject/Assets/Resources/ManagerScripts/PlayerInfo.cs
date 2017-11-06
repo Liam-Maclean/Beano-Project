@@ -14,15 +14,15 @@ public enum Character
 //to retrieve this info, GameObject.getComponent should be used
 public class PlayerInfo : MonoBehaviour{
 	//multiplayer index for each player
-	int multiplayerIndex;
+	public int multiplayerIndex;
 
 	//enum storing character chosen
-	Character characterChosen = Character.none;
+	public Character characterChosen = Character.none;
 
 	//score of the player during and after minigames
-	int score = 0;
+	public int score = 0;
 
 	//earned external currency 
 	//THIS WILL LIKELY MOVE SOMEWHERE ELSE
-	int earnedCurrency = 0;
+	public int earnedCurrency = 0;
 }
