@@ -138,13 +138,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1797720899962768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d080c41bb7c7b45a8dd585249164f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1229dc28d46b7ba43b4e60ef9e27c79f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textList:
-  - Dennis
-  - Gnasher
-  - Dennis's Dad
+  textList: []
 --- !u!212 &212524646545168428
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -177,7 +174,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5dfecc58dd259c24b9c6c7c5461ae45e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c27a0af2f1963844fb4c12696ed00a6f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -219,7 +216,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: de53eb87873635a428e2d3fab2b9809d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 60ee793057253ad419af5d28f4ebd035, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -261,7 +258,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 978abaa465d393a488c30401a592cbf6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 244add3da2b07b84c830a0934be8bf4f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

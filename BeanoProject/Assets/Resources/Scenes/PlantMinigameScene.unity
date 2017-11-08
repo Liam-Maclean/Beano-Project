@@ -286,6 +286,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1055334934}
     m_Modifications:
+    - target: {fileID: 114286706165368904, guid: dad02172ff255224d9d41e62de169547,
+        type: 2}
+      propertyPath: portaitSprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 224307916412122538, guid: dad02172ff255224d9d41e62de169547,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -376,6 +381,24 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114286706165368904, guid: dad02172ff255224d9d41e62de169547,
+        type: 2}
+      propertyPath: portaitSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 1064325833551088, guid: f17c584bbd299594ea55e4c779ae52d4,
+        type: 2}
+    - target: {fileID: 114286706165368904, guid: dad02172ff255224d9d41e62de169547,
+        type: 2}
+      propertyPath: portaitSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 1151616023549136, guid: f17c584bbd299594ea55e4c779ae52d4,
+        type: 2}
+    - target: {fileID: 114286706165368904, guid: dad02172ff255224d9d41e62de169547,
+        type: 2}
+      propertyPath: portaitSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 1726965090257184, guid: f17c584bbd299594ea55e4c779ae52d4,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dad02172ff255224d9d41e62de169547, type: 2}
   m_IsPrefabParent: 0

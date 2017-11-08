@@ -4,16 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+//==============================================
+//
+// Character Selection Script
+//
+// This class controls the selection of characters
+//
+// Kevin Conaghan - 07/11/17
+
+
 
 public class CharacterSelect : MonoBehaviour {
 
+	//Initialise list of character sprites and names
 	private GameObject[] characterList;
 	public List<string> textList; 
-
 
 	private int index;
 
 	Text nameText;
+
 
 	private void Start()
 	{
@@ -46,6 +56,7 @@ public class CharacterSelect : MonoBehaviour {
 		}
 	}
 
+	//Left button 
 	public void Toggleleft()
 	{
 		//Toggle off the current sprite
@@ -65,15 +76,18 @@ public class CharacterSelect : MonoBehaviour {
 
 	}
 
-
+	//Right button
 	public void ToggleRight()
 	{
 		//Toggle off the current sprite
 		characterList[index].SetActive(false);
 
+		//Increment index so it can cycle through the list of characters
 		index++;
+
 		if (index == characterList.Length)
 		{
+			// When at maximum character list reset to return to original character creating a loop effect
 			index = 0;
 		}
 
@@ -82,14 +96,20 @@ public class CharacterSelect : MonoBehaviour {
 		nameText.text = textList [index];
 	}
 
+	//Confirm button
 	public void ConfirmButton()
 	{
+		//Save the player's choice of character
 		PlayerPrefs.SetInt ("CharacterSelected", index);
-		SceneManager.LoadScene ("TestScene");
+
+		//Load the next scene
+		SceneManager.LoadScene ("PlantMinigamescene");
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
+		
 		
 	}
 }
