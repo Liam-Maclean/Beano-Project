@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Plant
+  - Text
+  - GameManager
+  - Node
   layers:
   - Default
   - TransparentFX
