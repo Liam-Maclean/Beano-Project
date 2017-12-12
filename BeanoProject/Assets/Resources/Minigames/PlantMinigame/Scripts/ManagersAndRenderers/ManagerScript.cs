@@ -97,10 +97,11 @@ public class ManagerScript : MonoBehaviour {
 			EndDrag =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			EndDrag.z = 0;
 
+			Vector2 directionPreNorm = (EndDrag - StartDrag);
 			Vector2 direction = (EndDrag - StartDrag).normalized;
 
 
-			RaycastHit2D[] hits = Physics2D.RaycastAll (StartDrag, direction);
+			RaycastHit2D[] hits = Physics2D.RaycastAll (StartDrag, direction, directionPreNorm.magnitude);
 			//Gizmos.DrawLine (new Vector3(StartDrag.x, StartDrag.y, -5), new Vector3(EndDrag.x, EndDrag.y, -5));
 			//Debug.DrawLine (new Vector3(StartDrag.x, StartDrag.y, 0), new Vector3(EndDrag.x, EndDrag.y, 0), Color.green, 100.0f);
 			for (int i = 0; i < hits.Length; i++) {
