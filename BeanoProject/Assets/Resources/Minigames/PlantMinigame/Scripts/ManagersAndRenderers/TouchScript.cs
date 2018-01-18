@@ -32,8 +32,8 @@ public class TouchScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		//manager script initialisation
         manager = this.GetComponent<ManagerScript>();
-        //rb.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -77,7 +77,7 @@ public class TouchScript : MonoBehaviour
                         m_swipeDirection.Normalize();
 
                         //check for multiple hits from a raycast and store them
-					RaycastHit2D[] hit = Physics2D.RaycastAll(ray2.origin, m_swipeDirection, m_swipeDirection.magnitude);
+						RaycastHit2D[] hit = Physics2D.RaycastAll(ray2.origin, m_swipeDirection, m_swipeDirection.magnitude);
 
                         //for everything hit by the raycast
                         for (int i = 0; i < hit.Length; i++)

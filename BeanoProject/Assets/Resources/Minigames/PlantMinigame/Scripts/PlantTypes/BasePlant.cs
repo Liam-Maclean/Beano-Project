@@ -17,8 +17,21 @@ public class BasePlant : MonoBehaviour
 {
 	//set if the plant is active or not 
 	private bool bActive = true;
+	protected int m_score = 0;
 	protected SpriteRenderer sr;
 
+	//getter
+	public int GetScore()
+	{
+		return m_score;
+	}
+
+	//setter
+	public void SetScore(int score)
+	{
+		m_score = score;
+	}
+		
 	//getter
 	public bool GetActive()
 	{
@@ -42,7 +55,7 @@ public class BasePlant : MonoBehaviour
 	{
 		sr.sprite = sprite;
 	}
-
+		
 	public void RemoveComponent()
 	{
 		Destroy (this);
@@ -53,9 +66,9 @@ public class BasePlant : MonoBehaviour
 		sr = this.transform.GetComponent<SpriteRenderer> ();
 	}
 
-	public virtual void ActivatePlant()
+	public virtual void ActivatePlant(bool bTrueFalse)
 	{
-		SetActive (false);
+		SetActive (bTrueFalse);
 	}
 
 }

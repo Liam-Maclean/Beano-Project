@@ -42,6 +42,7 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
+		FloatingTextManager.Initialise ();
 		//set up screen orientation and plant grid
 		Screen.orientation = ScreenOrientation.Landscape;
 		pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
@@ -123,6 +124,7 @@ public class ManagerScript : MonoBehaviour {
 				m_combinedScore += m_plantScore[i];
 			}
 			m_combinedScore *= m_plantScore.Count;
+			FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
 			Player1Stats.IncrementScore (m_combinedScore);
 			m_combinedScore = 0;
 			m_plantScore.Clear();
