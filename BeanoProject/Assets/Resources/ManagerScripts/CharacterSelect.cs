@@ -85,7 +85,7 @@ public class CharacterSelect : MonoBehaviour {
 	public void ConfirmButton()
 	{
 		PlayerPrefs.SetInt ("CharacterSelected", index);
-		SceneManager.LoadScene ("TestScene");
+		SceneManager.LoadScene ("PlantMinigameScene");
 	}
 
 	// Update is called once per frame

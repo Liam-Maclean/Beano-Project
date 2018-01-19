@@ -9,21 +9,21 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1474733256050752}
+  m_RootGameObject: {fileID: 1576396723639078}
   m_IsPrefabParent: 1
---- !u!1 &1474733256050752
+--- !u!1 &1576396723639078
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4521572404271032}
-  - component: {fileID: 114046971028826690}
-  - component: {fileID: 114329673853452414}
-  - component: {fileID: 114295486277000924}
-  - component: {fileID: 212145067220370060}
-  - component: {fileID: 61667042684058808}
+  - component: {fileID: 4166049452901570}
+  - component: {fileID: 114734380526544768}
+  - component: {fileID: 114070081937682542}
+  - component: {fileID: 114875953060772866}
+  - component: {fileID: 212907673173290414}
+  - component: {fileID: 61764552209763366}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -31,12 +31,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4521572404271032
+--- !u!4 &4166049452901570
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1474733256050752}
+  m_GameObject: {fileID: 1576396723639078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.6, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
@@ -44,12 +44,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61667042684058808
+--- !u!61 &61764552209763366
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1474733256050752}
+  m_GameObject: {fileID: 1576396723639078}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -69,51 +69,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.67, y: 8.63}
   m_EdgeRadius: 0
---- !u!114 &114046971028826690
+--- !u!114 &114070081937682542
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1474733256050752}
+  m_GameObject: {fileID: 1576396723639078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 235da75ca36779842a76df9481acbe30, type: 3}
+  m_Script: {fileID: 11500000, guid: fadb70c92cb008749a07b9a018b9a7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   originHealth: 3
-  enemyMovSpeedX: 1
+  enemyMovSpeedX: 2
   enemyMovSpeedY: 0
-  spawnPos: {x: -7.6, y: 0}
-  boundPos: {x: 7.6, y: 0}
---- !u!114 &114295486277000924
+  spawnPos: {x: -7.5, y: 0}
+  boundPos: {x: 7.5, y: 0}
+--- !u!114 &114734380526544768
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1474733256050752}
+  m_GameObject: {fileID: 1576396723639078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da637110e1317624fa629bd9f65b86ec, type: 3}
+  m_Script: {fileID: 11500000, guid: ebfe003289cde98469ea240be387bbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114329673853452414
+--- !u!114 &114875953060772866
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1474733256050752}
+  m_GameObject: {fileID: 1576396723639078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f470d44328e4184fac985e0198bc172, type: 3}
+  m_Script: {fileID: 11500000, guid: 985e7f8e01814334c97d55dd62bcc64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pie: {fileID: 0}
---- !u!212 &212145067220370060
+--- !u!212 &212907673173290414
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1474733256050752}
+  m_GameObject: {fileID: 1576396723639078}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
