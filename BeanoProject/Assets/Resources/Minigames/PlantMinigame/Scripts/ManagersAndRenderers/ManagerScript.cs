@@ -42,6 +42,7 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
+		FloatingTextManager.Initialise ();
 		//set up screen orientation and plant grid
 		Screen.orientation = ScreenOrientation.Landscape;
 		pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
@@ -97,10 +98,11 @@ public class ManagerScript : MonoBehaviour {
 			EndDrag =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			EndDrag.z = 0;
 
+			Vector2 directionPreNorm = (EndDrag - StartDrag);
 			Vector2 direction = (EndDrag - StartDrag).normalized;
 
 
-			RaycastHit2D[] hits = Physics2D.RaycastAll (StartDrag, direction);
+			RaycastHit2D[] hits = Physics2D.RaycastAll (StartDrag, direction, directionPreNorm.magnitude);
 			//Gizmos.DrawLine (new Vector3(StartDrag.x, StartDrag.y, -5), new Vector3(EndDrag.x, EndDrag.y, -5));
 			//Debug.DrawLine (new Vector3(StartDrag.x, StartDrag.y, 0), new Vector3(EndDrag.x, EndDrag.y, 0), Color.green, 100.0f);
 			for (int i = 0; i < hits.Length; i++) {
@@ -122,6 +124,7 @@ public class ManagerScript : MonoBehaviour {
 				m_combinedScore += m_plantScore[i];
 			}
 			m_combinedScore *= m_plantScore.Count;
+			FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
 			Player1Stats.IncrementScore (m_combinedScore);
 			m_combinedScore = 0;
 			m_plantScore.Clear();

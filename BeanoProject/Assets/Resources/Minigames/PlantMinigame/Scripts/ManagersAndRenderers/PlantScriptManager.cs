@@ -29,13 +29,17 @@ enum PlantComponentType
 
 public class PlantScriptManager : MonoBehaviour 
 {
+	//enum for plants
 	PlantComponentType plantComponentType;
 
     //Plant type component
-	NormalPlant ps;
-    DoubleScorePlant dsp;
-	DebuffPlant dbp;
-    //all the sprites the respawner requires
+	BasePlant basePlant;
+
+	//NormalPlant ps;
+    //DoubleScorePlant dsp;
+	//DebuffPlant dbp;
+
+	//all the sprites the respawner requires
 	public Sprite[] sprites;
 
     //timer for respawning
@@ -52,37 +56,35 @@ public class PlantScriptManager : MonoBehaviour
 	//add randomised plant component
 	public void AddNewPlantComponent()
 	{
-		//plantComponentType = (PlantComponentType) Random.Range (0, 3);
+		plantComponentType = (PlantComponentType) Random.Range (0, 3);
 
-		plantComponentType = 0;
+		//plantComponentType = 0;
 
 		switch (plantComponentType) {
 		case PlantComponentType.NORMALPLANT:
-			ps = gameObject.AddComponent<NormalPlant> ();
-			ps.SetSprite (sprites [0]);
+			basePlant = gameObject.AddComponent<NormalPlant> ();
+			basePlant.SetSprite (sprites [0]);
 			break;
 		case PlantComponentType.DOUBLESCOREPLANT:
-			dsp = gameObject.AddComponent<DoubleScorePlant> ();
-			dsp.SetSprite (sprites [1]);
+			basePlant = gameObject.AddComponent<DoubleScorePlant> ();
+			basePlant.SetSprite (sprites [1]);
 			break;
 		case PlantComponentType.DEBUFFPLANT:
-			dbp = gameObject.AddComponent<DebuffPlant> ();
-			dbp.SetSprite (sprites [2]);
+			basePlant = gameObject.AddComponent<DebuffPlant> ();
+			basePlant.SetSprite (sprites [2]);
 			break;
-		case PlantComponentType.DISABLEPLANT:
-			break;
-		}
-
-        
-	
+		}    
 	}
 
 
     //if tile is swiped over
     public int Swiped()
     {
-        int tempScore = ps.score;
-        ps.SetActive(false);
+		
+		int tempScore = basePlant.GetScore();
+		Debug.Log (basePlant.GetScore ());
+		FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform);
+		basePlant.SetActive(false);
         return tempScore;
     }
 
@@ -90,8 +92,9 @@ public class PlantScriptManager : MonoBehaviour
     //update
 	void Update()
 	{
-		if (!ps.GetActive ()) {  
-            ps.SetSprite(sprites[3]);
+		//if the base plant isn't active
+		if (!basePlant.GetActive ()) {  
+			basePlant.SetSprite(sprites[3]);
             StartTimer ();
 		}
     }
@@ -99,26 +102,14 @@ public class PlantScriptManager : MonoBehaviour
     //starts the timer to remove plant component
 	void StartTimer()
 	{
+		//start timer 
 		timer += Time.deltaTime;
 
+		//if time has reached the limit 
 		if (timer > 2.0f) {
-
-			switch (plantComponentType) {
-			case PlantComponentType.NORMALPLANT:
-				ps.RemoveComponent ();
-				break;
-			case PlantComponentType.DOUBLESCOREPLANT:
-				dsp.RemoveComponent();
-				break;
-			case PlantComponentType.DISABLEPLANT:
-				dbp.RemoveComponent ();
-				break;
-			case PlantComponentType.DEBUFFPLANT:
-				///Debuff remove component
-				break;
-			}
-
-            ps.RemoveComponent();
+			
+			//remove component, add a new one
+			basePlant.RemoveComponent();
             AddNewPlantComponent();
 			timer = 0f;
 		}

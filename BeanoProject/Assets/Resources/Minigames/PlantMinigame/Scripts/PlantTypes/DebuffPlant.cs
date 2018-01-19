@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class DebuffPlant : BasePlant {
 
-	public int score = 3;
 
-	public override void ActivatePlant()
+
+	void Start()
 	{
-		base.ActivatePlant();
+		sr = this.gameObject.GetComponent<SpriteRenderer> ();
+		SetScore (3);
+	}
+
+	public override void ActivatePlant(bool bTrueFalse)
+	{
+		base.ActivatePlant(bTrueFalse);
 	}
 }
