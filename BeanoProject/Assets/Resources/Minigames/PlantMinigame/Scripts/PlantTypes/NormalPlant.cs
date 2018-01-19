@@ -6,18 +6,17 @@ using UnityEngine;
 
 public class NormalPlant : BasePlant {
 
-	public int score = 1;
 
 		
 	void Start()
 	{
 		sr = this.gameObject.GetComponent<SpriteRenderer> ();
-
+		SetScore (1);
 	}
 
-	public override void ActivatePlant()
+	public override void ActivatePlant(bool bTrueFalse)
 	{
-		base.ActivatePlant ();
+		base.ActivatePlant (bTrueFalse);
 	}
 }
 

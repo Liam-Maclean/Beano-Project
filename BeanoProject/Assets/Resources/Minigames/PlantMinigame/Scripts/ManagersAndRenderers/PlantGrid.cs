@@ -25,14 +25,9 @@ public class PlantGrid : MonoBehaviour{
 
                 if (y == backgroundHeight - 9)
                 {
-                    m_tileGrid[y, x].GetComponent<TileTextureManager>().SetTexture(6);
-				
-                    
+                    m_tileGrid[y, x].GetComponent<TileTextureManager>().SetTexture(6);   
                 }
             }
-
-           
-
 		}
 
 		parent.transform.position =  new Vector3 (-(backgroundWidth / 2), -(backgroundHeight / 2), 0.0f);
