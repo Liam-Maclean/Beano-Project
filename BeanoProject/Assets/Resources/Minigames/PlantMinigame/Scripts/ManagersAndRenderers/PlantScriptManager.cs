@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 //==============================================
 //
 // Plant Script Manager class
@@ -35,9 +34,8 @@ public class PlantScriptManager : MonoBehaviour
     //Plant type component
 	BasePlant basePlant;
 
-	//NormalPlant ps;
-    //DoubleScorePlant dsp;
-	//DebuffPlant dbp;
+	public GameObject[] particleGameobjects;
+	List<ParticleSystem> emmiters = new List<ParticleSystem>();
 
 	//all the sprites the respawner requires
 	public Sprite[] sprites;
@@ -47,9 +45,15 @@ public class PlantScriptManager : MonoBehaviour
 
 
     //start function (initialises plant type)
-	void Start()
+	void Awake()
 	{
+		
+
+
 		AddNewPlantComponent ();
+		for (int i = 0; i < particleGameobjects.Length; i++) {
+			emmiters.Add (particleGameobjects [i].GetComponent<ParticleSystem> ());
+		}
 	}
 
 
@@ -85,6 +89,11 @@ public class PlantScriptManager : MonoBehaviour
 		Debug.Log (basePlant.GetScore ());
 		FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform);
 		basePlant.SetActive(false);
+
+		for (int i = 0; i < emmiters.Count; i++) {
+			emmiters [i].Play();
+		}
+
         return tempScore;
     }
 
