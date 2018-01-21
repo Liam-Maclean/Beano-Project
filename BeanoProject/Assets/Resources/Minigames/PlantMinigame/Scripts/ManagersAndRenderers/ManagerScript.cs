@@ -16,12 +16,28 @@ using UnityEngine.UI;
 //
 // Liam MacLean - 25/10/2017 03:42
 
+enum GameState
+{
+	transition,
+	countdown,
+	playing,
+	end,
+	counting
+}
+	
 public class ManagerScript : MonoBehaviour {
+
+
+	//Game Information
+	public float gameDuration = 30.0f;
+	private float m_gameTimer;
 
 	//multiplayer local player info
 	PlayerInfo LocalPlayerInfo;
-	private PortaitScript LocalPlayerStats;
+	private PortaitScript m_LocalPlayerStats;
 
+	//gamestate 
+	private GameState m_gameState = GameState.playing;
 
     //grid for background and plants
 	PlantGrid pGrid = new PlantGrid();
@@ -32,17 +48,49 @@ public class ManagerScript : MonoBehaviour {
 	private List<int> m_plantScore = new List<int>();
 
 	//raycast stuff
-	private Vector3 StartDrag, EndDrag;
-	private bool oldMouseDown = false, newMouseDown = false;
+	private Vector3 m_StartDrag, m_EndDrag;
+	private bool m_oldMouseDown = false, m_newMouseDown = false;
 
 	//Score stuff
+	public Text timer;
 	public GameObject Player1, Player2, Player3, Player4;
 	private PortaitScript Player1Stats, Player2Stats, Player3Stats, Player4Stats;
+
+	//Game Ended boolean function
+	public bool GameEnded()
+	{
+		//if time hasn't ended return false
+		if (m_gameTimer <= 0.0f) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	//Countdown the game timer
+	public void CountDown()
+	{
+		//remove the time elapsed
+		m_gameTimer -= Time.deltaTime;
+
+		//cast to interger so you don't see float values
+		int tempTimer = (int)m_gameTimer;
+
+		//Set game text timer
+		timer.text = tempTimer.ToString ();
+	}
+
+
 
     //start function
 	void Start()
 	{
+		//initialise timer
+		m_gameTimer = (int)gameDuration;
+
+		//floating text manager public static utility class initialisation
 		FloatingTextManager.Initialise ();
+
 		//set up screen orientation and plant grid
 		Screen.orientation = ScreenOrientation.Landscape;
 		pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
@@ -59,16 +107,16 @@ public class ManagerScript : MonoBehaviour {
 	{
 		switch (LocalPlayerInfo.multiplayerIndex) {
 		case 1:
-			LocalPlayerStats = Player1Stats;
+			m_LocalPlayerStats = Player1Stats;
 			break;
 		case 2:
-			LocalPlayerStats = Player2Stats;
+			m_LocalPlayerStats = Player2Stats;
 			break;
 		case 3: 
-			LocalPlayerStats = Player3Stats;
+			m_LocalPlayerStats = Player3Stats;
 			break;
 		case 4: 
-			LocalPlayerStats = Player4Stats;
+			m_LocalPlayerStats = Player4Stats;
 			break;
 		}
 	}
@@ -76,35 +124,49 @@ public class ManagerScript : MonoBehaviour {
     //update function
 	void Update()
 	{
-        //ScoreText.text = "Score: "
-		//
-        OnTileClick ();
+		
+		switch (m_gameState) {
+		case GameState.transition:
+			break;
+		case GameState.countdown:
+			break;
+		case GameState.playing:
+			if (!GameEnded ()) {
+				CountDown ();
+				OnTileClick ();
+			}
+			break;
+		case GameState.end: 
+			break;
+		case GameState.counting:
+			break;
+		}
 	}
 		
     //mouse input class
 	void OnTileClick()
 	{
-		newMouseDown = Input.GetMouseButton (0);
+		m_newMouseDown = Input.GetMouseButton (0);
 
         //if left mouse button is down
-		if (newMouseDown == true && oldMouseDown == false)
+		if (m_newMouseDown == true && m_oldMouseDown == false)
 		{
             //shoot a ray from the mouse position to the screen
-			StartDrag = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			StartDrag.z = 0;
+			m_StartDrag = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			m_StartDrag.z = 0;
 		}
-		if (newMouseDown == false && oldMouseDown == true)
+		if (m_newMouseDown == false && m_oldMouseDown == true)
 		{
-			EndDrag =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			EndDrag.z = 0;
+			m_EndDrag =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			m_EndDrag.z = 0;
 
-			Vector2 directionPreNorm = (EndDrag - StartDrag);
-			Vector2 direction = (EndDrag - StartDrag).normalized;
+			Vector2 directionPreNorm = (m_EndDrag - m_StartDrag);
+			Vector2 direction = (m_EndDrag - m_StartDrag).normalized;
 
 
-			RaycastHit2D[] hits = Physics2D.RaycastAll (StartDrag, direction, directionPreNorm.magnitude);
-			//Gizmos.DrawLine (new Vector3(StartDrag.x, StartDrag.y, -5), new Vector3(EndDrag.x, EndDrag.y, -5));
-			//Debug.DrawLine (new Vector3(StartDrag.x, StartDrag.y, 0), new Vector3(EndDrag.x, EndDrag.y, 0), Color.green, 100.0f);
+			RaycastHit2D[] hits = Physics2D.RaycastAll (m_StartDrag, direction, directionPreNorm.magnitude);
+
+			//check all the hits from the raycast
 			for (int i = 0; i < hits.Length; i++) {
 				//check if any of them are plants, if they are
 				if (hits[i].collider.tag == "Plant")
@@ -123,12 +185,17 @@ public class ManagerScript : MonoBehaviour {
 				//add that to the game score (DO SOMETHING FUNKY WITH MULTIPLIERS HERE)
 				m_combinedScore += m_plantScore[i];
 			}
+
 			m_combinedScore *= m_plantScore.Count;
+
+			//Create float text feedback numbers
 			FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
+
+			//increment the local players score
 			Player1Stats.IncrementScore (m_combinedScore);
 			m_combinedScore = 0;
 			m_plantScore.Clear();
 		}
-		oldMouseDown = newMouseDown;
+		m_oldMouseDown = m_newMouseDown;
 	}
 }
