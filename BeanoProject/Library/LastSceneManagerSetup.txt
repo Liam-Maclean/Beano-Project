@@ -1,4 +1,7 @@
 sceneSetups:
-- path: Assets/Resources/Scenes/PlantMinigameScene.unity
+- path: Assets/Resources/Scenes/Loading.unity
   isLoaded: 1
   isActive: 1
+- path: Assets/Resources/Scenes/Menu.unity
+  isLoaded: 1
+  isActive: 0
