@@ -238,8 +238,8 @@ MonoBehaviour:
   - {fileID: 1112928334454524}
   sprites:
   - {fileID: 21300000, guid: 3ad027e7963afd9428b6cc4010a0b86b, type: 3}
-  - {fileID: 21300000, guid: 17aace82137992342b412bcb83a25129, type: 3}
-  - {fileID: 21300000, guid: bd82f5d4c2d356f40a890d1c80a62b24, type: 3}
+  - {fileID: 21300000, guid: 0ea456362de0f294884a227979d3afbf, type: 3}
+  - {fileID: 21300000, guid: 9ccfda5460215f147b301b56c9708ebe, type: 3}
   - {fileID: 0}
 --- !u!198 &198020737670786412
 ParticleSystem:
@@ -13557,5 +13557,5 @@ SpriteRenderer:
   m_Size: {x: 1.1171429, y: 1.3214285}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
