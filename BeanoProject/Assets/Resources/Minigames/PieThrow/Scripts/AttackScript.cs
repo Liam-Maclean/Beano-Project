@@ -25,7 +25,7 @@ public class AttackScript : MonoBehaviour
 
 	public GameObject pie;
 	private int currentHealth;
-
+	public int pieSpeed;
 	// Use this for initialization
 	void Start ()
 	{
@@ -52,7 +52,8 @@ public class AttackScript : MonoBehaviour
                     //Get the position of the touch 
 					Vector2 objPos = Camera.main.ScreenToWorldPoint (m_touch);
                     //set the pie gameObject to the position of the touch
-					pie.transform.position = objPos;
+
+					pie.transform.Translate(0.0f, 0.0f, pieSpeed * Time.deltaTime);
                     //handles the mechanics of the touch
 					OnTouch ();
 				}
