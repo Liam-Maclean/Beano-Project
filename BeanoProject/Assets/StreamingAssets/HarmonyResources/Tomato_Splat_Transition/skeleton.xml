@@ -1,0 +1,16 @@
+<skeletons>
+ <skeleton name="Top">
+  <nodes>
+   <peg id="0" name="Tomato-P"/>
+   <read id="1" name="Tomato"/>
+   <peg id="2" name="Splash-P"/>
+   <read id="3" name="Splash"/>
+  </nodes>
+  <links>
+   <link in="Top" out="0"/>
+   <link in="0" out="1"/>
+   <link in="Top" out="2"/>
+   <link in="2" out="3"/>
+  </links>
+ </skeleton>
+</skeletons>
