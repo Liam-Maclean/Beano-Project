@@ -28,6 +28,10 @@ enum PlantComponentType
 
 public class PlantScriptManager : MonoBehaviour 
 {
+	private Animator m_animator;
+
+
+
 	//enum for plants
 	PlantComponentType plantComponentType;
 
@@ -47,8 +51,7 @@ public class PlantScriptManager : MonoBehaviour
     //start function (initialises plant type)
 	void Awake()
 	{
-		
-
+		m_animator = GetComponent<Animator> ();
 
 		AddNewPlantComponent ();
 		for (int i = 0; i < particleGameobjects.Length; i++) {
@@ -60,6 +63,7 @@ public class PlantScriptManager : MonoBehaviour
 	//add randomised plant component
 	public void AddNewPlantComponent()
 	{
+		m_animator.SetTrigger ("Spawn");
 		plantComponentType = (PlantComponentType) Random.Range (0, 3);
 
 		//plantComponentType = 0;
