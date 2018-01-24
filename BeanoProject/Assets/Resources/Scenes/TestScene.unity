@@ -108,68 +108,15 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &571330338
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4737336702117956, guid: 55d1e288cd1f0bf498d962bb09a35666, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -13.67
-      objectReference: {fileID: 0}
-    - target: {fileID: 4737336702117956, guid: 55d1e288cd1f0bf498d962bb09a35666, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -3.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 4737336702117956, guid: 55d1e288cd1f0bf498d962bb09a35666, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4737336702117956, guid: 55d1e288cd1f0bf498d962bb09a35666, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4737336702117956, guid: 55d1e288cd1f0bf498d962bb09a35666, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4737336702117956, guid: 55d1e288cd1f0bf498d962bb09a35666, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4737336702117956, guid: 55d1e288cd1f0bf498d962bb09a35666, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4737336702117956, guid: 55d1e288cd1f0bf498d962bb09a35666, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 212298576022980960, guid: 55d1e288cd1f0bf498d962bb09a35666,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2fa5e029057f30d41b2f5fc29b7e0514,
-        type: 3}
-    - target: {fileID: 212298576022980960, guid: 55d1e288cd1f0bf498d962bb09a35666,
-        type: 2}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 55d1e288cd1f0bf498d962bb09a35666, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &1288539987
+--- !u!1 &62723068
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1288539990}
-  - component: {fileID: 1288539988}
+  - component: {fileID: 62723070}
+  - component: {fileID: 62723069}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -177,24 +124,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1288539988
+--- !u!114 &62723069
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1288539987}
+  m_GameObject: {fileID: 62723068}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01e27252c9527b3458c9250b8a9d2800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AllPortraits:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  MenuBackPrefab: {fileID: 0}
+  MenuButtonPrefab: {fileID: 0}
   readyMenu: {fileID: 0}
---- !u!4 &1288539990
+--- !u!4 &62723070
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1288539987}
+  m_GameObject: {fileID: 62723068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}

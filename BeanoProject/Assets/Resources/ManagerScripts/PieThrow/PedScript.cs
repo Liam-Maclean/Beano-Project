@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PedScript : MonoBehaviour
 {
-    private enum
-	// Use this for initialization
+    public Sprite[] pedSprites;
+
 	void Start ()
     {
-		
+	    	
 	}
 	
 	// Update is called once per frame
