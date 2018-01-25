@@ -145,10 +145,10 @@ public class ManagerScript : MonoBehaviour {
 	{
 
 		GameObject box = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/SpeachBubble")) as GameObject;
-
+		box.transform.localPosition = Player1Stats.transform.localPosition;
+		box.transform.position = new Vector3 (20, 0, 1.0f);
 		box.transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
-
-		//box.transform.position = new Vector3 (174, 258, 1.0f);
+	
 	}
 
 
