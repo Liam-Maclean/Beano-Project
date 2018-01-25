@@ -28,6 +28,15 @@ enum GameState
 public class ManagerScript : MonoBehaviour {
 
 
+	//countdown at start of match
+	private CountDownScript countDownScript;
+
+	//dialogue variables
+	private float dialogueCooldown = 5.0f;
+
+
+
+
 	//Game Information
 	public float gameDuration = 30.0f;
 	private float m_gameTimer;
@@ -37,7 +46,10 @@ public class ManagerScript : MonoBehaviour {
 	private PortaitScript m_LocalPlayerStats;
 
 	//gamestate 
-	private GameState m_gameState = GameState.playing;
+	private GameState m_gameState = GameState.countdown;
+
+	//The plant grid has been instantiated.
+	private bool m_gridGenerated = false;
 
     //grid for background and plants
 	PlantGrid pGrid = new PlantGrid();
@@ -80,11 +92,37 @@ public class ManagerScript : MonoBehaviour {
 		timer.text = tempTimer.ToString ();
 	}
 
+	//checking if a vector is negative or positive
+	public Vector2 NegativePositiveFunction(Vector2 value)
+	{
+		float tempx, tempy;
+		tempx = value.x;
+		tempy = value.y;
+		if (tempx < 0.0f) {
+			tempx *= -1.0f;
+		}
+		if (tempy < 0.0f) {
+			tempy *= -1.0f;
+		}
+
+		if (tempx > tempy) {
+			return new Vector2 (value.x, 0.0f);
+		}
+		else if  (tempy > tempx) {
+			return new Vector2 (0.0f, value.y);
+		}
+
+		return new Vector2(0.0f, 0.0f);
+
+	}
 
 
     //start function
 	void Start()
 	{
+		countDownScript = GameObject.Find ("CountDownText").GetComponent<CountDownScript> ();
+
+
 		//initialise timer
 		m_gameTimer = (int)gameDuration;
 
@@ -93,14 +131,26 @@ public class ManagerScript : MonoBehaviour {
 
 		//set up screen orientation and plant grid
 		Screen.orientation = ScreenOrientation.Landscape;
-		pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
 
 		//get the component stuff from the portait prefabs
 		Player1Stats = Player1.GetComponent<PortaitScript> ();
 		Player2Stats = Player2.GetComponent<PortaitScript> ();
 		Player3Stats = Player3.GetComponent<PortaitScript> ();
-		Player4Stats = Player4.GetComponent<PortaitScript> ();
+		// Player4Stats = Player4.GetComponent<PortaitScript> ();
+
+
 	}
+
+	public void SpawnDialogueBox()
+	{
+
+		GameObject box = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/SpeachBubble")) as GameObject;
+
+		box.transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
+
+		//box.transform.position = new Vector3 (174, 258, 1.0f);
+	}
+
 
 	//set up local multiplayer info so score only goes up on the local player
 	void SetUpLocalPlayer()
@@ -127,18 +177,57 @@ public class ManagerScript : MonoBehaviour {
 		
 		switch (m_gameState) {
 		case GameState.transition:
+			//Transition period between overworld and minigame before game countdown
+			//Possible tutorial page
+			//wait for everyone to be connected and synced
 			break;
+
 		case GameState.countdown:
-			break;
-		case GameState.playing:
-			if (!GameEnded ()) {
-				CountDown ();
-				OnTileClick ();
+			if (countDownScript.AnimationEnded()) {
+				m_gameState = GameState.playing;
 			}
 			break;
-		case GameState.end: 
+
+		case GameState.playing:
+
+			//if the garden hasn't been generated yet 
+			if (!m_gridGenerated) {
+				//generate it only once
+				pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
+				m_gridGenerated = true;
+			}
+			//if the game hasn't ended
+			if (!GameEnded ()) {
+
+				dialogueCooldown -= Time.deltaTime;
+
+				//update game logic
+				CountDown ();
+				OnTileClick ();
+
+
+				if (dialogueCooldown < 0.0f) {
+					SpawnDialogueBox ();
+					dialogueCooldown = 5.0f;
+				}
+			
+			} 
+			//if the game HAS ended
+			else if (GameEnded()) {
+				//change gamestate
+				m_gameState = GameState.end;
+			}
 			break;
+
+		case GameState.end: 
+			//play stop animation
+			//Destroy existing plants
+			break;
+
 		case GameState.counting:
+			//count the score
+			//return to overworld option
+
 			break;
 		}
 	}
@@ -160,8 +249,13 @@ public class ManagerScript : MonoBehaviour {
 			m_EndDrag =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			m_EndDrag.z = 0;
 
-			Vector2 directionPreNorm = (m_EndDrag - m_StartDrag);
-			Vector2 direction = (m_EndDrag - m_StartDrag).normalized;
+			Vector2 direction = (m_EndDrag - m_StartDrag);
+
+			direction = NegativePositiveFunction (direction);
+
+			Vector2 directionPreNorm = direction;
+
+			direction = direction.normalized;
 
 
 			RaycastHit2D[] hits = Physics2D.RaycastAll (m_StartDrag, direction, directionPreNorm.magnitude);

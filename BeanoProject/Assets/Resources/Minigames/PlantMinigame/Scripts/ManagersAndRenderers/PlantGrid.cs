@@ -46,10 +46,6 @@ public class PlantGrid : MonoBehaviour{
 		//}
 		//parent.transform.position =  new Vector3 (-(backgroundWidth / 2), -(backgroundHeight / 2), 0.0f);
 
-
-
-
-
 		m_plantGrid = new GameObject[height,width];
 		plantParent = GameObject.Find("PlantParent");
 

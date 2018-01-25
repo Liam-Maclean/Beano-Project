@@ -21,8 +21,8 @@ public class PieScript : MonoBehaviour
 
 	void Start()
 	{
-		spring = GetComponent<SpringJoint2D>;
-		rb = GetComponent<Rigidbody2D>;
+		//spring = GetComponent<SpringJoint2D>;
+		//rb = GetComponent<Rigidbody2D>;
 	}
 
 	// Update is called once per frame
@@ -40,7 +40,7 @@ public class PieScript : MonoBehaviour
 			case TouchPhase.Ended:
 				spring.enabled = false;
 				rb.isKinematic = false;
-				Launch ();
+				//Launch ();
 				break;
 			}
 		}

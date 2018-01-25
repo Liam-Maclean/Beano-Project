@@ -30,7 +30,7 @@ public class PlantScriptManager : MonoBehaviour
 {
 	private Animator m_animator;
 
-
+	private bool FirstTimeSpawn = true;
 
 	//enum for plants
 	PlantComponentType plantComponentType;
@@ -63,7 +63,9 @@ public class PlantScriptManager : MonoBehaviour
 	//add randomised plant component
 	public void AddNewPlantComponent()
 	{
-		m_animator.SetTrigger ("Spawn");
+		if (!FirstTimeSpawn) {
+			m_animator.SetTrigger ("Spawn");
+		}
 		plantComponentType = (PlantComponentType) Random.Range (0, 3);
 
 		//plantComponentType = 0;
@@ -82,22 +84,25 @@ public class PlantScriptManager : MonoBehaviour
 			basePlant.SetSprite (sprites [2]);
 			break;
 		}    
+
+		FirstTimeSpawn = false;
 	}
 
 
     //if tile is swiped over
     public int Swiped()
     {
-		
-		int tempScore = basePlant.GetScore();
-		Debug.Log (basePlant.GetScore ());
-		FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform);
-		basePlant.SetActive(false);
+		int tempScore = 0;
+		if (basePlant.GetActive ()) {
+			tempScore = basePlant.GetScore ();
+			Debug.Log (basePlant.GetScore ());
+			FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform);
+			basePlant.SetActive (false);
 
-		for (int i = 0; i < emmiters.Count; i++) {
-			emmiters [i].Play();
+			for (int i = 0; i < emmiters.Count; i++) {
+				emmiters [i].Play ();
+			}
 		}
-
         return tempScore;
     }
 
