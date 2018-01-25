@@ -22,7 +22,8 @@ enum PlantComponentType
 	NORMALPLANT = 0,
 	DOUBLESCOREPLANT = 1,
 	DEBUFFPLANT = 2,
-	DISABLEPLANT = 3
+	DISABLEPLANT = 3,
+	ELECTRICPLANT = 4
 }
 
 
@@ -66,7 +67,7 @@ public class PlantScriptManager : MonoBehaviour
 		if (!FirstTimeSpawn) {
 			m_animator.SetTrigger ("Spawn");
 		}
-		plantComponentType = (PlantComponentType) Random.Range (0, 3);
+		plantComponentType = (PlantComponentType) Random.Range (0, 4);
 
 		//plantComponentType = 0;
 
@@ -82,6 +83,10 @@ public class PlantScriptManager : MonoBehaviour
 		case PlantComponentType.DEBUFFPLANT:
 			basePlant = gameObject.AddComponent<DebuffPlant> ();
 			basePlant.SetSprite (sprites [2]);
+			break;
+		case PlantComponentType.ELECTRICPLANT:
+			basePlant = gameObject.AddComponent<ElectricPlant> ();
+			basePlant.SetSprite (sprites [3]);
 			break;
 		}    
 

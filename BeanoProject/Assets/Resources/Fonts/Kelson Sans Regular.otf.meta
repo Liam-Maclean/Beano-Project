@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b051d978f265199498b3863bb1662e78
+timeCreated: 1516884807
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kelson Sans
+  fontNames:
+  - Kelson Sans
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 85d5b5b44adf5294db107fd49e3d6ee7, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
