@@ -22,8 +22,8 @@ enum PlantComponentType
 	NORMALPLANT = 0,
 	DOUBLESCOREPLANT = 1,
 	DEBUFFPLANT = 2,
-	DISABLEPLANT = 3,
-	ELECTRICPLANT = 4
+	ELECTRICPLANT = 3,
+
 }
 
 
@@ -117,7 +117,7 @@ public class PlantScriptManager : MonoBehaviour
 	{
 		//if the base plant isn't active
 		if (!basePlant.GetActive ()) {  
-			basePlant.SetSprite(sprites[3]);
+			basePlant.SetSprite(sprites[4]);
             StartTimer ();
 		}
     }
