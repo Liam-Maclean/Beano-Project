@@ -437,27 +437,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc1a1e06bb8d4eb88f4e236d92662c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 1, b: 1, a: 1}
+  color:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
   projectFolder: HarmonyResources/SpaceDuck
   clipNames:
   - SD_idle_SD_idle
   - SD_run_SD_run
   sheetResolution: default
   depth: 0
-  discretizationStep: 20
   renderTarget: 0
   renderTextureViewport:
-    serializedVersion: 2
     x: 0
     y: 0
     width: 640
     height: 480
-  renderTextureScale: 1
   syncCollider: 2
   colliderShape: 1
   colliderTrigger: 0
-  metadataKeys: []
-  metadataLists: []
   colliderKeys:
   - eConvexHullSD_idle_SD_idle1
   - eConvexHullSD_idle_SD_idle2
@@ -556,7 +555,6 @@ MonoBehaviour:
   - {fileID: 551622767}
   - {fileID: 551622766}
   - {fileID: 551622761}
-  readyToRender: 1
 --- !u!4 &551622765
 Transform:
   m_ObjectHideFlags: 0
@@ -2520,7 +2518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f262d84e76845399346eb3680f6d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameRate: 24
 --- !u!4 &1936962829
 Transform:
   m_ObjectHideFlags: 0

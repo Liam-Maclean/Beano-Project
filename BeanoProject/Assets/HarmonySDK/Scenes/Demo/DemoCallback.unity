@@ -162,7 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc1a1e06bb8d4eb88f4e236d92662c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 1, b: 1, a: 1}
+  color:
+    r: 1
+    g: 1
+    b: 1
+    a: 1
   projectFolder: HarmonyResources/SpaceDuck
   clipNames:
   - SD_run_SD_run
@@ -171,7 +175,6 @@ MonoBehaviour:
   discretizationStep: 20
   renderTarget: 0
   renderTextureViewport:
-    serializedVersion: 2
     x: 0
     y: 0
     width: 640
@@ -184,7 +187,6 @@ MonoBehaviour:
   metadataLists: []
   colliderKeys: []
   colliderLinks: []
-  readyToRender: 1
 --- !u!4 &263039725
 Transform:
   m_ObjectHideFlags: 0

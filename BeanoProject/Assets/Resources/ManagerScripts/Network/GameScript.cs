@@ -5,10 +5,10 @@ using UnityEngine.Networking;
 
 public class GameScript : MonoBehaviour {
 
-    [SyncVar]
+
     int metaScore = 0;
 
-    [SyncVar]
+  
     int miniScore = 0;
 
     // Use this for initialization
