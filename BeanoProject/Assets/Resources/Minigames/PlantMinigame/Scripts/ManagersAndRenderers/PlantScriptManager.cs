@@ -48,6 +48,8 @@ public class PlantScriptManager : MonoBehaviour
     //timer for respawning
 	float timer = 0.0f;
 
+	private bool endGame = false;
+
 
     //start function (initialises plant type)
 	void Awake()
@@ -111,6 +113,16 @@ public class PlantScriptManager : MonoBehaviour
         return tempScore;
     }
 
+	//kill the plant
+	public void KillPlant()
+	{
+		endGame = true;
+		basePlant.SetActive (false);
+		for (int i = 0; i < emmiters.Count; i++) {
+			emmiters [i].Play ();
+		}
+	}
+
 
     //update
 	void Update()
@@ -125,16 +137,18 @@ public class PlantScriptManager : MonoBehaviour
     //starts the timer to remove plant component
 	void StartTimer()
 	{
-		//start timer 
-		timer += Time.deltaTime;
+		if (!endGame) {
+			//start timer 
+			timer += Time.deltaTime;
 
-		//if time has reached the limit 
-		if (timer > 2.0f) {
+			//if time has reached the limit 
+			if (timer > 2.0f) {
 			
-			//remove component, add a new one
-			basePlant.RemoveComponent();
-            AddNewPlantComponent();
-			timer = 0f;
+				//remove component, add a new one
+				basePlant.RemoveComponent ();
+				AddNewPlantComponent ();
+				timer = 0f;
+			}
 		}
 	}
 
