@@ -29,6 +29,11 @@ enum GameState
 //Manager script
 public class ManagerScript : MonoBehaviour {
 
+	//Dialogue Data set (All the dialogue loaded from the xml file)
+	private XMLDialogueDatabase m_dialogueSet;
+
+
+
 	//stop animation script at end of the game
 	GameObject stopText;
 	private StopAnimationScript stopAnimationScript;
@@ -110,16 +115,13 @@ public class ManagerScript : MonoBehaviour {
 		if (tempy < 0.0f) {
 			tempy *= -1.0f;
 		}
-
 		if (tempx > tempy) {
 			return new Vector2 (value.x, 0.0f);
 		}
 		else if  (tempy > tempx) {
 			return new Vector2 (0.0f, value.y);
 		}
-
 		return new Vector2(0.0f, 0.0f);
-
 	}
 
 
@@ -261,6 +263,13 @@ public class ManagerScript : MonoBehaviour {
 		}
 	}
 		
+	//loads dialogue database
+	public void LoadDialogueDatabase()
+	{
+		m_dialogueSet = new XMLDialogueDatabase ();
+		m_dialogueSet = XMLSerializer.Deserialize<XMLDialogueDatabase> ("DialogueFile.xml", "");
+	}
+
     //mouse input class
 	void OnTileClick()
 	{
