@@ -32,7 +32,8 @@ public class ManagerScript : MonoBehaviour {
 	//Dialogue Data set (All the dialogue loaded from the xml file)
 	private XMLDialogueDatabase m_dialogueSet;
 
-
+	//swipe object
+	GameObject swipe;
 
 	//stop animation script at end of the game
 	GameObject stopText;
@@ -278,9 +279,15 @@ public class ManagerScript : MonoBehaviour {
         //if left mouse button is down
 		if (m_newMouseDown == true && m_oldMouseDown == false)
 		{
+			swipe = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/Swipe") as GameObject);
+
             //shoot a ray from the mouse position to the screen
 			m_StartDrag = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			m_StartDrag.z = 0;
+		}
+		if (m_newMouseDown == true && m_oldMouseDown == true)
+		{
+			swipe.transform.position = new Vector3(Camera.main.ScreenToWorldPoint (Input.mousePosition).x, Camera.main.ScreenToWorldPoint (Input.mousePosition).y, -5);
 		}
 		if (m_newMouseDown == false && m_oldMouseDown == true)
 		{
