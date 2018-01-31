@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 //==============================================
 //
 // Plant Script Manager class
@@ -23,21 +22,25 @@ enum PlantComponentType
 	NORMALPLANT = 0,
 	DOUBLESCOREPLANT = 1,
 	DEBUFFPLANT = 2,
-	DISABLEPLANT = 3
+	ELECTRICPLANT = 3,
+
 }
 
 
 public class PlantScriptManager : MonoBehaviour 
 {
+	private Animator m_animator;
+
+	private bool FirstTimeSpawn = true;
+
 	//enum for plants
 	PlantComponentType plantComponentType;
 
     //Plant type component
 	BasePlant basePlant;
 
-	//NormalPlant ps;
-    //DoubleScorePlant dsp;
-	//DebuffPlant dbp;
+	public GameObject[] particleGameobjects;
+	List<ParticleSystem> emmiters = new List<ParticleSystem>();
 
 	//all the sprites the respawner requires
 	public Sprite[] sprites;
@@ -45,18 +48,28 @@ public class PlantScriptManager : MonoBehaviour
     //timer for respawning
 	float timer = 0.0f;
 
+	private bool endGame = false;
+
 
     //start function (initialises plant type)
-	void Start()
+	void Awake()
 	{
+		m_animator = GetComponent<Animator> ();
+
 		AddNewPlantComponent ();
+		for (int i = 0; i < particleGameobjects.Length; i++) {
+			emmiters.Add (particleGameobjects [i].GetComponent<ParticleSystem> ());
+		}
 	}
 
 
 	//add randomised plant component
 	public void AddNewPlantComponent()
 	{
-		plantComponentType = (PlantComponentType) Random.Range (0, 3);
+		if (!FirstTimeSpawn) {
+			m_animator.SetTrigger ("Spawn");
+		}
+		plantComponentType = (PlantComponentType) Random.Range (0, 4);
 
 		//plantComponentType = 0;
 
@@ -73,20 +86,42 @@ public class PlantScriptManager : MonoBehaviour
 			basePlant = gameObject.AddComponent<DebuffPlant> ();
 			basePlant.SetSprite (sprites [2]);
 			break;
+		case PlantComponentType.ELECTRICPLANT:
+			basePlant = gameObject.AddComponent<ElectricPlant> ();
+			basePlant.SetSprite (sprites [3]);
+			break;
 		}    
+
+		FirstTimeSpawn = false;
 	}
 
 
     //if tile is swiped over
     public int Swiped()
     {
-		
-		int tempScore = basePlant.GetScore();
-		Debug.Log (basePlant.GetScore ());
-		FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform);
-		basePlant.SetActive(false);
+		int tempScore = 0;
+		if (basePlant.GetActive ()) {
+			tempScore = basePlant.GetScore ();
+			Debug.Log (basePlant.GetScore ());
+			FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform);
+			basePlant.SetActive (false);
+
+			for (int i = 0; i < emmiters.Count; i++) {
+				emmiters [i].Play ();
+			}
+		}
         return tempScore;
     }
+
+	//kill the plant
+	public void KillPlant()
+	{
+		endGame = true;
+		basePlant.SetActive (false);
+		for (int i = 0; i < emmiters.Count; i++) {
+			emmiters [i].Play ();
+		}
+	}
 
 
     //update
@@ -94,7 +129,7 @@ public class PlantScriptManager : MonoBehaviour
 	{
 		//if the base plant isn't active
 		if (!basePlant.GetActive ()) {  
-			basePlant.SetSprite(sprites[3]);
+			basePlant.SetSprite(sprites[4]);
             StartTimer ();
 		}
     }
@@ -102,16 +137,18 @@ public class PlantScriptManager : MonoBehaviour
     //starts the timer to remove plant component
 	void StartTimer()
 	{
-		//start timer 
-		timer += Time.deltaTime;
+		if (!endGame) {
+			//start timer 
+			timer += Time.deltaTime;
 
-		//if time has reached the limit 
-		if (timer > 2.0f) {
+			//if time has reached the limit 
+			if (timer > 2.0f) {
 			
-			//remove component, add a new one
-			basePlant.RemoveComponent();
-            AddNewPlantComponent();
-			timer = 0f;
+				//remove component, add a new one
+				basePlant.RemoveComponent ();
+				AddNewPlantComponent ();
+				timer = 0f;
+			}
 		}
 	}
 
