@@ -41,9 +41,12 @@ public class CustomLobby : NetworkLobbyPlayer {
 
         local = this;
 
+        local.playerDetails.Avatar = PlayerPrefs.GetInt("Avatar");
+        local.playerDetails.Handle = PlayerPrefs.GetString("Handle");
+
         SendCachedDetailRequests();
 
-        SendDetails(new PlayerDetails(FindObjectOfType<Networker>().handle, FindObjectOfType<Networker>().avatar));
+        SendDetails(new PlayerDetails(local.playerDetails.Handle, local.playerDetails.Avatar));
     }
 
     private static List<NetworkInstanceId> cachedRequestIDs;

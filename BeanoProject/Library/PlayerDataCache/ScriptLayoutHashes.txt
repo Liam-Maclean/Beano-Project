@@ -132,7 +132,7 @@ b6efbc8ea6a298113ee25d111ae6e21f Assembly-CSharp.dll:.PanCamera
 7de429fd231b7c107cd7c9153b821faa Assembly-CSharp.dll:.TileTextureManager
 2584f914b2000b7d5efb1265f0810f11 Assembly-CSharp.dll:.OverworldScript
 ef5b34b6cf19db8d3ec3dfc43c9b5fea Assembly-CSharp.dll:.HarmonyRendererController
-0b5455e18f1f31b2df9804830e8fa178 Assembly-CSharp.dll:.CharacterSelect
+2911091966a5d3e90529300f85611db8 Assembly-CSharp.dll:.CharacterSelect
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ScoreScriptAnimations
 f9f9e37ddfb4650ba7ad78eaef8af41a Assembly-CSharp.dll:.SceneSettings
 ef5b34b6cf19db8d3ec3dfc43c9b5fea Assembly-CSharp.dll:.LoopAll
@@ -180,3 +180,4 @@ b03e5ed3210ce3528381769f28cbac81 Assembly-CSharp.dll:.DisplayFps
 950c1930dc16a252e84f462b3bd0295d Assembly-CSharp.dll:.Navigator
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GameScript
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.NormalPlant
+b684027795c03ea8253e603d8afe864a Assembly-CSharp.dll:.NLM
