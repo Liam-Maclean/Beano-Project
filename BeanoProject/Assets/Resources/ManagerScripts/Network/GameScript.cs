@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class GameScript : MonoBehaviour {
 
+    [SyncVar]
+    public int playerCount
 
-    
 }

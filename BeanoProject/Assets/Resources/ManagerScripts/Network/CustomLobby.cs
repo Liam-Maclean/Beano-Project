@@ -10,6 +10,8 @@ public class CustomLobby : NetworkLobbyPlayer {
     //syncvar will call when UpdatePlayerDetails is called
     [SyncVar(hook = "UpdatePlayerDetails")]
     public bool hasPlayerDetails = false;
+    [SyncVar]
+    public int playerCount = NetworkClient.allClients.Count;
 
     private PlayerDetails playerDetails;
 
