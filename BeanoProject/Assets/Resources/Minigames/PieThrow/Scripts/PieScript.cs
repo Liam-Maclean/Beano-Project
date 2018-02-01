@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class PieScript : MonoBehaviour 
 {
-	EnemyManagerScript enemyManager;
-
+	//touch variable
 	private Vector2 m_touch;
 
+	//maximum stretch and a radius variable
 	public float maxStretch;
     private float maxStretchSqr;
     private float circleRadius;
 
+	//distance variables
 	private Vector3 pieStartPosition;
 	private Vector3 pieEndPosition;
 	private Vector3 distance;
 
+	//rigidbody object
 	private Rigidbody2D rb;
 
+	//linerenderer objects
     public LineRenderer leftLine;
     public LineRenderer rightLine;
 
-	private bool touched;
+
+	private bool isTouched;
 
     private Ray rayToTouch;
     private Ray slingToPie;
@@ -137,7 +141,7 @@ public class PieScript : MonoBehaviour
 		//hardcoded values of the line position points
 		leftPoints [0] = new Vector3(-2.0f, -2.5f, 0.0f);
 		leftPoints [1] = new Vector3 (-1.0f, -3.6f, 0.0f);
-		leftPoints [2] = gameObject.transform.position;
+		leftPoints [2] = this.transform.position;
 
 		//set those position points
 		leftLine.SetPositions (leftPoints);
@@ -148,7 +152,7 @@ public class PieScript : MonoBehaviour
 		//hardcoded values of the line position points
 		rightPoints [0] = new Vector3 (2.0f, -2.5f, 0.0f);
 		rightPoints [1] = new Vector3 (1.0f, 3.6f, 0.0f);
-		rightPoints [2] = gameObject.transform.position;
+		rightPoints [2] = this.transform.position;
 
 		//set those position points
 		rightLine.SetPositions (rightPoints);
