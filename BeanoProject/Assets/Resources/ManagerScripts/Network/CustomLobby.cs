@@ -11,9 +11,9 @@ public class CustomLobby : NetworkLobbyPlayer {
     [SyncVar(hook = "UpdatePlayerDetails")]
     public bool hasPlayerDetails = false;
     [SyncVar]
-    public int playerCount = NetworkClient.allClients.Count;
+    public int playerCount = 0;
 
-    private PlayerDetails playerDetails;
+    public PlayerDetails playerDetails;
 
     public static CustomLobby local { get; private set; }
 
@@ -45,10 +45,11 @@ public class CustomLobby : NetworkLobbyPlayer {
 
         local.playerDetails.Avatar = PlayerPrefs.GetInt("Avatar");
         local.playerDetails.Handle = PlayerPrefs.GetString("Handle");
+        local.playerDetails.Identifier = netId;
 
         SendCachedDetailRequests();
 
-        SendDetails(new PlayerDetails(local.playerDetails.Handle, local.playerDetails.Avatar));
+        SendDetails(new PlayerDetails(local.playerDetails.Handle, local.playerDetails.Avatar, local.playerDetails.Identifier));
     }
 
     private static List<NetworkInstanceId> cachedRequestIDs;
@@ -137,6 +138,7 @@ public class CustomLobby : NetworkLobbyPlayer {
         if(hasDetails && isLocalPlayer == false)
         {
             RequestDetails();
+            playerCount = NetworkClient.allClients.Count;
         }
     }
 }

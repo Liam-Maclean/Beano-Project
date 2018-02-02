@@ -5,8 +5,6 @@ using UnityEngine.Networking;
 
 public class PlayerDetailsMessage : MessageBase {
 
-
-
     public NetworkInstanceId playerID;
 
     public string playerHandle;
@@ -22,6 +20,6 @@ public class PlayerDetailsMessage : MessageBase {
 
     public PlayerDetails CreatePlayerDetails()
     {
-        return new PlayerDetails(playerHandle, playerAvatar);
+        return new PlayerDetails(playerHandle, playerAvatar, playerID);
     }
 }

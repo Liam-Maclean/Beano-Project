@@ -26,7 +26,7 @@ public class NLM : NetworkLobbyManager {
     {
         get
         {
-            return playerObjects.Count == playerCount;
+            return playerObjects.Count == GameScript.local.playerCount;
         }
     }
 
@@ -63,7 +63,7 @@ public class NLM : NetworkLobbyManager {
         gamePlayer.playerCount = lobbyPlayer.playerCount;
 
         
-        gamePlayer.SetDetails(lobbyPlayer.playerDetails);
+        gamePlayer.SetDetails(CustomLobby.local.playerDetails);
 
         return true;
     }

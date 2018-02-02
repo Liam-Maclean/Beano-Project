@@ -117,7 +117,6 @@ GameObject:
   m_Component:
   - component: {fileID: 763693711}
   - component: {fileID: 763693709}
-  - component: {fileID: 763693710}
   - component: {fileID: 763693713}
   - component: {fileID: 763693712}
   m_Layer: 0
@@ -148,7 +147,7 @@ MonoBehaviour:
   m_MaxDelay: 0.01
   m_LogLevel: 2
   m_PlayerPrefab: {fileID: 0}
-  m_AutoCreatePlayer: 0
+  m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: Loading
   m_OnlineScene: 
@@ -211,7 +210,7 @@ MonoBehaviour:
   m_ShowLobbyGUI: 1
   m_MaxPlayers: 4
   m_MaxPlayersPerConnection: 1
-  m_MinPlayers: 2
+  m_MinPlayers: 0
   m_LobbyPlayerPrefab: {fileID: 114039929747790182, guid: a723c0350f94a7b46ba01fac8e363bd3,
     type: 2}
   m_GamePlayerPrefab: {fileID: 1532825531039292, guid: d84d7063b29a76c4793a551fb04b30ea,
@@ -219,20 +218,6 @@ MonoBehaviour:
   m_LobbyScene: Loading
   m_PlayScene: Overworld
   lobbySlots: []
---- !u!114 &763693710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 763693708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52cc060e2ff9acc478dc2733e26353f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  persistentCurrency: 0
-  handle: 
-  avatar: 0
 --- !u!4 &763693711
 Transform:
   m_ObjectHideFlags: 0
@@ -262,7 +247,7 @@ MonoBehaviour:
   m_BroadcastVersion: 1
   m_BroadcastSubVersion: 1
   m_BroadcastInterval: 1000
-  m_UseNetworkManager: 0
+  m_UseNetworkManager: 1
   m_BroadcastData: HELLO
   m_ShowGUI: 1
   m_OffsetX: 400
