@@ -126,9 +126,9 @@ public class GameScript : NetworkBehaviour {
 
     }
 
-    public void Score(int score)
+    public void Score(int scoreChange)
     {
-        local.playerDetails.MiniScore += score;
+        local.playerDetails.MiniScore += scoreChange;
         SendDetails(local.playerDetails);
     }
 
@@ -142,6 +142,13 @@ public class GameScript : NetworkBehaviour {
             RequestDetails();
             playerCount = NetworkClient.allClients.Count;
         }
+    }
+
+    public void EndMiniGame()
+    {
+        local.playerDetails.MetaScore += local.playerDetails.MiniScore;
+        local.playerDetails.MiniScore = 0;
+        SendDetails(local.playerDetails);
     }
 
 }
