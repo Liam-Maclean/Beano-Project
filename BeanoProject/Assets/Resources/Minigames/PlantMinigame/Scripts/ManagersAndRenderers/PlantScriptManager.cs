@@ -35,6 +35,8 @@ public class PlantScriptManager : MonoBehaviour
 
 	//enum for plants
 	PlantComponentType plantComponentType;
+	SpriteRenderer sr;
+
 
     //Plant type component
 	BasePlant basePlant;
@@ -54,43 +56,74 @@ public class PlantScriptManager : MonoBehaviour
     //start function (initialises plant type)
 	void Awake()
 	{
+		sr = this.GetComponent<SpriteRenderer> ();
 		m_animator = GetComponent<Animator> ();
-
+		
 		AddNewPlantComponent ();
 		for (int i = 0; i < particleGameobjects.Length; i++) {
 			emmiters.Add (particleGameobjects [i].GetComponent<ParticleSystem> ());
 		}
 	}
-
+		
 
 	//add randomised plant component
 	public void AddNewPlantComponent()
 	{
-		if (!FirstTimeSpawn) {
-			m_animator.SetTrigger ("Spawn");
-		}
-		plantComponentType = (PlantComponentType) Random.Range (0, 4);
+		m_animator.SetTrigger ("Spawn");
+		plantComponentType = (PlantComponentType) Random.Range (0, 3);
 
 		//plantComponentType = 0;
 
 		switch (plantComponentType) {
 		case PlantComponentType.NORMALPLANT:
+			m_animator.enabled = false;
 			basePlant = gameObject.AddComponent<NormalPlant> ();
 			basePlant.SetSprite (sprites [0]);
+			sr.sprite = sprites [0];
+			m_animator.enabled = true;
+			m_animator.SetTrigger ("VenusPlant");
 			break;
 		case PlantComponentType.DOUBLESCOREPLANT:
+			m_animator.enabled = false;
 			basePlant = gameObject.AddComponent<DoubleScorePlant> ();
 			basePlant.SetSprite (sprites [1]);
+			sr.sprite = sprites [1];
+			m_animator.enabled = true;
+			m_animator.SetTrigger ("YellowPlant");
 			break;
 		case PlantComponentType.DEBUFFPLANT:
+			m_animator.enabled = false;
 			basePlant = gameObject.AddComponent<DebuffPlant> ();
 			basePlant.SetSprite (sprites [2]);
+			sr.sprite = sprites [2];
+			m_animator.enabled = true;
+			m_animator.SetTrigger ("BulbPlant");
 			break;
 		case PlantComponentType.ELECTRICPLANT:
 			basePlant = gameObject.AddComponent<ElectricPlant> ();
 			basePlant.SetSprite (sprites [3]);
+			sr.sprite = sprites [3];
+		
 			break;
 		}    
+
+
+
+
+		//switch (plantComponentType) {
+		//case PlantComponentType.NORMALPLANT:
+		//	m_animator.SetTrigger ("VenusPlant");
+		//	break;
+		//case PlantComponentType.DOUBLESCOREPLANT:
+		//	m_animator.SetTrigger ("YellowPlant");
+		//	break;
+		//case PlantComponentType.DEBUFFPLANT:
+		//	m_animator.SetTrigger ("BulbPlant");
+		//	break;
+		//case PlantComponentType.ELECTRICPLANT:
+		//	break;
+		//}    
+
 
 		FirstTimeSpawn = false;
 	}
@@ -104,6 +137,8 @@ public class PlantScriptManager : MonoBehaviour
 			tempScore = basePlant.GetScore ();
 			Debug.Log (basePlant.GetScore ());
 			FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform);
+			m_animator.SetTrigger ("DeadPlant");
+
 			basePlant.SetActive (false);
 
 			for (int i = 0; i < emmiters.Count; i++) {
@@ -118,6 +153,7 @@ public class PlantScriptManager : MonoBehaviour
 	{
 		endGame = true;
 		basePlant.SetActive (false);
+		m_animator.SetTrigger ("DeadPlant");
 		for (int i = 0; i < emmiters.Count; i++) {
 			emmiters [i].Play ();
 		}
