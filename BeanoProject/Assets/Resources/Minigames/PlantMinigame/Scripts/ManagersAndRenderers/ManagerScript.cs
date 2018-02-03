@@ -16,6 +16,7 @@ using UnityEngine.UI;
 //
 // Liam MacLean - 25/10/2017 03:42
 
+//gamestates for the game
 enum GameState
 {
 	transition,
@@ -24,9 +25,27 @@ enum GameState
 	end,
 	counting
 }
-	
+
+//Manager script
 public class ManagerScript : MonoBehaviour {
 
+	//Dialogue Data set (All the dialogue loaded from the xml file)
+	private XMLDialogueDatabase m_dialogueSet;
+
+	//swipe object
+	GameObject swipe;
+
+	//stop animation script at end of the game
+	GameObject stopText;
+	private StopAnimationScript stopAnimationScript;
+	private bool StopAnimInstantiated;
+
+	//countdown at start of match
+	private CountDownScript countDownScript;
+
+
+	//dialogue variables
+	private float dialogueCooldown = 5.0f;
 
 	//Game Information
 	public float gameDuration = 30.0f;
@@ -37,7 +56,10 @@ public class ManagerScript : MonoBehaviour {
 	private PortaitScript m_LocalPlayerStats;
 
 	//gamestate 
-	private GameState m_gameState = GameState.playing;
+	private GameState m_gameState = GameState.countdown;
+
+	//The plant grid has been instantiated.
+	private bool m_gridGenerated = false;
 
     //grid for background and plants
 	PlantGrid pGrid = new PlantGrid();
@@ -55,6 +77,8 @@ public class ManagerScript : MonoBehaviour {
 	public Text timer;
 	public GameObject Player1, Player2, Player3, Player4;
 	private PortaitScript Player1Stats, Player2Stats, Player3Stats, Player4Stats;
+
+
 
 	//Game Ended boolean function
 	public bool GameEnded()
@@ -80,11 +104,34 @@ public class ManagerScript : MonoBehaviour {
 		timer.text = tempTimer.ToString ();
 	}
 
+	//checking if a vector is negative or positive
+	public Vector2 NegativePositiveFunction(Vector2 value)
+	{
+		float tempx, tempy;
+		tempx = value.x;
+		tempy = value.y;
+		if (tempx < 0.0f) {
+			tempx *= -1.0f;
+		}
+		if (tempy < 0.0f) {
+			tempy *= -1.0f;
+		}
+		if (tempx > tempy) {
+			return new Vector2 (value.x, 0.0f);
+		}
+		else if  (tempy > tempx) {
+			return new Vector2 (0.0f, value.y);
+		}
+		return new Vector2(0.0f, 0.0f);
+	}
 
 
     //start function
 	void Start()
 	{
+		countDownScript = GameObject.Find ("CountDownText").GetComponent<CountDownScript> ();
+
+
 		//initialise timer
 		m_gameTimer = (int)gameDuration;
 
@@ -93,14 +140,36 @@ public class ManagerScript : MonoBehaviour {
 
 		//set up screen orientation and plant grid
 		Screen.orientation = ScreenOrientation.Landscape;
-		pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
 
 		//get the component stuff from the portait prefabs
 		Player1Stats = Player1.GetComponent<PortaitScript> ();
 		Player2Stats = Player2.GetComponent<PortaitScript> ();
 		Player3Stats = Player3.GetComponent<PortaitScript> ();
-		Player4Stats = Player4.GetComponent<PortaitScript> ();
+		// Player4Stats = Player4.GetComponent<PortaitScript> ();
+
+
 	}
+
+	public void SpawnStopAnimation()
+	{
+		//SET UP DIALOGUE BOX SPAWN POINT TO BE REALITVE TO PLAYERS PORTRAIT POSITION
+		stopText = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/StopText")) as GameObject;
+		stopText.transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
+		stopText.transform.localPosition = new Vector3 (0, 0, 1.0f);
+		stopAnimationScript = stopText.GetComponent<StopAnimationScript> ();
+	}
+
+
+	//Spawns dialogue box relative to player portrait position
+	public void SpawnDialogueBox()
+	{
+		//SET UP DIALOGUE BOX SPAWN POINT TO BE REALITVE TO PLAYERS PORTRAIT POSITION
+		GameObject box = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/SpeachBubble")) as GameObject;
+		box.transform.SetParent (GameObject.Find ("PlayerPortait").transform);
+		box.transform.localPosition = new Vector3 (55, 20, 1.0f);
+		//Debug.Log (box.transform.localPosition);
+	}
+
 
 	//set up local multiplayer info so score only goes up on the local player
 	void SetUpLocalPlayer()
@@ -124,25 +193,84 @@ public class ManagerScript : MonoBehaviour {
     //update function
 	void Update()
 	{
-		
+
+		//for every game state 
 		switch (m_gameState) {
+
+		//transition between overworld and minigame
 		case GameState.transition:
+			//Transition period between overworld and minigame before game countdown
+			//Possible tutorial page
+			//wait for everyone to be connected and synced
 			break;
+
+		//countdown before game begins
 		case GameState.countdown:
-			break;
-		case GameState.playing:
-			if (!GameEnded ()) {
-				CountDown ();
-				OnTileClick ();
+			//if the countdown animation ended
+			if (countDownScript.AnimationEnded()) {
+				//start game and switch gamestate 
+				m_gameState = GameState.playing;
 			}
 			break;
-		case GameState.end: 
+
+		//playing the game
+		case GameState.playing:
+
+			//if the garden hasn't been generated yet 
+			if (!m_gridGenerated) {
+				//generate it only once
+				pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
+				m_gridGenerated = true;
+			}
+			//if the game hasn't ended
+			if (!GameEnded ()) {
+
+				dialogueCooldown -= Time.deltaTime;
+
+				//update game logic
+				CountDown ();
+				OnTileClick ();
+
+				if (dialogueCooldown < 0.0f) {
+					SpawnDialogueBox ();
+					dialogueCooldown = 5.0f;
+				}
+			
+			} 
+			//if the game HAS ended
+			else if (GameEnded()) {
+				// if stop animation hasn't been instantiated
+				if (!StopAnimInstantiated) {
+					//instantiate only once
+					SpawnStopAnimation ();
+					StopAnimInstantiated = true;
+					//if it has been instantiated
+				} else if (StopAnimInstantiated) {
+					//check if it has finished animating, if it has
+					if (stopAnimationScript.AnimationEnded ()) {
+						//Kill plants in the scene, end the minigame
+						if (pGrid.KillGame ()) {
+							m_gameState = GameState.counting;
+						}
+					}
+				}
+			}
 			break;
+		//game is counting score and return to overworld
 		case GameState.counting:
+			//count the score
+			//return to overworld option
 			break;
 		}
 	}
 		
+	//loads dialogue database
+	public void LoadDialogueDatabase()
+	{
+		m_dialogueSet = new XMLDialogueDatabase ();
+		m_dialogueSet = XMLSerializer.Deserialize<XMLDialogueDatabase> ("DialogueFile.xml", "");
+	}
+
     //mouse input class
 	void OnTileClick()
 	{
@@ -151,17 +279,28 @@ public class ManagerScript : MonoBehaviour {
         //if left mouse button is down
 		if (m_newMouseDown == true && m_oldMouseDown == false)
 		{
+			swipe = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/Swipe") as GameObject);
+
             //shoot a ray from the mouse position to the screen
 			m_StartDrag = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			m_StartDrag.z = 0;
+		}
+		if (m_newMouseDown == true && m_oldMouseDown == true)
+		{
+			swipe.transform.position = new Vector3(Camera.main.ScreenToWorldPoint (Input.mousePosition).x, Camera.main.ScreenToWorldPoint (Input.mousePosition).y, -5);
 		}
 		if (m_newMouseDown == false && m_oldMouseDown == true)
 		{
 			m_EndDrag =  Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			m_EndDrag.z = 0;
 
-			Vector2 directionPreNorm = (m_EndDrag - m_StartDrag);
-			Vector2 direction = (m_EndDrag - m_StartDrag).normalized;
+			Vector2 direction = (m_EndDrag - m_StartDrag);
+
+			direction = NegativePositiveFunction (direction);
+
+			Vector2 directionPreNorm = direction;
+
+			direction = direction.normalized;
 
 
 			RaycastHit2D[] hits = Physics2D.RaycastAll (m_StartDrag, direction, directionPreNorm.magnitude);

@@ -18,12 +18,14 @@ using UnityEngine;
 // Liam MacLean - 25/10/2017 03:42
 public class TouchScript : MonoBehaviour
 {
+	//combined 
     private int m_combinedScore;
     private List<int> m_plantScore = new List<int>();
 
+	//Game manager script
     private ManagerScript manager;
 
-
+	//Direction vectors for mathematikz
     private Vector2 m_touchBegin;
     private Vector2 m_touchEnd;
     private Vector2 m_swipeDirection;
@@ -41,6 +43,30 @@ public class TouchScript : MonoBehaviour
     {
         SwipeLine();
     }
+
+	//checking if a vector is negative or positive
+	public Vector2 NegativePositiveFunction(Vector2 value)
+	{
+		float tempx, tempy;
+		tempx = value.x;
+		tempy = value.y;
+		if (tempx < 0.0f) {
+			tempx *= -1.0f;
+		}
+		if (tempy < 0.0f) {
+			tempy *= -1.0f;
+		}
+			
+		if (tempx > tempy) {
+			return new Vector2 (value.x, 0.0f);
+		}
+		else if  (tempy > tempx) {
+			return new Vector2 (0.0f, value.y);
+		}
+			
+		return new Vector2(0.0f, 0.0f);
+
+	}
 
 
     //does Kevins work but appeals to touch controls for the specific minigame
@@ -65,44 +91,46 @@ public class TouchScript : MonoBehaviour
                 //if the touch has ended
 				case TouchPhase.Ended:
                 {
-                        //store the end position
-                   		m_touchEnd = touch.position;
+                    //store the end position
+                   	m_touchEnd = touch.position;
 
-                        var ray2 = Camera.main.ScreenPointToRay(m_touchBegin);
+                    var ray2 = Camera.main.ScreenPointToRay(m_touchBegin);
 
 					Vector2 directionPreNorm = (m_touchEnd - m_touchBegin);
-                        m_swipeDirection = (m_touchEnd - m_touchBegin);
+                    m_swipeDirection = (m_touchEnd - m_touchBegin);
 
-                        //normalize
-                        m_swipeDirection.Normalize();
+					m_swipeDirection = NegativePositiveFunction (m_swipeDirection);
 
-                        //check for multiple hits from a raycast and store them
-						RaycastHit2D[] hit = Physics2D.RaycastAll(ray2.origin, m_swipeDirection, m_swipeDirection.magnitude);
+                    //normalize
+                    m_swipeDirection.Normalize();
 
-                        //for everything hit by the raycast
-                        for (int i = 0; i < hit.Length; i++)
+                    //check for multiple hits from a raycast and store them
+					RaycastHit2D[] hit = Physics2D.RaycastAll(ray2.origin, m_swipeDirection, m_swipeDirection.magnitude);
+
+                    //for everything hit by the raycast
+                    for (int i = 0; i < hit.Length; i++)
+                    {
+                        //check if any of them are plants, if they are
+                        if (hit[i].collider.tag == "Plant")
                         {
-                            //check if any of them are plants, if they are
-                            if (hit[i].collider.tag == "Plant")
-                            {
-                                //Get that plants script and set it to swiped
-                                PlantScriptManager tempPlantScript = hit[i].collider.gameObject.GetComponent<PlantScriptManager>();
+                            //Get that plants script and set it to swiped
+                            PlantScriptManager tempPlantScript = hit[i].collider.gameObject.GetComponent<PlantScriptManager>();
 
-                                //add the plants score to the list of scores
-                                m_plantScore.Add(tempPlantScript.Swiped());
-                            }
+                            //add the plants score to the list of scores
+                            m_plantScore.Add(tempPlantScript.Swiped());
                         }
+                    }
 
-                        //for each score swiped
-                        for (int i = 0; i < m_plantScore.Count; i++)
-                        {
-                            //add that to the game score (DO SOMETHING FUNKY WITH MULTIPLIERS HERE)
-                            m_combinedScore += m_plantScore[i];
-                        }
-                        m_combinedScore *= m_plantScore.Count;
-                        //manager.IncrementScore(m_combinedScore);
-                        m_combinedScore = 0;
-                        m_plantScore.Clear();
+                    //for each score swiped
+                    for (int i = 0; i < m_plantScore.Count; i++)
+                    {
+                        //add that to the game score (DO SOMETHING FUNKY WITH MULTIPLIERS HERE)
+                        m_combinedScore += m_plantScore[i];
+                    }
+                    m_combinedScore *= m_plantScore.Count;
+                    //manager.IncrementScore(m_combinedScore);
+                    m_combinedScore = 0;
+                    m_plantScore.Clear();
                 }
                 break;
            }

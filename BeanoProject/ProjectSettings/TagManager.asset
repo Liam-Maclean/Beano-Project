@@ -8,6 +8,9 @@ TagManager:
   - Text
   - GameManager
   - Node
+  - pie
+  - Enemy
+  - slingshot
   layers:
   - Default
   - TransparentFX
@@ -17,8 +20,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Foreground
+  - MiddleGround
   - 
   - 
   - 

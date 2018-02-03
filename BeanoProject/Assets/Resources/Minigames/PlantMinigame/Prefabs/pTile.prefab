@@ -159,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1069148657877570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.39, y: -1.39, z: -2}
+  m_LocalPosition: {x: -13.411518, y: -6.287083, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4891897931562004}
@@ -219,7 +219,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.55, y: 0.55}
   m_EdgeRadius: 0
 --- !u!95 &95545670905147828
 Animator:
@@ -258,6 +258,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3ad027e7963afd9428b6cc4010a0b86b, type: 3}
   - {fileID: 21300000, guid: 0ea456362de0f294884a227979d3afbf, type: 3}
   - {fileID: 21300000, guid: 9ccfda5460215f147b301b56c9708ebe, type: 3}
+  - {fileID: 21300000, guid: 995fede18938ce8448b201b12bce0476, type: 3}
   - {fileID: 0}
 --- !u!198 &198020737670786412
 ParticleSystem:
