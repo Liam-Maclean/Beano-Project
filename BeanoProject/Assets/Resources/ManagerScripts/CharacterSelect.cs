@@ -15,6 +15,9 @@ public class CharacterSelect : MonoBehaviour {
 
 	Text nameText;
 
+
+    public InputField handle;
+
 	private void Start()
 	{
 		index = PlayerPrefs.GetInt ("CharacterSelected");
@@ -84,8 +87,9 @@ public class CharacterSelect : MonoBehaviour {
 
 	public void ConfirmButton()
 	{
-		PlayerPrefs.SetInt ("CharacterSelected", index);
-		SceneManager.LoadScene ("PlantMinigameScene");
+		PlayerPrefs.SetInt ("Avatar", index);
+        PlayerPrefs.SetString("Handle", handle.text);
+		SceneManager.LoadScene (0);
 	}
 
 	// Update is called once per frame

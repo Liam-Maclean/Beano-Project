@@ -7,6 +7,7 @@ public class SceneTransition : MonoBehaviour {
 	public float transitionLength;
 	private bool startTransition = false;
 	public Canvas canvas;
+    float transitionTimer;
 
 	private void Awake()
 	{
@@ -21,11 +22,15 @@ public class SceneTransition : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		float transitionTimer = transitionLength;
+        if (!startTransition)
+        {
+            transitionTimer = transitionLength;
+        }
 
-		if (startTransition)
-			transitionTimer -= Time.deltaTime;
-
+        else if (startTransition)
+        {
+            transitionTimer -= Time.deltaTime;
+        }
 		if (transitionTimer <= 0)
 			Transition();
 	}

@@ -1,5 +1,0 @@
-<stages>
- <stage name="Tomato_Splat_Transition_Tomato_Splat_Transition">
-  <play drawingAnimation="Tomato_Splat_Transition_Top" name="Top" skeleton="Top" animation="Tomato_Splat_Transition_Top"/>
- </stage>
-</stages>
