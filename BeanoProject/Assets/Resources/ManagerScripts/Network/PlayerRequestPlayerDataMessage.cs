@@ -4,8 +4,13 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerRequestPlayerDataMessage : MessageBase {
-
+    /// <summary>
+    /// the player sending the message
+    /// </summary>
     public NetworkInstanceId SenderID;
+    /// <summary>
+    /// the player the message concerns
+    /// </summary>
     public NetworkInstanceId SubjectID;
 
     public PlayerRequestPlayerDataMessage() { }

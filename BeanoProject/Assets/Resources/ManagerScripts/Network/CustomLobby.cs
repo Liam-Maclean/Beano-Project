@@ -15,8 +15,14 @@ public class CustomLobby : NetworkLobbyPlayer {
 
     public PlayerDetails playerDetails;
 
+    /// <summary>
+    /// local data can be found in each PlayerID object
+    /// </summary>
     public static CustomLobby local { get; private set; }
 
+    /// <summary>
+    /// associate our custom message types with a function on the server when running the base OnStartServer() function
+    /// </summary>
     public override void OnStartServer()
     {
         base.OnStartServer();
@@ -25,6 +31,9 @@ public class CustomLobby : NetworkLobbyPlayer {
         NetworkServer.RegisterHandler(CustomMsgType.ClientRequestPlayerDetails, OnClientRequestPlayerDetails);
     }
 
+    /// <summary>
+    /// associate our custom message type with a function on the client when running the base OnStartClient() function 
+    /// </summary>
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -37,6 +46,9 @@ public class CustomLobby : NetworkLobbyPlayer {
         }
     }
 
+    /// <summary>
+    /// set values for the local data and send them to the server
+    /// </summary>
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
@@ -52,8 +64,14 @@ public class CustomLobby : NetworkLobbyPlayer {
         SendDetails(new PlayerDetails(local.playerDetails.Handle, local.playerDetails.Avatar, local.playerDetails.Identifier));
     }
 
+    /// <summary>
+    /// list of IDs to request details for
+    /// </summary>
     private static List<NetworkInstanceId> cachedRequestIDs;
 
+    /// <summary>
+    /// request our details from the server
+    /// </summary>
     [Client]
     private void RequestDetails()
     {
@@ -74,6 +92,9 @@ public class CustomLobby : NetworkLobbyPlayer {
         }
     }
 
+    /// <summary>
+    /// send detail requests we couldn't send previously
+    /// </summary>
     private void SendCachedDetailRequests()
     {
         if (cachedRequestIDs != null)
@@ -86,16 +107,28 @@ public class CustomLobby : NetworkLobbyPlayer {
         }
     }
 
+    /// <summary>
+    /// reuest details for a specific ID
+    /// </summary>
+    /// <param name="requestedID">the ID details are being requested for</param>
     private void SendDetailsRequestForNetId(NetworkInstanceId requestedID)
     {
         NetworkClient.allClients[0].Send(CustomMsgType.ClientRequestPlayerDetails, new PlayerRequestPlayerDataMessage(CustomLobby.local.netId, requestedID));
     }
 
+    /// <summary>
+    /// send details to the host
+    /// </summary>
+    /// <param name="playerDetailsTemp">the details to be sent</param>
     private void SendDetails(PlayerDetails playerDetailsTemp)
     {
         NetworkClient.allClients[0].Send(CustomMsgType.HostRecievePlayerDetails, new PlayerDetailsMessage(netId, playerDetailsTemp));
     }
 
+    /// <summary>
+    /// when the host recieves player details, update the player with them
+    /// </summary>
+    /// <param name="netMessage">the message with the details</param>
     private void OnHostRecievePlayerDetails(NetworkMessage netMessage)
     {
         PlayerDetailsMessage playerDetailsMessage = netMessage.ReadMessage<PlayerDetailsMessage>();
@@ -107,6 +140,10 @@ public class CustomLobby : NetworkLobbyPlayer {
         sendingPlayer.playerDetails = playerDetailsMessage.CreatePlayerDetails();
     }
 
+    /// <summary>
+    /// when a client requests details about the player, get the details and send them back
+    /// </summary>
+    /// <param name="netMessage">the message requesting the details</param>
     private void OnClientRequestPlayerDetails(NetworkMessage netMessage)
     {
         PlayerRequestPlayerDataMessage requestedMessage = netMessage.ReadMessage<PlayerRequestPlayerDataMessage>();
@@ -120,6 +157,10 @@ public class CustomLobby : NetworkLobbyPlayer {
         NetworkServer.SendToClient(int.Parse(senderID.ToString()), CustomMsgType.ClientRecievePlayerDetails, new PlayerDetailsMessage(subjectID, subjectPlayer.playerDetails));
     }
 
+    /// <summary>
+    /// client recieves player details message, update that player
+    /// </summary>
+    /// <param name="netMessage"> the recieved message</param>
     private void OnClientRecievePlayerDetails(NetworkMessage netMessage)
     {
         PlayerDetailsMessage playerDetailsMessage = netMessage.ReadMessage<PlayerDetailsMessage>();
@@ -131,6 +172,10 @@ public class CustomLobby : NetworkLobbyPlayer {
 
     }
 
+    /// <summary>
+    /// syncvar hook to keep a copy of each player's details on each client
+    /// </summary>
+    /// <param name="hasDetails"></param>
     private void UpdatePlayerDetails(bool hasDetails)
     {
         hasPlayerDetails = hasDetails;
