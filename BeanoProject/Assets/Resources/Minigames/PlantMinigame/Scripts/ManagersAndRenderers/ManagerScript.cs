@@ -37,6 +37,11 @@ public class ManagerScript : MonoBehaviour {
 
 	//stop animation script at end of the game
 	GameObject stopText;
+
+	//fade in transition
+	private StopAnimationScript FadeInAnimation;
+
+	//stop animation script (end of game)
 	private StopAnimationScript stopAnimationScript;
 	private bool StopAnimInstantiated;
 
@@ -56,7 +61,7 @@ public class ManagerScript : MonoBehaviour {
 	private PortaitScript m_LocalPlayerStats;
 
 	//gamestate 
-	private GameState m_gameState = GameState.countdown;
+	private GameState m_gameState = GameState.transition;
 
 	//The plant grid has been instantiated.
 	private bool m_gridGenerated = false;
@@ -129,8 +134,7 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
-		countDownScript = GameObject.Find ("CountDownText").GetComponent<CountDownScript> ();
-
+		FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
 
 		//initialise timer
 		m_gameTimer = (int)gameDuration;
@@ -199,6 +203,19 @@ public class ManagerScript : MonoBehaviour {
 
 		//transition between overworld and minigame
 		case GameState.transition:
+
+			if (FadeInAnimation.AnimationEnded ()) {
+
+				//Instantiate countdown text for countdown phase
+				GameObject countDownObject = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
+				countDownObject.transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
+				countDownObject.transform.localPosition = new Vector3 (0.0f, 0.0f, 1.0f);
+				countDownScript = GameObject.Find ("CountDownText(Clone)").GetComponent<CountDownScript> ();
+
+				//Swap to countdown phase
+				m_gameState = GameState.countdown;
+			}
+
 			//Transition period between overworld and minigame before game countdown
 			//Possible tutorial page
 			//wait for everyone to be connected and synced
