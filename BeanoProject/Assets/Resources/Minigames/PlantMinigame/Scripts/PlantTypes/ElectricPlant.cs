@@ -10,8 +10,8 @@ public class ElectricPlant : BasePlant {
 		SetScore (3);
 	}
 
-	public override void ActivatePlant(bool bTrueFalse)
+	public override void ActivatePlant(out int score)
 	{
-		base.ActivatePlant(bTrueFalse);
+		score = GetScore ();
 	}
 }

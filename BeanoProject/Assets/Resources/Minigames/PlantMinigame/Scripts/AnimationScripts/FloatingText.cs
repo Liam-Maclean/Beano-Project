@@ -13,10 +13,17 @@ public class FloatingText : MonoBehaviour {
 		Destroy (gameObject, clipInfo [0].clip.length);
 		m_indicatorText = m_animator.GetComponent<Text> ();
 	}
-	
+
+	//set string in text
 	public void SetText(string text)
 	{
 		m_indicatorText.text = text;
+	}
+
+	//set color of indicator text
+	public void SetColor(Color color)
+	{
+		m_indicatorText.color = color;
 	}
 
 }
