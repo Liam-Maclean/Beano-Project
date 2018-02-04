@@ -10,8 +10,10 @@ public class DoubleScorePlant : BasePlant {
 		SetScore (2);
 	}
 
-	public override void ActivatePlant(bool bTrueFalse)
+	public override void ActivatePlant(out int score)
     {
-		base.ActivatePlant(bTrueFalse);
+		int tempscore;
+		tempscore = GetScore () * 2;
+		score = tempscore;
     }
 }

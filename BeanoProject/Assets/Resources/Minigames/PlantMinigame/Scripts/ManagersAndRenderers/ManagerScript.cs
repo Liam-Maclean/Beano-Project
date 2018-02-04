@@ -26,6 +26,7 @@ enum GameState
 	counting
 }
 
+
 //Manager script
 public class ManagerScript : MonoBehaviour {
 
@@ -73,6 +74,8 @@ public class ManagerScript : MonoBehaviour {
 	//calcualting score for plants
 	private int m_combinedScore;
 	private List<int> m_plantScore = new List<int>();
+
+	private List<BasePlant> m_plantsHit = new List<BasePlant>();
 
 	//raycast stuff
 	private Vector3 m_StartDrag, m_EndDrag;
@@ -330,9 +333,22 @@ public class ManagerScript : MonoBehaviour {
 					//Get that plants script and set it to swiped
 					PlantScriptManager tempPlantScript = hits[i].collider.gameObject.GetComponent<PlantScriptManager>();
 
+					//get plant component
+					m_plantsHit.Add(tempPlantScript.GetPlantComponent ());
+
+					tempPlantScript.Swiped ();
 					//add the plants score to the list of scores
-					m_plantScore.Add(tempPlantScript.Swiped());
+					//m_plantScore.Add(tempPlantScript.Swiped());
 				}
+			}
+
+
+
+			for (int i = 0; i < m_plantsHit.Count; i++) {
+				m_plantScore.Add (0);
+				int temp;
+				m_plantsHit [i].ActivatePlant (out temp);
+				m_plantScore [m_plantScore.Count-1] = temp;
 			}
 
 			//for each score swiped
@@ -351,6 +367,7 @@ public class ManagerScript : MonoBehaviour {
 			Player1Stats.IncrementScore (m_combinedScore);
 			m_combinedScore = 0;
 			m_plantScore.Clear();
+			m_plantsHit.Clear ();
 		}
 		m_oldMouseDown = m_newMouseDown;
 	}

@@ -64,6 +64,13 @@ public class PlantScriptManager : MonoBehaviour
 			emmiters.Add (particleGameobjects [i].GetComponent<ParticleSystem> ());
 		}
 	}
+
+	public BasePlant GetPlantComponent()
+	{
+		return basePlant;
+	}
+
+
 		
 
 	//add randomised plant component
@@ -136,7 +143,16 @@ public class PlantScriptManager : MonoBehaviour
 		if (basePlant.GetActive ()) {
 			tempScore = basePlant.GetScore ();
 			Debug.Log (basePlant.GetScore ());
-			FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform);
+
+			//if the plant is type of double plant
+			if (basePlant is DoubleScorePlant) {
+				//white text
+				FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString () + " (x2)", basePlant.transform, Color.white);
+			} else {
+				//yellow text
+				FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform);
+			}
+
 			m_animator.SetTrigger ("DeadPlant");
 
 			basePlant.SetActive (false);

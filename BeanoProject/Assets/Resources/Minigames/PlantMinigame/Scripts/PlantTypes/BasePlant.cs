@@ -66,9 +66,9 @@ public class BasePlant : MonoBehaviour
 		sr = this.transform.GetComponent<SpriteRenderer> ();
 	}
 
-	public virtual void ActivatePlant(bool bTrueFalse)
+	public virtual void ActivatePlant(out int score)
 	{
-		SetActive (bTrueFalse);
+		score = GetScore ();
 	}
 
 }
