@@ -9,20 +9,20 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1452197043790032}
+  m_RootGameObject: {fileID: 1561835201999598}
   m_IsPrefabParent: 1
---- !u!1 &1452197043790032
+--- !u!1 &1561835201999598
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4349751074126658}
-  - component: {fileID: 212468911755849970}
-  - component: {fileID: 58826206842250972}
-  - component: {fileID: 50067184684878496}
-  - component: {fileID: 114404958094724860}
+  - component: {fileID: 4504972850007654}
+  - component: {fileID: 212990348051798738}
+  - component: {fileID: 50623776991794888}
+  - component: {fileID: 114616670313789116}
+  - component: {fileID: 61393609805667064}
   m_Layer: 8
   m_Name: pie
   m_TagString: pie
@@ -30,29 +30,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4349751074126658
+--- !u!4 &4504972850007654
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1452197043790032}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: -4.19, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.5, z: 0.5}
+  m_GameObject: {fileID: 1561835201999598}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.47, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50067184684878496
+--- !u!50 &50623776991794888
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1452197043790032}
+  m_GameObject: {fileID: 1561835201999598}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -63,12 +63,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58826206842250972
-CircleCollider2D:
+--- !u!61 &61393609805667064
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1452197043790032}
+  m_GameObject: {fileID: 1561835201999598}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -76,14 +76,24 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.5, y: 3.5}
+    newSize: {x: 3.5, y: 3.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.25
---- !u!114 &114404958094724860
+  m_Size: {x: 3.34, y: 2.85}
+  m_EdgeRadius: 0
+--- !u!114 &114616670313789116
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1452197043790032}
+  m_GameObject: {fileID: 1561835201999598}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d31e436c3c05794481b5336e6b59d08, type: 3}
@@ -92,12 +102,15 @@ MonoBehaviour:
   maxStretch: 3
   leftLine: {fileID: 0}
   rightLine: {fileID: 0}
---- !u!212 &212468911755849970
+  angledRightPie: {fileID: 21300000, guid: 2e838c220688b034dab86953d938fe71, type: 3}
+  angledLeftPie: {fileID: 21300000, guid: ce4892920a1d2e4429d0931ea87e323f, type: 3}
+  originPie: {fileID: 21300000, guid: 46371451b3f21c94fba4362974ee391d, type: 3}
+--- !u!212 &212990348051798738
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1452197043790032}
+  m_GameObject: {fileID: 1561835201999598}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -124,12 +137,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: debd77810c7ccb54c88b1dab536f20a0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 46371451b3f21c94fba4362974ee391d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 3.5, y: 3.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
