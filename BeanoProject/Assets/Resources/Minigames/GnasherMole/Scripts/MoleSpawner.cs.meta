@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 845e5507a7be9d843bc4ff585ab6e7ff
+timeCreated: 1517950905
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - moleTexture: {fileID: 21300000, guid: 9ccfda5460215f147b301b56c9708ebe, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
