@@ -7,6 +7,8 @@ public class PieScript : MonoBehaviour
 	//vector2 variables
 	private Vector2 m_touch;
 
+	public GameObject[] piePrefabs;
+
     //audio variables
     public AudioClip pullSound;
     public AudioClip launchSound;
@@ -18,7 +20,7 @@ public class PieScript : MonoBehaviour
 	//float variables
 	public float maxStretch;
     private float maxStretchSqr;
-    private float circleRadius;
+	private	float timer = 2.0f;
 
 	//distance variables
 	private Vector3 pieStartPosition;
@@ -27,14 +29,13 @@ public class PieScript : MonoBehaviour
 
 	//rigidbody object
 	private Rigidbody2D rb;
-    //linerenderer objects
-    public LineRenderer leftLine;
-    public LineRenderer rightLine;
 
     //bool variables
 	private bool isTouched;
 	private bool oldMouseDown;
     private bool newMouseDown;
+	private bool hasLaunched;
+	private bool isReload;
 
     //Ray variables
     private Ray rayToTouch;
@@ -59,69 +60,63 @@ public class PieScript : MonoBehaviour
 		slingshot = GameObject.FindGameObjectWithTag ("slingshot");
         source = GetComponent<AudioSource>();
     }
-
-
+		
 	void Start()
 	{
-        //initialise the line renderers
-        InitLineRenderer();
-
-         
+		piePrefabs [0] = this.gameObject;
         //initialise the rays
         rayToTouch = new Ray(gameObject.transform.position, Vector3.zero);
-        slingToPie = new Ray(leftLine.transform.position, Vector3.zero);
+		slingToPie = new Ray(slingshot.transform.position, Vector3.zero);
 
         //intialise the necessary components
         rb = gameObject.GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        circle = GetComponent<Collider2D>() as CircleCollider2D;
+   //   circle = GetComponent<Collider2D>() as CircleCollider2D;
 
         //get the square of maxstretch
         maxStretchSqr = maxStretch * maxStretch;
-        circleRadius = circle.radius;
 
+		hasLaunched = false;
+		isReload = false;
 	}
 
 
-	void Update ()
+	void Update()
     {
+			//Mouse Controls
+			OnMouseDown ();
+			//Touch Controls
+			if (Input.touchCount == 1) {
+				Touch touch = Input.GetTouch (0);
 
-		//Mouse Controls
-		OnMouseDown ();
-
-        //Update the line renders
-        //LineUpdate ();
-
-        //Touch Controls
-        if (Input.touchCount == 1) {
-			Touch touch = Input.GetTouch (0);
-
-			//Switch statement determining which type of touch it is
-			switch (touch.phase) 
-			{
-			case TouchPhase.Began:
+				//Switch statement determining which type of touch it is
+				switch (touch.phase) {
+				case TouchPhase.Began:
 				//store the initial position
-				pieStartPosition = gameObject.transform.position;
-				break;
+					pieStartPosition = gameObject.transform.position;
+					break;
 			case TouchPhase.Moved:
 				m_touch = touch.position;
-				Dragging ();
-                    source.PlayOneShot(pullSound, 1.0f);
-                    break;
-			case TouchPhase.Ended:
-				pieEndPosition = gameObject.transform.position;
-				Launch ();
-				break;
+				if (!isReload) {
+					Dragging ();
+				}
+					break;
+				case TouchPhase.Ended:
+					pieEndPosition = gameObject.transform.position;
+					Launch ();
+					Respawn ();
+					break;
+				}
 			}
-		}
+
 		gameObject.transform.position += distance;
 	}
+
 
 
 	void Dragging()
 	{
 
-        source.PlayOneShot(pullSound, 1.0f);
         //get the world position of the touch
         Vector2 objPos = Camera.main.ScreenToWorldPoint (m_touch);
 		//get the distance from the slingshot to the touch
@@ -138,7 +133,7 @@ public class PieScript : MonoBehaviour
 		this.transform.position = objPos;
 
         //rotate the pie depending on the angle of aim
-        PieRotate(objPos);
+        PieRotate(objPos.x);
     }
 
 	void MouseDragging()
@@ -159,7 +154,7 @@ public class PieScript : MonoBehaviour
 		this.transform.position = objPos;
 
         //rotate the pie depending on the angle of aim
-        PieRotate(objPos);
+        PieRotate(objPos.x);
     }
 
     void Launch()
@@ -170,61 +165,31 @@ public class PieScript : MonoBehaviour
 		distance = (pieStartPosition - pieEndPosition);
 		//normalize the distance
 		distance.Normalize();
-    }
+		hasLaunched = true;
 
-    void InitLineRenderer()
+	}
+
+    void HoldPoint()
 	{
-		//create array to store line positions
-		var leftPoints = new Vector3[3];
-
-		//hardcoded values of the line position points
-		leftPoints [0] = new Vector3(-2.0f, -2.5f, 0.0f);
-		leftPoints [1] = new Vector3 (-1.0f, -3.6f, 0.0f);
-		leftPoints [2] = this.transform.position;
-
-		//set those position points
-		leftLine.SetPositions (leftPoints);
-		 
-		//create array to store line positions
-		var rightPoints = new Vector3[3];
-
-		//hardcoded values of the line position points
-		rightPoints [0] = new Vector3 (2.0f, -2.5f, 0.0f);
-		rightPoints [1] = new Vector3 (1.0f, 3.6f, 0.0f);
-		rightPoints [2] = this.transform.position;
-
-		//set those position points
-		rightLine.SetPositions (rightPoints);
-
-		//set the order layer so that it displays the lines on top
-        leftLine.sortingOrder = 2;
-        rightLine.sortingOrder = 2;
-    }
-
-    void LineUpdate()
-    {
-		
-        Vector2 slingshotToPie = slingshot.transform.position - leftLine.transform.position;
+		Vector2 slingshotToPie = slingshot.transform.position - gameObject.transform.position;
         slingToPie.direction = slingshotToPie;
 
-        Vector3 holdPoint = slingToPie.GetPoint(slingshotToPie.magnitude + circleRadius);
-        leftLine.SetPosition(1, holdPoint);
-        rightLine.SetPosition(1, holdPoint);
+        Vector3 holdPoint = slingToPie.GetPoint(slingshotToPie.magnitude);
     }
 
 
-    void PieRotate(Vector2 pos)
+	void PieRotate(float pos)
     {
         //swap the sprite depending on whether the x value is negative or positive
-        if (pos.x < 0)
+        if (pos < 0)
         {
             sr.sprite = angledLeftPie;
         }
-        else if (pos.x >= 0 || pos.x < 1)
+        else if (pos >= 0 || pos < 1)
         {
             sr.sprite = originPie;
         }
-        if (pos.x > 1)
+        if (pos > 1)
         {
             sr.sprite = angledRightPie;
         }
@@ -250,8 +215,10 @@ public class PieScript : MonoBehaviour
         //if the click is being held down
         if (newMouseDown && oldMouseDown)
 		{
-			MouseDragging ();
-            LineUpdate ();
+			if (!isReload) {
+				MouseDragging ();
+				HoldPoint ();
+			}
 		}
 
        
@@ -259,26 +226,34 @@ public class PieScript : MonoBehaviour
 		if (!newMouseDown && oldMouseDown)
 		{
 			pieEndPosition = this.transform.position;
+			isReload = true;
 			Launch ();
-            Respawn();
             source.PlayOneShot(launchSound, 0.5f);
         }
 
+		if (hasLaunched)
+		{
+			Respawn ();		
+		}
         //set the current mouse input to the old one for comparison
 		oldMouseDown = newMouseDown;
 	}
 
     void Respawn()
     {
-        float timer = 5.0f;
+		GameObject newPie;
+		int pieCounter = 0;
+	
+		timer -= Time.deltaTime;
+		if (timer <= 0.0f) {
 
-        timer -= Time.deltaTime;
-
-        if (timer <= 0.0f)
-        {
-            GameObject respawn = Instantiate(this.gameObject, new Vector3(0.0f, 0.0f, 0.0f), gameObject.transform.rotation);
-            
-        }
-        
+			newPie = (GameObject)Instantiate (piePrefabs [pieCounter], new Vector3 (0.0f, -2.5f, 0.0f), Quaternion.identity);
+			Destroy (this.gameObject);
+			isReload = true;
+			pieCounter++;
+			timer = 2.0f;
+			hasLaunched = false;
+			sr.sprite = originPie;
+		}
     }
 }
