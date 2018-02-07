@@ -11,6 +11,8 @@ TagManager:
   - pie
   - Enemy
   - slingshot
+  - Pedestrian
+  - Kill
   layers:
   - Default
   - TransparentFX
