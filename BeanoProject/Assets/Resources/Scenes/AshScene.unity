@@ -137,13 +137,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minZDist: 5
   maxZDist: 10
-  spawnRateMin: 0.1
+  spawnRateMin: 0.5
   spawnRateMax: 1
   aircraftOdds: 0.25
   basicPedTypes: 4
   specialTypes: 2
   targetPos: {x: 0, y: 0}
-  xFlipDistance: 2
+  xFlipDistance: 20
   pedPrefabs:
   - {fileID: 1989798689709986, guid: 3c7842dc04f694c4481faf82d4249a3c, type: 2}
   - {fileID: 1989798689709986, guid: 3c7842dc04f694c4481faf82d4249a3c, type: 2}

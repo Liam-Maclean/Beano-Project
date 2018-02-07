@@ -89,13 +89,15 @@ public class PieThrowManagerScript : MonoBehaviour
                 if (threshold > aircraftOdds)
                 {
                     //PED
-                    if (isLeft == 0)
+                    if (isLeft != 0)
                     {
                         SpawnPed(true, false, i + minZDist);
+                        Debug.Log("Right");
                     }
                     else
                     {
                         SpawnPed(true, true, i + minZDist);
+                        Debug.Log("Right");
                     }
                 }
                 else

@@ -837,7 +837,7 @@ MonoBehaviour:
   currNodeTESTING: 0
   currPlayersTESTING: 4
   maxNodes: 14
-  playerPrefab: {fileID: 1359054776667446, guid: fa76e287d082fbb4c92175c74709a94d,
+  playerPrefab: {fileID: 1395211328230048, guid: 8fd0170a5398e1949af328c07d6d8f0c,
     type: 2}
 --- !u!4 &1507875166
 Transform:
