@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/TestScene.unity
     guid: 778b40a7ac937874385f29d4ef2207f5
+  - enabled: 1
+    path: Assets/Resources/Scenes/SkateboardWheel.unity
+    guid: e7d3534bdc1b4df4fac9c1a862d7f915
