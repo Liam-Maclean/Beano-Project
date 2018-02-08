@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 703075537}
   - component: {fileID: 703075536}
   - component: {fileID: 703075535}
+  - component: {fileID: 703075534}
   m_Layer: 0
   m_Name: Wrench
   m_TagString: Untagged
@@ -435,6 +436,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &703075534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 703075533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e1b49f8109026d498d2ae87a16d716e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finger: {fileID: 433443664}
+  wrench: {fileID: 703075533}
 --- !u!50 &703075535
 Rigidbody2D:
   serializedVersion: 4
