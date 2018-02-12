@@ -216,7 +216,7 @@ MonoBehaviour:
   m_GamePlayerPrefab: {fileID: 1532825531039292, guid: d84d7063b29a76c4793a551fb04b30ea,
     type: 2}
   m_LobbyScene: Loading
-  m_PlayScene: Overworld
+  m_PlayScene: NetworkPlayground
   lobbySlots: []
 --- !u!4 &763693711
 Transform:

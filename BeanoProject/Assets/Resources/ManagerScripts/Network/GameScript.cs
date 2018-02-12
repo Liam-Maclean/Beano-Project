@@ -11,12 +11,13 @@ public class GameScript : NetworkBehaviour {
     [SyncVar]
     public int playerCount;
 
-    MinigamePlayerDetails playerDetails;
+    public MinigamePlayerDetails playerDetails;
 
     /// <summary>
     /// local player info can be found on every object with this script in the scene
     /// </summary>
-    public static GameScript local { get; private set; }
+    public static GameScript local { get; set; }
+    
 
     /// <summary>
     /// associate our custom message types with a function on the server when running the base OnStartServer() function
@@ -53,9 +54,10 @@ public class GameScript : NetworkBehaviour {
     /// <param name="lobbyDetails">details from the lobby</param>
     public void SetDetails(PlayerDetails lobbyDetails)
     {
+        local = this;
         //take details we already have from the LobbyPlayer
-        local.playerDetails.Avatar = lobbyDetails.Avatar;
-        local.playerDetails.Handle = lobbyDetails.Handle;
+        local.playerDetails.Avatar = /*lobbyDetails.Avatar*/ 10;
+        local.playerDetails.Handle = /*lobbyDetails.Handle*/ "Scrublord";
         local.playerDetails.Identifier = lobbyDetails.Identifier;
 
         //request our details now that we have it
