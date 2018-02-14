@@ -26,7 +26,7 @@ public class DataDisplay : MonoBehaviour {
 
     #region players
 
-    List<GameScript> opponents;
+    private static List<GameScript> opponents;
 
     #endregion
 
