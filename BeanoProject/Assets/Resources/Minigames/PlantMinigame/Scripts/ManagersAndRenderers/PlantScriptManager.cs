@@ -65,12 +65,11 @@ public class PlantScriptManager : MonoBehaviour
 		}
 	}
 
+	//returns the plant component currently active on the spawner
 	public BasePlant GetPlantComponent()
 	{
 		return basePlant;
 	}
-
-
 		
 
 	//add randomised plant component
@@ -114,22 +113,6 @@ public class PlantScriptManager : MonoBehaviour
 			break;
 		}    
 
-
-
-
-		//switch (plantComponentType) {
-		//case PlantComponentType.NORMALPLANT:
-		//	m_animator.SetTrigger ("VenusPlant");
-		//	break;
-		//case PlantComponentType.DOUBLESCOREPLANT:
-		//	m_animator.SetTrigger ("YellowPlant");
-		//	break;
-		//case PlantComponentType.DEBUFFPLANT:
-		//	m_animator.SetTrigger ("BulbPlant");
-		//	break;
-		//case PlantComponentType.ELECTRICPLANT:
-		//	break;
-		//}    
 
 
 		FirstTimeSpawn = false;

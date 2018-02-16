@@ -65,7 +65,7 @@ public class PlantGrid : MonoBehaviour{
                 //Sets the parent of the instantiated Grid object, to the Tile parent (you can move this Gameobject in the editor to move the whole tilegrid)
                 m_plantGrid[y, x] = Instantiate ((GameObject)Resources.Load ("Minigames/PlantMinigame/Prefabs/pTile"));
                 m_plantGrid[y, x].transform.localPosition = plantParent.transform.position;
-				m_plantGrid[y, x].transform.localPosition = new Vector3(plantParent.transform.position.x + (x * 1.2f), plantParent.transform.position.y + (y * 1.2f), -2 + (y*0.1f));
+				m_plantGrid[y, x].transform.localPosition = new Vector3(plantParent.transform.position.x + (x * 1.6f), plantParent.transform.position.y + (y * 1.6f), -2 + (x*y*0.1f));
                 m_plantGrid[y, x].transform.parent = plantParent.transform;
             }
 		}
