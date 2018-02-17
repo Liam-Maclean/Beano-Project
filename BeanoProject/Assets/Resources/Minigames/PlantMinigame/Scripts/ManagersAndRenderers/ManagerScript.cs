@@ -30,6 +30,8 @@ enum GameState
 //Manager script
 public class ManagerScript : MonoBehaviour {
 
+	private GameObject m_tutorialCanvas;
+
 	//Dialogue Data set (All the dialogue loaded from the xml file)
 	private XMLDialogueDatabase m_dialogueSet;
 
@@ -49,6 +51,8 @@ public class ManagerScript : MonoBehaviour {
 	//countdown at start of match
 	private CountDownScript countDownScript;
 
+	//bool
+	private bool bTutorialCanvasInstantiated = false;
 
 	//dialogue variables
 	private float dialogueCooldown = 5.0f;
@@ -69,7 +73,7 @@ public class ManagerScript : MonoBehaviour {
 
     //grid for background and plants
 	PlantGrid pGrid = new PlantGrid();
-	public int height, width, backgroundHeight, backgroundWidth;
+	public int height, width;
 
 	//calcualting score for plants
 	private int m_combinedScore;
@@ -137,6 +141,7 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
+		
 		FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
 
 		//initialise timer
@@ -153,9 +158,15 @@ public class ManagerScript : MonoBehaviour {
 		Player2Stats = Player2.GetComponent<PortaitScript> ();
 		Player3Stats = Player3.GetComponent<PortaitScript> ();
 		// Player4Stats = Player4.GetComponent<PortaitScript> ();
-
-
 	}
+
+	//instantiate canvas once
+	public void InstantiateTutorialCanvasOnce()
+	{
+		m_tutorialCanvas = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/TutorialCanvas")) as GameObject;
+		bTutorialCanvasInstantiated = true;
+	}
+
 
 	public void SpawnStopAnimation()
 	{
@@ -207,17 +218,33 @@ public class ManagerScript : MonoBehaviour {
 		//transition between overworld and minigame
 		case GameState.transition:
 
+			//fade in animation
 			if (FadeInAnimation.AnimationEnded ()) {
 
-				//Instantiate countdown text for countdown phase
-				GameObject countDownObject = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
-				countDownObject.transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
-				countDownObject.transform.localPosition = new Vector3 (0.0f, 0.0f, 1.0f);
-				countDownScript = GameObject.Find ("CountDownText(Clone)").GetComponent<CountDownScript> ();
+				//Display tutorial
+				if (!bTutorialCanvasInstantiated) {
+					InstantiateTutorialCanvasOnce ();
+				}
 
-				//Swap to countdown phase
-				m_gameState = GameState.countdown;
+
+				//if player wants to continue
+				if (Input.GetMouseButtonDown (0)) {
+
+					Destroy (m_tutorialCanvas);
+
+					//Instantiate mole plane animation
+					Instantiate (Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane"));
+
+					//Instantiate countdown text for countdown phase
+					GameObject countDownObject = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
+					countDownObject.transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
+					countDownObject.transform.localPosition = new Vector3 (0.0f, 0.0f, 1.0f);
+					countDownScript = GameObject.Find ("CountDownText(Clone)").GetComponent<CountDownScript> ();
+					m_gameState = GameState.countdown;
+				}
 			}
+
+
 
 			//Transition period between overworld and minigame before game countdown
 			//Possible tutorial page
@@ -239,17 +266,19 @@ public class ManagerScript : MonoBehaviour {
 			//if the garden hasn't been generated yet 
 			if (!m_gridGenerated) {
 				//generate it only once
-				pGrid.CreateGrd (width, height, backgroundHeight, backgroundWidth);
+				pGrid.CreateGrid (width, height);
 				m_gridGenerated = true;
 			}
 			//if the game hasn't ended
 			if (!GameEnded ()) {
 
+				//dialogue cooldown timer
 				dialogueCooldown -= Time.deltaTime;
 
 				//update game logic
 				CountDown ();
 				OnTileClick ();
+
 
 				if (dialogueCooldown < 0.0f) {
 					SpawnDialogueBox ();
@@ -278,6 +307,8 @@ public class ManagerScript : MonoBehaviour {
 			break;
 		//game is counting score and return to overworld
 		case GameState.counting:
+
+			//GameScript.local.EndMiniGame ();
 			//count the score
 			//return to overworld option
 			break;
@@ -294,6 +325,7 @@ public class ManagerScript : MonoBehaviour {
     //mouse input class
 	void OnTileClick()
 	{
+		//check if the mouse is down
 		m_newMouseDown = Input.GetMouseButton (0);
 
         //if left mouse button is down
@@ -358,7 +390,7 @@ public class ManagerScript : MonoBehaviour {
 				m_combinedScore += m_plantScore[i];
 			}
 
-			m_combinedScore *= m_plantScore.Count;
+			//m_combinedScore *= m_plantScore.Count;
 
 			//Create float text feedback numbers
 			FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);

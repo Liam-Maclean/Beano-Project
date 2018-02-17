@@ -5,11 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Human "Mole" class
 /// 
-/// 
-/// 
 ///	Hit these "moles" and you'll get negative score (for testing purposes)
-/// 
-/// 
 /// 
 /// Liam MacLean 20:08 06/02/2018
 /// </summary>

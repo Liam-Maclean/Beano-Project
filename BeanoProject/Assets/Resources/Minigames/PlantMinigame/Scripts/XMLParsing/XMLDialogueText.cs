@@ -12,15 +12,12 @@ using System.Xml.Serialization;
 /// 
 /// Liam MacLean 28/01/2018 19:23
 /// </summary>
-
-
-
 //Dialogue XML class
 public class XMLDialogueText
 {
+	//XML headings for serialzation
 	[XmlAttribute("CharacterName")]
 	private string m_name;
-
 	[XmlElement("CharacterDialogue")]
 	private string m_CharacterDialogue;
 

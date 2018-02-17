@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
 using System.Xml.Serialization;
-
-	//item collection class used to store all the items in the game currently in the database (XML file)
-
+/// <summary>
+///  XML Dialogue database 
+///
+///  item collection class used to store all the items in the game currently in the database (XML file)
+/// 
+///  Liam MacLean - 25/10/2017 03:42
+/// </summary>
 [XmlRoot("DialogueDatabase")]
 public class XMLDialogueDatabase
 {
+	//XML Headings
 	[XmlArray("DialogueList")]
 	[XmlArrayItem("Dialogue")]
 	//list of database items

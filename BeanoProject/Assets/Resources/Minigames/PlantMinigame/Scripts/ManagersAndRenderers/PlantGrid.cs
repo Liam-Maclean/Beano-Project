@@ -10,48 +10,22 @@ using UnityEngine;
 //
 // Move the parent "Garden" gameobject in inspector to move plant grid
 // 
-//
-// 
-// 
-//
-// Liam MacLean - Edited 20/01/2018 17:46
-
-
+// Liam MacLean - Edited 17/02/2018 15:49
 public class PlantGrid : MonoBehaviour{
 
+	//variables
 	private float m_killTimer = 0.1f;
 	private int m_plantCountX, m_plantCountY;
 	private int m_width, m_height;
 
-
-	private GameObject [,] m_tileGrid;
+	//gameobjects
 	private GameObject[,] m_plantGrid;
-	private GameObject parent;
 	private GameObject plantParent;
-	//public int width,height;
 
-	public void CreateGrd(int width, int height, int backgroundWidth, int backgroundHeight)
+	//Creates the plant grid for the minigame (takes in Width and height from editor
+	public void CreateGrid(int width, int height)
 	{
-		//***REDUNDANT CODE*** 
-
-		//m_tileGrid = new GameObject[backgroundWidth,backgroundHeight];
-		//parent = new GameObject ("Tile Parent");
-		//for (int y = 0; y < backgroundHeight; y++)
-		//{
-		//	for (int x = 0; x < backgroundWidth; x++)
-		//	{
-		//		m_tileGrid [y,x] = Instantiate ((GameObject)Resources.Load ("Minigames/PlantMinigame/Prefabs/BackgroundTiles"), new Vector3 (x*1.5f, y*1.5f, 0), Quaternion.identity);
-		//		m_tileGrid [y, x].transform.SetParent (parent.transform);
-		//
-		//
-        //        if (y == backgroundHeight - 9)
-        //        {
-        //            m_tileGrid[y, x].GetComponent<TileTextureManager>().SetTexture(6);   
-        //        }
-        //    }
-		//}
-		//parent.transform.position =  new Vector3 (-(backgroundWidth / 2), -(backgroundHeight / 2), 0.0f);
-
+		//creates an array of gameobjects for plant grid
 		m_plantGrid = new GameObject[height,width];
 		plantParent = GameObject.Find("PlantParent");
 
@@ -65,7 +39,7 @@ public class PlantGrid : MonoBehaviour{
                 //Sets the parent of the instantiated Grid object, to the Tile parent (you can move this Gameobject in the editor to move the whole tilegrid)
                 m_plantGrid[y, x] = Instantiate ((GameObject)Resources.Load ("Minigames/PlantMinigame/Prefabs/pTile"));
                 m_plantGrid[y, x].transform.localPosition = plantParent.transform.position;
-				m_plantGrid[y, x].transform.localPosition = new Vector3(plantParent.transform.position.x + (x * 1.2f), plantParent.transform.position.y + (y * 1.2f), -2 + (y*0.1f));
+				m_plantGrid[y, x].transform.localPosition = new Vector3(plantParent.transform.position.x + (x * 1.6f), plantParent.transform.position.y + (y * 1.6f), -2 + (x*y*0.1f));
                 m_plantGrid[y, x].transform.parent = plantParent.transform;
             }
 		}
@@ -79,28 +53,37 @@ public class PlantGrid : MonoBehaviour{
 		m_plantCountY = m_height-1;
 	}
 
-
+	//Kills the plants at the end of the game
 	public bool KillGame()
 	{
+		//run down kill timer
 		m_killTimer -= Time.deltaTime;
 
+		//if all of the plants are not destroyed
 		if ((m_plantCountX != -1)  &&  (m_plantCountY != -1)) {
+			//if the kill timer has triggered
 			if (m_killTimer <= 0.0f) {
+				//get the component from the next plant and kill plant
 				m_plantGrid [m_plantCountY, m_plantCountX].GetComponent<PlantScriptManager> ().KillPlant ();
+
+				//reset timer
 				m_killTimer = 0.1f;
 
+				//if the plant is the last in the row
 				if (m_plantCountX == 0) {
+					//decrement row
 					m_plantCountY--;
 					m_plantCountX = m_width;
 				}
+
+				//decrement X 
 				m_plantCountX--;
-							
 			}
 			return false;
-		} else  {
+		}
+		else  
+		{
 			return true;
 		}
-
-
 	}
 }

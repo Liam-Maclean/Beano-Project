@@ -5,24 +5,22 @@ using UnityEngine;
 /// <summary>
 /// Mole Spawner class, one each to control the behaviours of the moles coming out the holes.
 /// 
-/// 
 /// Works similarly to the plant minigame, 1 individual spawner for each mole, spawning different
 /// kind of moles and controlling the overall behaviour of the moles, such as duration, spawning,
 /// despawning, animations etc.
 /// 
-/// 
 /// Liam MacLean 19:57 06/02/2018
 /// </summary>
 
+//mole type enums
 enum MoleTypes
 {
 	Mole = 0,
 	Human = 1
 }
-
-
 public class MoleSpawner : MonoBehaviour {
 
+	//mole type
 	private MoleTypes moleType;
 
 	//mole sprite
