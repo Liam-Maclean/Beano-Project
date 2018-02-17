@@ -29,8 +29,6 @@ public class BasePlant : MonoBehaviour
 	protected SpriteRenderer sr;
 	public specialityType m_specialityType;
 
-
-
 	//getter
 	public specialityType GetSpecialityType()
 	{
@@ -38,9 +36,9 @@ public class BasePlant : MonoBehaviour
 	}
 
 	//setter
-	public void SetSpecialityType(specialityType specialityTsype)
+	public void SetSpecialityType(specialityType specialityType)
 	{
-		m_specialityType = specialityTsype;
+		m_specialityType = specialityType;
 	}
 
 
@@ -81,7 +79,7 @@ public class BasePlant : MonoBehaviour
 	}
 		
 	//destroys the component on the object
-	public void RemoveComponent()
+	public virtual void RemoveComponent()
 	{
 		Destroy (this);
 	}

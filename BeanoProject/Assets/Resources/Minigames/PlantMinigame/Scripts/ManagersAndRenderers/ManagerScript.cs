@@ -137,6 +137,7 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
+		
 		FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
 
 		//initialise timer
@@ -245,12 +246,14 @@ public class ManagerScript : MonoBehaviour {
 			//if the game hasn't ended
 			if (!GameEnded ()) {
 
+				//dialogue cooldown timer
 				dialogueCooldown -= Time.deltaTime;
 
 				//update game logic
 				CountDown ();
 				OnTileClick ();
 
+				//
 				if (dialogueCooldown < 0.0f) {
 					SpawnDialogueBox ();
 					dialogueCooldown = 5.0f;
@@ -278,6 +281,8 @@ public class ManagerScript : MonoBehaviour {
 			break;
 		//game is counting score and return to overworld
 		case GameState.counting:
+
+			//GameScript.local.EndMiniGame ();
 			//count the score
 			//return to overworld option
 			break;
