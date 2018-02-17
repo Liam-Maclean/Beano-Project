@@ -90,7 +90,7 @@ public class BasePlant : MonoBehaviour
 		sr = this.transform.GetComponent<SpriteRenderer> ();
 	}
 
-	//activates the plant with override functionality
+	//override activate plant method (not in use)
 	public virtual void ActivatePlant(out int score)
 	{
 		score = GetScore ();

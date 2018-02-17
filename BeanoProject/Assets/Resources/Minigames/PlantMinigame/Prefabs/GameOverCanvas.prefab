@@ -22,13 +22,14 @@ GameObject:
   - component: {fileID: 223824618596738628}
   - component: {fileID: 114750561164199888}
   - component: {fileID: 114751751230174488}
+  - component: {fileID: 114057938319649238}
   m_Layer: 5
   m_Name: GameOverCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1080416532670694
 GameObject:
   m_ObjectHideFlags: 1
@@ -443,6 +444,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e27e1858d57c0bd429cb7475979ab019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114057938319649238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055955927050498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a5a61c537fddb4e95b36d84a39d5dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114070959470745382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -577,7 +589,6 @@ MonoBehaviour:
   playerIndex: 1
   playerScoreText: {fileID: 114937692355527206}
   animScript: {fileID: 0}
-  playerScore: 0
   portaitSprites: []
 --- !u!114 &114276084809812126
 MonoBehaviour:
@@ -593,7 +604,6 @@ MonoBehaviour:
   playerIndex: 1
   playerScoreText: {fileID: 114411191974084016}
   animScript: {fileID: 0}
-  playerScore: 0
   portaitSprites: []
 --- !u!114 &114299435507957520
 MonoBehaviour:
@@ -853,7 +863,6 @@ MonoBehaviour:
   playerIndex: 1
   playerScoreText: {fileID: 114299435507957520}
   animScript: {fileID: 0}
-  playerScore: 0
   portaitSprites: []
 --- !u!114 &114750561164199888
 MonoBehaviour:

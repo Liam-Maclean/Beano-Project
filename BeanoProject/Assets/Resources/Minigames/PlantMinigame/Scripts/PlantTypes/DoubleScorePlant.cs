@@ -1,10 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// <summary>
+/// Double Score Plant
+/// 
+/// Plant component with glow particle system attached.
+/// 
+/// When swiped over, has a score of 5 and a tint of gold.
+/// 
+/// encapsulated particle system that destroys when not in use
+/// 
+/// Liam MacLean 17/02/2018, 16:02
+/// </summary>
+
 
 public class DoubleScorePlant : BasePlant {
-	
-
 	//particle system object
 	GameObject m_particleSystemObject;
 
@@ -51,7 +61,7 @@ public class DoubleScorePlant : BasePlant {
 		base.RemoveComponent ();
 	}
 
-	//override for activating plant (swipe over)
+	//override activate plant method (not in use)
 	public override void ActivatePlant(out int score)
 	{
 		base.ActivatePlant (out score);

@@ -80,7 +80,7 @@ public class DebuffPlant : BasePlant {
 		base.RemoveComponent ();
 	}
 
-	//override for activating plant (swipe over)
+	//override activate plant method (not in use)
 	public override void ActivatePlant(out int score)
 	{
 		base.ActivatePlant (out score);
