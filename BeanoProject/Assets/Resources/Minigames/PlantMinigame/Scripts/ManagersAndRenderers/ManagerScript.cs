@@ -32,9 +32,6 @@ public class ManagerScript : MonoBehaviour {
 
 	private GameObject m_tutorialCanvas;
 
-	//Dialogue Data set (All the dialogue loaded from the xml file)
-	private XMLDialogueDatabase m_dialogueSet;
-
 	//swipe object
 	GameObject swipe;
 
@@ -141,7 +138,6 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
-		
 		FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
 
 		//initialise timer
@@ -176,17 +172,7 @@ public class ManagerScript : MonoBehaviour {
 		stopText.transform.localPosition = new Vector3 (0, 0, 1.0f);
 		stopAnimationScript = stopText.GetComponent<StopAnimationScript> ();
 	}
-
-
-	//Spawns dialogue box relative to player portrait position
-	public void SpawnDialogueBox()
-	{
-		//SET UP DIALOGUE BOX SPAWN POINT TO BE REALITVE TO PLAYERS PORTRAIT POSITION
-		GameObject box = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/SpeachBubble")) as GameObject;
-		box.transform.SetParent (GameObject.Find ("PlayerPortait").transform);
-		box.transform.localPosition = new Vector3 (55, 20, 1.0f);
-		//Debug.Log (box.transform.localPosition);
-	}
+		
 
 
 	//set up local multiplayer info so score only goes up on the local player
@@ -271,19 +257,9 @@ public class ManagerScript : MonoBehaviour {
 			}
 			//if the game hasn't ended
 			if (!GameEnded ()) {
-
-				//dialogue cooldown timer
-				dialogueCooldown -= Time.deltaTime;
-
 				//update game logic
 				CountDown ();
 				OnTileClick ();
-
-
-				if (dialogueCooldown < 0.0f) {
-					SpawnDialogueBox ();
-					dialogueCooldown = 5.0f;
-				}
 			
 			} 
 			//if the game HAS ended
@@ -313,13 +289,6 @@ public class ManagerScript : MonoBehaviour {
 			//return to overworld option
 			break;
 		}
-	}
-		
-	//loads dialogue database
-	public void LoadDialogueDatabase()
-	{
-		m_dialogueSet = new XMLDialogueDatabase ();
-		m_dialogueSet = XMLSerializer.Deserialize<XMLDialogueDatabase> ("DialogueFile.xml", "");
 	}
 
     //mouse input class

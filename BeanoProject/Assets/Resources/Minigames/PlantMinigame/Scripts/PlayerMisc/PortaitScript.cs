@@ -14,6 +14,8 @@ using UnityEngine.UI;
 /// </summary>
 public class PortaitScript : MonoBehaviour {
 
+
+	private XMLDialogueDatabase m_dialogueSet;
 	PlayerInfo localPlayerInfo;
 	public int playerIndex;
 	public Text playerScoreText;
@@ -47,5 +49,22 @@ public class PortaitScript : MonoBehaviour {
 	{
 		//update score text in child
 		playerScoreText.text = "Score: " + playerScore;
+	}
+
+	//loads dialogue database
+	public void LoadDialogueDatabase()
+	{
+		m_dialogueSet = new XMLDialogueDatabase ();
+		m_dialogueSet = XMLSerializer.Deserialize<XMLDialogueDatabase> ("DialogueFile.xml", "");
+	}
+
+	//Spawns dialogue box relative to player portrait position
+	public void SpawnDialogueBox()
+	{
+		//SET UP DIALOGUE BOX SPAWN POINT TO BE REALITVE TO PLAYERS PORTRAIT POSITION
+		GameObject box = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/SpeachBubble")) as GameObject;
+		box.transform.SetParent (GameObject.Find ("PlayerPortait").transform);
+		box.transform.localPosition = new Vector3 (55, 20, 1.0f);
+		//Debug.Log (box.transform.localPosition);
 	}
 }
