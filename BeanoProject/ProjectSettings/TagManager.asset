@@ -13,6 +13,8 @@ TagManager:
   - slingshot
   - Pedestrian
   - Kill
+  - Portrait
+  - Hand
   layers:
   - Default
   - TransparentFX
