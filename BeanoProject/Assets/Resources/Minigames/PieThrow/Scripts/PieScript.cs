@@ -9,14 +9,6 @@ public class PieScript : MonoBehaviour
 
 	public GameObject[] piePrefabs;
 
-    //audio variables
-    public AudioClip pullSound;
-    public AudioClip launchSound;
-    private AudioSource source;
-    private float volLowRange = 0.5f;
-    private float volHighRange = 1.0f;
-
-
 	//float variables
 	public float maxStretch;
     private float maxStretchSqr;
@@ -58,7 +50,7 @@ public class PieScript : MonoBehaviour
     {
         //On launch find the slingshot gameObject
 		slingshot = GameObject.FindGameObjectWithTag ("slingshot");
-        source = GetComponent<AudioSource>();
+
     }
 		
 	void Start()
@@ -159,7 +151,6 @@ public class PieScript : MonoBehaviour
 
     void Launch()
 	{
-        source.PlayOneShot(launchSound);
 
 		//calculate the distance the pie has travelled
 		distance = (pieStartPosition - pieEndPosition);
@@ -208,7 +199,6 @@ public class PieScript : MonoBehaviour
 		{
 			//store the initial position
 			pieStartPosition = this.transform.position;
-            source.PlayOneShot(pullSound, 0.5f);
 
         }
 
@@ -228,7 +218,6 @@ public class PieScript : MonoBehaviour
 			pieEndPosition = this.transform.position;
 			isReload = true;
 			Launch ();
-            source.PlayOneShot(launchSound, 0.5f);
         }
 
 		if (hasLaunched)
