@@ -5,15 +5,18 @@ using UnityEngine.Networking;
 
 public class CustomLobby : NetworkLobbyPlayer {
 
-    
-    
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     //syncvar will call when UpdatePlayerDetails is called
     [SyncVar(hook = "UpdatePlayerDetails")]
     public bool hasPlayerDetails = false;
-    [SyncVar]
+
     public int playerCount = 0;
 
-    public PlayerDetails playerDetails;
+    public MinigamePlayerDetails playerDetails;
 
     /// <summary>
     /// local data can be found in each PlayerID object
@@ -58,10 +61,12 @@ public class CustomLobby : NetworkLobbyPlayer {
         local.playerDetails.Avatar = PlayerPrefs.GetInt("Avatar");
         local.playerDetails.Handle = PlayerPrefs.GetString("Handle");
         local.playerDetails.Identifier = netId;
+        local.playerDetails.MetaScore = 0;
+        local.playerDetails.MiniScore = 0;
 
         SendCachedDetailRequests();
 
-        SendDetails(new PlayerDetails(local.playerDetails.Handle, local.playerDetails.Avatar, local.playerDetails.Identifier));
+        SendDetails(new MinigamePlayerDetails(local.playerDetails.MiniScore, local.playerDetails.MetaScore, local.playerDetails.Identifier, local.playerDetails.Handle, local.playerDetails.Avatar));
     }
 
     /// <summary>
@@ -111,7 +116,7 @@ public class CustomLobby : NetworkLobbyPlayer {
     /// reuest details for a specific ID
     /// </summary>
     /// <param name="requestedID">the ID details are being requested for</param>
-    private void SendDetailsRequestForNetId(NetworkInstanceId requestedID)
+    public void SendDetailsRequestForNetId(NetworkInstanceId requestedID)
     {
         NetworkClient.allClients[0].Send(CustomMsgType.ClientRequestPlayerDetails, new PlayerRequestPlayerDataMessage(CustomLobby.local.netId, requestedID));
     }
@@ -120,9 +125,9 @@ public class CustomLobby : NetworkLobbyPlayer {
     /// send details to the host
     /// </summary>
     /// <param name="playerDetailsTemp">the details to be sent</param>
-    private void SendDetails(PlayerDetails playerDetailsTemp)
+    private void SendDetails(MinigamePlayerDetails playerDetailsTemp)
     {
-        NetworkClient.allClients[0].Send(CustomMsgType.HostRecievePlayerDetails, new PlayerDetailsMessage(netId, playerDetailsTemp));
+        NetworkClient.allClients[0].Send(CustomMsgType.HostRecievePlayerDetails, new GamePlayerDetailsMessage(netId, playerDetailsTemp));
     }
 
     /// <summary>
@@ -131,7 +136,7 @@ public class CustomLobby : NetworkLobbyPlayer {
     /// <param name="netMessage">the message with the details</param>
     private void OnHostRecievePlayerDetails(NetworkMessage netMessage)
     {
-        PlayerDetailsMessage playerDetailsMessage = netMessage.ReadMessage<PlayerDetailsMessage>();
+        GamePlayerDetailsMessage playerDetailsMessage = netMessage.ReadMessage<GamePlayerDetailsMessage>();
 
         GameObject sendingPlayerObject = NetworkServer.FindLocalObject(playerDetailsMessage.playerID);
         CustomLobby sendingPlayer = sendingPlayerObject.GetComponent<CustomLobby>();
@@ -154,7 +159,7 @@ public class CustomLobby : NetworkLobbyPlayer {
         GameObject subjectPlayerObject = NetworkServer.FindLocalObject(subjectID);
         CustomLobby subjectPlayer = subjectPlayerObject.GetComponent<CustomLobby>();
 
-        NetworkServer.SendToClient(int.Parse(senderID.ToString()), CustomMsgType.ClientRecievePlayerDetails, new PlayerDetailsMessage(subjectID, subjectPlayer.playerDetails));
+        NetworkServer.SendToClient(int.Parse(senderID.ToString()), CustomMsgType.ClientRecievePlayerDetails, new GamePlayerDetailsMessage(subjectID, subjectPlayer.playerDetails));
     }
 
     /// <summary>
@@ -163,7 +168,7 @@ public class CustomLobby : NetworkLobbyPlayer {
     /// <param name="netMessage"> the recieved message</param>
     private void OnClientRecievePlayerDetails(NetworkMessage netMessage)
     {
-        PlayerDetailsMessage playerDetailsMessage = netMessage.ReadMessage<PlayerDetailsMessage>();
+        GamePlayerDetailsMessage playerDetailsMessage = netMessage.ReadMessage<GamePlayerDetailsMessage>();
 
         GameObject targetPlayerObject = ClientScene.FindLocalObject(playerDetailsMessage.playerID);
         CustomLobby targetPlayer = targetPlayerObject.GetComponent<CustomLobby>();
@@ -185,5 +190,25 @@ public class CustomLobby : NetworkLobbyPlayer {
             RequestDetails();
             playerCount = NetworkClient.allClients.Count;
         }
+    }
+
+    /// <summary>
+    /// update score in overworld and reset minigame score for the next one, then send
+    /// </summary>
+    public void EndMiniGame()
+    {
+        local.playerDetails.MetaScore += local.playerDetails.MiniScore;
+        local.playerDetails.MiniScore = 0;
+        SendDetails(local.playerDetails);
+    }
+
+    /// <summary>
+    ///update score and send new details
+    ///</summary>
+    ///<param name="scoreChange">the amount to change the player's score by</param>
+    public void Score(int scoreChange)
+    {
+        local.playerDetails.MiniScore += scoreChange;
+        SendDetails(local.playerDetails);
     }
 }

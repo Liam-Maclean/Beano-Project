@@ -26,11 +26,11 @@ public class DataDisplay : MonoBehaviour {
 
     #region players
 
-    private static List<GameScript> opponents;
+    private static List<GameObject> opponents = new List<GameObject>();
 
     #endregion
 
-    private void Awake()
+    void Awake()
     {
         score = GameObject.Find("Score").GetComponent<Text>();
         effect = GameObject.Find("Effect").GetComponent<Text>();
@@ -43,20 +43,18 @@ public class DataDisplay : MonoBehaviour {
 
         score3 = GameObject.Find("Score3").GetComponent<Text>();
         effect3 = GameObject.Find("Effect3").GetComponent<Text>();
+
     }
 
-    private void Start()
+   void Start()
     {
-        Repeat:
-        GameScript gameScript = GameScript.local;
-        GameScript[] players = FindObjectsOfType(typeof(GameScript)) as GameScript[];
-        if (players.Length != gameScript.playerCount)
+        
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+       
+        foreach (GameObject player in players)
         {
-            goto Repeat;
-        }
-        foreach (GameScript player in players)
-        {
-            if (player.playerDetails.Identifier != gameScript.playerDetails.Identifier)
+            if (player.GetComponent<CustomLobby>().playerDetails.Identifier != CustomLobby.local.playerDetails.Identifier)
             {
                 opponents.Add(player);
             }
@@ -64,12 +62,21 @@ public class DataDisplay : MonoBehaviour {
         
     }
 
-    private void Update()
+    void Update()
     {
-        score.text = GameScript.local.playerDetails.MiniScore.ToString();
-        score1.text = opponents[0].playerDetails.MiniScore.ToString();
-        score2.text = opponents[1].playerDetails.MiniScore.ToString();
-        score3.text = opponents[2].playerDetails.MiniScore.ToString();
-        score.text = "testval";
+        CustomLobby.local.Score(20);
+
+        foreach(GameObject opponent in opponents)
+        {
+            CustomLobby.local.SendDetailsRequestForNetId(opponent.GetComponent<CustomLobby>().playerDetails.Identifier);
+        }
+
+        score.text = CustomLobby.local.playerDetails.MiniScore.ToString();
+        score1.text = opponents[0].GetComponent<CustomLobby>().playerDetails.MiniScore.ToString();
+        score2.text = opponents[1].GetComponent<CustomLobby>().playerDetails.MiniScore.ToString();
+        score3.text = opponents[2].GetComponent<CustomLobby>().playerDetails.MiniScore.ToString();
+
+        
+
     }
 }

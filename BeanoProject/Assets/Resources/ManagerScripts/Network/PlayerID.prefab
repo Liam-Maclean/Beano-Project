@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 222318408415941444}
   m_Layer: 0
   m_Name: PlayerID
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,6 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLobbyGUI: 1
   hasPlayerDetails: 0
+  playerCount: 0
 --- !u!114 &114199570853047382
 MonoBehaviour:
   m_ObjectHideFlags: 1

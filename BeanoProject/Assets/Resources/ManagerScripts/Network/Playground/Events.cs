@@ -6,7 +6,7 @@ public class Events : MonoBehaviour {
 
 	public void Score()
     {
-        GameScript.local.Score(10);
+        CustomLobby.local.Score(10);
     }
 
     public void Powerup()
