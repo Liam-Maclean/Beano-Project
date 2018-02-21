@@ -13,12 +13,34 @@ using UnityEngine;
 // Contains a self-destructor method and sprite setting methods
 //
 // Liam MacLean - 25/10/2017 03:42
+
+public enum specialityType
+{
+	none,
+	sparks,
+	glow
+}
+
 public class BasePlant : MonoBehaviour
 {
 	//set if the plant is active or not 
 	private bool bActive = true;
 	protected int m_score = 0;
 	protected SpriteRenderer sr;
+	public specialityType m_specialityType;
+
+	//getter
+	public specialityType GetSpecialityType()
+	{
+		return m_specialityType;
+	}
+
+	//setter
+	public void SetSpecialityType(specialityType specialityType)
+	{
+		m_specialityType = specialityType;
+	}
+
 
 	//getter
 	public int GetScore()
@@ -56,16 +78,19 @@ public class BasePlant : MonoBehaviour
 		sr.sprite = sprite;
 	}
 		
-	public void RemoveComponent()
+	//destroys the component on the object
+	public virtual void RemoveComponent()
 	{
 		Destroy (this);
 	}
 
+	//on awake function
 	void Awake()
 	{
 		sr = this.transform.GetComponent<SpriteRenderer> ();
 	}
 
+	//override activate plant method (not in use)
 	public virtual void ActivatePlant(out int score)
 	{
 		score = GetScore ();

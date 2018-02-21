@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+/// <summary>
+/// Script used to check if an animation has ended 
+/// 
+/// contains baseline functions for the countdown animation at the start of the game
+/// 
+/// Liam MacLean 17/02/2018, 15:58
+/// </summary>
+
 public class CountDownScript : MonoBehaviour {
 	public Animator m_animator;
 	private Text m_countDownText;

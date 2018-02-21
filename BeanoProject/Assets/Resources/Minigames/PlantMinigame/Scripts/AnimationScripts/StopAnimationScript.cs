@@ -1,6 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// <summary>
+/// Script used to check if an animation has ended 
+/// 
+/// contains baseline functions for checking if animation has ended at the end of the game
+/// 
+/// Liam MacLean 17/02/2018, 15:58
+/// </summary>
 
 public class StopAnimationScript : MonoBehaviour {
 

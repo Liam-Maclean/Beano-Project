@@ -13,7 +13,7 @@ public class NodeScript : MonoBehaviour
     void Start()
     {
         Vector3 newPos = transform.position;
-        newPos.z = newPos.y;
+        //newPos.z = newPos.y;
         transform.position = newPos;
     }
 

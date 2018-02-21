@@ -5,11 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Mole class
 /// 
-/// 
-/// 
 ///	Hit these "moles" and you'll get positive score
-/// 
-/// 
 /// 
 /// Liam MacLean 20:09 06/02/2018
 /// </summary>
