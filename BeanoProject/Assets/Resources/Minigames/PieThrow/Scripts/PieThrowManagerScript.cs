@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PieThrowManagerScript : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class PieThrowManagerScript : MonoBehaviour
 
     public int minZDist;
     public int maxZDist;
+
+    public Text timer;
+    public float timeLeft;
 
     public float spawnRateMin;
     public float spawnRateMax;
@@ -34,6 +38,9 @@ public class PieThrowManagerScript : MonoBehaviour
 
     void Awake()
     {
+        timeLeft = 30.0f;
+
+
         m_currState = GAMESTATE.Start;
 
         m_pedObjects = new List<GameObject>();
@@ -72,6 +79,11 @@ public class PieThrowManagerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        //Overall game timer
+        GameTimer();
+
+
+
 		switch (m_currState)
         {
             case GAMESTATE.Start:
@@ -176,4 +188,36 @@ public class PieThrowManagerScript : MonoBehaviour
             m_pedObjects[m_pedObjects.Count - 1].GetComponent<PedScript>().InitPed(isLeft, zPos);
         }
     }
+
+    void GameTimer()
+    {
+       
+
+        timeLeft -= Time.deltaTime;
+
+        //convert to integer
+        int tempTime = (int)timeLeft;
+
+        timer.text = tempTime.ToString();
+
+        if (timeLeft <= 0.0f)
+        {
+            GameOver();
+        }
+
+
+    }
+
+    void GameOver()
+    {
+
+    }
+
+
+
+
+
+
+
+
 }

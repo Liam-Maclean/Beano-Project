@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class OverworldScript : MonoBehaviour
 {
-    public int currNodeTESTING;
     public int currPlayersTESTING;
+    private int m_currNode;
 
     public int maxNodes;
     public GameObject playerPrefab;
@@ -45,24 +45,24 @@ public class OverworldScript : MonoBehaviour
 
     public int GetCurrNode()
     {
-        return currNodeTESTING;
+        return m_currNode;
     }
 
     public void PushNode()
     {
-        if (currNodeTESTING + 1 < maxNodes)
+        if (m_currNode + 1 < maxNodes)
         {
-            currNodeTESTING++;
+            m_currNode++;
             for (int i = 0; i < currPlayersTESTING; i++)
             {
-                m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(currNodeTESTING));
+                m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(m_currNode));
             }
         }
         else
         {
             Debug.Log("EndGame Function Hit");
-            currNodeTESTING = 0;
-            SceneManager.LoadSceneAsync("Menu");
+            m_currNode = 0;
+            SceneManager.LoadScene("Menu");
         }
     }
 
@@ -89,11 +89,11 @@ public class OverworldScript : MonoBehaviour
 
         foreach (GameObject node in nodes)
         {
-            if (node.GetComponent<NodeScript>().GetID() == currNodeTESTING)
+            if (node.GetComponent<NodeScript>().GetID() == m_currNode)
             {
                 if (node.GetComponent<NodeScript>().IsGame())
                 {
-                    Debug.Log("START GAME FOR NODE: " + currNodeTESTING);
+                    Debug.Log("START GAME FOR NODE: " + m_currNode);
                     LoadMinigame((Biome)node.GetComponent<NodeScript>().GetBiomeType());
                 }
                 break;
@@ -103,7 +103,7 @@ public class OverworldScript : MonoBehaviour
         PushNode();
 
         GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(currNodeTESTING));
+        mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
     }
 
     public void LoadMinigame(Biome currBiome)
@@ -116,13 +116,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0,1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -130,13 +130,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -144,13 +144,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -158,13 +158,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -172,13 +172,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -186,13 +186,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -200,13 +200,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
