@@ -116,13 +116,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0,1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -130,13 +130,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -144,13 +144,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -158,13 +158,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -172,13 +172,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -186,13 +186,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
@@ -200,13 +200,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
+                            SceneManager.LoadSceneAsync(6);
                             break;
                     }
                     break;
