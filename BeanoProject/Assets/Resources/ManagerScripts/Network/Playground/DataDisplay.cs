@@ -72,10 +72,18 @@ public class DataDisplay : MonoBehaviour {
         }
 
         score.text = CustomLobby.local.playerDetails.MiniScore.ToString();
-        score1.text = opponents[0].GetComponent<CustomLobby>().playerDetails.MiniScore.ToString();
-        score2.text = opponents[1].GetComponent<CustomLobby>().playerDetails.MiniScore.ToString();
-        score3.text = opponents[2].GetComponent<CustomLobby>().playerDetails.MiniScore.ToString();
-
+        if (opponents.Count > 0)
+        {
+            score1.text = opponents[0].GetComponent<CustomLobby>().playerDetails.MiniScore.ToString();
+            if (opponents.Count > 1)
+            {
+                score2.text = opponents[1].GetComponent<CustomLobby>().playerDetails.MiniScore.ToString();
+                if (opponents.Count > 3)
+                {
+                    score3.text = opponents[2].GetComponent<CustomLobby>().playerDetails.MiniScore.ToString();
+                }
+            }
+        }
         
 
     }

@@ -128,6 +128,7 @@ public class CustomLobby : NetworkLobbyPlayer {
     private void SendDetails(MinigamePlayerDetails playerDetailsTemp)
     {
         NetworkClient.allClients[0].Send(CustomMsgType.HostRecievePlayerDetails, new GamePlayerDetailsMessage(netId, playerDetailsTemp));
+        
     }
 
     /// <summary>
@@ -190,6 +191,7 @@ public class CustomLobby : NetworkLobbyPlayer {
             RequestDetails();
             playerCount = NetworkClient.allClients.Count;
         }
+        hasPlayerDetails = false;
     }
 
     /// <summary>
@@ -209,6 +211,16 @@ public class CustomLobby : NetworkLobbyPlayer {
     public void Score(int scoreChange)
     {
         local.playerDetails.MiniScore += scoreChange;
+        
+        if (isServer)
+        {
+            GameObject sendingPlayerObject = NetworkServer.FindLocalObject(local.playerDetails.Identifier);
+            CustomLobby sendingPlayer = sendingPlayerObject.GetComponent<CustomLobby>();
+
+            sendingPlayer.hasPlayerDetails = true;
+            sendingPlayer.playerDetails = local.playerDetails;
+        }
+
         SendDetails(local.playerDetails);
     }
 }
