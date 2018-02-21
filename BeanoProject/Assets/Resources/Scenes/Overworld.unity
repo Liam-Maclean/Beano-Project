@@ -595,7 +595,7 @@ Prefab:
     - target: {fileID: 114673290847710992, guid: 8597c176fe316324a99b2834df1a8be9,
         type: 2}
       propertyPath: isGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1237896412339266, guid: 8597c176fe316324a99b2834df1a8be9, type: 2}
       propertyPath: m_TagString
@@ -1065,7 +1065,7 @@ Prefab:
     - target: {fileID: 114673290847710992, guid: 8597c176fe316324a99b2834df1a8be9,
         type: 2}
       propertyPath: isGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1237896412339266, guid: 8597c176fe316324a99b2834df1a8be9, type: 2}
       propertyPath: m_TagString
@@ -1475,7 +1475,7 @@ Prefab:
     - target: {fileID: 114673290847710992, guid: 8597c176fe316324a99b2834df1a8be9,
         type: 2}
       propertyPath: isGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1237896412339266, guid: 8597c176fe316324a99b2834df1a8be9, type: 2}
       propertyPath: m_TagString
@@ -1759,7 +1759,7 @@ Prefab:
     - target: {fileID: 114673290847710992, guid: 8597c176fe316324a99b2834df1a8be9,
         type: 2}
       propertyPath: isGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114673290847710992, guid: 8597c176fe316324a99b2834df1a8be9,
         type: 2}
@@ -2110,7 +2110,7 @@ Prefab:
     - target: {fileID: 114673290847710992, guid: 8597c176fe316324a99b2834df1a8be9,
         type: 2}
       propertyPath: isGame
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1237896412339266, guid: 8597c176fe316324a99b2834df1a8be9, type: 2}
       propertyPath: m_TagString
@@ -2220,6 +2220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172e98a45ea551d409e06f7e7e60b6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoomSpeed: 100
   targetZoom: 0
   targetPos: {x: 0, y: 0, z: 0}
   orthoCamera: {fileID: 1986526899}

@@ -16,6 +16,8 @@ public class CameraScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        Vector3 currPos = transform.position;
+
         if (Input.touchCount == 2)
         {
             Touch touch0 = Input.GetTouch(0);
@@ -29,58 +31,52 @@ public class CameraScript : MonoBehaviour
 
             float magDifference = oldTouchMag - currTouchMag;
 
-            orthoCamera.orthographicSize += magDifference * zoomSpeed;
-            orthoCamera.orthographicSize = Mathf.Max(orthoCamera.orthographicSize, 0.1f);
+            targetZoom += magDifference * zoomSpeed;
+            targetZoom = Mathf.Max(targetZoom, 0.1f);
         }
-        else
+        else if (currPos.x <= targetPos.x - newSpaceBuffer || currPos.x >= targetPos.x + newSpaceBuffer || currPos.y <= targetPos.y - newSpaceBuffer || currPos.y >= targetPos.y + newSpaceBuffer)
         {
+            m_moveVelo.x = targetPos.x - currPos.x;
+            m_moveVelo.y = targetPos.y - currPos.y;
+            m_moveVelo.Normalize();
 
-            Vector3 currPos = transform.position;
-
-            if (currPos.x <= targetPos.x - newSpaceBuffer || currPos.x >= targetPos.x + newSpaceBuffer || currPos.y <= targetPos.y - newSpaceBuffer || currPos.y >= targetPos.y + newSpaceBuffer)
+            if (m_momentum == 0)
             {
-                m_moveVelo.x = targetPos.x - currPos.x;
-                m_moveVelo.y = targetPos.y - currPos.y;
-                m_moveVelo.Normalize();
-
-                if (m_momentum == 0)
-                {
-                    m_momentum = 0.1f;
-                }
-                else
-                {
-                    if (m_momentum < 0.75f)
-                    {
-                        m_momentum = m_momentum * 1.25f;
-                    }
-                    else
-                    {
-                        m_momentum = 1.0f;
-                    }
-                }
-
-                transform.position += (m_moveVelo * m_momentum * Time.deltaTime);
+                m_momentum = 0.1f;
             }
             else
             {
-                m_momentum = 0;
+                if (m_momentum < 0.75f)
+                {
+                    m_momentum = m_momentum * 1.25f;
+                }
+                else
+                {
+                    m_momentum = 1.0f;
+                }
             }
 
-            float currSize = orthoCamera.orthographicSize;
+            transform.position += (m_moveVelo * m_momentum * Time.deltaTime);
+        }
+        else
+        {
+            m_momentum = 0;
+        }
 
-            if (currSize != targetZoom)
+        float currSize = orthoCamera.orthographicSize;
+
+        if (currSize != targetZoom)
+        {
+            if (targetZoom > currSize && currSize < 10)
             {
-                if (targetZoom > currSize && currSize < 10)
-                {
-                    currSize += 0.01f;
-                }
-                else if (currSize > 3)
-                {
-                    currSize -= 0.01f;
-                }
-
-                orthoCamera.orthographicSize = currSize;
+                currSize += 0.01f;
             }
+            else if (currSize > 3)
+            {
+                currSize -= 0.01f;
+            }
+
+            orthoCamera.orthographicSize = currSize;
         }
     }
 
