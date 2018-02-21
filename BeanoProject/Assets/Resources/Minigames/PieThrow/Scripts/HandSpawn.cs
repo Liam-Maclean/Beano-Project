@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HandSpawn : MonoBehaviour
 { 
+    private SpriteRenderer sr;
     private bool oldMouseDown;
     private bool newMouseDown;
-    private SpriteRenderer sr;
     public Sprite handClosed;
     public Sprite handOpen;
     public GameObject handPrefab;
@@ -17,11 +17,7 @@ public class HandSpawn : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-
-        for (int i = 0; i  < 1; i ++)
-        {
-            clone = (GameObject)Instantiate(handPrefab, new Vector2(0.0f, -3.0f), Quaternion.identity);
-        }
+        
     }
 
     // Update is called once per frame
@@ -29,28 +25,23 @@ public class HandSpawn : MonoBehaviour
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        //get the current mouse click 
-        newMouseDown = Input.GetMouseButton(0);
+        newMouseDown = Input.GetMouseButtonDown(0);
 
-        //if there has been a click
         if (newMouseDown && !oldMouseDown)
         {
-            clone.transform.position = mousePos;
+            clone = (GameObject)Instantiate(handPrefab, mousePos, Quaternion.identity);
+           
         }
 
-        //if the click is being held down
-        if (newMouseDown && oldMouseDown)
-        {
-        }
-
-        //if the there is no longer a click being held down
+        clone.transform.position = mousePos;
+        
         if (!newMouseDown && oldMouseDown)
         {
-            sr.sprite = handOpen;
             Destroy(clone);
         }
-        //set the current mouse input to the old one for comparison
+
         oldMouseDown = newMouseDown;
+
     }
 
 
