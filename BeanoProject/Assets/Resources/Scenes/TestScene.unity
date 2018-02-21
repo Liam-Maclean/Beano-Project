@@ -135,8 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f808b6df14089248b6feefe9686f2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handClosed: {fileID: 21300000, guid: 828cf8f0d27ea3241ad144b11be6b3d4, type: 3}
-  handOpen: {fileID: 21300000, guid: b3c90f2888faff349a803b707dca247f, type: 3}
   handPrefab: {fileID: 1341756042043334, guid: 096c4be797d5aa64887abace622ff9dd, type: 2}
 --- !u!4 &313527901
 Transform:
@@ -646,6 +644,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 82848244155654124, guid: 37aa0cd3113d4924b939a66e33e80f71, type: 2}
+    - {fileID: 114133704571085762, guid: 37aa0cd3113d4924b939a66e33e80f71, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 37aa0cd3113d4924b939a66e33e80f71, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &950119419
