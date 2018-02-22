@@ -19,7 +19,7 @@ public class CustomLobby : NetworkLobbyPlayer {
     /// <summary>
     /// Active powerup used on player
     /// </summary>
-    int effect = 0;
+    public int effect = 0;
 
     public MinigamePlayerDetails playerDetails;
 
@@ -194,6 +194,7 @@ public class CustomLobby : NetworkLobbyPlayer {
         GameObject subjectObject = ClientScene.FindLocalObject(subjectID);
         CustomLobby subjectPlayer = subjectObject.GetComponent<CustomLobby>();
 
+        subjectPlayer.hasPlayerDetails = true;
         subjectPlayer.effect = powerUp;
     }
 
