@@ -21,7 +21,7 @@ public class NLM : NetworkLobbyManager {
     /// <summary>
     /// list of player objects
     /// </summary>
-    private List<CustomLobby> playerObjects = new List<CustomLobby>();
+    public static List<CustomLobby> playerObjects = new List<CustomLobby>();
     /// <summary>
     /// bool to determine if ready message has been sent
     /// </summary>
