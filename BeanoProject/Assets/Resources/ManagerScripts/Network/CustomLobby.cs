@@ -211,7 +211,7 @@ public class CustomLobby : NetworkLobbyPlayer {
             RequestDetails();
             playerCount = NetworkClient.allClients.Count;
         }
-        hasPlayerDetails = false;
+        
     }
 
     /// <summary>
@@ -254,11 +254,11 @@ public class CustomLobby : NetworkLobbyPlayer {
         NetworkClient.allClients[0].Send(CustomMsgType.PlayerSendPowerUp, new PowerUpMessage(powerUpType, subject));
     }
 
-    public void Effected(int theHookNeedsThis)
+    public void Effected(int number)
     {
         if (this.playerDetails.Identifier == local.playerDetails.Identifier)
         {
-            local.effect = this.effect;
+            local.effect = number;
         }
     }
 }
