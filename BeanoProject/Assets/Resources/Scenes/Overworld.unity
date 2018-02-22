@@ -2220,9 +2220,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172e98a45ea551d409e06f7e7e60b6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSpeed: 100
-  targetZoom: 0
-  targetPos: {x: 0, y: 0, z: 0}
+  zoomSpeed: 0.025
+  swipeSpeed: 0.1
+  spaceBuffer: 0.1
+  cooldownMax: 1
   orthoCamera: {fileID: 1986526899}
 --- !u!1001 &1992035103
 Prefab:
