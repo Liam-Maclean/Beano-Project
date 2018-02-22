@@ -47,7 +47,7 @@ public class CameraScript : MonoBehaviour
             m_targetPos *= touchMag * swipeSpeed * m_targetZoom;
 
             // Apply movement
-            transform.position += m_targetPos * Time.deltaTime;
+            transform.position -= m_targetPos * Time.deltaTime;
 
             // Reset counter
             m_cooldownMoveCounter = cooldownMax;
