@@ -62,7 +62,7 @@ public class CustomLobby : NetworkLobbyPlayer {
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
-
+        
         local = this;
 
         local.playerDetails.Avatar = PlayerPrefs.GetInt("Avatar");
@@ -254,7 +254,7 @@ public class CustomLobby : NetworkLobbyPlayer {
         NetworkClient.allClients[0].Send(CustomMsgType.PlayerSendPowerUp, new PowerUpMessage(powerUpType, subject));
     }
 
-    public void Effected()
+    public void Effected(int theHookNeedsThis)
     {
         if (this.playerDetails.Identifier == local.playerDetails.Identifier)
         {
