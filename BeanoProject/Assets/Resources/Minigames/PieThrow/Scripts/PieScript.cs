@@ -7,8 +7,6 @@ public class PieScript : MonoBehaviour
 	//vector2 variables
 	private Vector2 m_touch;
 
-	public GameObject[] piePrefabs;
-
 	//float variables
 	public float maxStretch;
     private float maxStretchSqr;
@@ -24,10 +22,13 @@ public class PieScript : MonoBehaviour
 
     //bool variables
 	private bool isTouched;
+	private bool isReload;
 	private bool oldMouseDown;
     private bool newMouseDown;
-	private bool hasLaunched;
-	private bool isReload;
+	private bool isDestroyed;
+	private static bool hasLaunched;
+
+
 
     //Ray variables
     private Ray rayToTouch;
@@ -35,6 +36,7 @@ public class PieScript : MonoBehaviour
 
     //GameObject variables
 	private GameObject slingshot;
+	public GameObject piePrefab;
 
     //Collider variables
     private CircleCollider2D circle;
@@ -50,12 +52,10 @@ public class PieScript : MonoBehaviour
     {
         //On launch find the slingshot gameObject
 		slingshot = GameObject.FindGameObjectWithTag ("slingshot");
-
     }
 		
 	void Start()
 	{
-		piePrefabs [0] = this.gameObject;
         //initialise the rays
         rayToTouch = new Ray(gameObject.transform.position, Vector3.zero);
 		slingToPie = new Ray(slingshot.transform.position, Vector3.zero);
@@ -70,6 +70,7 @@ public class PieScript : MonoBehaviour
 
 		hasLaunched = false;
 		isReload = false;
+		isDestroyed = false;
 	}
 
 
@@ -89,7 +90,7 @@ public class PieScript : MonoBehaviour
 					break;
 			case TouchPhase.Moved:
 				m_touch = touch.position;
-				if (!isReload) {
+				if (isReload) {
 					Dragging ();
 				}
 					break;
@@ -103,8 +104,6 @@ public class PieScript : MonoBehaviour
 
 		gameObject.transform.position += distance;
 	}
-
-
 
 	void Dragging()
 	{
@@ -236,13 +235,43 @@ public class PieScript : MonoBehaviour
 		timer -= Time.deltaTime;
 		if (timer <= 0.0f) {
 
-			newPie = (GameObject)Instantiate (piePrefabs [pieCounter], new Vector3 (0.0f, -2.5f, 0.0f), Quaternion.identity);
+			newPie = (GameObject)Instantiate (piePrefab, new Vector3 (0.0f, -2.5f, 0.0f), Quaternion.identity);
 			Destroy (this.gameObject);
 			isReload = true;
-			pieCounter++;
 			timer = 2.0f;
 			hasLaunched = false;
 			sr.sprite = originPie;
 		}
+		if (isDestroyed && timer <= 0.0f)
+		{ 
+			newPie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.5f, 0.0f), Quaternion.identity);
+			isReload = true;
+			timer = 2.0f;
+			hasLaunched = false;
+			sr.sprite = originPie;
+			isDestroyed = false;
+		}
     }
+
+	//GETTERS
+	public bool GetLaunched()
+	{
+		return hasLaunched;
+	}
+
+	public bool GetDestroyed ()
+	{
+		return isDestroyed;
+	}
+
+	//SETTERS
+	public void SetDestroyed(bool destroyed)
+	{
+		isDestroyed = destroyed;
+	}
+	public void SetLaunched(bool launched)
+	{
+		hasLaunched = launched;
+	}
+
 }

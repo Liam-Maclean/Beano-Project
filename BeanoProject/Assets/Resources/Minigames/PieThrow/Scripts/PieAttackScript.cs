@@ -4,29 +4,34 @@ using UnityEngine;
 
 public class PieAttackScript : MonoBehaviour {
 
-    Vector3 rayDir;
+	PieScript pieScript;
 
 
 
     // Use this for initialization
     void Start ()
-    {
-
-        rayDir = new Vector3(0.0f, 0.0f, 10.0f);    
+    {   
+		pieScript = gameObject.GetComponent<PieScript>();
 
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-     //   Ray ray;
+		
+		if (pieScript.GetLaunched () == true) 
+		{
 
-      //  RaycastHit hit = Physics.Raycast(gameObject.transform.position, Mathf.Infinity);
+			RaycastHit[] hit = Physics.RaycastAll (gameObject.transform.position, new Vector3 (0.0f, 0.0f, 1.0f), Mathf.Infinity);
 
-       // if (hit)
-        {
-            //Debug.Log(hit.transform.name);
-        }
+			for (int i = 0; i < hit.Length; i++)
+			{
+				pieScript.SetDestroyed (true);
+				Destroy (hit [i].collider.gameObject);
+				Destroy (gameObject);
+			}
+		}
+        
 
 
 

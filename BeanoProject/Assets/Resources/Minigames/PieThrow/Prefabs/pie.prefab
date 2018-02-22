@@ -192,10 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d31e436c3c05794481b5336e6b59d08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piePrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
   maxStretch: 3
+  piePrefab: {fileID: 1986721381973192}
   angledRightPie: {fileID: 21300000, guid: 2e838c220688b034dab86953d938fe71, type: 3}
   angledLeftPie: {fileID: 21300000, guid: ce4892920a1d2e4429d0931ea87e323f, type: 3}
   originPie: {fileID: 21300000, guid: 46371451b3f21c94fba4362974ee391d, type: 3}
