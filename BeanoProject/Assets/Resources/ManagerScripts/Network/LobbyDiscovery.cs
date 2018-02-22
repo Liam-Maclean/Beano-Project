@@ -5,10 +5,20 @@ using UnityEngine.Networking;
 
 public class LobbyDiscovery : NetworkDiscovery {
 
-	public override void OnReceivedBroadcast(string fromAddress, string data)
+    
+
+    public void Host()
     {
-        NetworkLobbyManager.singleton.networkAddress = fromAddress;
-        NetworkLobbyManager.singleton.StartClient();
+        base.StartAsServer();
     }
 
+    public void Join()
+    {
+        base.StartAsClient();
+    }
+
+    public override void OnReceivedBroadcast(string fromAddress, string data)
+    {
+        this.GetComponent<NLM>().FoundGame(fromAddress);
+    }
 }

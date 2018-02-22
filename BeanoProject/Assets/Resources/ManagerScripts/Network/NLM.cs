@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class NLM : NetworkLobbyManager {
 
     public static bool goAhead = false;
+    bool shouldReady = false;
 
     /// <summary>
     /// when server connects, start the host
@@ -85,7 +86,32 @@ public class NLM : NetworkLobbyManager {
         goAhead = true;
     }
 
-    
+    public void HostButton()
+    {
+        this.GetComponent<LobbyDiscovery>().Host();
+        StartHost();
+    }
 
+    public void JoinButton()
+    {
+        this.GetComponent<LobbyDiscovery>().Join();
+    }
 
+    public void ReadyButton()
+    {
+        shouldReady = !shouldReady;
+        foreach (CustomLobby player in FindObjectsOfType<CustomLobby>())
+        {
+            if (player.playerDetails.Identifier == CustomLobby.local.playerDetails.Identifier)
+            {
+                player.readyToBegin = shouldReady;
+            }
+        }
+    }
+
+    public void FoundGame(string fromAddress)
+    {
+        networkAddress = fromAddress;
+        StartClient();
+    }
 }
