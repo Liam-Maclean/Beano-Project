@@ -85,7 +85,19 @@ public class NLM : NetworkLobbyManager {
         goAhead = true;
     }
 
-    
+    public void HostButton()
+    {
 
+    }
+
+    public void JoinButton()
+    {
+
+    }
+
+    public void ReadyButton()
+    {
+        
+    }
 
 }

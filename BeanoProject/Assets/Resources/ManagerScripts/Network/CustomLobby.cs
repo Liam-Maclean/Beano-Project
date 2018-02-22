@@ -19,6 +19,7 @@ public class CustomLobby : NetworkLobbyPlayer {
     /// <summary>
     /// Active powerup used on player
     /// </summary>
+    [SyncVar(hook = "Effected")]
     public int effect = 0;
 
     public MinigamePlayerDetails playerDetails;
@@ -194,7 +195,6 @@ public class CustomLobby : NetworkLobbyPlayer {
         GameObject subjectObject = ClientScene.FindLocalObject(subjectID);
         CustomLobby subjectPlayer = subjectObject.GetComponent<CustomLobby>();
 
-        subjectPlayer.hasPlayerDetails = true;
         subjectPlayer.effect = powerUp;
     }
 
@@ -252,5 +252,13 @@ public class CustomLobby : NetworkLobbyPlayer {
     public void PowerUp(int powerUpType, NetworkInstanceId subject)
     {
         NetworkClient.allClients[0].Send(CustomMsgType.PlayerSendPowerUp, new PowerUpMessage(powerUpType, subject));
+    }
+
+    public void Effected()
+    {
+        if (this.playerDetails.Identifier == local.playerDetails.Identifier)
+        {
+            local.effect = this.effect;
+        }
     }
 }
