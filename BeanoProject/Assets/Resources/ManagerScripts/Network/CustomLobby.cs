@@ -16,6 +16,11 @@ public class CustomLobby : NetworkLobbyPlayer {
 
     public int playerCount = 0;
 
+    /// <summary>
+    /// Active powerup used on player
+    /// </summary>
+    int effect = 0;
+
     public MinigamePlayerDetails playerDetails;
 
     /// <summary>
@@ -32,6 +37,7 @@ public class CustomLobby : NetworkLobbyPlayer {
 
         NetworkServer.RegisterHandler(CustomMsgType.HostRecievePlayerDetails, OnHostRecievePlayerDetails);
         NetworkServer.RegisterHandler(CustomMsgType.ClientRequestPlayerDetails, OnClientRequestPlayerDetails);
+        NetworkServer.RegisterHandler(CustomMsgType.PlayerSendPowerUp, OnPlayerSendPowerUp);
     }
 
     /// <summary>
@@ -178,6 +184,19 @@ public class CustomLobby : NetworkLobbyPlayer {
 
     }
 
+    private void OnPlayerSendPowerUp(NetworkMessage networkMessage)
+    {
+        PowerUpMessage message = networkMessage.ReadMessage<PowerUpMessage>();
+
+        NetworkInstanceId subjectID = message.SubjectID;
+        int powerUp = message.PowerUp;
+
+        GameObject subjectObject = ClientScene.FindLocalObject(subjectID);
+        CustomLobby subjectPlayer = subjectObject.GetComponent<CustomLobby>();
+
+        subjectPlayer.effect = powerUp;
+    }
+
     /// <summary>
     /// syncvar hook to keep a copy of each player's details on each client
     /// </summary>
@@ -222,5 +241,15 @@ public class CustomLobby : NetworkLobbyPlayer {
         }
 
         SendDetails(local.playerDetails);
+    }
+
+    /// <summary>
+    /// send a powerup effect to another player
+    /// </summary>
+    /// <param name="powerUpType">integer for the powerup used</param>
+    /// <param name="subject">The player to send this to, get this by finding that player in the scene and getting CustomLobby.playerDetails.Identifier </param>
+    public void PowerUp(int powerUpType, NetworkInstanceId subject)
+    {
+        NetworkClient.allClients[0].Send(CustomMsgType.PlayerSendPowerUp, new PowerUpMessage(powerUpType, subject));
     }
 }

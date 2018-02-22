@@ -18,4 +18,6 @@ public class CustomMsgType : MsgType {
     /// </summary>
     public const short ClientRecievePlayerDetails = MsgType.Highest + 3;
 
+    public const short PlayerSendPowerUp = MsgType.Highest + 4;
+
 }
