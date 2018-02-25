@@ -213,8 +213,8 @@ public class ManagerScript : MonoBehaviour {
 				}
 
 
-				//if player wants to continue
-				if (Input.GetMouseButtonDown (0)) {
+				////if player wants to continue
+				//if (Input.GetMouseButtonDown (0)) {
 
 					Destroy (m_tutorialCanvas);
 
@@ -227,7 +227,7 @@ public class ManagerScript : MonoBehaviour {
 					countDownObject.transform.localPosition = new Vector3 (0.0f, 0.0f, 1.0f);
 					countDownScript = GameObject.Find ("CountDownText(Clone)").GetComponent<CountDownScript> ();
 					m_gameState = GameState.countdown;
-				}
+				//}
 			}
 
 

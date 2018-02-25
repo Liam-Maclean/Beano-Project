@@ -25,16 +25,22 @@ public class PlantGameCanvas : MonoBehaviour {
 	//positions on the screen for 1st, 2nd, 3rd and 4th
 	public Vector3[] m_portraitPositions;
 
+	private GameObject[] m_opponents;
+
 
 	// Use this for initialization
 	void Start () {
 
 		//get gameobjects with the tag portraits in the scene
 		m_portraits = GameObject.FindGameObjectsWithTag ("Portrait");
+		m_opponents = GameObject.FindGameObjectsWithTag ("Players");
+
+
 
 		//gets all the portrait scripts from the portrait objects
 		for (int i = 0; i < m_portraits.Length; i++) {
 			m_potraitScripts.Add(m_portraits [i].GetComponent<PortaitScript> ());
+			m_potraitScripts [i].HandPlayerNetworkLobby (m_opponents [i].GetComponent<CustomLobby>());
 		}
 	}
 
