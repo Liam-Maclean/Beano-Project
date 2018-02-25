@@ -33,7 +33,7 @@ public class PlantGameCanvas : MonoBehaviour {
 
 		//get gameobjects with the tag portraits in the scene
 		m_portraits = GameObject.FindGameObjectsWithTag ("Portrait");
-		m_opponents = GameObject.FindGameObjectsWithTag ("Players");
+		m_opponents = GameObject.FindGameObjectsWithTag ("Player");
 
 
 

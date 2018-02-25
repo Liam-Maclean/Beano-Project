@@ -62,7 +62,8 @@ public class OverworldScript : MonoBehaviour
         {
             Debug.Log("EndGame Function Hit");
             m_currNode = 0;
-            SceneManager.LoadScene("Menu");
+			SceneManager.LoadScene ("PlantMinigameScene");
+            //SceneManager.LoadScene("Menu");
         }
     }
 
