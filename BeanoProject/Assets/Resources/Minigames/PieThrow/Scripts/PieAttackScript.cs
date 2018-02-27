@@ -11,6 +11,7 @@ public class PieAttackScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {   
+        //variable to access the pieScript
 		pieScript = gameObject.GetComponent<PieScript>();
 
     }
@@ -21,13 +22,17 @@ public class PieAttackScript : MonoBehaviour {
 		
 		if (pieScript.GetLaunched () == true) 
 		{
-
+            //cast a ray out of all the objects and store them in an array
 			RaycastHit[] hit = Physics.RaycastAll (gameObject.transform.position, new Vector3 (0.0f, 0.0f, 1.0f), Mathf.Infinity);
 
+            
 			for (int i = 0; i < hit.Length; i++)
 			{
+                //if there has been a collision 
 				pieScript.SetDestroyed (true);
+                //destroy the object the pie has collided with
 				Destroy (hit [i].collider.gameObject);
+                //destroy the pie
 				Destroy (gameObject);
 			}
 		}
