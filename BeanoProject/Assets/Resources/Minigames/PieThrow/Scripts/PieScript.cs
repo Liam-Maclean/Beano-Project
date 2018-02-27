@@ -17,35 +17,23 @@ public class PieScript : MonoBehaviour
 	private Vector3 pieEndPosition;
 	private Vector3 distance;
 
-	//rigidbody object
-	private Rigidbody2D rb;
-
     //bool variables
-	private bool isReload;
+	private bool isReloading;
 	private bool isDestroyed;
 	private static bool hasLaunched;
 	private bool oldMouseDown;
     private bool newMouseDown;
 
-
-
     //Ray variables
     private Ray rayToTouch;
-    private Ray slingToPie;
 
     //GameObject variables
 	private GameObject slingshot;
 	public GameObject piePrefab;
+    private GameObject pie;
 
     //Collider variables
     private CircleCollider2D circle;
-
-    //Sprite variables
-    private SpriteRenderer sr;
-    public Sprite angledRightPie;
-    public Sprite angledLeftPie;
-    public Sprite originPie;
-
 
     void Awake()
     {
@@ -55,20 +43,16 @@ public class PieScript : MonoBehaviour
 		
 	void Start()
 	{
+        pie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.5f,0.0f), Quaternion.identity);
         //initialise the rays
-        rayToTouch = new Ray(gameObject.transform.position, Vector3.zero);
-		slingToPie = new Ray(slingshot.transform.position, Vector3.zero);
+        rayToTouch = new Ray(pie.transform.position, Vector3.zero);
 
-        //intialise the necessary components
-        rb = gameObject.GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
-
-
+     
         //get the square of maxstretch
         maxStretchSqr = maxStretch * maxStretch;
 
 		hasLaunched = false;
-		isReload = false;
+		isReloading = false;
 		isDestroyed = false;
 	}
 
@@ -76,7 +60,7 @@ public class PieScript : MonoBehaviour
 	void Update()
     {
         //Mouse Controls
-        if (!isReload && !hasLaunched)
+        if (!isReloading && !hasLaunched)
         {
             OnMouseDown();
         }
@@ -90,28 +74,26 @@ public class PieScript : MonoBehaviour
             {
                 case TouchPhase.Began:
                     //store the initial position
-                    pieStartPosition = gameObject.transform.position;
+                    pieStartPosition = pie.transform.position;
                     break;
                 case TouchPhase.Moved:
                     m_touch = touch.position;
-                    if (!isReload && !hasLaunched)
+                    if (!isReloading && !hasLaunched)
                     {
                         Dragging();
                     }
                     break;
                 case TouchPhase.Ended:
-                    pieEndPosition = gameObject.transform.position;
+                    pieEndPosition = pie.transform.position;
                     Launch();
-                    Respawn();
                     break;
             }
         }
-
         //only respawn if the pie has been launched 
-        if (hasLaunched)
+        if (hasLaunched || isDestroyed)
         {
             //translates the pies position
-            gameObject.transform.position += distance;
+            pie.transform.position += distance;
             Respawn();
         }
 	}
@@ -132,10 +114,8 @@ public class PieScript : MonoBehaviour
         }
 
         //set the pies position to the position of the touch
-		this.transform.position = objPos;
+        pie.transform.position = objPos;
 
-        //rotate the pie depending on the angle of aim
-        PieRotate(objPos.x);
     }
 
 	void MouseDragging()
@@ -152,53 +132,19 @@ public class PieScript : MonoBehaviour
             objPos = rayToTouch.GetPoint(maxStretch);   
 		}
 
-		//set the pies position to the position of the touch
-		this.transform.position = objPos;
-
-        //update the sprite of the pie depending on the angle of aim
-        PieRotate(objPos.x);
-       // HoldPoint();
+        //set the pies position to the position of the touch
+        pie.transform.position = objPos;
     }
 
     void Launch()
 	{
-
         //calculate the distance the pie has travelled
         distance = (pieStartPosition - pieEndPosition);
 
 		//normalize the distance
 		distance.Normalize();
         hasLaunched = true;
-        isReload = true;
 	}
-
-    void HoldPoint()
-	{
-        //get the distance between the slingshot to the pie
-		Vector2 slingshotToPie = slingshot.transform.position - gameObject.transform.position;
-        slingToPie.direction = slingshotToPie;
-
-        Vector3 holdPoint = slingToPie.GetPoint(slingshotToPie.magnitude);
-    }
-
-
-	void PieRotate(float pos)
-    {
-        //swap the sprite depending on whether the x value is negative or positive
-        if (pos < 0)
-        {
-            sr.sprite = angledLeftPie;
-        }
-        else if (pos >= 0 || pos < 1)
-        {
-            sr.sprite = originPie;
-        }
-        if (pos > 1)
-        {
-            sr.sprite = angledRightPie;
-        }
-    }
-
 
     //this function does the exact same thing as the touch controls only with mouse controls instead
 	void OnMouseDown()
@@ -211,22 +157,20 @@ public class PieScript : MonoBehaviour
 		if (newMouseDown && !oldMouseDown)
 		{
 			//store the initial position
-			pieStartPosition = this.transform.position;
+			pieStartPosition = pie.transform.position;
 
         }
 
         //if the click is being held down
         if (newMouseDown && oldMouseDown)
 		{
-		
-				MouseDragging ();
-			
+	        MouseDragging ();
 		}
  
         //if the there is no longer a click being held down
 		if (!newMouseDown && oldMouseDown)
 		{
-			pieEndPosition = this.transform.position;
+			pieEndPosition = pie.transform.position;
 			Launch ();
         }
 
@@ -235,27 +179,24 @@ public class PieScript : MonoBehaviour
 	}
 
     void Respawn()
-    {
-		GameObject newPie;
-	    
-        //takes away 1 second per frame
-		timer -= Time.deltaTime;
-        //if the timer hits 0
-		if (timer <= 0.0f)
-        {
-            //instansiate the new pie at the respawn position
-			newPie = (GameObject)Instantiate (piePrefab, new Vector3 (0.0f, -2.5f, 0.0f), Quaternion.identity);
-            //destroy the old pie if it hasnt collided
-			Destroy (this.gameObject);
-            //reset pie variables 
-			timer = 2.0f;
-			isReload = false;
-			hasLaunched = false;
-            isDestroyed = false;
-            //set the sprite back to the original sprite
-			sr.sprite = originPie;
-		}
+    {   
 
+        timer -= Time.deltaTime;
+
+        if (timer <= 0.0f)
+        {
+            isReloading = true;
+            //destroy the old pie if it hasnt collided
+            Destroy(pie.gameObject);
+            isDestroyed = true;
+            //instansiate the new pie at the respawn position
+            pie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.5f, 0.0f), Quaternion.identity);
+            //reset pie variables 
+            timer = 2.0f;
+            isReloading = false;
+            hasLaunched = false;
+            isDestroyed = false;
+        }
     }
 
 	//GETTERS
@@ -278,5 +219,4 @@ public class PieScript : MonoBehaviour
 	{
 		hasLaunched = launched;
 	}
-
 }

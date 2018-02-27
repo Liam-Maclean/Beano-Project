@@ -14,7 +14,7 @@ TagManager:
   - Pedestrian
   - Kill
   - Portrait
-  - Hand
+  - PieSpawner
   layers:
   - Default
   - TransparentFX
