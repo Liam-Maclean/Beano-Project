@@ -26,7 +26,7 @@ public class PlantGameCanvas : MonoBehaviour {
 	public Vector3[] m_portraitPositions;
 
 	private GameObject[] m_opponents;
-
+	private List<GameObject> opponents = new List <GameObject> ();
 
 	// Use this for initialization
 	void Awake () {
@@ -36,7 +36,13 @@ public class PlantGameCanvas : MonoBehaviour {
 		m_opponents = GameObject.FindGameObjectsWithTag ("Player");
 
 
-
+		foreach (GameObject player in m_opponents)
+		{
+			//if (player.GetComponent<CustomLobby>().playerDetails.Identifier != CustomLobby.local.playerDetails.Identifier)
+			//{
+				opponents.Add(player);
+			//}
+		}
 		//gets all the portrait scripts from the portrait objects
 
 		for (int i = 0; i < m_portraits.Length; i++) {
@@ -90,6 +96,16 @@ public class PlantGameCanvas : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
+
+		for (int i = 0; i < m_portraits.Length; i++) {
+			m_potraitScripts [i].HandPlayerNetworkLobby (m_opponents [i].GetComponent<CustomLobby> ());
+		}
+
+		foreach(GameObject opponent in opponents)
+		{
+			CustomLobby.local.SendDetailsRequestForNetId(opponent.GetComponent<CustomLobby>().playerDetails.Identifier);
+		}
+
 		//order the portraits every frame (bit inefficient)
 		OrderPortraits ();
 	}

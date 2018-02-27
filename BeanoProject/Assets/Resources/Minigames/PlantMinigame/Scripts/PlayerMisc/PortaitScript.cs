@@ -66,17 +66,17 @@ public class PortaitScript : MonoBehaviour {
 		//playerScore += value;
 		if (networkPlayerInfo.isLocalPlayer) {
 			CustomLobby.local.Score (value);
-		}
+		} 
 
 	}
 
 	//update function
 	void Update()
 	{
-		if (networkPlayerInfo) {
-			//update score text in child
-			playerScoreText.text = "Score: " + networkPlayerInfo.playerDetails.MiniScore;
-		}
+		//if (networkPlayerInfo) {
+				playerScoreText.text = "Score: " + networkPlayerInfo.playerDetails.MiniScore;
+		//}
+
 	}
 
 	//loads dialogue database
