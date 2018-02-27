@@ -30,6 +30,21 @@ public class PortaitScript : MonoBehaviour {
 		return playerScore;
 	}
 
+	//check the portrait is the local player's portrait
+	public bool IsLocalPlayerPortrait()
+	{
+		if (networkPlayerInfo) {
+			if (networkPlayerInfo.isLocalPlayer) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+
 	//start function
 	void Start()
 	{
@@ -58,8 +73,10 @@ public class PortaitScript : MonoBehaviour {
 	//update function
 	void Update()
 	{
-		//update score text in child
-		playerScoreText.text = "Score: " + networkPlayerInfo.playerDetails.MiniScore;
+		if (networkPlayerInfo) {
+			//update score text in child
+			playerScoreText.text = "Score: " + networkPlayerInfo.playerDetails.MiniScore;
+		}
 	}
 
 	//loads dialogue database

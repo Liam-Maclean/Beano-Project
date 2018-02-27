@@ -29,7 +29,7 @@ public class PlantGameCanvas : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
 		//get gameobjects with the tag portraits in the scene
 		m_portraits = GameObject.FindGameObjectsWithTag ("Portrait");
@@ -38,10 +38,12 @@ public class PlantGameCanvas : MonoBehaviour {
 
 
 		//gets all the portrait scripts from the portrait objects
+
 		for (int i = 0; i < m_portraits.Length; i++) {
-			m_potraitScripts.Add(m_portraits [i].GetComponent<PortaitScript> ());
-			m_potraitScripts [i].HandPlayerNetworkLobby (m_opponents [i].GetComponent<CustomLobby>());
+			m_potraitScripts.Add (m_portraits [i].GetComponent<PortaitScript> ());
+			m_potraitScripts [i].HandPlayerNetworkLobby (m_opponents [i].GetComponent<CustomLobby> ());
 		}
+
 	}
 
 	//function to reposition portraits ascending order
