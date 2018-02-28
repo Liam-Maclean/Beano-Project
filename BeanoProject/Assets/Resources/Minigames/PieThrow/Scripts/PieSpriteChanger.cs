@@ -19,13 +19,13 @@ public class PieSpriteChanger : MonoBehaviour {
     {
         //acces the pie spawner game object and get its attached script
         pieSpawner = GameObject.FindGameObjectWithTag("PieSpawner");
-        pieScript = pieSpawner.GetComponent<PieScript>();
-        sr = gameObject.GetComponent<SpriteRenderer>();
+		pieScript = pieSpawner.GetComponent<PieScript> ();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
+		sr = gameObject.GetComponent<SpriteRenderer> ();
         //get the game objects current x position
         float xPos = gameObject.transform.position.x;
 

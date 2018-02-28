@@ -24,6 +24,8 @@ public class PieScript : MonoBehaviour
 	private bool oldMouseDown;
     private bool newMouseDown;
 
+	private SpriteRenderer sr;
+
     //Ray variables
     private Ray rayToTouch;
 
@@ -47,6 +49,7 @@ public class PieScript : MonoBehaviour
         //initialise the rays
         rayToTouch = new Ray(pie.transform.position, Vector3.zero);
 
+		sr = pie.GetComponent<SpriteRenderer>();
      
         //get the square of maxstretch
         maxStretchSqr = maxStretch * maxStretch;
@@ -90,11 +93,11 @@ public class PieScript : MonoBehaviour
             }
         }
         //only respawn if the pie has been launched 
-        if (hasLaunched || isDestroyed)
+		if (hasLaunched || isDestroyed)
         {
             //translates the pies position
             pie.transform.position += distance;
-            Respawn();
+			Respawn ();
         }
 	}
 
@@ -178,19 +181,16 @@ public class PieScript : MonoBehaviour
 		oldMouseDown = newMouseDown;
 	}
 
-    void Respawn()
-    {   
-
+	public void Respawn()
+    {
         timer -= Time.deltaTime;
 
         if (timer <= 0.0f)
-        {
+		{
             isReloading = true;
-            //destroy the old pie if it hasnt collided
-            Destroy(pie.gameObject);
-            isDestroyed = true;
             //instansiate the new pie at the respawn position
             pie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.5f, 0.0f), Quaternion.identity);
+			sr = pie.GetComponent<SpriteRenderer>();
             //reset pie variables 
             timer = 2.0f;
             isReloading = false;
@@ -198,6 +198,14 @@ public class PieScript : MonoBehaviour
             isDestroyed = false;
         }
     }
+
+	public void Destroy()
+	{
+		isDestroyed = true;
+		Destroy (sr);
+		Destroy (pie.gameObject,2.0f);
+	}
+
 
 	//GETTERS
 	public bool GetLaunched()
