@@ -16,7 +16,7 @@ public class OverworldScript : MonoBehaviour
     private NetworkInstanceId m_clientID; // CustomLobby.playerdetails.identifiyer
     private List<GameObject> m_players;
 
-    public enum Biome {Residential, School, Park, Forest, Downtown, Beanoland};
+    public enum Biome { Residential, School, Park, Forest, Downtown, Beanoland };
     private string m_lastPlayed;
 
     private GameObject m_playerIDObject;
@@ -101,7 +101,11 @@ public class OverworldScript : MonoBehaviour
                 if (node.GetComponent<NodeScript>().IsGame())
                 {
                     Debug.Log("START GAME FOR NODE: " + m_currNode);
-                    LoadMinigame((Biome)node.GetComponent<NodeScript>().GetBiomeType());
+
+                    if (m_clientID.Value == 1) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
+                    {
+                        LoadMinigameHost((Biome)node.GetComponent<NodeScript>().GetBiomeType());
+                    }
                 }
                 break;
             }
@@ -113,111 +117,32 @@ public class OverworldScript : MonoBehaviour
         mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
     }
 
-    public void LoadMinigame(Biome currBiome)
+    public void LoadMinigameHost(Biome currBiome)
     {
-        if (m_clientID.Value == 0) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
+        switch (Random.Range(0, 2))
         {
-            switch (currBiome)
-            {
-                case Biome.Residential:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                    }
-                    break;
-                case Biome.School:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                    }
-                    break;
-                case Biome.Park:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                    }
-                    break;
-                case Biome.Forest:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                    }
-                    break;
-                case Biome.Downtown:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                    }
-                    break;
-                case Biome.Beanoland:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                    }
-                    break;
-                default:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync(4);
-                            break;
-                    }
-                    break;
-            }
+            case 0:
+                SceneManager.LoadSceneAsync(4); // Garden Destruction
+                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(4);
+                break;
+            case 1:
+                SceneManager.LoadSceneAsync(5); // Pie Throw
+                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(5);
+                break;
+            case 2:
+                SceneManager.LoadSceneAsync(6); // Mole Control
+                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(6);
+                break;
+            default:
+                SceneManager.LoadSceneAsync(1); // Lobby Error
+                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(1);
+                Debug.Log("Error");
+                break;
         }
+    }
+
+    public void LoadMiniGameClient(int sceneID)
+    {
+        SceneManager.LoadSceneAsync(sceneID);
     }
 }

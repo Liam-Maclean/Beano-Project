@@ -261,4 +261,17 @@ public class CustomLobby : NetworkLobbyPlayer {
             local.effect = number;
         }
     }
+
+    public void triggerClientChange(int sceneID)
+    {
+        for (int i = 0; i < NetworkClient.allClients.Count; ++i)
+        {
+            if (i != 0)
+            {
+                GameObject overworldManager = GameObject.FindGameObjectWithTag("GameManager");
+                overworldManager.GetComponent<OverworldScript>().LoadMiniGameClient(sceneID);
+            }
+        }
+
+    }
 }
