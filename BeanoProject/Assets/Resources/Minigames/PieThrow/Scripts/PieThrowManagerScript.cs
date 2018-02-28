@@ -80,7 +80,7 @@ public class PieThrowManagerScript : MonoBehaviour
 	void Update ()
     {
         //Overall game timer
-        GameTimer();
+      //  GameTimer();
 
 
 

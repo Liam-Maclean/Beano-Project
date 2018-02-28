@@ -131,13 +131,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(5);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(5);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(5);
                             break;
                     }
                     break;

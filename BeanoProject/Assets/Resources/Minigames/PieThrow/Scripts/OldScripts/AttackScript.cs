@@ -49,10 +49,6 @@ public class AttackScript : MonoBehaviour
                 //if the touch has ended
 			case TouchPhase.Ended:
 				{
-                    //Get the position of the touch 
-					Vector2 objPos = Camera.main.ScreenToWorldPoint (m_touch);
-                    //set the pie gameObject to the position of the touch
-
 					pie.transform.Translate(0.0f, 0.0f, pieSpeed * Time.deltaTime);
                     //handles the mechanics of the touch
 					OnTouch ();

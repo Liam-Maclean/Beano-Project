@@ -86,9 +86,11 @@ c63db43c730fa2cbb8ca07de15898cb6 UnityEngine.UI.dll:UnityEngine.UI.Toggle
 f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 86d36c43c53541d667100dc90b89cfba UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
+2b149cee6e020ab96f0daa21975e907f Assembly-CSharp.dll:.HandSpriteChange
 277eea69bd43eefac67ce3b1535fea5b Assembly-CSharp.dll:.CountDownScript
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Selector
 10b09bcb5d372aadf4b42864395b6c8d Assembly-CSharp.dll:.ScoreScript
+918787196bc5c80fbbbf65faa3deb310 Assembly-CSharp.dll:.PieSpriteChanger
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 cac917711d0e84d412d48737b6fc9ae7 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 706b890efe0a474d76b40e459ddb3e76 UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -129,7 +131,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 60b2bb652410a5867a5ab9a01cd38461 Assembly-CSharp.dll:.LobbyDiscovery
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Events
 54ee3e2b4df0d2de7788fc51ae985a41 Assembly-CSharp.dll:.Settings
-02024627d20a6416dbf89163df801b8e Assembly-CSharp.dll:.PieScript
+97c19184714717dfd393a2ce172ff64d Assembly-CSharp.dll:.PieScript
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Human
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlantGrid
 277eea69bd43eefac67ce3b1535fea5b Assembly-CSharp.dll:.FloatingText
@@ -175,7 +177,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GameOverCanvasScript
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FloatingTextManager
 2efae4ce1af956d0cf62f2c9e181b11c Assembly-CSharp.dll:.PedScript
-9516ecc69926b5b71351930c1ee68d5b Assembly-CSharp.dll:.HandSpawn
+3a9d24cb4dd88904ee923126f9a20aa8 Assembly-CSharp.dll:.HandSpawn
 32e72b8c3dac22952b612fb19ecd2bd9 Assembly-CSharp.dll:.Networker
 e7238cb9f2feea24ab6ebb69d0f7d968 Assembly-CSharp.dll:.AttackScript
 477a8900d9d28ab2c2f38c40b3658881 Assembly-CSharp.dll:.ElectricPlant
