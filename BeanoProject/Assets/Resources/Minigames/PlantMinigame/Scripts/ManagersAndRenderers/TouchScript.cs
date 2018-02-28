@@ -41,7 +41,7 @@ public class TouchScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SwipeLine();
+        //SwipeLine();
     }
 
 	//checking if a vector is negative or positive
@@ -70,7 +70,7 @@ public class TouchScript : MonoBehaviour
 
 
     //does Kevins work but appeals to touch controls for the specific minigame
-    void SwipeLine()
+    public void SwipeLine(PortaitScript portrait)
     {
         //if there is touch input
         if (Input.touchCount == 1)
@@ -127,9 +127,10 @@ public class TouchScript : MonoBehaviour
                         //add that to the game score (DO SOMETHING FUNKY WITH MULTIPLIERS HERE)
                         m_combinedScore += m_plantScore[i];
                     }
-                    m_combinedScore *= m_plantScore.Count;
-                    //manager.IncrementScore(m_combinedScore);
-                    m_combinedScore = 0;
+                    //m_combinedScore *= m_plantScore.Count;
+                        //manager.IncrementScore(m_combinedScore);
+                        portrait.IncrementScore(m_combinedScore);
+                        m_combinedScore = 0;
                     m_plantScore.Clear();
                 }
                 break;

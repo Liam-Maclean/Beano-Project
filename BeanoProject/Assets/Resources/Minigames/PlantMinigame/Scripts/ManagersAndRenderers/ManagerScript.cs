@@ -31,9 +31,9 @@ enum GameState
 public class ManagerScript : MonoBehaviour {
 
 	private GameObject m_tutorialCanvas;
-
-	//swipe object
-	GameObject swipe;
+    private TouchScript touchControlls;
+    //swipe object
+    GameObject swipe;
 
 	//stop animation script at end of the game
 	GameObject stopText;
@@ -142,6 +142,7 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
+        touchControlls = this.GetComponent<TouchScript>();
 		FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
 
 		//get all portrait script objects
@@ -217,6 +218,7 @@ public class ManagerScript : MonoBehaviour {
 	void Update()
 	{
 
+       
 		//for every game state 
 		switch (m_gameState) {
 
@@ -278,7 +280,8 @@ public class ManagerScript : MonoBehaviour {
 			if (!GameEnded ()) {
 				//update game logic
 				CountDown ();
-				OnTileClick ();
+                touchControlls.SwipeLine(LocalPlayerPortrait);
+                OnTileClick ();
 			
 			} 
 			//if the game HAS ended

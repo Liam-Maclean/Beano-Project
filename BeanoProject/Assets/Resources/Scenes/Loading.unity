@@ -236,7 +236,7 @@ MonoBehaviour:
   m_UseNetworkManager: 0
   m_BroadcastData: HELLO
   m_ShowGUI: 1
-  m_OffsetX: 0
+  m_OffsetX: 400
   m_OffsetY: 0
 --- !u!4 &763693711
 Transform:
