@@ -1678,7 +1678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currPlayersTESTING: 4
   maxNodes: 33
-  playerPrefab: {fileID: 1395211328230048, guid: 8fd0170a5398e1949af328c07d6d8f0c,
+  playerPrefab: {fileID: 1949163199634524, guid: 9f3c15cc8acc2e7488e12bc46321be5b,
     type: 2}
 --- !u!4 &1507875166
 Transform:
