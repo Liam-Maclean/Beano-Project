@@ -21,6 +21,7 @@ public class OverworldScript : MonoBehaviour
     void Awake()
     {
         m_players = new List<GameObject>();
+        Orientor.pieThrow = false;
     }
 
     void Start()

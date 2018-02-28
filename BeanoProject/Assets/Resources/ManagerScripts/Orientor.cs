@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Orientor : MonoBehaviour {
 
-	private void Awake()
+    public static bool pieThrow = false;
+
+    private void Awake()
 	{
 		DontDestroyOnLoad(gameObject);
 		Screen.orientation = ScreenOrientation.Landscape;
@@ -18,6 +20,13 @@ public class Orientor : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+        if (pieThrow)
+        {
+            Screen.orientation = ScreenOrientation.Portrait;
+        }
+        else
+        {
+            Screen.orientation = ScreenOrientation.Landscape;
+        }
 	}
 }
