@@ -20,7 +20,11 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
+<<<<<<< HEAD
   m_MinSize: {x: 950, y: 392}
+=======
+  m_MinSize: {x: 950, y: 542}
+>>>>>>> OverworldAndMoles-AD
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -42,8 +46,13 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
+<<<<<<< HEAD
   m_MinSize: {x: 683, y: 342}
   m_MaxSize: {x: 12008, y: 8042}
+=======
+  m_MinSize: {x: 679, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
+>>>>>>> OverworldAndMoles-AD
   vertical: 0
   controlID: 9
 --- !u!114 &3
@@ -60,12 +69,21 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 1365
+=======
+    x: 1531
+>>>>>>> OverworldAndMoles-AD
     y: 0
-    width: 555
+    width: 389
     height: 947
+<<<<<<< HEAD
   m_MinSize: {x: 277, y: 71}
   m_MaxSize: {x: 4002, y: 4021}
+=======
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+>>>>>>> OverworldAndMoles-AD
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -87,10 +105,17 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 405
     height: 573
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
+=======
+    width: 379
+    height: 573
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+>>>>>>> OverworldAndMoles-AD
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -112,16 +137,24 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 573
+<<<<<<< HEAD
     width: 1365
     height: 374
   m_MinSize: {x: 102, y: 121}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 18}
+=======
+    width: 1531
+    height: 374
+  m_MinSize: {x: 232, y: 271}
+  m_MaxSize: {x: 10002, y: 10021}
+  m_ActualView: {fileID: 13}
+>>>>>>> OverworldAndMoles-AD
   m_Panes:
   - {fileID: 13}
   - {fileID: 18}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -143,7 +176,11 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
+<<<<<<< HEAD
   m_MinSize: {x: 950, y: 300}
+=======
+  m_MinSize: {x: 950, y: 542}
+>>>>>>> OverworldAndMoles-AD
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
 MonoBehaviour:
@@ -204,10 +241,17 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1365
     height: 947
   m_MinSize: {x: 406, y: 342}
   m_MaxSize: {x: 8006, y: 8042}
+=======
+    width: 1531
+    height: 947
+  m_MinSize: {x: 404, y: 492}
+  m_MaxSize: {x: 10002, y: 14042}
+>>>>>>> OverworldAndMoles-AD
   vertical: 1
   controlID: 10
 --- !u!114 &10
@@ -228,10 +272,17 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1365
     height: 573
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
+=======
+    width: 1531
+    height: 573
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
+>>>>>>> OverworldAndMoles-AD
   vertical: 0
   controlID: 11
 --- !u!114 &11
@@ -248,9 +299,15 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 405
     y: 0
     width: 960
+=======
+    x: 379
+    y: 0
+    width: 1152
+>>>>>>> OverworldAndMoles-AD
     height: 573
   m_MinSize: {x: 204, y: 221}
   m_MaxSize: {x: 4004, y: 4021}
@@ -309,10 +366,17 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 961
     y: 668
     width: 679
     height: 349
+=======
+    x: 0
+    y: 665
+    width: 1529
+    height: 353
+>>>>>>> OverworldAndMoles-AD
   m_SearchFilter:
     m_NameFilter: 
     m_ClassNames: []
@@ -325,19 +389,34 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
+<<<<<<< HEAD
     - Assets/Resources/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
   - Assets/Resources/Scenes
+=======
+    - Assets/Resources/ManagerScripts
+  m_ViewMode: 1
+  m_StartGridSize: 64
+  m_LastFolders:
+  - Assets/Resources/ManagerScripts
+>>>>>>> OverworldAndMoles-AD
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ashle\Documents\GitHub\Beano-Project\BeanoProject
   m_IsLocked: 0
   m_FolderTreeState:
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 292}
     m_SelectedIDs: e42b0000
     m_LastClickedID: 11236
     m_ExpandedIDs: 000000003e06000042060000600600006a060000b426000098270000c6270000aa280000082a00001c2c00001e2c00004c2d0000ac2d0000e22d00008c2e0000a22e00001c2f0000f0300000f2300000f4300000f630000000ca9a3bffffff7f
+=======
+    scrollPos: {x: 0, y: 95}
+    m_SelectedIDs: 42350000
+    m_LastClickedID: 13634
+    m_ExpandedIDs: 000000003e06000042060000600600006a060000b22d0000a02e0000d02e0000c82f0000383100006633000068330000a83400000c35000042350000f8350000123600008c360000f6370000f8370000fa370000fc37000000ca9a3bffffff7f
+>>>>>>> OverworldAndMoles-AD
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -365,7 +444,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 000000003e06000042060000600600006a060000b426000098270000c6270000aa280000082a00001c2c00001e2c00004c2d0000ac2d0000e22d00008c2e0000a22e00001c2f0000f0300000f2300000f4300000f6300000
+=======
+    m_ExpandedIDs: 000000003e06000042060000600600006a060000b22d0000a02e0000d02e0000c82f0000383100006633000068330000a83400000c35000042350000f8350000123600008c360000f6370000f8370000fa370000fc370000
+>>>>>>> OverworldAndMoles-AD
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -442,9 +525,13 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 1367
+=======
+    x: 1533
+>>>>>>> OverworldAndMoles-AD
     y: 92
-    width: 553
+    width: 387
     height: 926
   m_ScrollPosition: {x: 0, y: 0}
   m_InspectorMode: 0
@@ -477,13 +564,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 92
+<<<<<<< HEAD
     width: 403
+=======
+    width: 377
+>>>>>>> OverworldAndMoles-AD
     height: 552
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: 00080000
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: ee76ffff64adffff32affffff4b0ffffaecdffffaed2ffff1afcfffff4ffffff00000000
+=======
+    m_ExpandedIDs: c2f8ffff00000000
+>>>>>>> OverworldAndMoles-AD
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: Node (8)
@@ -502,7 +597,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
   m_ExpandedScenes:
-  - Loading
+  - Overworld
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -528,19 +623,34 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 407
     y: 92
     width: 956
     height: 552
   m_SceneLighting: 1
   lastFramingTime: 1474.8468005930426
+=======
+    x: 381
+    y: 92
+    width: 1148
+    height: 552
+  m_SceneLighting: 1
+  lastFramingTime: 2079.2113627874637
+>>>>>>> OverworldAndMoles-AD
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
     m_Target: {x: 4.6433873, y: 1.9651465, z: 0}
     speed: 2
     m_Value: {x: 4.6433873, y: 1.9651465, z: 0}
+=======
+    m_Target: {x: 4.186632, y: 2.539484, z: 2.539484}
+    speed: 2
+    m_Value: {x: 4.186632, y: 2.539484, z: 2.539484}
+>>>>>>> OverworldAndMoles-AD
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -567,9 +677,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
+<<<<<<< HEAD
     m_Target: 1.1377401
     speed: 2
     m_Value: 1.1377401
+=======
+    m_Target: 12.186406
+    speed: 2
+    m_Value: 12.186406
+>>>>>>> OverworldAndMoles-AD
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -602,9 +718,15 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 407
     y: 92
     width: 956
+=======
+    x: 381
+    y: 92
+    width: 1148
+>>>>>>> OverworldAndMoles-AD
     height: 552
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
@@ -614,8 +736,13 @@ MonoBehaviour:
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
+<<<<<<< HEAD
     m_HBaseRangeMin: -478
     m_HBaseRangeMax: 478
+=======
+    m_HBaseRangeMin: -574
+    m_HBaseRangeMax: 574
+>>>>>>> OverworldAndMoles-AD
     m_VBaseRangeMin: -267.5
     m_VBaseRangeMax: 267.5
     m_HAllowExceedBaseRangeMin: 1
@@ -634,25 +761,42 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 17
+<<<<<<< HEAD
       width: 956
       height: 535
     m_Scale: {x: 1, y: 1}
     m_Translation: {x: 478, y: 267.5}
+=======
+      width: 1148
+      height: 535
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 574, y: 267.5}
+>>>>>>> OverworldAndMoles-AD
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
       x: -478
       y: -267.5
       width: 956
+=======
+      x: -574
+      y: -267.5
+      width: 1148
+>>>>>>> OverworldAndMoles-AD
       height: 535
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
+<<<<<<< HEAD
   m_LastWindowPixelSize: {x: 956, y: 552}
+=======
+  m_LastWindowPixelSize: {x: 1148, y: 552}
+>>>>>>> OverworldAndMoles-AD
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000100000100
@@ -680,5 +824,9 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 665
+<<<<<<< HEAD
     width: 1363
+=======
+    width: 1529
+>>>>>>> OverworldAndMoles-AD
     height: 353
