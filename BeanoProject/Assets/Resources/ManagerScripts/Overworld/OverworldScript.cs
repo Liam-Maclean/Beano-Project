@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class OverworldScript : MonoBehaviour
@@ -12,11 +13,13 @@ public class OverworldScript : MonoBehaviour
     public int maxNodes;
     public GameObject playerPrefab;
 
-    private int m_clientID;
+    private NetworkInstanceId m_clientID; // CustomLobby.playerdetails.identifiyer
     private List<GameObject> m_players;
 
     public enum Biome {Residential, School, Park, Forest, Downtown, Beanoland};
     private string m_lastPlayed;
+
+    private GameObject m_playerIDObject;
 
     void Awake()
     {
@@ -25,7 +28,11 @@ public class OverworldScript : MonoBehaviour
 
     void Start()
     {
-        m_clientID = 0;
+        m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
+        m_clientID = m_playerIDObject.GetComponent<CustomLobby>().playerDetails.Identifier;
+
+        Debug.Log("Network ID: " + m_clientID);
+
         InitiWorld();
         NodeReached();
     }
@@ -108,21 +115,21 @@ public class OverworldScript : MonoBehaviour
 
     public void LoadMinigame(Biome currBiome)
     {
-        if (m_clientID == 0) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
+        if (m_clientID.Value == 0) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
         {
             switch (currBiome)
             {
                 case Biome.Residential:
-                    switch (Random.Range(0,1))
+                    switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                     }
                     break;
@@ -130,13 +137,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                     }
                     break;
@@ -144,13 +151,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                     }
                     break;
@@ -158,13 +165,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                     }
                     break;
@@ -172,13 +179,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                     }
                     break;
@@ -186,13 +193,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                     }
                     break;
@@ -200,13 +207,13 @@ public class OverworldScript : MonoBehaviour
                     switch (Random.Range(0, 1))
                     {
                         case 0:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         case 1:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                         default:
-                            SceneManager.LoadSceneAsync(6);
+                            SceneManager.LoadSceneAsync(4);
                             break;
                     }
                     break;
