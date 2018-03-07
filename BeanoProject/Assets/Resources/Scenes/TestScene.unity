@@ -1119,7 +1119,7 @@ GameObject:
   - component: {fileID: 1161843849}
   - component: {fileID: 1161843848}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Score1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1140,7 +1140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 49.93335, y: 13.63}
+  m_AnchoredPosition: {x: 58.75, y: 16.345}
   m_SizeDelta: {x: 257.7, y: 67.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1161843848
@@ -1164,12 +1164,12 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 52
+    m_FontSize: 62
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 300
-    m_Alignment: 3
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1312,7 +1312,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: b051d978f265199498b3863bb1662e78, type: 3}
-    m_FontSize: 45
+    m_FontSize: 62
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1323,7 +1323,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'GAZILLION AND ONE
+  m_Text: '
 
 '
 --- !u!222 &1225035495
@@ -1782,7 +1782,7 @@ GameObject:
   - component: {fileID: 1872624344}
   m_Layer: 0
   m_Name: PedSpawner
-  m_TagString: Untagged
+  m_TagString: PedSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1802,6 +1802,7 @@ MonoBehaviour:
   maxZDist: 15
   timer: {fileID: 1225035494}
   timeLeft: 30
+  score: {fileID: 1161843848}
   spawnRateMin: 4
   spawnRateMax: 10
   aircraftOdds: 0.05

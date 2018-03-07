@@ -11,10 +11,12 @@ TagManager:
   - pie
   - Enemy
   - slingshot
-  - Pedestrian
   - Kill
   - Portrait
   - PieSpawner
+  - Hand
+  - PedSpawner
+  - Friendly
   layers:
   - Default
   - TransparentFX

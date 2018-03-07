@@ -14,6 +14,8 @@ public class PieThrowManagerScript : MonoBehaviour
     public Text timer;
     public float timeLeft;
 
+	public Text score;
+
     public float spawnRateMin;
     public float spawnRateMax;
     private float[] m_spawnTimer;
@@ -35,6 +37,8 @@ public class PieThrowManagerScript : MonoBehaviour
 
     public GameObject despawnerPrefab;
     private List<GameObject> m_despawnerObjects;
+
+	private float playerScore;
 
     void Awake()
     {
@@ -79,8 +83,6 @@ public class PieThrowManagerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        //Overall game timer
-      //  GameTimer();
 
 
 
@@ -88,9 +90,13 @@ public class PieThrowManagerScript : MonoBehaviour
         {
             case GAMESTATE.Start:
                 //start FUNC only;
+				m_currState = GAMESTATE.Playing;
                 break;
-            case GAMESTATE.Playing:
+			case GAMESTATE.Playing:
                 // Normal Gameplay
+				//Overall game timer
+				GameTimer ();
+				DisplayScore ();
                 break;
             case GAMESTATE.Finished:
                 // Outro Plz
@@ -149,7 +155,7 @@ public class PieThrowManagerScript : MonoBehaviour
     // Called to start the active game & timers
     void StartGame()
     {
-        
+     	   
     }
 
     void SpawnPed(bool isBasic, bool isLeft, int zPos)
@@ -191,8 +197,6 @@ public class PieThrowManagerScript : MonoBehaviour
 
     void GameTimer()
     {
-       
-
         timeLeft -= Time.deltaTime;
 
         //convert to integer
@@ -204,20 +208,35 @@ public class PieThrowManagerScript : MonoBehaviour
         {
             GameOver();
         }
-
-
     }
 
     void GameOver()
     {
-
+		m_currState = GAMESTATE.Finished;
     }
 
+	void DisplayScore()
+	{
+		//convert to integer
+		int tempScore = (int)playerScore;
+
+		score.text = tempScore.ToString();
+	}
+
+	//GETTERS
+	public float GetScore()
+	{
+		return playerScore;
+	}
 
 
-
-
-
-
+	//SETTERS
+	public void AddScore(float newScore)
+	{
+		if (playerScore >= 0.0f) 
+		{
+			playerScore += newScore;
+		}
+	}
 
 }

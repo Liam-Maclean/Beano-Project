@@ -9,10 +9,12 @@ public class PedScript : MonoBehaviour
     public float moveSpeed;
     private bool m_isLeft;
     private int m_zPos;
+	public float m_score;
+
+
 
 	void Start ()
     {
-	    	
 	}
 	
 	// Update is called once per frame
@@ -39,4 +41,9 @@ public class PedScript : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
+
+	public float GetScore()
+	{
+		return m_score;
+	}
 }
