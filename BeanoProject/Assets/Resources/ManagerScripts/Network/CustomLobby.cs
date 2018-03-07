@@ -266,7 +266,6 @@ public class CustomLobby : NetworkLobbyPlayer {
         }
     }
 
-<<<<<<< HEAD
     public void triggerClientChange(int sceneID)
     {
         for (int i = 0; i < NetworkClient.allClients.Count; ++i)
@@ -277,11 +276,10 @@ public class CustomLobby : NetworkLobbyPlayer {
                 overworldManager.GetComponent<OverworldScript>().LoadMiniGameClient(sceneID);
             }
         }
+	}
 
-=======
     public void ChangeScene(int scene)
     {
         SceneManager.LoadScene(scene);
->>>>>>> 486b9ca4baf05dee93db52b9da5a32622deb2a2d
     }
 }
