@@ -44,12 +44,17 @@ public class PlantGameCanvas : MonoBehaviour {
 			//}
 		}
 		//gets all the portrait scripts from the portrait objects
+		//if there are more than 0 opponents
+		if (m_opponents.Length > 0) {
+			//itterate through portrait objects
+			for (int i = 0; i < m_portraits.Length; i++) {
+				//add portrait script list to list of portraits
+				m_potraitScripts.Add (m_portraits [i].GetComponent<PortaitScript> ());
 
-		for (int i = 0; i < m_portraits.Length; i++) {
-			m_potraitScripts.Add (m_portraits [i].GetComponent<PortaitScript> ());
-			m_potraitScripts [i].HandPlayerNetworkLobby (m_opponents [i].GetComponent<CustomLobby> ());
+				//hand a portrait a network lobby
+				m_potraitScripts [i].HandPlayerNetworkLobby (m_opponents [i].GetComponent<CustomLobby> ());
+			}
 		}
-
 	}
 
 	//function to reposition portraits ascending order
@@ -97,8 +102,12 @@ public class PlantGameCanvas : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		for (int i = 0; i < m_portraits.Length; i++) {
-			m_potraitScripts [i].HandPlayerNetworkLobby (m_opponents [i].GetComponent<CustomLobby> ());
+		//if opponents exist
+		if (m_opponents.Length > 0) {
+			for (int i = 0; i < m_portraits.Length; i++) {
+				//hand player the network lobby info
+				m_potraitScripts [i].HandPlayerNetworkLobby (m_opponents [i].GetComponent<CustomLobby> ());
+			}
 		}
 
 		foreach(GameObject opponent in opponents)

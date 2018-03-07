@@ -32,6 +32,7 @@ public class ManagerScript : MonoBehaviour {
 
 	private GameObject m_tutorialCanvas;
 
+	GameObject GameOverCanvas;
 	//swipe object
 	GameObject swipe;
 
@@ -302,7 +303,10 @@ public class ManagerScript : MonoBehaviour {
 			break;
 		//game is counting score and return to overworld
 		case GameState.counting:
-			Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/GameOverCanvas"));
+			
+			if (!GameOverCanvas) {
+				Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/GameOverCanvas"));
+			}
 			//GameObject.Find ("MinigameCanvas").SetActive (false);
 			//GameScript.local.EndMiniGame ();
 			//count the score
@@ -385,7 +389,11 @@ public class ManagerScript : MonoBehaviour {
 			FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
 
 			//increment the local players score
-			LocalPlayerPortrait.IncrementScore (m_combinedScore);
+			if (LocalPlayerPortrait) {
+				LocalPlayerPortrait.IncrementScore (m_combinedScore);
+			} else {
+				Player1Stats.IncrementScore (m_combinedScore);
+			}
 			m_combinedScore = 0;
 			m_plantScore.Clear();
 			m_plantsHit.Clear ();

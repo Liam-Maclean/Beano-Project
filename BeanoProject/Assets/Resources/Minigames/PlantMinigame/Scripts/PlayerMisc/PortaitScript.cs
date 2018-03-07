@@ -27,7 +27,13 @@ public class PortaitScript : MonoBehaviour {
 	//get the score from the portrait script
 	public int GetScore()
 	{
-		return playerScore;
+		if (networkPlayerInfo != null) {
+			return networkPlayerInfo.playerDetails.MiniScore;
+		} else {
+			return playerScore;
+		}
+
+		return 0;
 	}
 
 	//check the portrait is the local player's portrait
@@ -64,18 +70,25 @@ public class PortaitScript : MonoBehaviour {
 	{
 		animScript.PlayScoreIncreaseAnimation ();
 		//playerScore += value;
-		if (networkPlayerInfo.isLocalPlayer) {
-			CustomLobby.local.Score (value);
-		} 
+		if (networkPlayerInfo) {
+			if (networkPlayerInfo.isLocalPlayer) {
+				CustomLobby.local.Score (value);
+				playerScore += value;
+			} 
+		} else {
+			playerScore += value;
+		}
 
 	}
 
 	//update function
 	void Update()
 	{
-		//if (networkPlayerInfo) {
-				playerScoreText.text = "Score: " + networkPlayerInfo.playerDetails.MiniScore;
-		//}
+		if (networkPlayerInfo) {
+			playerScoreText.text = "Score: " + networkPlayerInfo.playerDetails.MiniScore;
+		} else {
+			playerScoreText.text = "Score: " + playerScore;
+		}
 
 	}
 
