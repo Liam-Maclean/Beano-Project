@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class CustomLobby : NetworkLobbyPlayer {
 
@@ -9,6 +10,9 @@ public class CustomLobby : NetworkLobbyPlayer {
     {
         DontDestroyOnLoad(gameObject);
     }
+
+    [SyncVar(hook = "ChangeScene")]
+    public int Scene;
 
     //syncvar will call when UpdatePlayerDetails is called
     [SyncVar(hook = "UpdatePlayerDetails")]
@@ -262,6 +266,7 @@ public class CustomLobby : NetworkLobbyPlayer {
         }
     }
 
+<<<<<<< HEAD
     public void triggerClientChange(int sceneID)
     {
         for (int i = 0; i < NetworkClient.allClients.Count; ++i)
@@ -273,5 +278,10 @@ public class CustomLobby : NetworkLobbyPlayer {
             }
         }
 
+=======
+    public void ChangeScene(int scene)
+    {
+        SceneManager.LoadScene(scene);
+>>>>>>> 486b9ca4baf05dee93db52b9da5a32622deb2a2d
     }
 }

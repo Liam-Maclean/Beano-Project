@@ -9,12 +9,14 @@ public class LobbyDiscovery : NetworkDiscovery {
 
     public void Host()
     {
-        base.StartAsServer();
+        Initialize();
+        StartAsServer();
     }
 
     public void Join()
     {
-        base.StartAsClient();
+        Initialize();
+        StartAsClient();
     }
 
     public override void OnReceivedBroadcast(string fromAddress, string data)
