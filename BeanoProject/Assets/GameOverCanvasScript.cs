@@ -9,15 +9,23 @@ using UnityEngine;
 //the end game screen
 public class GameOverCanvasScript : MonoBehaviour {
 
+	//portraits in game with the game's score in it
 	public GameObject[] portraits;
-	public Vector3[] positions;
 
+	//positions of the portraits that are spawned on the canvas
+	private List<Vector3> positions = new List<Vector3>();
 
 	// Use this for initialization
 	void Start () {
 
 		//find all the objects in the scene with the tag portriats
 		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
+
+
+		for (int i = 0; i < portraits.Length; i++) {
+			positions.Add (new Vector3 (0, 0, 0));
+		}
+
 
 		SetUpPortraitPositions ();
 		ReparentPortraits ();
@@ -33,9 +41,12 @@ public class GameOverCanvasScript : MonoBehaviour {
 			break;
 		case 1:
 			//one player
+			positions [0] = new Vector3 (0, 0, 0);
 			break;
 		case 2:
 			//two players
+			positions [0] = new Vector3 (-400, 0, 0);
+			positions [1] = new Vector3 (400, 0, 0);
 			break;
 		case 3:
 			//three players
@@ -45,6 +56,10 @@ public class GameOverCanvasScript : MonoBehaviour {
 			break;
 		case 4:
 			//four players
+			positions [0] = new Vector3 (-600, 0, 0);
+			positions [1] = new Vector3 (0, -200, 0);
+			positions [2] = new Vector3 (0, 200, 0);
+			positions [3] = new Vector3 (600, 0, 0);
 			break;
 		default:
 			//Incase all else fails
@@ -63,33 +78,5 @@ public class GameOverCanvasScript : MonoBehaviour {
 			portraits [i].transform.SetParent (this.transform);
 			portraits[i].transform.localPosition = positions[i];
 		}
-	}
-
-	////instantiates all the end game portraits
-	//void InstantiateEndGamePortraits()
-	//{
-	//	//for each portrait in the game being used (for each player)
-	//	for (int i = 0; i < portraits.Length; i++) {
-	//		
-	//		//instantiate a new prefab
-	//		GameObject portraitTemp = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/PlayerPortait"), new Vector3(0,0,0), Quaternion.identity) as GameObject;
-	//		portraitTemp.transform.SetParent (this.transform);
-	//		portraitTemp.transform.localPosition = positions[i];
-	//
-	//
-	//		//Destroy default portrait script
-	//		//Destroy(portraitTemp.GetComponent<PortaitScript> ());
-	//		//portraitTemp.GetComponent<PortaitScript>().(portraitScripts[i];
-	//		//give the new prefab the existing player portrait script
-	//		//portraitTemp.AddComponent(portraitScripts [i]);
-	//
-	//	}
-	//
-	//}
-
-
-	// Update is called once per frame
-	void Update () {
-		
 	}
 }

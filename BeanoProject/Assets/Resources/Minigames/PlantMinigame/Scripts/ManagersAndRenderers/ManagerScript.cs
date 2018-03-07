@@ -303,14 +303,12 @@ public class ManagerScript : MonoBehaviour {
 			break;
 		//game is counting score and return to overworld
 		case GameState.counting:
-			
-			if (!GameOverCanvas) {
-				Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/GameOverCanvas"));
+			//if the game over canvas has not been instantiated yet 
+			if (GameOverCanvas == null) {
+				//Instantiate the game over canvas
+				GameOverCanvas = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/GameOverCanvas")) as GameObject;
 			}
-			//GameObject.Find ("MinigameCanvas").SetActive (false);
-			//GameScript.local.EndMiniGame ();
-			//count the score
-			//return to overworld option
+
 			break;
 		}
 	}
