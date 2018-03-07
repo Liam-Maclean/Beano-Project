@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class CustomLobby : NetworkLobbyPlayer {
 
@@ -9,6 +10,9 @@ public class CustomLobby : NetworkLobbyPlayer {
     {
         DontDestroyOnLoad(gameObject);
     }
+
+    [SyncVar(hook = "ChangeScene")]
+    public int Scene;
 
     //syncvar will call when UpdatePlayerDetails is called
     [SyncVar(hook = "UpdatePlayerDetails")]
@@ -260,5 +264,22 @@ public class CustomLobby : NetworkLobbyPlayer {
         {
             local.effect = number;
         }
+    }
+
+    public void triggerClientChange(int sceneID)
+    {
+        for (int i = 0; i < NetworkClient.allClients.Count; ++i)
+        {
+            if (i != 0)
+            {
+                GameObject overworldManager = GameObject.FindGameObjectWithTag("GameManager");
+                overworldManager.GetComponent<OverworldScript>().LoadMiniGameClient(sceneID);
+            }
+        }
+	}
+
+    public void ChangeScene(int scene)
+    {
+        SceneManager.LoadScene(scene);
     }
 }

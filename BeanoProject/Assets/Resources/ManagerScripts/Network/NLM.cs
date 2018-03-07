@@ -106,6 +106,7 @@ public class NLM : NetworkLobbyManager {
             {
                 player.readyToBegin = shouldReady;
             }
+            CheckReadyToBegin();
         }
     }
 
