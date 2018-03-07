@@ -20,15 +20,36 @@ public class PortaitScript : MonoBehaviour {
 	public int playerIndex;
 	public Text playerScoreText;
 	public ScoreScriptAnimations animScript;
-
 	private int playerScore = 0;
 	public GameObject[] portaitSprites;
+	CustomLobby networkPlayerInfo;
 
 	//get the score from the portrait script
 	public int GetScore()
 	{
-		return playerScore;
+		if (networkPlayerInfo != null) {
+			return networkPlayerInfo.playerDetails.MiniScore;
+		} else {
+			return playerScore;
+		}
+
+		return 0;
 	}
+
+	//check the portrait is the local player's portrait
+	public bool IsLocalPlayerPortrait()
+	{
+		if (networkPlayerInfo) {
+			if (networkPlayerInfo.isLocalPlayer) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
 
 	//start function
 	void Start()
@@ -37,18 +58,38 @@ public class PortaitScript : MonoBehaviour {
 		animScript = GetComponentInChildren<ScoreScriptAnimations> ();
 	}
 
+	//hands the player's network information (customlobby) from the plantgamecanvas
+	public void HandPlayerNetworkLobby(CustomLobby player)
+	{
+		networkPlayerInfo = player;
+	}
+
+
 	//increment score for text in child object
 	public void IncrementScore(int value)
 	{
 		animScript.PlayScoreIncreaseAnimation ();
-		playerScore += value;
+		//playerScore += value;
+		if (networkPlayerInfo) {
+			if (networkPlayerInfo.isLocalPlayer) {
+				CustomLobby.local.Score (value);
+				playerScore += value;
+			} 
+		} else {
+			playerScore += value;
+		}
+
 	}
 
 	//update function
 	void Update()
 	{
-		//update score text in child
-		playerScoreText.text = "Score: " + playerScore;
+		if (networkPlayerInfo) {
+			playerScoreText.text = "Score: " + networkPlayerInfo.playerDetails.MiniScore;
+		} else {
+			playerScoreText.text = "Score: " + playerScore;
+		}
+
 	}
 
 	//loads dialogue database

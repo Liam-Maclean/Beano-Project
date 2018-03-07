@@ -74,8 +74,20 @@ public class PlantScriptManager : MonoBehaviour
 	//add randomised plant component
 	public void AddNewPlantComponent()
 	{
+
+		int chance = Random.Range (0, 100);
+
+		if (chance >= 90) {
+			plantComponentType = PlantComponentType.DEBUFFPLANT;
+		} else if (chance > 70 && chance < 90) {
+			plantComponentType = PlantComponentType.DOUBLESCOREPLANT;
+		} else {
+			plantComponentType = PlantComponentType.NORMALPLANT;
+		}
+
+
 		m_animator.SetTrigger ("Spawn");
-		plantComponentType = (PlantComponentType) Random.Range (0, 3);
+		//plantComponentType = (PlantComponentType) Random.Range (0, 3);
 
 		//plantComponentType = 0;
 
