@@ -5,6 +5,9 @@ using UnityEngine.Networking;
 
 public class NLM : NetworkLobbyManager {
 
+    public static bool goAhead = false;
+    bool shouldReady = false;
+
     /// <summary>
     /// when server connects, start the host
     /// </summary>
@@ -19,7 +22,7 @@ public class NLM : NetworkLobbyManager {
     /// <summary>
     /// list of player objects
     /// </summary>
-    private List<GameScript> playerObjects = new List<GameScript>();
+    public static List<CustomLobby> playerObjects = new List<CustomLobby>();
     /// <summary>
     /// bool to determine if ready message has been sent
     /// </summary>
@@ -31,7 +34,7 @@ public class NLM : NetworkLobbyManager {
     {
         get
         {
-            return playersReady && GameScript.local != null && sentReady == false;
+            return playersReady && CustomLobby.local != null && sentReady == false;
         }
     }
 
@@ -42,7 +45,7 @@ public class NLM : NetworkLobbyManager {
     {
         get
         {
-            return playerObjects.Count == GameScript.local.playerCount;
+            return playerObjects.Count == CustomLobby.local.playerCount;
         }
     }
 
@@ -51,7 +54,7 @@ public class NLM : NetworkLobbyManager {
     /// If this was the last player that needed to join, send ready message
     /// </summary>
     /// <param name="clientPlayer">the joining player</param>
-    public void OnCreatedClientPlayerObject(GameScript clientPlayer)
+    public void OnCreatedClientPlayerObject(CustomLobby clientPlayer)
     {
         playerObjects.Add(clientPlayer);
 
@@ -65,7 +68,7 @@ public class NLM : NetworkLobbyManager {
     /// if the local player is the last to join, send ready message
     /// </summary>
     /// <param name="localPlayer"></param>
-    public void OnCreatedLocalPlayerObject(GameScript localPlayer)
+    public void OnCreatedLocalPlayerObject(CustomLobby localPlayer)
     {
         if (sendReady)
         {
@@ -80,26 +83,36 @@ public class NLM : NetworkLobbyManager {
     {
         sentReady = true;
 
-        //TODO set up readying system
+        goAhead = true;
     }
 
-    /// <summary>
-    /// when the scene loads, transfer information from the lobby player to the game player
-    /// </summary>
-    /// <param name="lobbyPlayerObject">the object holding player data in the lobby</param>
-    /// <param name="gamePlayerObject">the object holding player data in the game</param>
-    /// <returns></returns>
-    public override bool OnLobbyServerSceneLoadedForPlayer(GameObject lobbyPlayerObject, GameObject gamePlayerObject)
+    public void HostButton()
     {
-        CustomLobby lobbyPlayer = lobbyPlayerObject.GetComponent<CustomLobby>();
-        GameScript gamePlayer = gamePlayerObject.GetComponent<GameScript>();
-
-        gamePlayer.playerCount = lobbyPlayer.playerCount;
-
-        
-        gamePlayer.SetDetails(CustomLobby.local.playerDetails);
-
-        return true;
+        this.GetComponent<LobbyDiscovery>().Host();
+        StartHost();
     }
 
+    public void JoinButton()
+    {
+        this.GetComponent<LobbyDiscovery>().Join();
+    }
+
+    public void ReadyButton()
+    {
+        shouldReady = !shouldReady;
+        foreach (CustomLobby player in FindObjectsOfType<CustomLobby>())
+        {
+            if (player.playerDetails.Identifier == CustomLobby.local.playerDetails.Identifier)
+            {
+                player.readyToBegin = shouldReady;
+            }
+            CheckReadyToBegin();
+        }
+    }
+
+    public void FoundGame(string fromAddress)
+    {
+        networkAddress = fromAddress;
+        StartClient();
+    }
 }

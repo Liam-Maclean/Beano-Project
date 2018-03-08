@@ -31,6 +31,6 @@ public class ScoreScript : MonoBehaviour {
             i = 0;
         }
         else i++;
-        GameScript.local.Score(scoreChange);
+        CustomLobby.local.Score(scoreChange);
 	}
 }

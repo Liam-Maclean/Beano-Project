@@ -2,30 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class OverworldScript : MonoBehaviour
 {
-    public int currNodeTESTING;
     public int currPlayersTESTING;
+    private int m_currNode;
 
     public int maxNodes;
     public GameObject playerPrefab;
 
-    private int m_clientID;
+    private NetworkInstanceId m_clientID; // CustomLobby.playerdetails.identifiyer
     private List<GameObject> m_players;
 
-    public enum Biome {Residential, School, Park, Forest, Downtown, Beanoland};
+    public enum Biome { Residential, School, Park, Forest, Downtown, Beanoland };
     private string m_lastPlayed;
+
+    private GameObject m_playerIDObject;
 
     void Awake()
     {
         m_players = new List<GameObject>();
+        Orientor.pieThrow = false;
     }
 
     void Start()
     {
-        m_clientID = 0;
+        m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
+        m_clientID = m_playerIDObject.GetComponent<CustomLobby>().playerDetails.Identifier;
+
+        Debug.Log("Network ID: " + m_clientID);
+
         InitiWorld();
         NodeReached();
     }
@@ -45,24 +53,25 @@ public class OverworldScript : MonoBehaviour
 
     public int GetCurrNode()
     {
-        return currNodeTESTING;
+        return m_currNode;
     }
 
     public void PushNode()
     {
-        if (currNodeTESTING + 1 < maxNodes)
+        if (m_currNode + 1 < maxNodes)
         {
-            currNodeTESTING++;
+            m_currNode++;
             for (int i = 0; i < currPlayersTESTING; i++)
             {
-                m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(currNodeTESTING));
+                m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(m_currNode));
             }
         }
         else
         {
             Debug.Log("EndGame Function Hit");
-            currNodeTESTING = 0;
-            SceneManager.LoadSceneAsync("Menu");
+            m_currNode = 0;
+			SceneManager.LoadScene ("PlantMinigameScene");
+            //SceneManager.LoadScene("Menu");
         }
     }
 
@@ -89,12 +98,16 @@ public class OverworldScript : MonoBehaviour
 
         foreach (GameObject node in nodes)
         {
-            if (node.GetComponent<NodeScript>().GetID() == currNodeTESTING)
+            if (node.GetComponent<NodeScript>().GetID() == m_currNode)
             {
                 if (node.GetComponent<NodeScript>().IsGame())
                 {
-                    Debug.Log("START GAME FOR NODE: " + currNodeTESTING);
-                    LoadMinigame((Biome)node.GetComponent<NodeScript>().GetBiomeType());
+                    Debug.Log("START GAME FOR NODE: " + m_currNode);
+
+                    if (m_clientID.Value == 1) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
+                    {
+                        LoadMinigameHost((Biome)node.GetComponent<NodeScript>().GetBiomeType());
+                    }
                 }
                 break;
             }
@@ -103,114 +116,35 @@ public class OverworldScript : MonoBehaviour
         PushNode();
 
         GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(currNodeTESTING));
+        mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
     }
 
-    public void LoadMinigame(Biome currBiome)
+    public void LoadMinigameHost(Biome currBiome)
     {
-        if (m_clientID == 0) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
+        switch (Random.Range(0, 2))
         {
-            switch (currBiome)
-            {
-                case Biome.Residential:
-                    switch (Random.Range(0,1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                    }
-                    break;
-                case Biome.School:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                    }
-                    break;
-                case Biome.Park:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                    }
-                    break;
-                case Biome.Forest:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                    }
-                    break;
-                case Biome.Downtown:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                    }
-                    break;
-                case Biome.Beanoland:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                    }
-                    break;
-                default:
-                    switch (Random.Range(0, 1))
-                    {
-                        case 0:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        case 1:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                        default:
-                            SceneManager.LoadSceneAsync("PlantMinigameScene");
-                            break;
-                    }
-                    break;
-            }
+            case 0:
+                SceneManager.LoadSceneAsync(4); // Garden Destruction
+                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(4);
+                break;
+            case 1:
+                SceneManager.LoadSceneAsync(5); // Pie Throw
+                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(5);
+                break;
+            case 2:
+                SceneManager.LoadSceneAsync(6); // Mole Control
+                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(6);
+                break;
+            default:
+                SceneManager.LoadSceneAsync(1); // Lobby Error
+                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(1);
+                Debug.Log("Error");
+                break;
         }
+    }
+
+    public void LoadMiniGameClient(int sceneID)
+    {
+        SceneManager.LoadSceneAsync(sceneID);
     }
 }

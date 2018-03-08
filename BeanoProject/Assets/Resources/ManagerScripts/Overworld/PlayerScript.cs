@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour
     private Vector3 m_moveVelo = new Vector3(0, 0, 0);
 
     private Vector3 m_currPos;
+    private Vector3 m_oldPos;
     private Vector3 m_targetPos;
     private Vector3 m_oldTargetPos;
 
@@ -23,13 +24,15 @@ public class PlayerScript : MonoBehaviour
     public int m_sausageCount;
     public int m_ranking; // To be utailised once scoring is inplace
 
-    enum CharacterID {Dennis, Gnasher, Walter, DennisDad};
+    enum CharacterID {Dennis, Gnasher, Walter, DennisDad}; // This needs updated with a FULL list
     private CharacterID m_currChar;
 
     void Start ()
     {
         m_oldTargetMet = false;
-	}
+        m_currPos = transform.position;
+        m_oldPos = m_currPos;
+    }
 
     public void InitPlayer(int playerID, int currChar, int sausageCount)
     {
@@ -122,6 +125,29 @@ public class PlayerScript : MonoBehaviour
                 m_oldTargetMet = true;
             }
         }
+
+        Vector3 moveDir = m_currPos - m_oldPos;
+
+        if (moveDir != Vector3.zero)
+        {
+            float playerRot = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
+
+            Debug.Log("Rot " + playerRot);
+
+            if (playerRot >= -90.0f && playerRot < 90.0f)
+            {
+                transform.rotation = Quaternion.AngleAxis(playerRot, Vector3.forward);
+                transform.localScale = new Vector3(0.15f, transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                playerRot -= 180;
+                transform.rotation = Quaternion.AngleAxis(playerRot, Vector3.forward);
+                transform.localScale = new Vector3(-0.15f, transform.localScale.y, transform.localScale.z);
+            }
+        }
+
+        m_oldPos = m_currPos;
     }
 
     public void SetTargetPos(Vector3 newTargetPos)

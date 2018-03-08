@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114074942549242582}
   m_Layer: 0
   m_Name: ScoringID
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +53,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bc292cf6c614734597c96ef1467a8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasPlayerDetails: 0
+  playerCount: 0
+  me: {fileID: 1532825531039292}
 --- !u!114 &114118348414854194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -65,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistentCurrency: 0
+  handle: 
+  avatar: 0
 --- !u!114 &114776282249948580
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -25,16 +25,35 @@ public class PlantGameCanvas : MonoBehaviour {
 	//positions on the screen for 1st, 2nd, 3rd and 4th
 	public Vector3[] m_portraitPositions;
 
+	private GameObject[] m_opponents;
+	private List<GameObject> opponents = new List <GameObject> ();
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
 		//get gameobjects with the tag portraits in the scene
 		m_portraits = GameObject.FindGameObjectsWithTag ("Portrait");
+		m_opponents = GameObject.FindGameObjectsWithTag ("Player");
 
+
+		foreach (GameObject player in m_opponents)
+		{
+			//if (player.GetComponent<CustomLobby>().playerDetails.Identifier != CustomLobby.local.playerDetails.Identifier)
+			//{
+				opponents.Add(player);
+			//}
+		}
 		//gets all the portrait scripts from the portrait objects
-		for (int i = 0; i < m_portraits.Length; i++) {
-			m_potraitScripts.Add(m_portraits [i].GetComponent<PortaitScript> ());
+		//if there are more than 0 opponents
+		if (m_opponents.Length > 0) {
+			//itterate through portrait objects
+			for (int i = 0; i < m_portraits.Length; i++) {
+				//add portrait script list to list of portraits
+				m_potraitScripts.Add (m_portraits [i].GetComponent<PortaitScript> ());
+
+				//hand a portrait a network lobby
+				m_potraitScripts [i].HandPlayerNetworkLobby (m_opponents [i].GetComponent<CustomLobby> ());
+			}
 		}
 	}
 
@@ -82,6 +101,20 @@ public class PlantGameCanvas : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
+
+		//if opponents exist
+		if (m_opponents.Length > 0) {
+			for (int i = 0; i < m_portraits.Length; i++) {
+				//hand player the network lobby info
+				m_potraitScripts [i].HandPlayerNetworkLobby (m_opponents [i].GetComponent<CustomLobby> ());
+			}
+		}
+
+		foreach(GameObject opponent in opponents)
+		{
+			CustomLobby.local.SendDetailsRequestForNetId(opponent.GetComponent<CustomLobby>().playerDetails.Identifier);
+		}
+
 		//order the portraits every frame (bit inefficient)
 		OrderPortraits ();
 	}

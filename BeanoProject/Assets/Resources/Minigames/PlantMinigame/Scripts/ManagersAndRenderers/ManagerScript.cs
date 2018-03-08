@@ -32,9 +32,7 @@ public class ManagerScript : MonoBehaviour {
 
 	private GameObject m_tutorialCanvas;
 
-	//Dialogue Data set (All the dialogue loaded from the xml file)
-	private XMLDialogueDatabase m_dialogueSet;
-
+	GameObject GameOverCanvas;
 	//swipe object
 	GameObject swipe;
 
@@ -90,6 +88,10 @@ public class ManagerScript : MonoBehaviour {
 	public GameObject Player1, Player2, Player3, Player4;
 	private PortaitScript Player1Stats, Player2Stats, Player3Stats, Player4Stats;
 
+	private PortaitScript LocalPlayerPortrait;
+
+	private List<PortaitScript> m_portraitScripts = new List<PortaitScript> ();
+	private GameObject[] m_portraits;
 
 
 	//Game Ended boolean function
@@ -141,8 +143,22 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
-		
 		FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
+
+		//get all portrait script objects
+		m_portraits = GameObject.FindGameObjectsWithTag ("Portrait");
+
+		//for every object found
+		for (int i = 0; i < m_portraits.Length; i++) {
+			//get the portrait script inside it
+			m_portraitScripts.Add (m_portraits [i].GetComponent<PortaitScript> ());
+			//check if the player is the local player, if it is, contain it in localplayerportrait
+			if (m_portraitScripts [i].IsLocalPlayerPortrait ()) {
+				LocalPlayerPortrait = m_portraitScripts [i];
+			}
+		}
+
+
 
 		//initialise timer
 		m_gameTimer = (int)gameDuration;
@@ -176,17 +192,7 @@ public class ManagerScript : MonoBehaviour {
 		stopText.transform.localPosition = new Vector3 (0, 0, 1.0f);
 		stopAnimationScript = stopText.GetComponent<StopAnimationScript> ();
 	}
-
-
-	//Spawns dialogue box relative to player portrait position
-	public void SpawnDialogueBox()
-	{
-		//SET UP DIALOGUE BOX SPAWN POINT TO BE REALITVE TO PLAYERS PORTRAIT POSITION
-		GameObject box = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/SpeachBubble")) as GameObject;
-		box.transform.SetParent (GameObject.Find ("PlayerPortait").transform);
-		box.transform.localPosition = new Vector3 (55, 20, 1.0f);
-		//Debug.Log (box.transform.localPosition);
-	}
+		
 
 
 	//set up local multiplayer info so score only goes up on the local player
@@ -227,8 +233,8 @@ public class ManagerScript : MonoBehaviour {
 				}
 
 
-				//if player wants to continue
-				if (Input.GetMouseButtonDown (0)) {
+				////if player wants to continue
+				//if (Input.GetMouseButtonDown (0)) {
 
 					Destroy (m_tutorialCanvas);
 
@@ -241,7 +247,7 @@ public class ManagerScript : MonoBehaviour {
 					countDownObject.transform.localPosition = new Vector3 (0.0f, 0.0f, 1.0f);
 					countDownScript = GameObject.Find ("CountDownText(Clone)").GetComponent<CountDownScript> ();
 					m_gameState = GameState.countdown;
-				}
+				//}
 			}
 
 
@@ -271,19 +277,9 @@ public class ManagerScript : MonoBehaviour {
 			}
 			//if the game hasn't ended
 			if (!GameEnded ()) {
-
-				//dialogue cooldown timer
-				dialogueCooldown -= Time.deltaTime;
-
 				//update game logic
 				CountDown ();
 				OnTileClick ();
-
-
-				if (dialogueCooldown < 0.0f) {
-					SpawnDialogueBox ();
-					dialogueCooldown = 5.0f;
-				}
 			
 			} 
 			//if the game HAS ended
@@ -307,19 +303,14 @@ public class ManagerScript : MonoBehaviour {
 			break;
 		//game is counting score and return to overworld
 		case GameState.counting:
+			//if the game over canvas has not been instantiated yet 
+			if (GameOverCanvas == null) {
+				//Instantiate the game over canvas
+				GameOverCanvas = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/GameOverCanvas")) as GameObject;
+			}
 
-			//GameScript.local.EndMiniGame ();
-			//count the score
-			//return to overworld option
 			break;
 		}
-	}
-		
-	//loads dialogue database
-	public void LoadDialogueDatabase()
-	{
-		m_dialogueSet = new XMLDialogueDatabase ();
-		m_dialogueSet = XMLSerializer.Deserialize<XMLDialogueDatabase> ("DialogueFile.xml", "");
 	}
 
     //mouse input class
@@ -396,7 +387,11 @@ public class ManagerScript : MonoBehaviour {
 			FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
 
 			//increment the local players score
-			Player1Stats.IncrementScore (m_combinedScore);
+			if (LocalPlayerPortrait) {
+				LocalPlayerPortrait.IncrementScore (m_combinedScore);
+			} else {
+				Player1Stats.IncrementScore (m_combinedScore);
+			}
 			m_combinedScore = 0;
 			m_plantScore.Clear();
 			m_plantsHit.Clear ();
