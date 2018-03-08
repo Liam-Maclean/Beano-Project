@@ -33,6 +33,10 @@ public class PieScript : MonoBehaviour
 	private GameObject slingshot;
 	public GameObject piePrefab;
     private GameObject pie;
+	public GameObject gameManager;
+
+
+	private PieThrowManagerScript managerScript;
 
     //Collider variables
     private CircleCollider2D circle;
@@ -50,7 +54,8 @@ public class PieScript : MonoBehaviour
         rayToTouch = new Ray(pie.transform.position, Vector3.zero);
 
 		sr = pie.GetComponent<SpriteRenderer>();
-     
+		managerScript = gameManager.GetComponent<PieThrowManagerScript> ();
+
         //get the square of maxstretch
         maxStretchSqr = maxStretch * maxStretch;
 
@@ -62,43 +67,41 @@ public class PieScript : MonoBehaviour
 
 	void Update()
     {
-        //Mouse Controls
-        if (!isReloading && !hasLaunched)
-        {
-            OnMouseDown();
-        }
-        //Touch Controls
-        if (Input.touchCount == 1)
-        {
-            Touch touch = Input.GetTouch(0);
+		if (managerScript.GetState () == 1) {
+			//Mouse Controls
+			if (!isReloading && !hasLaunched) {
+				OnMouseDown ();
+			}
+			//Touch Controls
+			if (Input.touchCount == 1) {
+				Touch touch = Input.GetTouch (0);
 
-            //Switch statement determining which type of touch it is
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
+				//Switch statement determining which type of touch it is
+				switch (touch.phase) {
+				case TouchPhase.Began:
                     //store the initial position
-                    pieStartPosition = pie.transform.position;
-                    break;
-                case TouchPhase.Moved:
-                    m_touch = touch.position;
-                    if (!isReloading && !hasLaunched)
-                    {
-                        Dragging();
-                    }
-                    break;
-                case TouchPhase.Ended:
-                    pieEndPosition = pie.transform.position;
-                    Launch();
-                    break;
-            }
-        }
-        //only respawn if the pie has been launched 
-		if (hasLaunched || isDestroyed)
-        {
-            //translates the pies position
-            pie.transform.position += distance;
-			Respawn ();
-        }
+					pieStartPosition = pie.transform.position;
+					break;
+				case TouchPhase.Moved:
+					m_touch = touch.position;
+					if (!isReloading && !hasLaunched) {
+						Dragging ();
+					}
+					break;
+				case TouchPhase.Ended:
+					pieEndPosition = pie.transform.position;
+					Launch ();
+					break;
+				}
+			}
+			//only respawn if the pie has been launched 
+			if (hasLaunched || isDestroyed) {
+				//translates the pies position
+				pie.transform.position += distance;
+
+				Respawn ();
+			}
+		}
 	}
 
 	void Dragging()

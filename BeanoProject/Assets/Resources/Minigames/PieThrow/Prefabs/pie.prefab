@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114133704571085762}
   - component: {fileID: 61107689284345098}
   - component: {fileID: 82848244155654124}
+  - component: {fileID: 111524030573083404}
   m_Layer: 8
   m_Name: pie
   m_TagString: pie
@@ -170,6 +171,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!111 &111524030573083404
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1986721381973192}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 405dca2b7ed557949abd46b7da7c0bf6, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114133704571085762
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,6 +22,8 @@ public class PieAttackScript : MonoBehaviour {
 	private float hitScore;
 
 
+	private Animation splatAnim;
+
 
     // Use this for initialization
     void Start ()
@@ -35,6 +37,8 @@ public class PieAttackScript : MonoBehaviour {
 		friendlyPedScript = friendlyTarget.GetComponent<PedScript> ();
 		enemyPedScript = enemyTarget.GetComponent<PedScript> ();
 
+
+		splatAnim = gameObject.GetComponent<Animation> ();
 		isHit = false;
 		sr = gameObject.GetComponent<SpriteRenderer>();
    }
@@ -62,6 +66,7 @@ public class PieAttackScript : MonoBehaviour {
 					}
 
 					gameManagerScript.AddScore (hitScore);
+					splatAnim.Play ();
 					//destroy the object the pie has collided with
 					Destroy (hit [i].collider.gameObject);
 					pieScript.Respawn ();

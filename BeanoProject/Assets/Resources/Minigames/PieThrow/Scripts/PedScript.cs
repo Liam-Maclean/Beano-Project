@@ -35,6 +35,7 @@ public class PedScript : MonoBehaviour
         m_isLeft = isLeft;
         m_zPos = zPos;
         transform.localScale = Vector3.Scale(transform.localScale, new Vector3((4.0f / m_zPos), (4.0f / m_zPos), 1.0f));
+		m_score = m_score * m_zPos;
     }
 
     public void Despawn()
