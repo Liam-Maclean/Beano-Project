@@ -141,10 +141,10 @@ public class PlantScriptManager : MonoBehaviour
 			//if the plant is type of double plant
 			if (basePlant is DoubleScorePlant) {
 				//white text
-				FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform, Color.white);
+				FloatingTextManager.CreateFloatingText ("+" + basePlant.GetScore ().ToString (), basePlant.transform, Color.white);
 			} else {
 				//yellow text
-				FloatingTextManager.CreateFloatingText (basePlant.GetScore ().ToString (), basePlant.transform);
+				FloatingTextManager.CreateFloatingText ("+" + basePlant.GetScore ().ToString (), basePlant.transform);
 			}
 
 			m_animator.SetTrigger ("DeadPlant");
