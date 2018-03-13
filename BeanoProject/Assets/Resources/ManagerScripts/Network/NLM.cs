@@ -104,9 +104,16 @@ public class NLM : NetworkLobbyManager {
         {
             if (player.playerDetails.Identifier == CustomLobby.local.playerDetails.Identifier)
             {
-                player.readyToBegin = shouldReady;
+                if (shouldReady)
+                {
+                    player.SendReadyToBeginMessage();
+                }
+                else
+                {
+                    player.SendNotReadyToBeginMessage();
+                }
             }
-            CheckReadyToBegin();
+            //CheckReadyToBegin();
         }
     }
 
