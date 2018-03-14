@@ -5,8 +5,6 @@ using UnityEngine.Networking;
 
 public class LobbyDiscovery : NetworkDiscovery {
 
-    
-
     public void Host()
     {
         Initialize();
@@ -22,5 +20,6 @@ public class LobbyDiscovery : NetworkDiscovery {
     public override void OnReceivedBroadcast(string fromAddress, string data)
     {
         this.GetComponent<NLM>().FoundGame(fromAddress);
+        StopBroadcast();
     }
 }
