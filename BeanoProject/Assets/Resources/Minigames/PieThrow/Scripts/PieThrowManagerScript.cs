@@ -238,10 +238,7 @@ public class PieThrowManagerScript : MonoBehaviour
 
 	public void AddScore(float newScore)
 	{
-		if (playerScore > 0.0f) 
-		{
-			playerScore += newScore;
-		}
+		playerScore += newScore;
 	}
 
 }

@@ -1903,7 +1903,7 @@ MonoBehaviour:
   minZDist: 7
   maxZDist: 15
   timer: {fileID: 1225035494}
-  timeLeft: 4
+  timeLeft: 30
   score: {fileID: 1161843848}
   spawnRateMin: 4
   spawnRateMax: 10
