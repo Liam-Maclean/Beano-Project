@@ -4,34 +4,78 @@ using UnityEngine;
 
 public class PieAttackScript : MonoBehaviour {
 
-    Vector3 rayDir;
 
+	private GameObject pieSpawner;
+	private PieScript pieScript;
 
+	private GameObject pedSpawner;
+	private PieThrowManagerScript gameManagerScript;
+
+	private PieSpriteChanger spriteChangeScript;
+
+	public GameObject friendlyTarget;
+	private PedScript friendlyPedScript;
+
+	public GameObject enemyTarget;
+	private PedScript enemyPedScript;
+
+	private SpriteRenderer sr;
+	private bool isHit;
+	private float hitScore;
 
     // Use this for initialization
     void Start ()
     {
+        pieSpawner = GameObject.FindGameObjectWithTag("PieSpawner");
+		pedSpawner = GameObject.FindGameObjectWithTag ("PedSpawner");
 
-        rayDir = new Vector3(0.0f, 0.0f, 10.0f);    
+		spriteChangeScript = gameObject.GetComponent<PieSpriteChanger> ();
+        pieScript = pieSpawner.GetComponent<PieScript>();
+		gameManagerScript = pedSpawner.GetComponent<PieThrowManagerScript>();
+		friendlyPedScript = friendlyTarget.GetComponent<PedScript> ();
+		enemyPedScript = enemyTarget.GetComponent<PedScript> ();
 
-    }
+		isHit = false;
+		sr = gameObject.GetComponent<SpriteRenderer>();
+   }
 	
 	// Update is called once per frame
 	void Update ()
     {
-     //   Ray ray;
+		if(!isHit)
+		{
+			if (pieScript.GetLaunched () == true) 
+			{
+            	//cast a ray out of all the objects and store them in an array
+				RaycastHit[] hit = Physics.RaycastAll (gameObject.transform.position, new Vector3 (0.0f, 0.0f, 1.0f), Mathf.Infinity);
+            
 
-      //  RaycastHit hit = Physics.Raycast(gameObject.transform.position, Mathf.Infinity);
+				for (int i = 0; i < hit.Length; i++)
+				{
+					if (hit [i].collider.tag == "Friendly") 
+					{
+						hitScore = friendlyPedScript.GetScore ();
+					}
+					else 
+					{
+						hitScore = enemyPedScript.GetScore ();
+					}
 
-       // if (hit)
-        {
-            //Debug.Log(hit.transform.name);
-        }
-
-
-
-
-
+					gameManagerScript.AddScore (hitScore);
+					spriteChangeScript.PlaySplat ();
+					//destroy the object the pie has collided with
+					Destroy (hit [i].collider.gameObject);
+					pieScript.Respawn ();
+					pieScript.SetDistance (new Vector3 (0.0f, 0.0f, 0.0f));
+					pieScript.Destroy ();
+					isHit = true;
+					break;
+				}      
+			}
+		}
 	}
 
+
 }
+
+

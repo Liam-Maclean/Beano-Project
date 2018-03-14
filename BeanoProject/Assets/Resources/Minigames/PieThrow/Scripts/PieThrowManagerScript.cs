@@ -14,6 +14,8 @@ public class PieThrowManagerScript : MonoBehaviour
     public Text timer;
     public float timeLeft;
 
+	public Text score;
+
     public float spawnRateMin;
     public float spawnRateMax;
     private float[] m_spawnTimer;
@@ -33,14 +35,15 @@ public class PieThrowManagerScript : MonoBehaviour
     public Animator readyMenuAnim;
     public GameObject readyMenu;
 
-    public GameObject despawnerPrefab;
-    private List<GameObject> m_despawnerObjects;
+	public GameObject endGameCanvas;
+	private GameObject newCanvas;
+	private bool isEnd;
+
+	private float playerScore;
 
     void Awake()
     {
-        timeLeft = 30.0f;
-
-
+        playerScore = 0.0f;
         m_currState = GAMESTATE.Start;
 
         m_pedObjects = new List<GameObject>();
@@ -52,17 +55,6 @@ public class PieThrowManagerScript : MonoBehaviour
         {
             m_spawnRateRand[i] = Random.Range(spawnRateMin, spawnRateMax);
         }
-
-        m_despawnerObjects = new List<GameObject>();
-
-        GameObject newDespawner;
-        newDespawner = (GameObject)Instantiate(despawnerPrefab, new Vector3(targetPos.x - 5f, targetPos.y, maxZDist - minZDist), Quaternion.identity);
-        newDespawner.transform.localScale = new Vector3(1.0f, 1.0f, maxZDist - minZDist + maxZDist - minZDist * maxZDist - minZDist);
-        m_despawnerObjects.Add(newDespawner);
-
-        newDespawner = (GameObject)Instantiate(despawnerPrefab, new Vector3(targetPos.x + xFlipDistance + 5f, targetPos.y, maxZDist - minZDist), Quaternion.identity);
-        newDespawner.transform.localScale = new Vector3(1.0f, 1.0f, maxZDist - minZDist + maxZDist - minZDist * maxZDist - minZDist);
-        m_despawnerObjects.Add(newDespawner);
     }
 
 	// Use this for initialization
@@ -79,8 +71,6 @@ public class PieThrowManagerScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        //Overall game timer
-        GameTimer();
 
 
 
@@ -88,56 +78,31 @@ public class PieThrowManagerScript : MonoBehaviour
         {
             case GAMESTATE.Start:
                 //start FUNC only;
+				m_currState = GAMESTATE.Playing;
                 break;
-            case GAMESTATE.Playing:
+		case GAMESTATE.Playing:
                 // Normal Gameplay
+				//Overall game timer
+			GameTimer ();
+			DisplayScore ();
+			SpawnPed ();
+			if (timeLeft <= 0.0f) 
+			{
+				m_currState = GAMESTATE.Finished;
+				isEnd = true;
+			}
+
+
                 break;
             case GAMESTATE.Finished:
                 // Outro Plz
-                break;
+				GameOver();
+               	break;
             default:
                 Debug.Log("GameState Error");
                 break;
         }
 
-        for (int i = 0; i < maxZDist - minZDist; i++)
-        {
-            if (m_spawnTimer[i] >= m_spawnRateRand[i])
-            {
-                m_spawnTimer[i] -= m_spawnRateRand[i];
-                m_spawnRateRand[i] = Random.Range(spawnRateMin, spawnRateMax);
-
-                float threshold = Random.Range(0.00f, 1.00f);
-                bool isLeft = (Random.value > 0.5f);
-
-                if (threshold > aircraftOdds)
-                {
-                    //PED
-                    if (isLeft)
-                    {
-                        SpawnPed(true, false, i + minZDist);
-                    }
-                    else
-                    {
-                        SpawnPed(true, true, i + minZDist);
-                    }
-                }
-                else
-                {
-                    //PLANE
-                    if (isLeft)
-                    {
-                        SpawnPed(false, false, i + minZDist);
-                    }
-                    else
-                    {
-                        SpawnPed(false, true, i + minZDist);
-                    }
-                }
-            }
-
-            m_spawnTimer[i] += Time.deltaTime;
-        }
 	}
 
     // Called at the begining of the game to make sure all users are loaded into the game correctly
@@ -149,10 +114,53 @@ public class PieThrowManagerScript : MonoBehaviour
     // Called to start the active game & timers
     void StartGame()
     {
-        
+     	   
     }
+	void SpawnPed()
+	{
+		for (int i = 0; i < maxZDist - minZDist; i++)
+		{
+			if (m_spawnTimer[i] >= m_spawnRateRand[i])
+			{
+				m_spawnTimer[i] -= m_spawnRateRand[i];
+				m_spawnRateRand[i] = Random.Range(spawnRateMin, spawnRateMax);
 
-    void SpawnPed(bool isBasic, bool isLeft, int zPos)
+				float threshold = Random.Range(0.00f, 1.00f);
+				bool isLeft = (Random.value > 0.5f);
+
+				if (threshold > aircraftOdds)
+				{
+					//PED
+					if (isLeft)
+					{
+						CreatePed(true, false, i + minZDist);
+					}
+					else
+					{
+						CreatePed(true, true, i + minZDist);
+					}
+				}
+				else
+				{
+					//PLANE
+					if (isLeft)
+					{
+						CreatePed(false, false, i + minZDist);
+					}
+					else
+					{
+						CreatePed(false, true, i + minZDist);
+					}
+				}
+			}
+
+			m_spawnTimer[i] += Time.deltaTime;
+		}
+	}
+
+
+
+    void CreatePed(bool isBasic, bool isLeft, int zPos)
     {
         GameObject newPed;
         int typeHelper = 0;
@@ -173,7 +181,7 @@ public class PieThrowManagerScript : MonoBehaviour
         }
         else
         {
-            newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y, zPos), Quaternion.identity);
+           newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y, zPos), Quaternion.identity);
 
             if (isBasic)
             {
@@ -191,33 +199,46 @@ public class PieThrowManagerScript : MonoBehaviour
 
     void GameTimer()
     {
-       
-
         timeLeft -= Time.deltaTime;
 
         //convert to integer
         int tempTime = (int)timeLeft;
 
         timer.text = tempTime.ToString();
-
-        if (timeLeft <= 0.0f)
-        {
-            GameOver();
-        }
-
-
     }
 
     void GameOver()
     {
-
+		if (isEnd) {
+			
+			newCanvas = Instantiate (endGameCanvas, new Vector3(0.0f,0.0f, 0.0f), Quaternion.identity);
+			isEnd = false;
+		}
     }
 
+	void DisplayScore()
+	{
+		//convert to integer
+		int tempScore = (int)playerScore;
 
+		score.text = tempScore.ToString();
+	}
 
+	//GETTERS
+	public float GetScore()
+	{
+		return playerScore;
+	}
 
+	public int GetState()
+	{
+		int	tempCurrentState = (int)m_currState;
+		return tempCurrentState;
+	}
 
-
-
+	public void AddScore(float newScore)
+	{
+		playerScore += newScore;
+	}
 
 }

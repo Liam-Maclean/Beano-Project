@@ -21,10 +21,11 @@ GameObject:
   - component: {fileID: 4310646645479176}
   - component: {fileID: 212963669949144462}
   - component: {fileID: 50943201719326600}
-  - component: {fileID: 114599884828170998}
+  - component: {fileID: 114671150272939500}
   - component: {fileID: 114133704571085762}
   - component: {fileID: 61107689284345098}
   - component: {fileID: 82848244155654124}
+  - component: {fileID: 95089713266852094}
   m_Layer: 8
   m_Name: pie
   m_TagString: pie
@@ -170,6 +171,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &95089713266852094
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1986721381973192}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: da2f716404317b140bfe50c97c99a47a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114133704571085762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,7 +199,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310ac174a0a7c664ca5fa73389cfb9ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114599884828170998
+  friendlyTarget: {fileID: 1926289350274030, guid: 7fd504fb4f7a6d144b901332f553086d,
+    type: 2}
+  enemyTarget: {fileID: 1851017793039470, guid: 214f7b03bd8b16641bb52f9facd04ded,
+    type: 2}
+--- !u!114 &114671150272939500
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -189,13 +211,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1986721381973192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d31e436c3c05794481b5336e6b59d08, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e034af2bfc783244b110ef96bc89b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piePrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  maxStretch: 3
   angledRightPie: {fileID: 21300000, guid: 2e838c220688b034dab86953d938fe71, type: 3}
   angledLeftPie: {fileID: 21300000, guid: ce4892920a1d2e4429d0931ea87e323f, type: 3}
   originPie: {fileID: 21300000, guid: 46371451b3f21c94fba4362974ee391d, type: 3}
