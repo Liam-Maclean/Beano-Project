@@ -67,7 +67,7 @@ public class PieAttackScript : MonoBehaviour {
 					Destroy (hit [i].collider.gameObject);
 					pieScript.Respawn ();
 					pieScript.SetDistance (new Vector3 (0.0f, 0.0f, 0.0f));
-					//pieScript.Destroy ();
+					pieScript.Destroy ();
 					isHit = true;
 					break;
 				}      

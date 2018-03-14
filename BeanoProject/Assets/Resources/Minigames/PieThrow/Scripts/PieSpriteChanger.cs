@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PieSpriteChanger : MonoBehaviour {
 
     private PieScript pieScript;
@@ -14,7 +15,7 @@ public class PieSpriteChanger : MonoBehaviour {
     public Sprite angledLeftPie;
     public Sprite originPie;
 
-	public Animation pieSplat;
+    private Animator pieSplat;
 
     // Use this for initialization
     void Start ()
@@ -22,6 +23,7 @@ public class PieSpriteChanger : MonoBehaviour {
         //acces the pie spawner game object and get its attached script
         pieSpawner = GameObject.FindGameObjectWithTag("PieSpawner");
 		pieScript = pieSpawner.GetComponent<PieScript> ();
+        pieSplat = gameObject.GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
@@ -58,8 +60,7 @@ public class PieSpriteChanger : MonoBehaviour {
 
 	public void PlaySplat()
 	{
-		pieSplat.Play ();
-		Debug.Log(pieSplat.isPlaying);
-
-	}
+        pieSplat.SetBool("hasLaunched", true);
+     
+    }
 }

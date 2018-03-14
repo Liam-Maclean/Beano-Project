@@ -24,8 +24,10 @@ GameObject:
   - component: {fileID: 114247327557308768}
   - component: {fileID: 54482078766948980}
   - component: {fileID: 65695754159165896}
+  - component: {fileID: 95016688411811604}
+  - component: {fileID: 111719918443835866}
   m_Layer: 0
-  m_Name: Dad
+  m_Name: Gran
   m_TagString: Friendly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +41,7 @@ Transform:
   m_GameObject: {fileID: 1926289350274030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -69,8 +71,40 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 11, z: 0.5}
+  m_Size: {x: 2, y: 4.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &95016688411811604
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926289350274030}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b1b42b032308394eaab12248d59daab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!111 &111719918443835866
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1926289350274030}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 84734fb25632438478ac0531615ae79f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 84734fb25632438478ac0531615ae79f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114247327557308768
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,7 +164,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 56129872d0ad3054f978749d5440fc6f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f6d18b138e8e9114d886555690949945, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

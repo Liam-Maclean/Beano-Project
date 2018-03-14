@@ -43,7 +43,7 @@ public class PieThrowManagerScript : MonoBehaviour
 
     void Awake()
     {
-
+        playerScore = 0.0f;
         m_currState = GAMESTATE.Start;
 
         m_pedObjects = new List<GameObject>();
@@ -181,7 +181,7 @@ public class PieThrowManagerScript : MonoBehaviour
         }
         else
         {
-            newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y, zPos), Quaternion.identity);
+           newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y, zPos), Quaternion.identity);
 
             if (isBasic)
             {
