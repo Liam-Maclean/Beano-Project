@@ -125,19 +125,19 @@ public class OverworldScript : MonoBehaviour
         {
             case 0:
                 SceneManager.LoadSceneAsync(4); // Garden Destruction
-                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(4);
+                m_playerIDObject.GetComponent<CustomLobby>().Scene = 4;
                 break;
             case 1:
                 SceneManager.LoadSceneAsync(5); // Pie Throw
-                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(5);
+                m_playerIDObject.GetComponent<CustomLobby>().Scene = 5;
                 break;
             case 2:
                 SceneManager.LoadSceneAsync(6); // Mole Control
-                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(6);
+                m_playerIDObject.GetComponent<CustomLobby>().Scene = 6;
                 break;
             default:
                 SceneManager.LoadSceneAsync(1); // Lobby Error
-                m_playerIDObject.GetComponent<CustomLobby>().triggerClientChange(1);
+                m_playerIDObject.GetComponent<CustomLobby>().Scene = 1; ;
                 Debug.Log("Error");
                 break;
         }

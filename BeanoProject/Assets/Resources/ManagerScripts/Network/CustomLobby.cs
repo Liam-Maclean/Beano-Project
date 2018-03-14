@@ -280,6 +280,6 @@ public class CustomLobby : NetworkLobbyPlayer {
 
     public void ChangeScene(int scene)
     {
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
     }
 }
