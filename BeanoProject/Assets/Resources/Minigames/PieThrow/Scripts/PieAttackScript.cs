@@ -13,11 +13,7 @@ public class PieAttackScript : MonoBehaviour {
 
 	private PieSpriteChanger spriteChangeScript;
 
-	public GameObject friendlyTarget;
-	private PedScript friendlyPedScript;
 
-	public GameObject enemyTarget;
-	private PedScript enemyPedScript;
 
 	private SpriteRenderer sr;
 	private bool isHit;
@@ -32,8 +28,7 @@ public class PieAttackScript : MonoBehaviour {
 		spriteChangeScript = gameObject.GetComponent<PieSpriteChanger> ();
         pieScript = pieSpawner.GetComponent<PieScript>();
 		gameManagerScript = pedSpawner.GetComponent<PieThrowManagerScript>();
-		friendlyPedScript = friendlyTarget.GetComponent<PedScript> ();
-		enemyPedScript = enemyTarget.GetComponent<PedScript> ();
+	
 
 		isHit = false;
 		sr = gameObject.GetComponent<SpriteRenderer>();
@@ -52,14 +47,11 @@ public class PieAttackScript : MonoBehaviour {
 
 				for (int i = 0; i < hit.Length; i++)
 				{
-					if (hit [i].collider.tag == "Friendly") 
-					{
-						hitScore = friendlyPedScript.GetScore ();
-					}
-					else 
-					{
-						hitScore = enemyPedScript.GetScore ();
-					}
+                    PedScript pedScript;
+
+                    pedScript = hit[i].collider.gameObject.GetComponent<PedScript>();
+
+                    hitScore = pedScript.GetScore();
 
 					gameManagerScript.AddScore (hitScore);
 					spriteChangeScript.PlaySplat ();

@@ -145,11 +145,11 @@ public class PieThrowManagerScript : MonoBehaviour
 					//PLANE
 					if (isLeft)
 					{
-						CreatePed(false, false, i + minZDist);
+						CreatePed(false, true, i + minZDist);
 					}
 					else
 					{
-						CreatePed(false, true, i + minZDist);
+						CreatePed(false, false, i + minZDist);
 					}
 				}
 			}
@@ -177,16 +177,17 @@ public class PieThrowManagerScript : MonoBehaviour
 
         if (isLeft)
         {
-            newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x, targetPos.y, zPos), Quaternion.identity);
-        }
-        else
-        {
-           newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y, zPos), Quaternion.identity);
 
+            newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x, targetPos.y, zPos), Quaternion.identity);
             if (isBasic)
             {
                 newPed.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
             }
+        }
+        else
+        {
+
+           newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y, zPos), Quaternion.identity);
         }
 
         m_pedObjects.Add(newPed);
