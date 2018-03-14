@@ -14,6 +14,8 @@ public class PieSpriteChanger : MonoBehaviour {
     public Sprite angledLeftPie;
     public Sprite originPie;
 
+	public Animation pieSplat;
+
     // Use this for initialization
     void Start ()
     {
@@ -53,4 +55,11 @@ public class PieSpriteChanger : MonoBehaviour {
             sr.sprite = angledRightPie;
         }
     }
+
+	public void PlaySplat()
+	{
+		pieSplat.Play ();
+		Debug.Log(pieSplat.isPlaying);
+
+	}
 }

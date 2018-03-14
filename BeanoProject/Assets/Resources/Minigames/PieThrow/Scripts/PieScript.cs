@@ -24,6 +24,8 @@ public class PieScript : MonoBehaviour
 	private bool oldMouseDown;
     private bool newMouseDown;
 
+
+
 	private SpriteRenderer sr;
 
     //Ray variables
@@ -35,7 +37,7 @@ public class PieScript : MonoBehaviour
     private GameObject pie;
 	public GameObject gameManager;
 
-
+	private PieAttackScript pieAttackScript;
 	private PieThrowManagerScript managerScript;
 
     //Collider variables
@@ -58,6 +60,7 @@ public class PieScript : MonoBehaviour
 
 		sr = pie.GetComponent<SpriteRenderer>();
 		managerScript = gameManager.GetComponent<PieThrowManagerScript> ();
+		pieAttackScript = pie.GetComponent<PieAttackScript> ();
 
         //get the square of maxstretch
         maxStretchSqr = maxStretch * maxStretch;
@@ -98,12 +101,13 @@ public class PieScript : MonoBehaviour
 				}
 			}
 			//only respawn if the pie has been launched 
-			if (hasLaunched || isDestroyed) {
+			if (hasLaunched || isDestroyed)
+			{
 				//translates the pies position
 				pie.transform.position += distance;
 
 				Respawn ();
-			}
+			}	
 		}
 	}
 
@@ -193,6 +197,7 @@ public class PieScript : MonoBehaviour
 
         if (timer <= 0.0f)
 		{
+			
             isReloading = true;
             //instansiate the new pie at the respawn position
             pie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.5f, 0.0f), Quaternion.identity);
@@ -232,5 +237,9 @@ public class PieScript : MonoBehaviour
 	public void SetLaunched(bool launched)
 	{
 		hasLaunched = launched;
+	}
+	public void SetDistance(Vector3 dist)
+	{
+		distance = dist;
 	}
 }
