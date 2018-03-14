@@ -89,7 +89,8 @@ public class CharacterSelect : MonoBehaviour {
 	{
 		PlayerPrefs.SetInt ("Avatar", index);
         PlayerPrefs.SetString("Handle", handle.text);
-		SceneManager.LoadScene (0);
+        SceneManager.UnloadSceneAsync(2);
+        FindObjectOfType<Navigator>().GetComponent<Navigator>().ReturnFromSelect();
 	}
 
 	// Update is called once per frame
