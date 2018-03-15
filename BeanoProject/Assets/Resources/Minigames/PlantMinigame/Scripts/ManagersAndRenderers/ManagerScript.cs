@@ -31,10 +31,13 @@ enum GameState
 public class ManagerScript : MonoBehaviour {
 
 	private GameObject m_tutorialCanvas;
-
+	public GameObject fade;
 	GameObject GameOverCanvas;
 	//swipe object
 	GameObject swipe;
+
+	float swipeLockoutTimer;
+	bool bSwipeLockout = false;
 
 	//stop animation script at end of the game
 	GameObject stopText;
@@ -45,6 +48,8 @@ public class ManagerScript : MonoBehaviour {
 	//stop animation script (end of game)
 	private StopAnimationScript stopAnimationScript;
 	private bool StopAnimInstantiated;
+
+	BasePlant plantHit;
 
 	//countdown at start of match
 	private CountDownScript countDownScript;
@@ -144,7 +149,7 @@ public class ManagerScript : MonoBehaviour {
 	void Start()
 	{
 		FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
-
+		fade.SetActive (false);
 		//get all portrait script objects
 		m_portraits = GameObject.FindGameObjectsWithTag ("Portrait");
 
@@ -279,8 +284,13 @@ public class ManagerScript : MonoBehaviour {
 			if (!GameEnded ()) {
 				//update game logic
 				CountDown ();
-				OnTileClick ();
+				if (bSwipeLockout == false) {
+					OnTileClick ();
+				} else {
+					LockOutTimer ();
+				}
 			
+
 			} 
 			//if the game HAS ended
 			else if (GameEnded()) {
@@ -312,6 +322,23 @@ public class ManagerScript : MonoBehaviour {
 			break;
 		}
 	}
+
+	//lockout timer for tile clicking (debug so far)
+	void LockOutTimer()
+	{
+		if (swipeLockoutTimer < 2.0f) {
+			fade.SetActive (true);
+			swipeLockoutTimer += Time.deltaTime;
+			swipeLockoutTimer = swipeLockoutTimer % 60;
+		}
+		if (swipeLockoutTimer > 2.0f) {
+			fade.SetActive (false);
+			bSwipeLockout = false;
+			swipeLockoutTimer = 0;
+		}
+	}
+
+
 
     //mouse input class
 	void OnTileClick()
@@ -359,9 +386,25 @@ public class ManagerScript : MonoBehaviour {
 					//get plant component
 					m_plantsHit.Add(tempPlantScript.GetPlantComponent ());
 
-					tempPlantScript.Swiped ();
+					tempPlantScript.Swiped (out plantHit);
 					//add the plants score to the list of scores
 					//m_plantScore.Add(tempPlantScript.Swiped());
+
+					//if the plant hit is a debuff plant (lightning plant
+					if (plantHit is DebuffPlant) {
+						//Upcase the baseplant to debuff plant since we're sure it's a debuffplant
+						DebuffPlant tempPlant = plantHit as DebuffPlant;
+
+						//if the debuff plants lightning is active
+						if (tempPlant.GetLightning ()) {
+							//lock out swiping for 2 seconds
+							bSwipeLockout = true;
+						}
+						//else 
+						else {
+							//do nothing
+						}
+					}
 				}
 			}
 
