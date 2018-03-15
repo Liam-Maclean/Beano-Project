@@ -30,6 +30,12 @@ public class StopAnimationScript : MonoBehaviour {
 		}
 	}
 
+	//getter for animated state (frame between floats 0 and 1)
+	public float GetAnimatedState()
+	{
+		return m_stateInfo.normalizedTime;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		//get animation state information every frame (time information)
