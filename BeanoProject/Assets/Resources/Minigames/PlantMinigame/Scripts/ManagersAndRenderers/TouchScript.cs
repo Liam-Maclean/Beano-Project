@@ -18,6 +18,8 @@ using UnityEngine;
 // Liam MacLean - 25/10/2017 03:42
 public class TouchScript : MonoBehaviour
 {
+
+	BasePlant plantHit;
 	//combined 
     private int m_combinedScore;
     private List<int> m_plantScore = new List<int>();
@@ -117,7 +119,7 @@ public class TouchScript : MonoBehaviour
                             PlantScriptManager tempPlantScript = hit[i].collider.gameObject.GetComponent<PlantScriptManager>();
 
                             //add the plants score to the list of scores
-                            m_plantScore.Add(tempPlantScript.Swiped());
+							m_plantScore.Add(tempPlantScript.Swiped(out plantHit));
                         }
                     }
 

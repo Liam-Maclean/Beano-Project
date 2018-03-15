@@ -28,8 +28,10 @@ enum PlantComponentType
 	
 public class PlantScriptManager : MonoBehaviour 
 {
+	private float itterator = 1.0f;
+	private float frame = 0.5f;
 	private Animator m_animator;
-
+	private AnimatorStateInfo m_stateInfo;
 	private bool FirstTimeSpawn = true;
 
 	//enum for plants
@@ -57,7 +59,7 @@ public class PlantScriptManager : MonoBehaviour
 	{
 		sr = this.GetComponent<SpriteRenderer> ();
 		m_animator = GetComponent<Animator> ();
-		
+		AnimatorClipInfo[] clipInfo = m_animator.GetCurrentAnimatorClipInfo (0);
 		AddNewPlantComponent ();
 		for (int i = 0; i < particleGameobjects.Length; i++) {
 			emmiters.Add (particleGameobjects [i].GetComponent<ParticleSystem> ());
@@ -131,9 +133,11 @@ public class PlantScriptManager : MonoBehaviour
 
 
     //if tile is swiped over
-    public int Swiped()
+	public int Swiped(out BasePlant plant)
     {
 		int tempScore = 0;
+		plant = basePlant;
+
 		if (basePlant.GetActive ()) {
 			tempScore = basePlant.GetScore ();
 			Debug.Log (basePlant.GetScore ());
@@ -169,15 +173,34 @@ public class PlantScriptManager : MonoBehaviour
 		}
 	}
 
+	//swaps over lightning debuff on plant 
+	void SwapLightningDebuff()
+	{
+		if ((m_stateInfo.normalizedTime % 1) <= 0.5f) {
+			DebuffPlant debuff = basePlant as DebuffPlant;
+			debuff.SetLightning (true);
+			debuff.SetScore (0);
+		} else {
+			DebuffPlant debuff = basePlant as DebuffPlant;
+			debuff.SetLightning (false);
+			debuff.SetScore (2);
+		}
+	}
 
     //update
 	void Update()
 	{
+		m_stateInfo = m_animator.GetCurrentAnimatorStateInfo (0);
 		//if the base plant isn't active
 		if (!basePlant.GetActive ()) {  
 			basePlant.SetSprite(sprites[4]);
             StartTimer ();
 		}
+
+		if (basePlant is DebuffPlant) {
+			SwapLightningDebuff ();
+		}
+
     }
 
     //starts the timer to remove plant component
@@ -189,7 +212,6 @@ public class PlantScriptManager : MonoBehaviour
 
 			//if time has reached the limit 
 			if (timer > 2.0f) {
-			
 				//remove component, add a new one
 				basePlant.RemoveComponent ();
 				AddNewPlantComponent ();

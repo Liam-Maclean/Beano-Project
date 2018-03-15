@@ -13,6 +13,19 @@ public class DebuffPlant : BasePlant {
 	ParticleSystem m_particleSystem;
 
 	private float m_duration;
+	private bool bLightningOnOff;
+
+	//Setter
+	public void SetLightning(bool lightning)
+	{
+		bLightningOnOff = lightning;
+	}
+
+	//Getter
+	public bool GetLightning()
+	{
+		return bLightningOnOff;
+	}
 
 	//initialise (start)
 	void Start()
@@ -23,7 +36,7 @@ public class DebuffPlant : BasePlant {
 		sr.color = new Color (255, 255, 0);
 		SetScore (0);
 		ActivateSparks ();
-
+		bLightningOnOff = true;
 	}
 
 	//activate spark particle system
@@ -70,7 +83,6 @@ public class DebuffPlant : BasePlant {
 			m_particleSystem.Stop ();
 		}
 	}
-
 
 	//override for deleting the component (destroys the particle system object as well)
 	public override void RemoveComponent()
