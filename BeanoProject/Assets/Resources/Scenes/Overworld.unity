@@ -595,7 +595,7 @@ Prefab:
     - target: {fileID: 114673290847710992, guid: 8597c176fe316324a99b2834df1a8be9,
         type: 2}
       propertyPath: isGame
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1237896412339266, guid: 8597c176fe316324a99b2834df1a8be9, type: 2}
       propertyPath: m_TagString

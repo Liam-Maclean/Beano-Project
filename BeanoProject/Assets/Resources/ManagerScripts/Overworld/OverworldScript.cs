@@ -121,7 +121,7 @@ public class OverworldScript : MonoBehaviour
 
     public void LoadMinigameHost(Biome currBiome)
     {
-        switch (Random.Range(0, 2))
+        switch (Random.Range(0, 3))
         {
             case 0:
                 SceneManager.LoadSceneAsync(4); // Garden Destruction
@@ -136,9 +136,9 @@ public class OverworldScript : MonoBehaviour
                 m_playerIDObject.GetComponent<CustomLobby>().Scene = 6;
                 break;
             default:
-                SceneManager.LoadSceneAsync(1); // Lobby Error
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 1; ;
-                Debug.Log("Error");
+                //SceneManager.LoadSceneAsync(1); // Lobby Error
+                //m_playerIDObject.GetComponent<CustomLobby>().Scene = 1; ;
+                //Debug.Log("Error");
                 break;
         }
     }
