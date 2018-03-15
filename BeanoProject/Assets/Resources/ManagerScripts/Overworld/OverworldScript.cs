@@ -124,27 +124,40 @@ public class OverworldScript : MonoBehaviour
         switch (Random.Range(0, 2))
         {
             case 0:
-                SceneManager.LoadSceneAsync(4); // Garden Destruction
+                //SceneManager.LoadScene(4, LoadSceneMode.Additive); // Garden Destruction
                 m_playerIDObject.GetComponent<CustomLobby>().Scene = 4;
                 break;
             case 1:
-                SceneManager.LoadSceneAsync(5); // Pie Throw
+                //SceneManager.LoadScene(5, LoadSceneMode.Additive); // Pie Throw
                 m_playerIDObject.GetComponent<CustomLobby>().Scene = 5;
                 break;
             case 2:
-                SceneManager.LoadSceneAsync(6); // Mole Control
+                //SceneManager.LoadScene(6, LoadSceneMode.Additive); // Mole Control
                 m_playerIDObject.GetComponent<CustomLobby>().Scene = 6;
                 break;
             default:
-                SceneManager.LoadSceneAsync(1); // Lobby Error
+                //SceneManager.LoadScene(1); // Lobby Error
                 m_playerIDObject.GetComponent<CustomLobby>().Scene = 1; ;
                 Debug.Log("Error");
                 break;
         }
+        Stop();
     }
 
     public void LoadMiniGameClient(int sceneID)
     {
         SceneManager.LoadSceneAsync(sceneID);
+        Stop();
+    }
+
+    protected void Stop()
+    {
+        PlayerScript[] players = FindObjectsOfType<PlayerScript>();
+        foreach (PlayerScript player in players)
+        {
+            player.gameState = PlayerScript.GameState.InGame;
+        }
+
+
     }
 }

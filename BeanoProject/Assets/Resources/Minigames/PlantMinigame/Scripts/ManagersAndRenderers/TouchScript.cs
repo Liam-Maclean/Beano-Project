@@ -43,7 +43,7 @@ public class TouchScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SwipeLine();
+        //SwipeLine();
     }
 
 	//checking if a vector is negative or positive
