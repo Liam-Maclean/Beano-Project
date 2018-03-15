@@ -2,67 +2,85 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <This script deals with spawning the hand>
+/// Hand spawn.
+/// this script will be attatched to an empty game object that will spawn the hand prefab.
+/// It spawns a hand prefab at the current mouse position and it moves depending on the current
+/// mouse or touch position.
+/// <This will be the final version>
+
+
 public class HandSpawn : MonoBehaviour
 { 
-    private bool oldMouseDown;
-    private bool newMouseDown;
-    private SpriteRenderer sr;
-    public Sprite handClosed;
-    public Sprite handOpen;
+	//gameObject variables
     public GameObject handPrefab;
     private GameObject clone;
+
+	//vector2 variables
+	private Vector2 m_touch;
 
 
     // Use this for initialization
     void Start()
     {
-        sr = GetComponent<SpriteRenderer>();
+		//get the current mouse position
+		Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		//spawn the hand at the current mouse position
+		clone = (GameObject)Instantiate(handPrefab, mousePos, Quaternion.identity);
+		//set the cursor to invisible
+		Cursor.visible = false;
 
-        for (int i = 0; i  < 1; i ++)
-        {
-            clone = (GameObject)Instantiate(handPrefab, new Vector2(0.0f, -3.0f), Quaternion.identity);
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        //get the current mouse click 
-        newMouseDown = Input.GetMouseButton(0);
-
-        //if there has been a click
-        if (newMouseDown && !oldMouseDown)
-        {
-            clone.transform.position = mousePos;
-        }
-
-        //if the click is being held down
-        if (newMouseDown && oldMouseDown)
-        {
-        }
-
-        //if the there is no longer a click being held down
-        if (!newMouseDown && oldMouseDown)
-        {
-            sr.sprite = handOpen;
-            Destroy(clone);
-        }
-        //set the current mouse input to the old one for comparison
-        oldMouseDown = newMouseDown;
+		//this handles all the mouse controls
+		MouseControls ();
+		//this handles all the touch controls
+		TouchControls ();
     }
 
 
-    void OnCollisionEnter(Collision collisionInfo)
-    {
-        Debug.Log("hit");
+	void MouseControls()
+	{
+		//get the current mouse position which is updated every frame
+		Vector2 currMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
+		//if the hand exists
+		if (clone)
+		{
+			//set the hands position to the current mouse position
+			clone.transform.position = currMousePos;
+		}
+	}
 
-        if (collisionInfo.collider.tag == "pie")
-        {
-            sr.sprite = handClosed;
-        }
+	void TouchControls()
+	{
+		//get the world position of the touch
+		Vector2 currTouchPos = Camera.main.ScreenToWorldPoint (m_touch);
 
-    }
+		//Touch Controls
+		if (Input.touchCount == 1) 
+		{
+			Touch touch = Input.GetTouch (0);
+
+			//Switch statement determining which type of touch it is
+			switch (touch.phase) 
+			{
+			case TouchPhase.Began:
+				//store the initial position
+				if (clone)
+				{
+					//set the hands position to the current touch position 
+					clone.transform.position = currTouchPos;
+				};
+				break;
+			case TouchPhase.Moved:
+				//set the current touch position
+				m_touch = touch.position;
+				break;
+			}
+		}
+	}
 }

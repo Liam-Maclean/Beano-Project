@@ -99,4 +99,15 @@ public class Navigator : MonoBehaviour {
 		select.enabled = true;
 		mainMenu.enabled = false;
 	}
+
+    public void CharacterSelect()
+    {
+        mainMenu.enabled = false;
+        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+    }
+
+    public void ReturnFromSelect()
+    {
+        mainMenu.enabled = true;
+    }
 }
