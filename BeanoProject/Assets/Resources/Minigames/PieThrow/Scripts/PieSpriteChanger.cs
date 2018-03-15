@@ -57,10 +57,4 @@ public class PieSpriteChanger : MonoBehaviour {
             sr.sprite = angledRightPie;
         }
     }
-
-	public void PlaySplat()
-	{
-        pieSplat.SetBool("hasLaunched", true);
-     
-    }
 }

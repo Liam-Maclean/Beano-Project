@@ -332,6 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxStretch: 3
+  respawnTime: 1
   piePrefab: {fileID: 1986721381973192, guid: 37aa0cd3113d4924b939a66e33e80f71, type: 2}
   gameManager: {fileID: 1872624343}
 --- !u!1 &854318684

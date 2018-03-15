@@ -10,7 +10,8 @@ public class PieScript : MonoBehaviour
 	//float variables
 	public float maxStretch;
     private float maxStretchSqr;
-	private	float timer = 2.0f;
+	public float respawnTime;
+	private float tempTime;
 
 	//distance variables
 	private Vector3 pieStartPosition;
@@ -54,7 +55,9 @@ public class PieScript : MonoBehaviour
 		
 	void Start()
 	{
-        pie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.5f,0.0f), Quaternion.identity);
+		tempTime = respawnTime;
+
+        pie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.25f,0.0f), Quaternion.identity);
         //initialise the rays
         rayToTouch = new Ray(pie.transform.position, Vector3.zero);
 
@@ -193,9 +196,10 @@ public class PieScript : MonoBehaviour
 
 	public void Respawn()
     {
-        timer -= Time.deltaTime;
+		//standard timer
+		respawnTime -= Time.deltaTime;
 
-        if (timer <= 0.0f)
+		if (respawnTime <= 0.0f)
 		{
 			
             isReloading = true;
@@ -203,7 +207,7 @@ public class PieScript : MonoBehaviour
             pie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.5f, 0.0f), Quaternion.identity);
 			sr = pie.GetComponent<SpriteRenderer>();
             //reset pie variables 
-            timer = 2.0f;
+			respawnTime = tempTime;
             isReloading = false;
             hasLaunched = false;
             isDestroyed = false;

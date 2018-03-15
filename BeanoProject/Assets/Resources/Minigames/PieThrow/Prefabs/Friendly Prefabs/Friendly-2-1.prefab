@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pedSprites: []
-  moveSpeed: 3
+  moveSpeed: 6
   m_score: -10
 --- !u!212 &212599523437786932
 SpriteRenderer:
