@@ -203,6 +203,7 @@ public class PieScript : MonoBehaviour
 		{
 			
             isReloading = true;
+			Destroy (pie);
             //instansiate the new pie at the respawn position
             pie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.5f, 0.0f), Quaternion.identity);
 			sr = pie.GetComponent<SpriteRenderer>();

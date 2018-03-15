@@ -35,9 +35,15 @@ public class PieThrowManagerScript : MonoBehaviour
     public Animator readyMenuAnim;
     public GameObject readyMenu;
 
+
+	public GameObject gameCanvas;
+
 	public GameObject endGameCanvas;
 	private GameObject newCanvas;
 	private bool isEnd;
+
+	public GameObject handSpawn;
+	private HandSpawn handSpawnScript;
 
 	private float playerScore;
 
@@ -66,6 +72,10 @@ public class PieThrowManagerScript : MonoBehaviour
 
         // Call start menu
         StartMenu();
+
+
+		handSpawnScript = handSpawn.GetComponent<HandSpawn> ();
+
 	}
 	
 	// Update is called once per frame
@@ -171,18 +181,18 @@ public class PieThrowManagerScript : MonoBehaviour
         }
         else
         {
-            typeHelper = Random.Range(0, specialTypes);
-            typeHelper += basicPedTypes;
+			typeHelper = Random.Range(basicPedTypes, specialTypes);
+            //typeHelper += basicPedTypes;
         }
 
         if (isLeft)
         {
 
             newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x, targetPos.y, zPos), Quaternion.identity);
-            if (isBasic)
-            {
+           // if (isBasic)
+           // {
                 newPed.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-            }
+            //}
         }
         else
         {
@@ -192,10 +202,10 @@ public class PieThrowManagerScript : MonoBehaviour
 
         m_pedObjects.Add(newPed);
 
-        if (isBasic)
-        {
+     //   if (isBasic)
+     //   {
             m_pedObjects[m_pedObjects.Count - 1].GetComponent<PedScript>().InitPed(isLeft, zPos);
-        }
+     //   }
     }
 
     void GameTimer()
@@ -214,6 +224,12 @@ public class PieThrowManagerScript : MonoBehaviour
 			
 			newCanvas = Instantiate (endGameCanvas, new Vector3(0.0f,0.0f, 0.0f), Quaternion.identity);
 			isEnd = false;
+
+			//destroy the hand object and for mouse controls set the cursor to visible
+			handSpawnScript.Destroy ();
+			Destroy (gameCanvas);
+			DisplayScore ();
+			Cursor.visible = true;
 		}
     }
 
