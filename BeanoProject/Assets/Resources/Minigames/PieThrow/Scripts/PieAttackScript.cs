@@ -11,14 +11,6 @@ public class PieAttackScript : MonoBehaviour {
 	private GameObject pedSpawner;
 	private PieThrowManagerScript gameManagerScript;
 
-	private PieSpriteChanger spriteChangeScript;
-
-	public GameObject friendlyTarget;
-	private PedScript friendlyPedScript;
-
-	public GameObject enemyTarget;
-	private PedScript enemyPedScript;
-
 	private SpriteRenderer sr;
 	private bool isHit;
 	private float hitScore;
@@ -26,17 +18,16 @@ public class PieAttackScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+		//find the two spawners to acces scripts
         pieSpawner = GameObject.FindGameObjectWithTag("PieSpawner");
 		pedSpawner = GameObject.FindGameObjectWithTag ("PedSpawner");
 
-		spriteChangeScript = gameObject.GetComponent<PieSpriteChanger> ();
+		//get the script and component references
         pieScript = pieSpawner.GetComponent<PieScript>();
 		gameManagerScript = pedSpawner.GetComponent<PieThrowManagerScript>();
-		friendlyPedScript = friendlyTarget.GetComponent<PedScript> ();
-		enemyPedScript = enemyTarget.GetComponent<PedScript> ();
-
-		isHit = false;
 		sr = gameObject.GetComponent<SpriteRenderer>();
+	
+		isHit = false;
    }
 	
 	// Update is called once per frame
@@ -52,30 +43,30 @@ public class PieAttackScript : MonoBehaviour {
 
 				for (int i = 0; i < hit.Length; i++)
 				{
-					if (hit [i].collider.tag == "Friendly") 
-					{
-						hitScore = friendlyPedScript.GetScore ();
-					}
-					else 
-					{
-						hitScore = enemyPedScript.GetScore ();
-					}
+					
+					isHit = true;
+                    PedScript pedScript;
 
+					//get the ped script of the object that the pie has collided with
+                    pedScript = hit[i].collider.gameObject.GetComponent<PedScript>();
+
+					//get the unique score of the collided object
+                    hitScore = pedScript.GetScore();
+					//add the score to the player's score
 					gameManagerScript.AddScore (hitScore);
-					spriteChangeScript.PlaySplat ();
 					//destroy the object the pie has collided with
 					Destroy (hit [i].collider.gameObject);
+					//respawn the pie
 					pieScript.Respawn ();
+					//stop the velocity of the pie for animation purposes
 					pieScript.SetDistance (new Vector3 (0.0f, 0.0f, 0.0f));
+					//destroy the pie
 					pieScript.Destroy ();
-					isHit = true;
 					break;
 				}      
 			}
 		}
 	}
-
-
 }
 
 
