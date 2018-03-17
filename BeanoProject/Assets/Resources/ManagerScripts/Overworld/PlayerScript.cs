@@ -159,6 +159,10 @@ public class PlayerScript : MonoBehaviour
 
             m_oldPos = m_currPos;
         }
+        else if (gameState == GameState.InGame)
+        {
+            this.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
     public void SetTargetPos(Vector3 newTargetPos)

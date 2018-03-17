@@ -1680,6 +1680,7 @@ MonoBehaviour:
   maxNodes: 33
   playerPrefab: {fileID: 1949163199634524, guid: 9f3c15cc8acc2e7488e12bc46321be5b,
     type: 2}
+  background: {fileID: 1981121829}
 --- !u!4 &1507875166
 Transform:
   m_ObjectHideFlags: 0

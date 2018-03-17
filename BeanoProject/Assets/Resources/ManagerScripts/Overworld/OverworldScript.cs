@@ -21,6 +21,8 @@ public class OverworldScript : MonoBehaviour
 
     private GameObject m_playerIDObject;
 
+    public SpriteRenderer background;
+
     void Awake()
     {
         m_players = new List<GameObject>();
@@ -31,6 +33,7 @@ public class OverworldScript : MonoBehaviour
     {
         m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
         m_clientID = m_playerIDObject.GetComponent<CustomLobby>().playerDetails.Identifier;
+        currPlayersTESTING = FindObjectsOfType<CustomLobby>().Length;
 
         Debug.Log("Network ID: " + m_clientID);
 
@@ -96,6 +99,8 @@ public class OverworldScript : MonoBehaviour
     {
         GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
 
+        
+
         foreach (GameObject node in nodes)
         {
             if (node.GetComponent<NodeScript>().GetID() == m_currNode)
@@ -104,10 +109,14 @@ public class OverworldScript : MonoBehaviour
                 {
                     Debug.Log("START GAME FOR NODE: " + m_currNode);
 
+                    
+
                     if (m_clientID.Value == 1) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
                     {
                         LoadMinigameHost((Biome)node.GetComponent<NodeScript>().GetBiomeType());
                     }
+
+                    Stop();
                 }
                 break;
             }
@@ -141,13 +150,13 @@ public class OverworldScript : MonoBehaviour
                 Debug.Log("Error");
                 break;
         }
-        Stop();
     }
 
     public void LoadMiniGameClient(int sceneID)
     {
-        SceneManager.LoadSceneAsync(sceneID);
         Stop();
+        SceneManager.LoadSceneAsync(sceneID);
+        
     }
 
     protected void Stop()
@@ -157,7 +166,16 @@ public class OverworldScript : MonoBehaviour
         {
             player.gameState = PlayerScript.GameState.InGame;
         }
+        background.enabled = false;
+    }
 
-
+    public void Resume()
+    {
+        PlayerScript[] players = FindObjectsOfType<PlayerScript>();
+        foreach (PlayerScript player in players)
+        {
+            player.gameState = PlayerScript.GameState.Playing;
+        }
+        background.enabled = true; ;
     }
 }
