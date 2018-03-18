@@ -186,7 +186,6 @@ MonoBehaviour:
   playerIndex: 1
   playerScoreText: {fileID: 114203357453145240}
   animScript: {fileID: 0}
-  playerScore: 0
   portaitSprites: []
 --- !u!114 &114865001624054718
 MonoBehaviour:

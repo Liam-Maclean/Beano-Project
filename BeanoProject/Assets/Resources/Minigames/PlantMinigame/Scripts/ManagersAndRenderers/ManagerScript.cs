@@ -324,7 +324,7 @@ public class ManagerScript : MonoBehaviour {
 			//if the game over canvas has not been instantiated yet 
 			if (GameOverCanvas == null) {
 				//Instantiate the game over canvas
-				GameOverCanvas = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/GameOverCanvas")) as GameObject;
+				GameOverCanvas = Instantiate (Resources.Load ("Minigames/UniversalMinigamePrefabs/GameOverCanvas")) as GameObject;
 			}
 
 			break;

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 //global game over screen for every minigame hopefully
 //should work on every mini game by using gameobject.find
 //on the game's portraits and then using them to populate
@@ -22,11 +21,12 @@ public class GameOverCanvasScript : MonoBehaviour {
 		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
 
 
+        //add a new position for each portrait in the list of positions
 		for (int i = 0; i < portraits.Length; i++) {
 			positions.Add (new Vector3 (0, 0, 0));
 		}
 
-
+        //set up and reparent portraits from the main game
 		SetUpPortraitPositions ();
 		ReparentPortraits ();
 	}
@@ -75,7 +75,7 @@ public class GameOverCanvasScript : MonoBehaviour {
 		//for each portrait
 		for (int i = 0; i < portraits.Length; i++) {
 			//reparent to the end game screen
-			portraits [i].transform.SetParent (this.transform);
+			portraits[i].transform.SetParent (this.transform);
 			portraits[i].transform.localPosition = positions[i];
 		}
 	}
