@@ -8,12 +8,15 @@ using UnityEngine.SceneManagement;
 public class CharacterSelect : MonoBehaviour {
 
 	private GameObject[] characterList;
-	public List<string> textList; 
+	public List<string> textList;
 
+    public Image selected;
+    public Image left;
+    public Image right;
+    public Image backLeft;
+    public Image backRight;
 
 	private int index;
-    private int left;
-    private int right;
 
 	//Text nameText;
 
@@ -28,8 +31,6 @@ public class CharacterSelect : MonoBehaviour {
 	private void Start()
 	{
 		index = PlayerPrefs.GetInt ("Avatar");
-        left = index + 1;
-        right = index - 1;
 
         //Initialise lists
         characterList = new GameObject[transform.childCount];
@@ -45,14 +46,14 @@ public class CharacterSelect : MonoBehaviour {
 		//Toggle of the sprites
 		foreach (GameObject go in characterList )
 		{
-			go.SetActive (false);
+			//go.SetActive (false);
 
 		}
 
 		//Toggle on the selected character
 		if (characterList [index])
 		{
-			characterList [index].SetActive (true);
+			//characterList [index].SetActive (true);
 			//nameText.text = textList[index];
 
 		}
@@ -61,8 +62,15 @@ public class CharacterSelect : MonoBehaviour {
 	public void Toggleleft()
 	{
 		//Toggle off the current sprite
-		characterList[index].SetActive(false);
+		//characterList[index].SetActive(false);
 
+        backLeft.sprite = left.sprite;
+        left.sprite = selected.sprite;
+        selected.sprite = right.sprite;
+        right.sprite = backRight.sprite;
+        backRight.sprite = backLeft.sprite;
+
+        
 
 		index--; 
 		if (index < 0) 
@@ -70,16 +78,6 @@ public class CharacterSelect : MonoBehaviour {
 			index = characterList.Length - 1;
 
 		}
-        left = index + 1;
-        right = index - 1;
-        if (left > characterList.Length)
-        {
-            left = 0;
-        }
-        if (right < 0)
-        {
-            right = characterList.Length;
-        }
 
         //Toggle on the new sprite
         characterList[index].SetActive(true);
@@ -91,23 +89,19 @@ public class CharacterSelect : MonoBehaviour {
 	public void ToggleRight()
 	{
 		//Toggle off the current sprite
-		characterList[index].SetActive(false);
+		//characterList[index].SetActive(false);
+
+        backRight.sprite = right.sprite;
+        right.sprite = selected.sprite;
+        selected.sprite = left.sprite;
+        left.sprite = backLeft.sprite;
+        backLeft.sprite = backRight.sprite;
 
 		index++;
 		if (index == characterList.Length)
 		{
 			index = 0;
 		}
-        left = index + 1;
-        right = index - 1;
-        if (left > characterList.Length)
-        {
-            left = 0;
-        }
-        if (right < 0)
-        {
-            right = characterList.Length;
-        }
 
         //Toggle on the new sprite
         characterList[index].SetActive(true);
@@ -162,5 +156,13 @@ public class CharacterSelect : MonoBehaviour {
         {
             touchOldPos.x = 99999;
         }
+        Color setAlpha = Color.white;
+        selected.color = setAlpha;
+        setAlpha.a = 0.5f;
+        right.color = setAlpha;
+        left.color = setAlpha;
+        setAlpha.a = 0.25f;
+        backRight.color = setAlpha;
+        backLeft.color = setAlpha;
 	}
 }
