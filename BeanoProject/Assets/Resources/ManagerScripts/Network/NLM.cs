@@ -7,6 +7,8 @@ public class NLM : NetworkLobbyManager {
 
     public static bool goAhead = false;
     bool shouldReady = false;
+    public Canvas hostJoin;
+    public Canvas inGame;
 
     /// <summary>
     /// when server connects, start the host
@@ -90,6 +92,8 @@ public class NLM : NetworkLobbyManager {
     {
         this.GetComponent<LobbyDiscovery>().Host();
         StartHost();
+        hostJoin.enabled = false;
+        inGame.enabled = true;
     }
 
     public void JoinButton()
@@ -121,5 +125,12 @@ public class NLM : NetworkLobbyManager {
     {
         networkAddress = fromAddress;
         StartClient();
+        hostJoin.enabled = false;
+        inGame.enabled = true;
+    }
+
+    private void Start()
+    {
+        inGame.enabled = false;
     }
 }
