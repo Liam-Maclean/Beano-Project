@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114286706165368904}
   m_Layer: 5
   m_Name: PlayerPortait
-  m_TagString: Untagged
+  m_TagString: Portrait
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

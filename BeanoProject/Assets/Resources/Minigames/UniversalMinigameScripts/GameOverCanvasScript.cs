@@ -67,6 +67,13 @@ public class GameOverCanvasScript : MonoBehaviour {
 		}
 	}
 
+    //Return to the overworld scene through this button method
+    //@BUTTON METHOD
+    public void ReturnToOverworld()
+    {
+       //change scene
+       //Increment overworld score to the winner
+    }
 
 
 	//calls when the end game portrait has been instantiated
