@@ -14,7 +14,6 @@ using UnityEngine.UI;
 /// </summary>
 public class PortaitScript : MonoBehaviour {
 
-
 	private XMLDialogueDatabase m_dialogueSet;
 	PlayerInfo localPlayerInfo;
 	public int playerIndex;
@@ -106,6 +105,5 @@ public class PortaitScript : MonoBehaviour {
 		GameObject box = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/SpeachBubble")) as GameObject;
 		box.transform.SetParent (GameObject.Find ("PlayerPortait").transform);
 		box.transform.localPosition = new Vector3 (55, 20, 1.0f);
-		//Debug.Log (box.transform.localPosition);
 	}
 }

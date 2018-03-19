@@ -30,6 +30,24 @@ public class StopAnimationScript : MonoBehaviour {
 		}
 	}
 
+    public bool AnimationEndedOnReverse()
+    {
+        if (m_stateInfo.normalizedTime == 0.0f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void ResetAnimWithNewState()
+    {
+        m_stateInfo = m_animator.GetCurrentAnimatorStateInfo(0);
+    }
+
+
 	//getter for animated state (frame between floats 0 and 1)
 	public float GetAnimatedState()
 	{
