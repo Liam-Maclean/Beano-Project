@@ -17,9 +17,12 @@ public class OverworldScript : MonoBehaviour
     private List<GameObject> m_players;
 
     public enum Biome { Residential, School, Park, Forest, Downtown, Beanoland };
+    public Biome minigameBiome;
     private string m_lastPlayed;
 
     private GameObject m_playerIDObject;
+
+    public SpriteRenderer background;
 
     void Awake()
     {
@@ -31,6 +34,7 @@ public class OverworldScript : MonoBehaviour
     {
         m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
         m_clientID = m_playerIDObject.GetComponent<CustomLobby>().playerDetails.Identifier;
+        currPlayersTESTING = FindObjectsOfType<CustomLobby>().Length;
 
         Debug.Log("Network ID: " + m_clientID);
 
@@ -96,6 +100,8 @@ public class OverworldScript : MonoBehaviour
     {
         GameObject[] nodes = GameObject.FindGameObjectsWithTag("Node");
 
+        
+
         foreach (GameObject node in nodes)
         {
             if (node.GetComponent<NodeScript>().GetID() == m_currNode)
@@ -104,10 +110,14 @@ public class OverworldScript : MonoBehaviour
                 {
                     Debug.Log("START GAME FOR NODE: " + m_currNode);
 
+                    
+
                     if (m_clientID.Value == 1) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
                     {
                         LoadMinigameHost((Biome)node.GetComponent<NodeScript>().GetBiomeType());
                     }
+
+                    Stop();
                 }
                 break;
             }
@@ -121,30 +131,66 @@ public class OverworldScript : MonoBehaviour
 
     public void LoadMinigameHost(Biome currBiome)
     {
-        switch (Random.Range(0, 2))
+        minigameBiome = currBiome;
+        float chance = 100/Selector.activeMinigames.Count;
+        int x = Random.Range(0, 100);
+        int indexInMinigameList = 0;
+        for (float i=chance; i<=100; i+=chance)
         {
-            case 0:
-                SceneManager.LoadSceneAsync(4); // Garden Destruction
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 4;
-                break;
-            case 1:
-                SceneManager.LoadSceneAsync(5); // Pie Throw
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 5;
-                break;
-            case 2:
-                SceneManager.LoadSceneAsync(6); // Mole Control
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 6;
-                break;
-            default:
-                SceneManager.LoadSceneAsync(1); // Lobby Error
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 1; ;
-                Debug.Log("Error");
-                break;
+            if (x<i)
+            {
+                m_playerIDObject.GetComponent<CustomLobby>().Scene = Selector.activeMinigames[indexInMinigameList];
+                goto BreakOut;
+            }
+            ++indexInMinigameList;
         }
+        BreakOut:;
+        //switch (Random.Range(0, 2))
+        //{
+        //    case 0:
+        //        //SceneManager.LoadScene(4, LoadSceneMode.Additive); // Garden Destruction
+        //        m_playerIDObject.GetComponent<CustomLobby>().Scene = 4;
+        //        break;
+        //    case 1:
+        //        //SceneManager.LoadScene(5, LoadSceneMode.Additive); // Pie Throw
+        //        m_playerIDObject.GetComponent<CustomLobby>().Scene = 5;
+        //        break;
+        //    case 2:
+        //        //SceneManager.LoadScene(6, LoadSceneMode.Additive); // Mole Control
+        //        m_playerIDObject.GetComponent<CustomLobby>().Scene = 6;
+        //        break;
+        //    default:
+        //        //SceneManager.LoadScene(1); // Lobby Error
+        //        m_playerIDObject.GetComponent<CustomLobby>().Scene = 1; ;
+        //        Debug.Log("Error");
+        //        break;
+        //}
     }
 
     public void LoadMiniGameClient(int sceneID)
     {
+        Stop();
         SceneManager.LoadSceneAsync(sceneID);
+        
+    }
+
+    protected void Stop()
+    {
+        PlayerScript[] players = FindObjectsOfType<PlayerScript>();
+        foreach (PlayerScript player in players)
+        {
+            player.gameState = PlayerScript.GameState.InGame;
+        }
+        background.enabled = false;
+    }
+
+    public void Resume()
+    {
+        PlayerScript[] players = FindObjectsOfType<PlayerScript>();
+        foreach (PlayerScript player in players)
+        {
+            player.gameState = PlayerScript.GameState.Playing;
+        }
+        background.enabled = true; ;
     }
 }
