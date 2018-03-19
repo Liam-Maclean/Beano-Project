@@ -127,11 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portraits: []
-  positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 100, y: 0, z: 0}
-  - {x: 200, y: 0, z: 0}
-  - {x: 300, y: 0, z: 0}
 --- !u!114 &114070959470745382
 MonoBehaviour:
   m_ObjectHideFlags: 1

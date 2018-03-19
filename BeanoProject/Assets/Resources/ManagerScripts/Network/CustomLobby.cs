@@ -226,6 +226,7 @@ public class CustomLobby : NetworkLobbyPlayer {
         local.playerDetails.MetaScore += local.playerDetails.MiniScore;
         local.playerDetails.MiniScore = 0;
         SendDetails(local.playerDetails);
+        FindObjectOfType<OverworldScript>().Resume();
     }
 
     /// <summary>

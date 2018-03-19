@@ -48,9 +48,6 @@ public class PieScript : MonoBehaviour
     {
         //On launch find the slingshot gameObject
 		slingshot = GameObject.FindGameObjectWithTag ("slingshot");
-
-        Orientor.pieThrow = true;
-
     }
 		
 	void Start()
