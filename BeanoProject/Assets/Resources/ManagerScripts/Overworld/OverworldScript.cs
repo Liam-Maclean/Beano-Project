@@ -112,11 +112,11 @@ public class OverworldScript : MonoBehaviour
                 {
                     Debug.Log("START GAME FOR NODE: " + m_currNode);
 
-                    
+                    minigameBiome = (Biome)node.GetComponent<NodeScript>().GetBiomeType();
 
                     if (m_clientID.Value == 1) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
                     {
-                        LoadMinigameHost((Biome)node.GetComponent<NodeScript>().GetBiomeType());
+                        LoadMinigameHost();
                     }
 
                     Stop();
@@ -131,9 +131,9 @@ public class OverworldScript : MonoBehaviour
         mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
     }
 
-    public void LoadMinigameHost(Biome currBiome)
+    public void LoadMinigameHost()
     {
-        minigameBiome = currBiome;
+        
         float chance = 100/Selector.activeMinigames.Count;
         int x = Random.Range(0, 100);
         indexInMinigameList = 0;
