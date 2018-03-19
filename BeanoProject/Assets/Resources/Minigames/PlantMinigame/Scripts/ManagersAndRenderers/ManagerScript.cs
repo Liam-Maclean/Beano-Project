@@ -261,7 +261,6 @@ public class ManagerScript : MonoBehaviour {
                         MolePlaneAnim = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane")) as GameObject;
                         MoleAnimation = MolePlaneAnim.GetComponent<StopAnimationScript>();
                         bMoleAnimationInstantiated = true;
-                        
                     }
 
 
