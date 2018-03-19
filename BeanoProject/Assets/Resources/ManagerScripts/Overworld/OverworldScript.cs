@@ -20,6 +20,8 @@ public class OverworldScript : MonoBehaviour
     public Biome minigameBiome;
     private string m_lastPlayed;
 
+    int indexInMinigameList;
+
     private GameObject m_playerIDObject;
 
     public SpriteRenderer background;
@@ -134,7 +136,7 @@ public class OverworldScript : MonoBehaviour
         minigameBiome = currBiome;
         float chance = 100/Selector.activeMinigames.Count;
         int x = Random.Range(0, 100);
-        int indexInMinigameList = 0;
+        indexInMinigameList = 0;
         for (float i=chance; i<=100; i+=chance)
         {
             if (x<i)
@@ -186,6 +188,7 @@ public class OverworldScript : MonoBehaviour
 
     public void Resume()
     {
+        SceneManager.UnloadSceneAsync(Selector.activeMinigames[indexInMinigameList]);
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
         foreach (PlayerScript player in players)
         {
