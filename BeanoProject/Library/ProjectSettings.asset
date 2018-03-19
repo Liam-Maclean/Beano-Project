@@ -18,9 +18,9 @@ PlayerSettings:
   m_ShowUnitySplashScreen: 1
   m_ShowUnitySplashLogo: 1
   m_SplashScreenOverlayOpacity: 1
-  m_SplashScreenAnimation: 0
+  m_SplashScreenAnimation: 1
   m_SplashScreenLogoStyle: 1
-  m_SplashScreenDrawMode: 0
+  m_SplashScreenDrawMode: 1
   m_SplashScreenBackgroundAnimationZoom: 0.556
   m_SplashScreenLogoAnimationZoom: 0.31
   m_SplashScreenBackgroundLandscapeAspect: 1
@@ -38,9 +38,9 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos:
-  - logo: {fileID: 21300000, guid: d5007d524c85a1f4eaf963b6e4534849, type: 3}
+  - logo: {fileID: 10404, guid: 0000000000000000e000000000000000, type: 0}
     duration: 2
-  - logo: {fileID: 21300000, guid: 1469c2588d4596149b97257fc17e913b, type: 3}
+  - logo: {fileID: 21300000, guid: cd240b9f491097c439a20d103acda57d, type: 3}
     duration: 2
   m_SplashScreenBackgroundLandscape: {fileID: 0}
   m_SplashScreenBackgroundPortrait: {fileID: 0}
@@ -241,7 +241,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: be674104ad1b991498e7016e747ac112, type: 3}
+      m_Icon: {fileID: 2800000, guid: 0a1d932ca5d558044812092271f3abe2, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching: []
