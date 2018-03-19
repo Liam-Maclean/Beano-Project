@@ -108,6 +108,8 @@ public class Navigator : MonoBehaviour {
 
     public void ReturnFromSelect()
     {
+        select.enabled = false;
         mainMenu.enabled = true;
     }
+
 }

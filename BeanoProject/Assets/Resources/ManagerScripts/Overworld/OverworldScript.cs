@@ -17,6 +17,7 @@ public class OverworldScript : MonoBehaviour
     private List<GameObject> m_players;
 
     public enum Biome { Residential, School, Park, Forest, Downtown, Beanoland };
+    public Biome minigameBiome;
     private string m_lastPlayed;
 
     private GameObject m_playerIDObject;
@@ -130,26 +131,40 @@ public class OverworldScript : MonoBehaviour
 
     public void LoadMinigameHost(Biome currBiome)
     {
-        switch (Random.Range(0, 2))
+        minigameBiome = currBiome;
+        float chance = 100/Selector.activeMinigames.Count;
+        int x = Random.Range(0, 100);
+        int indexInMinigameList = 0;
+        for (float i=chance; i<=100; i+=chance)
         {
-            case 0:
-                //SceneManager.LoadScene(4, LoadSceneMode.Additive); // Garden Destruction
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 4;
-                break;
-            case 1:
-                //SceneManager.LoadScene(5, LoadSceneMode.Additive); // Pie Throw
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 5;
-                break;
-            case 2:
-                //SceneManager.LoadScene(6, LoadSceneMode.Additive); // Mole Control
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 6;
-                break;
-            default:
-                //SceneManager.LoadScene(1); // Lobby Error
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 1; ;
-                Debug.Log("Error");
-                break;
+            if (x<i)
+            {
+                m_playerIDObject.GetComponent<CustomLobby>().Scene = Selector.activeMinigames[indexInMinigameList];
+                i = 100;
+            }
+            ++indexInMinigameList;
         }
+        
+        //switch (Random.Range(0, 2))
+        //{
+        //    case 0:
+        //        //SceneManager.LoadScene(4, LoadSceneMode.Additive); // Garden Destruction
+        //        m_playerIDObject.GetComponent<CustomLobby>().Scene = 4;
+        //        break;
+        //    case 1:
+        //        //SceneManager.LoadScene(5, LoadSceneMode.Additive); // Pie Throw
+        //        m_playerIDObject.GetComponent<CustomLobby>().Scene = 5;
+        //        break;
+        //    case 2:
+        //        //SceneManager.LoadScene(6, LoadSceneMode.Additive); // Mole Control
+        //        m_playerIDObject.GetComponent<CustomLobby>().Scene = 6;
+        //        break;
+        //    default:
+        //        //SceneManager.LoadScene(1); // Lobby Error
+        //        m_playerIDObject.GetComponent<CustomLobby>().Scene = 1; ;
+        //        Debug.Log("Error");
+        //        break;
+        //}
     }
 
     public void LoadMiniGameClient(int sceneID)

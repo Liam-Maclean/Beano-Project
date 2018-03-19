@@ -88,7 +88,7 @@ f61c0793411f10cf5fbfa1473fef5ef2 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 1b8c02d0aa82fbf036a2b9b2d713eec3 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 2b149cee6e020ab96f0daa21975e907f Assembly-CSharp.dll:.HandSpriteChange
 277eea69bd43eefac67ce3b1535fea5b Assembly-CSharp.dll:.CountDownScript
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Selector
+fcf2a120b4b92950932460e43acdb160 Assembly-CSharp.dll:.Selector
 10b09bcb5d372aadf4b42864395b6c8d Assembly-CSharp.dll:.ScoreScript
 918787196bc5c80fbbbf65faa3deb310 Assembly-CSharp.dll:.PieSpriteChanger
 02b2cb0d4e8f84d4227d1ad74653d70f Assembly-CSharp.dll:.TempBackgroundScript
@@ -140,14 +140,14 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 557e48babb4391e2b57ef847009aa3ad Assembly-CSharp.dll:.DespawnerScript
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.BaseMole
 f543ca38df71d69d641c2f01c76ec748 Assembly-CSharp.dll:.MoleSpawner
-2cdc473c76343ea7769fa606a2bc19e4 Assembly-CSharp.dll:.OverworldScript
-0b5455e18f1f31b2df9804830e8fa178 Assembly-CSharp.dll:.CharacterSelect
+99531318bcccae11d39c28ca72219214 Assembly-CSharp.dll:.OverworldScript
+390cfac7fbe7b01b5470d146e8f53637 Assembly-CSharp.dll:.CharacterSelect
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ScoreScriptAnimations
 7128eb14da39d88bafe2324133e74382 Assembly-CSharp.dll:.CanvasManagerScript
 7336316ddddb265dc77cb839175c4d37 Assembly-CSharp.dll:.WrenchScript
 e8ad9818540aab023db7f315902ffa01 Assembly-CSharp.dll:.SceneTransition
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Mole
-b684027795c03ea8253e603d8afe864a Assembly-CSharp.dll:.NLM
+69d921f42a96dcf8f34508449ec36e40 Assembly-CSharp.dll:.NLM
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery

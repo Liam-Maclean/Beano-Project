@@ -8,16 +8,28 @@ using System;
 
 public class Selector : MonoBehaviour
 {
-    // Use this for initialization
-    void Start()
-    {
 
+    public static List<int> activeMinigames = new List<int>();
+    public int sceneIndex;
+
+    public Image onButton;
+    public Image offButton;
+
+    public Image indicator;
+    public Sprite onSprite;
+    public Sprite offSprite;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-
+        activeMinigames.Add(sceneIndex);
+        onButton.enabled = false;
+        offButton.enabled = true;
+        indicator.sprite = onSprite;
     }
 
     //take text from input field, convert to int, load scene from build index
@@ -29,4 +41,27 @@ public class Selector : MonoBehaviour
         //load scene using build index
         SceneManager.LoadScene(indexInt, LoadSceneMode.Single);
     }
+
+    public void ToggleMinigameOff()
+    {
+        activeMinigames.RemoveAll(AlreadyThere);
+        indicator.sprite = offSprite;
+        onButton.enabled = true;
+        offButton.enabled = false;
+    }
+
+    public void ToggleMinigameOn()
+    {
+        activeMinigames.RemoveAll(AlreadyThere);
+        activeMinigames.Add(sceneIndex);
+        indicator.sprite = onSprite;
+        offButton.enabled = true;
+        onButton.enabled = false;
+    }
+
+    bool AlreadyThere(int x)
+    {
+        return x == sceneIndex;
+    }
+
 }
