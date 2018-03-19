@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: FadeIn
+  m_Name: FadeOut
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: FadeOut
@@ -13,7 +13,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -33,7 +33,7 @@ AnimatorState:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: FadeInAnimation
+  m_Name: FadeOutAnimation
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -45,7 +45,7 @@ AnimatorState:
   m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cace8a6d418c8054c89c0684f9213697, type: 2}
+  m_Motion: {fileID: 7400000, guid: 672dee63cff720f49b2ce451baab48de, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
