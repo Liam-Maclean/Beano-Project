@@ -14,7 +14,11 @@ public class PieThrowManagerScript : MonoBehaviour
     public Text timer;
     public float timeLeft;
 
-	public Text score;
+	//public Text score;
+	private GameObject[] portraits;
+	private List<PortaitScript> portraitScripts = new List<PortaitScript>();
+	private PortaitScript localPortrait;
+
 
     public float spawnRateMin;
     public float spawnRateMax;
@@ -72,6 +76,19 @@ public class PieThrowManagerScript : MonoBehaviour
 
         // Call start menu
         StartMenu();
+
+		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
+
+		for (int i = 0; i < portraits.Length; i++) 
+		{
+			portraitScripts.Add (portraits [i].GetComponent<PortaitScript> ());
+
+			if (portraitScripts [i].IsLocalPlayerPortrait ())
+			{
+				localPortrait = portraitScripts [i];
+			}
+
+		}
 
 
 		handSpawnScript = handSpawn.GetComponent<HandSpawn> ();
@@ -238,7 +255,7 @@ public class PieThrowManagerScript : MonoBehaviour
 		//convert to integer
 		int tempScore = (int)playerScore;
 
-		score.text = tempScore.ToString();
+		//score.text = tempScore.ToString();
 	}
 
 	//GETTERS
@@ -255,7 +272,14 @@ public class PieThrowManagerScript : MonoBehaviour
 
 	public void AddScore(float newScore)
 	{
-		playerScore += newScore;
+		if (localPortrait) {
+			localPortrait.IncrementScore ((int)newScore);
+			playerScore += newScore;
+		}
+		else
+		{
+			portraitScripts[0].IncrementScore((int)newScore);
+		}
 	}
 
 }
