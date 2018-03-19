@@ -140,11 +140,11 @@ public class OverworldScript : MonoBehaviour
             if (x<i)
             {
                 m_playerIDObject.GetComponent<CustomLobby>().Scene = Selector.activeMinigames[indexInMinigameList];
-                i = 100;
+                goto BreakOut;
             }
             ++indexInMinigameList;
         }
-        
+        BreakOut:;
         //switch (Random.Range(0, 2))
         //{
         //    case 0:
