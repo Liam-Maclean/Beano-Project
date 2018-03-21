@@ -138,6 +138,10 @@ public class CharacterSelect : MonoBehaviour {
                 Vector2 direction = touchNewPos - touchOldPos;
                 if (onPortrait)
                 {
+                    right.enabled = true;
+                    left.enabled = true;
+                    backRight.enabled = true;
+                    backLeft.enabled = true;
                     if (direction.x > 0)
                     {
                         ToggleRight();
@@ -155,6 +159,10 @@ public class CharacterSelect : MonoBehaviour {
         else
         {
             touchOldPos.x = 99999;
+            right.enabled = false;
+            left.enabled = false;
+            backRight.enabled = false;
+            backLeft.enabled = false;
         }
         Color setAlpha = Color.white;
         selected.color = setAlpha;
