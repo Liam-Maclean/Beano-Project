@@ -17,6 +17,7 @@ TagManager:
   - Hand
   - PedSpawner
   - Friendly
+  - EnemyAnim
   layers:
   - Default
   - TransparentFX

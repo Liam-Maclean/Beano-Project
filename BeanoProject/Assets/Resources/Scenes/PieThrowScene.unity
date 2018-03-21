@@ -1598,7 +1598,7 @@ MonoBehaviour:
   minZDist: 8
   maxZDist: 10
   timer: {fileID: 1225035494}
-  timeLeft: 11
+  timeLeft: 30
   spawnRateMin: 1
   spawnRateMax: 3
   aircraftOdds: 0.5
