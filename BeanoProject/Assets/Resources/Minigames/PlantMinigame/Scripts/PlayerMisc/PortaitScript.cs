@@ -26,13 +26,13 @@ public class PortaitScript : MonoBehaviour {
 	//get the score from the portrait script
 	public int GetScore()
 	{
-		if (networkPlayerInfo != null) {
-			return networkPlayerInfo.playerDetails.MiniScore;
-		} else {
+		//if (networkPlayerInfo != null) {
+		//	return networkPlayerInfo.playerDetails.MiniScore;
+		//} else {
 			return playerScore;
-		}
+		//}
 
-		return 0;
+		//return 0;
 	}
 
 	//check the portrait is the local player's portrait

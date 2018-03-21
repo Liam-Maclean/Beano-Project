@@ -93,7 +93,7 @@ public class CanvasPortraitSetup : MonoBehaviour
 
         //reposition potraits and clear scores for recalculation
         m_scores.Clear();
-        RepositionPotraits();
+        //RepositionPotraits();
     }
 
 
