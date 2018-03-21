@@ -191,9 +191,9 @@ public class ManagerScript : MonoBehaviour {
 		Screen.orientation = ScreenOrientation.Landscape;
 
 		//get the component stuff from the portait prefabs
-		Player1Stats = Player1.GetComponent<PortaitScript> ();
-		Player2Stats = Player2.GetComponent<PortaitScript> ();
-		Player3Stats = Player3.GetComponent<PortaitScript> ();
+		//Player1Stats = Player1.GetComponent<PortaitScript> ();
+		//Player2Stats = Player2.GetComponent<PortaitScript> ();
+		//Player3Stats = Player3.GetComponent<PortaitScript> ();
 		// Player4Stats = Player4.GetComponent<PortaitScript> ();
 	}
 
@@ -466,13 +466,13 @@ public class ManagerScript : MonoBehaviour {
 			//m_combinedScore *= m_plantScore.Count;
 
 			//Create float text feedback numbers
-			FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
+			//FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
 
 			//increment the local players score
 			if (LocalPlayerPortrait) {
 				LocalPlayerPortrait.IncrementScore (m_combinedScore);
 			} else {
-				Player1Stats.IncrementScore (m_combinedScore);
+				m_portraitScripts[0].IncrementScore (m_combinedScore);
 			}
 			m_combinedScore = 0;
 			m_plantScore.Clear();
@@ -559,7 +559,19 @@ public class ManagerScript : MonoBehaviour {
 						//add that to the game score (DO SOMETHING FUNKY WITH MULTIPLIERS HERE)
 						m_combinedScore += m_plantScore[i];
 					}
-					m_combinedScore *= m_plantScore.Count;
+					//m_combinedScore *= m_plantScore.Count;
+
+					//Create float text feedback numbers
+					FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
+
+					//increment the local players score
+					if (LocalPlayerPortrait) {
+						LocalPlayerPortrait.IncrementScore (m_combinedScore);
+					} else {
+						Player1Stats.IncrementScore (m_combinedScore);
+					}
+
+					//m_combinedScore *= m_plantScore.Count;
 					//manager.IncrementScore(m_combinedScore);
 					m_combinedScore = 0;
 					m_plantScore.Clear();
