@@ -52,10 +52,12 @@ public class CanvasPortraitSetup : MonoBehaviour
 		for (int i = 0; i < m_opponents.Length; i++) {
 			m_portraits.Add(Instantiate(Resources.Load("Minigames/UniversalMinigamePrefabs/PlayerPortait"), m_portraitPositions[i], Quaternion.identity)as GameObject);
 			m_portraits [i].transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
+			m_portraits [i].transform.localScale = new Vector3(1.2f, 1.4f, 1.0f);
 		}
 		if (m_opponents.Length == 0) {
 			LocalPortrait = Instantiate(Resources.Load("Minigames/UniversalMinigamePrefabs/PlayerPortait"), m_portraitPositions[0], Quaternion.identity)as GameObject;
 			LocalPortrait.transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
+			LocalPortrait.transform.localScale = new Vector3(1.2f, 1.4f, 1.0f);
 		}
 
         //itterate through portrait objects
