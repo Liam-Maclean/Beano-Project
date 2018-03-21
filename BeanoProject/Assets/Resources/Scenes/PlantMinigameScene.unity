@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fade: {fileID: 2085366579}
-  gameDuration: 10
+  gameDuration: 30
   height: 3
   width: 4
   timer: {fileID: 855452496}
