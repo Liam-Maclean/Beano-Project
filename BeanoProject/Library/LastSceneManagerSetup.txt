@@ -1,4 +1,7 @@
 sceneSetups:
-- path: Assets/Resources/Scenes/PieThrowScene.unity
+- path: Assets/Resources/Scenes/Menu.unity
   isLoaded: 1
   isActive: 1
+- path: Assets/Resources/Scenes/Overworld.unity
+  isLoaded: 0
+  isActive: 0
