@@ -289,7 +289,7 @@ public class CustomLobby : NetworkLobbyPlayer {
     {
         if (loaded)
         {
-            NLM.ResumeWalking(local.netId)
+			NLM.ResumeWalking(local.netId);
         }
         else
         {
