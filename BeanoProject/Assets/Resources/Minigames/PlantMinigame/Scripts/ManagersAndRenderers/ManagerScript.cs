@@ -50,6 +50,12 @@ public class ManagerScript : MonoBehaviour {
 	//stop animation script at end of the game
 	GameObject stopText;
 
+    //Tutorial stuff
+    public GameObject tutorialCanvas;
+    private GameObject newTutCanvas;
+    public float tutorialTime;
+
+
 
     //Mole animation
     bool bMoleAnimationInstantiated = false;
@@ -190,18 +196,22 @@ public class ManagerScript : MonoBehaviour {
 		//set up screen orientation and plant grid
 		Screen.orientation = ScreenOrientation.Landscape;
 
-		//get the component stuff from the portait prefabs
-		//Player1Stats = Player1.GetComponent<PortaitScript> ();
-		//Player2Stats = Player2.GetComponent<PortaitScript> ();
-		//Player3Stats = Player3.GetComponent<PortaitScript> ();
+
+
+        newTutCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+
+        //get the component stuff from the portait prefabs
+        Player1Stats = Player1.GetComponent<PortaitScript> ();
+		Player2Stats = Player2.GetComponent<PortaitScript> ();
+		Player3Stats = Player3.GetComponent<PortaitScript> ();
 		// Player4Stats = Player4.GetComponent<PortaitScript> ();
 	}
 
 	//instantiate canvas once
 	public void InstantiateTutorialCanvasOnce()
 	{
-		m_tutorialCanvas = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/TutorialCanvas")) as GameObject;
-		bTutorialCanvasInstantiated = true;
+        //m_tutorialCanvas = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/TutorialCanvas")) as GameObject;
+        bTutorialCanvasInstantiated = true;
 	}
 
 
@@ -243,6 +253,8 @@ public class ManagerScript : MonoBehaviour {
             //transition between overworld and minigame
             case GameState.transition:
 
+
+
                 //fade in animation
                 if (FadeInAnimation.AnimationEnded()) {
 
@@ -253,28 +265,33 @@ public class ManagerScript : MonoBehaviour {
                     }
 
 
-                
+                    tutorialTime -= Time.deltaTime;
 
-                    if (!bMoleAnimationInstantiated)
+                    if (tutorialTime <= 0.0f)
                     {
-                        //Instantiate mole plane animation
-                        MolePlaneAnim = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane")) as GameObject;
-                        MoleAnimation = MolePlaneAnim.GetComponent<StopAnimationScript>();
-                        bMoleAnimationInstantiated = true;
-                    }
+                        Destroy(newTutCanvas);
+
+                        if (!bMoleAnimationInstantiated)
+                        {
+                            //Instantiate mole plane animation
+                            MolePlaneAnim = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane")) as GameObject;
+                            MoleAnimation = MolePlaneAnim.GetComponent<StopAnimationScript>();
+                            bMoleAnimationInstantiated = true;
+                        }
 
 
-                    if (MoleAnimation.AnimationEnded())
-                    {
-                        //Instantiate countdown text for countdown phase
-                        GameObject countDownObject = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
-                        countDownObject.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
-                        countDownObject.transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
-                        countDownScript = GameObject.Find("CountDownText(Clone)").GetComponent<CountDownScript>();
-                        m_gameState = GameState.countdown;
+                        if (MoleAnimation.AnimationEnded())
+                        {
+                            //Instantiate countdown text for countdown phase
+                            GameObject countDownObject = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
+                            countDownObject.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
+                            countDownObject.transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
+                            countDownScript = GameObject.Find("CountDownText(Clone)").GetComponent<CountDownScript>();
+                            m_gameState = GameState.countdown;
+                        }
                     }
                 }
-
+               
 
 
                 //Transition period between overworld and minigame before game countdown
@@ -466,13 +483,13 @@ public class ManagerScript : MonoBehaviour {
 			//m_combinedScore *= m_plantScore.Count;
 
 			//Create float text feedback numbers
-			//FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
+			FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
 
 			//increment the local players score
 			if (LocalPlayerPortrait) {
 				LocalPlayerPortrait.IncrementScore (m_combinedScore);
 			} else {
-				m_portraitScripts[0].IncrementScore (m_combinedScore);
+				Player1Stats.IncrementScore (m_combinedScore);
 			}
 			m_combinedScore = 0;
 			m_plantScore.Clear();
@@ -559,19 +576,7 @@ public class ManagerScript : MonoBehaviour {
 						//add that to the game score (DO SOMETHING FUNKY WITH MULTIPLIERS HERE)
 						m_combinedScore += m_plantScore[i];
 					}
-					//m_combinedScore *= m_plantScore.Count;
-
-					//Create float text feedback numbers
-					FloatingTextManager.CreateFloatingText (m_combinedScore.ToString(), Player1.transform);
-
-					//increment the local players score
-					if (LocalPlayerPortrait) {
-						LocalPlayerPortrait.IncrementScore (m_combinedScore);
-					} else {
-						Player1Stats.IncrementScore (m_combinedScore);
-					}
-
-					//m_combinedScore *= m_plantScore.Count;
+					m_combinedScore *= m_plantScore.Count;
 					//manager.IncrementScore(m_combinedScore);
 					m_combinedScore = 0;
 					m_plantScore.Clear();
