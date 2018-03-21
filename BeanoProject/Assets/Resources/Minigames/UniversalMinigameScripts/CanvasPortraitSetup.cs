@@ -18,7 +18,7 @@ public class CanvasPortraitSetup : MonoBehaviour
     private List<int> m_scores = new List<int>();
 
     //gameobject portraits with tag "Portrait"
-    private GameObject[] m_portraits;
+	private List<GameObject> m_portraits = new List<GameObject>();
 
     //portrait script containing all details of the portrait from the gameobjects found
     private List<PortaitScript> m_potraitScripts = new List<PortaitScript>();
@@ -26,39 +26,50 @@ public class CanvasPortraitSetup : MonoBehaviour
     //positions on the screen for 1st, 2nd, 3rd and 4th
     public Vector3[] m_portraitPositions;
 
+	private GameObject LocalPortrait;
     private GameObject[] m_opponents;
     private List<GameObject> opponents = new List<GameObject>();
 
     // Use this for initialization
     void Awake()
-    {
-
+    {	
+		
         //get gameobjects with the tag portraits in the scene
-        m_portraits = GameObject.FindGameObjectsWithTag("Portrait");
+        //m_portraits = GameObject.FindGameObjectsWithTag("Portrait");
         m_opponents = GameObject.FindGameObjectsWithTag("Player");
 
 
-        foreach (GameObject player in m_opponents)
-        {
-            //if (player.GetComponent<CustomLobby>().playerDetails.Identifier != CustomLobby.local.playerDetails.Identifier)
-            //{
-            opponents.Add(player);
-            //}
-        }
-        //gets all the portrait scripts from the portrait objects
-        //if there are more than 0 opponents
-        if (m_opponents.Length > 0)
-        {
-            //itterate through portrait objects
-            for (int i = 0; i < m_portraits.Length; i++)
-            {
-                //add portrait script list to list of portraits
-                m_potraitScripts.Add(m_portraits[i].GetComponent<PortaitScript>());
+        //foreach (GameObject player in m_opponents)
+        //{
+        //    //if (player.GetComponent<CustomLobby>().playerDetails.Identifier != CustomLobby.local.playerDetails.Identifier)
+        //    //{
+        //    opponents.Add(player);
+        //    //}
+        //}
 
-                //hand a portrait a network lobby
-                m_potraitScripts[i].HandPlayerNetworkLobby(m_opponents[i].GetComponent<CustomLobby>());
-            }
+        ////gets all the portrait scripts from the portrait objects
+        ////if there are more than 0 opponents
+		for (int i = 0; i < m_opponents.Length; i++) {
+			m_portraits.Add(Instantiate(Resources.Load("Minigames/UniversalMinigamePrefabs/PlayerPortait"), m_portraitPositions[i], Quaternion.identity)as GameObject);
+			m_portraits [i].transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
+			m_portraits [i].transform.localScale = new Vector3(1.2f, 1.4f, 1.0f);
+		}
+		if (m_opponents.Length == 0) {
+			LocalPortrait = Instantiate(Resources.Load("Minigames/UniversalMinigamePrefabs/PlayerPortait"), m_portraitPositions[0], Quaternion.identity)as GameObject;
+			LocalPortrait.transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
+			LocalPortrait.transform.localScale = new Vector3(1.2f, 1.4f, 1.0f);
+		}
+
+        //itterate through portrait objects
+		for (int i = 0; i < m_portraits.Count; i++)
+        {
+            //add portrait script list to list of portraits
+            m_potraitScripts.Add(m_portraits[i].GetComponent<PortaitScript>());
+
+       		//hand a portrait a network lobby
+            m_potraitScripts[i].HandPlayerNetworkLobby(m_opponents[i].GetComponent<CustomLobby>());
         }
+		RepositionPotraits ();
     }
 
     //function to reposition portraits ascending order
@@ -101,30 +112,30 @@ public class CanvasPortraitSetup : MonoBehaviour
     void RepositionPotraits()
     {
         //for every potrait
-        for (int i = 0; i < m_potraitScripts.Count; i++)
-        {
-            //reposition the corresponding gameobject
-            m_potraitScripts[i].gameObject.transform.localPosition = m_portraitPositions[i];
-        }
+		if (m_opponents.Length > 0) {
+			for (int i = 0; i < m_potraitScripts.Count; i++) {
+				//reposition the corresponding gameobject
+				m_potraitScripts [i].gameObject.transform.localPosition = m_portraitPositions [i];
+			}
+		}
+		else
+		{
+			LocalPortrait.transform.localPosition = m_portraitPositions [0];
+		}
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //if opponents exist
-        if (m_opponents.Length > 0)
+		for (int i = 0; i < m_portraits.Count; i++)
         {
-            for (int i = 0; i < m_portraits.Length; i++)
-            {
-                //hand player the network lobby info
-                m_potraitScripts[i].HandPlayerNetworkLobby(m_opponents[i].GetComponent<CustomLobby>());
-            }
+            //hand player the network lobby info
+            m_potraitScripts[i].HandPlayerNetworkLobby(m_opponents[i].GetComponent<CustomLobby>());
         }
-
-        foreach (GameObject opponent in opponents)
+       
+		foreach (GameObject opponent in m_opponents)
         {
-            CustomLobby.local.SendDetailsRequestForNetId(opponent.GetComponent<CustomLobby>().playerDetails.Identifier);
+			CustomLobby.local.SendDetailsRequestForNetId(opponent.GetComponent<CustomLobby>().playerDetails.Identifier);
         }
 
         //order the portraits every frame (bit inefficient)

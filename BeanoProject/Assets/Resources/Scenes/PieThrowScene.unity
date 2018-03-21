@@ -303,10 +303,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_portraitPositions:
-  - {x: 350, y: -100, z: 0}
-  - {x: 777, y: -100, z: 0}
-  - {x: -777, y: -100, z: 0}
-  - {x: -350, y: -100, z: 0}
+  - {x: -950, y: 535, z: 0}
+  - {x: -500, y: 535, z: 0}
+  - {x: 500, y: 535, z: 0}
+  - {x: 950, y: 535, z: 0}
 --- !u!1 &969357731
 GameObject:
   m_ObjectHideFlags: 0
