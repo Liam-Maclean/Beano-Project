@@ -27,7 +27,7 @@ public class MolesScript : MonoBehaviour
     private void Awake()
     {
         m_currTime = Random.Range(minTime, maxTime);
-        m_moleManager = GameObject.FindGameObjectWithTag("GameManager");
+        m_moleManager = GameObject.FindGameObjectWithTag("MoleManager");
     }
 
     // Use this for initialization
@@ -138,28 +138,27 @@ public class MolesScript : MonoBehaviour
                 // REMOVE SCORE
                 m_currState = MoleState.Hit;
                 Debug.Log("Normal Mole Hit");
+                m_moleManager.GetComponent<MoleGameManagerScript>().IncrementScore(-10, this.transform.position.x, this.transform.position.y);
                 break;
             case MoleType.Frozen:
                 if (m_hitOnce == false)
                 {
-                    // Ice Break animation
-                    // ADD SCORE
                     Debug.Log("Ice Mole Hit");
                     m_hitOnce = true;
+                    m_moleManager.GetComponent<MoleGameManagerScript>().IncrementScore(5, this.transform.position.x, this.transform.position.y);
                 }
                 else
                 {
-                    // Ice Break animation
-                    // ADD Bonus SCORE
                     m_currMole = MoleType.Normal;
                     this.GetComponent<SpriteRenderer>().sprite = moleSprites[(int)m_currMole];
                     Debug.Log("Ice Mole Convert");
+                    m_moleManager.GetComponent<MoleGameManagerScript>().IncrementScore(15, this.transform.position.x, this.transform.position.y);
                 }
                 break;
             case MoleType.Evil:
-                // ADD SCORE
                 m_currState = MoleState.Hit;
                 Debug.Log("Bad Mole Hit");
+                m_moleManager.GetComponent<MoleGameManagerScript>().IncrementScore(20, this.transform.position.x, this.transform.position.y);
                 break;
             default:
                 break;

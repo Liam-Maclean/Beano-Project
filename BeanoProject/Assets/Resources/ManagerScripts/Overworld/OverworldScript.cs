@@ -132,29 +132,7 @@ public class OverworldScript : MonoBehaviour
     }
 
     public void LoadMinigameHost()
-    {
-<<<<<<< HEAD
-        switch (Random.Range(0, 3))
-        {
-            case 0:
-                SceneManager.LoadSceneAsync(4); // Garden Destruction
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 4;
-                break;
-            case 1:
-                SceneManager.LoadSceneAsync(5); // Pie Throw
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 5;
-                break;
-            case 2:
-                SceneManager.LoadSceneAsync(6); // Mole Control
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = 6;
-                break;
-            default:
-                //SceneManager.LoadSceneAsync(1); // Lobby Error
-                //m_playerIDObject.GetComponent<CustomLobby>().Scene = 1; ;
-                //Debug.Log("Error");
-                break;
-=======
-        
+    {   
         float chance = 100/Selector.activeMinigames.Count;
         int x = Random.Range(0, 100);
         indexInMinigameList = 0;
@@ -166,9 +144,9 @@ public class OverworldScript : MonoBehaviour
                 goto BreakOut;
             }
             ++indexInMinigameList;
->>>>>>> master
         }
         BreakOut:;
+
         //switch (Random.Range(0, 2))
         //{
         //    case 0:

@@ -17,7 +17,6 @@ public class MoleGameManagerScript : MonoBehaviour
     private List<GameObject> m_hammers;
 
     public GameObject molePrefab;
-    private List<GameObject> m_moles;
     private float[] m_spawner;
     const int SPAWNERS = 9;
     public float maxSpawnTime;
@@ -30,7 +29,14 @@ public class MoleGameManagerScript : MonoBehaviour
 
     private GameObject m_playerIDObject;
     private int m_playerCount;
-    //private NetworkInstanceId m_clientID;
+
+    private GameObject m_overworldGM;
+    private NetworkInstanceId m_clientID;
+
+    private List<PortaitScript> m_portraits = new List<PortaitScript>();
+    private GameObject[] m_playerIDS;
+
+    private PortaitScript m_localPortrait;
 
     // Called on launch
     void Awake()
@@ -50,8 +56,23 @@ public class MoleGameManagerScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        FloatingTextManager.Initialise();
+
+        m_playerIDS = GameObject.FindGameObjectsWithTag("Portrait");
         m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
+        m_overworldGM = GameObject.FindGameObjectWithTag("GameManager");
+
         //m_clientID = m_playerIDObject.GetComponent<CustomLobby>().playerDetails.Identifier; 
+
+        for (int i = 0; i < m_playerIDS.Length; i++)
+        {
+            m_portraits.Add(m_playerIDS[i].GetComponent<PortaitScript>());
+
+            if (m_portraits[i].IsLocalPlayerPortrait())
+            {
+                m_localPortrait = m_portraits[i];
+            }
+        }
 
         m_background = GameObject.FindGameObjectWithTag("Background");
 
@@ -66,7 +87,8 @@ public class MoleGameManagerScript : MonoBehaviour
         switch (m_currState)
         {
             case GameState.Setup:
-                InitGame(Biome.Residential, 1);
+                InitGame(0, 1);
+                //InitGame((int)m_overworldGM.GetComponent<OverworldScript>().minigameBiome, 1);
                 break;
             case GameState.Waiting:
                 // users ready up // Fed instructions
@@ -89,15 +111,12 @@ public class MoleGameManagerScript : MonoBehaviour
                             {
                                 GameObject newMole = (GameObject)Instantiate(molePrefab, new Vector3(0.0f, 0.0f, -1.0f), Quaternion.identity);
                                 newMole.GetComponent<MolesScript>().InitMole(i);
-                                m_moles.Add(newMole);
                             }
                         }
                     }
 
                     if ((Input.GetMouseButtonDown(0) || Input.touchCount > 0) && m_isOldTouch == false)
-                    {
-                        Debug.Log("Input detected");
-                        
+                    {   
                         Vector3 pointPos = new Vector3(0.0f,0.0f,0.0f);
 
                         if (Input.GetMouseButtonDown(0))
@@ -163,11 +182,11 @@ public class MoleGameManagerScript : MonoBehaviour
     }
 
     // Called by overworld to set params
-    public void InitGame(Biome currBiome, int playerCount)
+    public void InitGame(int currBiomeID, int playerCount)
     {
         m_playerCount = playerCount;
 
-        m_background.GetComponent<BackgroundScript>().SetSprite((int)currBiome);
+        m_background.GetComponent<BackgroundScript>().SetSprite(currBiomeID);
 
         for(int i = 0; i < playerCount; i++)
         {
@@ -187,6 +206,34 @@ public class MoleGameManagerScript : MonoBehaviour
         if (m_currState == GameState.Playing)
         {
             m_spawner[pos] = Random.Range(minSpawnTime, maxSpawnTime);
+        }
+    }
+
+    public void IncrementScore(int scoreChange, float xPos, float yPos)
+    {
+        Debug.Log("Score Changed");
+
+        if (m_localPortrait)
+        {
+            //m_localPortrait.IncrementScore(scoreChange);
+        }
+        else
+        {
+            //m_portraits[0].IncrementScore(scoreChange);
+        }
+
+        m_portraits[0].IncrementScore(scoreChange);
+
+        Transform tempPos = this.transform;
+        tempPos.position = new Vector3(xPos, yPos, -3.5f);
+
+        if (scoreChange > 0)
+        {
+            FloatingTextManager.CreateFloatingText("+" + scoreChange, tempPos, Color.green);
+        }
+        else
+        {
+            FloatingTextManager.CreateFloatingText("" + scoreChange, tempPos, Color.red);
         }
     }
 }
