@@ -26,6 +26,7 @@ public class CustomLobby : NetworkLobbyPlayer {
     [SyncVar(hook = "Effected")]
     public int effect = 0;
 
+
     public MinigamePlayerDetails playerDetails;
 
     /// <summary>
@@ -282,5 +283,17 @@ public class CustomLobby : NetworkLobbyPlayer {
     public void ChangeScene(int scene)
     {
         SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+    }
+
+    public void ReadyPlayerFUN(bool loaded)
+    {
+        if (loaded)
+        {
+            NLM.ResumeWalking(local.netId)
+        }
+        else
+        {
+            NLM.Unready();
+        }
     }
 }

@@ -9,6 +9,7 @@ public class NLM : NetworkLobbyManager {
     bool shouldReady = false;
     public Canvas hostJoin;
     public Canvas inGame;
+    protected static bool[] readyList = new bool[Selector.activeMinigames.Count];
 
     /// <summary>
     /// when server connects, start the host
@@ -132,5 +133,27 @@ public class NLM : NetworkLobbyManager {
     private void Start()
     {
         inGame.enabled = false;
+    }
+
+    public static void ResumeWalking(NetworkInstanceId id)
+    {
+        readyList[int.Parse(id.ToString())] = true;
+        for (int i = 0; i<Selector.activeMinigames.Count; i++)
+        {
+            if (readyList[i] == false)
+            {
+                goto NotReady;
+            }
+        }
+        FindObjectOfType<OverworldScript>().Go();
+        NotReady:;
+    }
+    
+    public static void Unready()
+    {
+        for (int i = 0; i < Selector.activeMinigames.Count; i++)
+        {
+            readyList[i] = false;
+        }
     }
 }
