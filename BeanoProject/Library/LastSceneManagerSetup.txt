@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Resources/Scenes/MoleControl.unity
+=======
+- path: Assets/Resources/Scenes/Menu.unity
+>>>>>>> master
   isLoaded: 1
   isActive: 1

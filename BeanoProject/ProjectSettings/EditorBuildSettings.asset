@@ -24,8 +24,13 @@ EditorBuildSettings:
     path: Assets/Resources/Scenes/PieThrowScene.unity
     guid: 778b40a7ac937874385f29d4ef2207f5
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Resources/Scenes/MoleControl.unity
     guid: 0db1d8bd0f2e96849aeb83e5eed378e6
+=======
+    path: Assets/Resources/Scenes/GnasherMole.unity
+    guid: 0a7b423be11340a4f9da33890e038afd
+>>>>>>> master
   - enabled: 0
     path: Assets/Resources/Scenes/NetworkPlayground.unity
     guid: e7d3534bdc1b4df4fac9c1a862d7f915
