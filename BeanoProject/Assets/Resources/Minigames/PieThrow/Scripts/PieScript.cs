@@ -202,7 +202,6 @@ public class PieScript : MonoBehaviour
 
 		if (respawnTime <= 0.0f)
 		{
-			
             isReloading = true;
 			Destroy (pie);
             //instansiate the new pie at the respawn position

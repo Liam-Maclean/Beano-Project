@@ -84,7 +84,11 @@ public class OverworldScript : MonoBehaviour
         {
             Debug.Log("EndGame Function Hit");
             m_currNode = 0;
-			SceneManager.LoadScene ("PlantMinigameScene");
+            for (int i = 0; i < currPlayersTESTING; i++)
+            {
+                m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(m_currNode));
+            }
+            SceneManager.LoadScene ("PlantMinigameScene");
             //SceneManager.LoadScene("Menu");
         }
     }
@@ -186,7 +190,7 @@ public class OverworldScript : MonoBehaviour
 
     protected void Stop()
     {
-        
+        CustomLobby.local.ReadyPlayerFUN(false);
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
         foreach (PlayerScript player in players)
         {
@@ -203,8 +207,18 @@ public class OverworldScript : MonoBehaviour
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
         foreach (PlayerScript player in players)
         {
-            player.gameState = PlayerScript.GameState.Playing;
+            CustomLobby.local.ReadyPlayerFUN(true);
+            player.gameState = PlayerScript.GameState.Waiting;
         }
         background.enabled = true; ;
+    }
+
+    public void Go()
+    {
+        PlayerScript[] players = FindObjectsOfType<PlayerScript>();
+        foreach (PlayerScript player in players)
+        {
+            player.gameState = PlayerScript.GameState.Playing;
+        }
     }
 }

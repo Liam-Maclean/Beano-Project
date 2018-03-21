@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 95533948251607192}
   m_Layer: 0
   m_Name: Male_Enemy-1-1
-  m_TagString: Enemy
+  m_TagString: EnemyAnim
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,7 @@ Animation:
   m_Animation: {fileID: 7400000, guid: f87e290879f40e74a8008deb847688ff, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: f87e290879f40e74a8008deb847688ff, type: 2}
+  - {fileID: 7400000, guid: f61ca44c928190249accd308afc07eed, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
