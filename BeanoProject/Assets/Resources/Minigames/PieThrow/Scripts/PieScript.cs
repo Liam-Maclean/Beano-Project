@@ -10,7 +10,8 @@ public class PieScript : MonoBehaviour
 	//float variables
 	public float maxStretch;
     private float maxStretchSqr;
-	private	float timer = 2.0f;
+	public float respawnTime;
+	private float tempTime;
 
 	//distance variables
 	private Vector3 pieStartPosition;
@@ -23,9 +24,6 @@ public class PieScript : MonoBehaviour
 	private static bool hasLaunched;
 	private bool oldMouseDown;
     private bool newMouseDown;
-
-
-
 	private SpriteRenderer sr;
 
     //Ray variables
@@ -43,18 +41,20 @@ public class PieScript : MonoBehaviour
     //Collider variables
     private CircleCollider2D circle;
 
+
+	public Vector3 pieSpawnPosition;
+
     void Awake()
     {
         //On launch find the slingshot gameObject
 		slingshot = GameObject.FindGameObjectWithTag ("slingshot");
-
-        Orientor.pieThrow = true;
-
     }
 		
 	void Start()
 	{
-        pie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.5f,0.0f), Quaternion.identity);
+		tempTime = respawnTime;
+
+		pie = (GameObject)Instantiate(piePrefab, pieSpawnPosition, Quaternion.identity);
         //initialise the rays
         rayToTouch = new Ray(pie.transform.position, Vector3.zero);
 
@@ -103,8 +103,10 @@ public class PieScript : MonoBehaviour
 			//only respawn if the pie has been launched 
 			if (hasLaunched || isDestroyed)
 			{
+
 				//translates the pies position
 				pie.transform.position += distance;
+
 
 				Respawn ();
 			}	
@@ -113,47 +115,50 @@ public class PieScript : MonoBehaviour
 
 	void Dragging()
 	{
-
         //get the world position of the touch
         Vector2 objPos = Camera.main.ScreenToWorldPoint (m_touch);
-		//get the distance from the slingshot to the touch
-		Vector2 slingToTouch = new Vector2((objPos.x - slingshot.transform.position.x), (objPos.y - slingshot.transform.position.y));
+		if (objPos.y <= -2.5f) 
+		{
+			//get the distance from the slingshot to the touch
+			Vector2 slingToTouch = new Vector2 ((objPos.x - slingshot.transform.position.x), (objPos.y - slingshot.transform.position.y));
 
-        //this basically ensures that if the player stretches further than max stretch then it will still be aligned
-        if (slingToTouch.sqrMagnitude > maxStretchSqr)
-        {
-            rayToTouch.direction = slingToTouch;
-            objPos = rayToTouch.GetPoint(maxStretch);
-        }
+			//this basically ensures that if the player stretches further than max stretch then it will still be aligned
+			if (slingToTouch.sqrMagnitude > maxStretchSqr) {
+				rayToTouch.direction = slingToTouch;
+				objPos = rayToTouch.GetPoint (maxStretch);
+			}
 
-        //set the pies position to the position of the touch
-        pie.transform.position = objPos;
-
+			//set the pies position to the position of the touch
+			pie.transform.position = objPos;
+		}
     }
 
 	void MouseDragging()
 	{
         //get the world position of the touch
         Vector2 objPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		//get the distance from the slingshot to the touch
-		Vector2 slingToTouch = new Vector2((objPos.x - slingshot.transform.position.x), (objPos.y - slingshot.transform.position.y));
+		//get the distance from the slingshot to the touch]
+		if (objPos.y <= -2f) {
+			Vector2 slingToTouch = new Vector3 ((objPos.x - slingshot.transform.position.x), (objPos.y - slingshot.transform.position.y), 0.0f);
 
-		//this basically ensures that if the player stretches further than max stretch then it will still be aligned
-		if (slingToTouch.sqrMagnitude > maxStretchSqr)
-		{
-			rayToTouch.direction = slingToTouch;
-            objPos = rayToTouch.GetPoint(maxStretch);   
+			//this ensures that if the player stretches further than max stretch then it will still be aligned
+			if (slingToTouch.sqrMagnitude > maxStretchSqr) {
+				rayToTouch.direction = slingToTouch;
+				objPos = rayToTouch.GetPoint (maxStretch);   
+			}
+
+			//set the pies position to the position of the touch
+			pie.transform.position = objPos;
 		}
-
-        //set the pies position to the position of the touch
-        pie.transform.position = objPos;
     }
 
     void Launch()
 	{
+
         //calculate the distance the pie has travelled
         distance = (pieStartPosition - pieEndPosition);
 
+		
 		//normalize the distance
 		distance.Normalize();
         hasLaunched = true;
@@ -164,7 +169,6 @@ public class PieScript : MonoBehaviour
 	{
         //get the current mouse click 
 		newMouseDown = Input.GetMouseButton (0);
-
 
         //if there has been a click
 		if (newMouseDown && !oldMouseDown)
@@ -193,17 +197,19 @@ public class PieScript : MonoBehaviour
 
 	public void Respawn()
     {
-        timer -= Time.deltaTime;
+		//standard timer
+		respawnTime -= Time.deltaTime;
 
-        if (timer <= 0.0f)
+		if (respawnTime <= 0.0f)
 		{
 			
             isReloading = true;
+			Destroy (pie);
             //instansiate the new pie at the respawn position
-            pie = (GameObject)Instantiate(piePrefab, new Vector3(0.0f, -2.5f, 0.0f), Quaternion.identity);
+			pie = (GameObject)Instantiate(piePrefab, pieSpawnPosition, Quaternion.identity);
 			sr = pie.GetComponent<SpriteRenderer>();
             //reset pie variables 
-            timer = 2.0f;
+			respawnTime = tempTime;
             isReloading = false;
             hasLaunched = false;
             isDestroyed = false;

@@ -44,23 +44,17 @@ public class PieSpriteChanger : MonoBehaviour {
     void PieRotate(float pos)
     {
         //swap the sprite depending on whether the x value is negative or positive
-        if (pos < 0)
+        if (pos < 0.0f)
         {
             sr.sprite = angledLeftPie;
         }
-        else if (pos >= 0 || pos < 1)
+        else if (pos >= 0.0f || pos < 1.0f)
         {
             sr.sprite = originPie;
         }
-        if (pos > 1)
+        if (pos > 1.0f)
         {
             sr.sprite = angledRightPie;
         }
-    }
-
-	public void PlaySplat()
-	{
-        pieSplat.SetBool("hasLaunched", true);
-     
     }
 }

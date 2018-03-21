@@ -14,7 +14,11 @@ public class PieThrowManagerScript : MonoBehaviour
     public Text timer;
     public float timeLeft;
 
-	public Text score;
+	//public Text score;
+	private GameObject[] portraits;
+	private List<PortaitScript> portraitScripts = new List<PortaitScript>();
+	private PortaitScript localPortrait;
+
 
     public float spawnRateMin;
     public float spawnRateMax;
@@ -35,9 +39,15 @@ public class PieThrowManagerScript : MonoBehaviour
     public Animator readyMenuAnim;
     public GameObject readyMenu;
 
+
+	public GameObject gameCanvas;
+
 	public GameObject endGameCanvas;
 	private GameObject newCanvas;
 	private bool isEnd;
+
+	public GameObject handSpawn;
+	private HandSpawn handSpawnScript;
 
 	private float playerScore;
 
@@ -66,6 +76,23 @@ public class PieThrowManagerScript : MonoBehaviour
 
         // Call start menu
         StartMenu();
+
+		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
+
+		for (int i = 0; i < portraits.Length; i++) 
+		{
+			portraitScripts.Add (portraits [i].GetComponent<PortaitScript> ());
+
+			if (portraitScripts [i].IsLocalPlayerPortrait ())
+			{
+				localPortrait = portraitScripts [i];
+			}
+
+		}
+
+
+		handSpawnScript = handSpawn.GetComponent<HandSpawn> ();
+
 	}
 	
 	// Update is called once per frame
@@ -145,11 +172,11 @@ public class PieThrowManagerScript : MonoBehaviour
 					//PLANE
 					if (isLeft)
 					{
-						CreatePed(false, false, i + minZDist);
+						CreatePed(false, true, i + minZDist);
 					}
 					else
 					{
-						CreatePed(false, true, i + minZDist);
+						CreatePed(false, false, i + minZDist);
 					}
 				}
 			}
@@ -171,30 +198,31 @@ public class PieThrowManagerScript : MonoBehaviour
         }
         else
         {
-            typeHelper = Random.Range(0, specialTypes);
-            typeHelper += basicPedTypes;
+			typeHelper = Random.Range(basicPedTypes, specialTypes);
+            //typeHelper += basicPedTypes;
         }
 
         if (isLeft)
         {
+
             newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x, targetPos.y, zPos), Quaternion.identity);
+           // if (isBasic)
+           // {
+                newPed.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            //}
         }
         else
         {
-           newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y, zPos), Quaternion.identity);
 
-            if (isBasic)
-            {
-                newPed.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-            }
+           newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y, zPos), Quaternion.identity);
         }
 
         m_pedObjects.Add(newPed);
 
-        if (isBasic)
-        {
+     //   if (isBasic)
+     //   {
             m_pedObjects[m_pedObjects.Count - 1].GetComponent<PedScript>().InitPed(isLeft, zPos);
-        }
+     //   }
     }
 
     void GameTimer()
@@ -213,6 +241,12 @@ public class PieThrowManagerScript : MonoBehaviour
 			
 			newCanvas = Instantiate (endGameCanvas, new Vector3(0.0f,0.0f, 0.0f), Quaternion.identity);
 			isEnd = false;
+
+			//destroy the hand object and for mouse controls set the cursor to visible
+			handSpawnScript.Destroy ();
+			Destroy (gameCanvas);
+			DisplayScore ();
+			Cursor.visible = true;
 		}
     }
 
@@ -221,7 +255,7 @@ public class PieThrowManagerScript : MonoBehaviour
 		//convert to integer
 		int tempScore = (int)playerScore;
 
-		score.text = tempScore.ToString();
+		//score.text = tempScore.ToString();
 	}
 
 	//GETTERS
@@ -238,7 +272,14 @@ public class PieThrowManagerScript : MonoBehaviour
 
 	public void AddScore(float newScore)
 	{
-		playerScore += newScore;
+		if (localPortrait) {
+			localPortrait.IncrementScore ((int)newScore);
+			playerScore += newScore;
+		}
+		else
+		{
+			portraitScripts[0].IncrementScore((int)newScore);
+		}
 	}
 
 }

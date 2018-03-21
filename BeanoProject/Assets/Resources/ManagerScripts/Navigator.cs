@@ -43,7 +43,7 @@ public class Navigator : MonoBehaviour {
 	//progress from title screen
 	public void TapToStart()
 	{
-		titleCard.enabled = false;
+		//titleCard.enabled = false;
 		mainMenu.enabled = true;
 	}
 
@@ -108,6 +108,8 @@ public class Navigator : MonoBehaviour {
 
     public void ReturnFromSelect()
     {
+        select.enabled = false;
         mainMenu.enabled = true;
     }
+
 }

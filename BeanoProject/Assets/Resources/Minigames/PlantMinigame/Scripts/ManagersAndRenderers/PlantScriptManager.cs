@@ -38,7 +38,6 @@ public class PlantScriptManager : MonoBehaviour
 	PlantComponentType plantComponentType;
 	SpriteRenderer sr;
 
-
     //Plant type component
 	BasePlant basePlant;
 
@@ -50,17 +49,25 @@ public class PlantScriptManager : MonoBehaviour
 
     //timer for respawning
 	float timer = 0.0f;
-
 	private bool endGame = false;
 
+    bool bStartSpawn = false;
+    public float lowestSpawnTime;
+    public float highestSpawnTime;
+    private float startSpawnTime;
 
     //start function (initialises plant type)
 	void Awake()
 	{
+        //initialise values from the gameobjects components
 		sr = this.GetComponent<SpriteRenderer> ();
 		m_animator = GetComponent<Animator> ();
 		AnimatorClipInfo[] clipInfo = m_animator.GetCurrentAnimatorClipInfo (0);
+
+        //Add a new plant component to initialise with
 		AddNewPlantComponent ();
+
+        //for every particle system added
 		for (int i = 0; i < particleGameobjects.Length; i++) {
 			emmiters.Add (particleGameobjects [i].GetComponent<ParticleSystem> ());
 		}
@@ -76,22 +83,29 @@ public class PlantScriptManager : MonoBehaviour
 	//add randomised plant component
 	public void AddNewPlantComponent()
 	{
-
+        //Set up a random percentage chance
 		int chance = Random.Range (0, 100);
 
-		if (chance >= 90) {
+        //if the chance is greater than 90 (10% chance)
+		if (chance >= 90)
+        {
+            //spawn debuff plant (lightning plant)
 			plantComponentType = PlantComponentType.DEBUFFPLANT;
-		} else if (chance > 70 && chance < 90) {
+		}
+        //if the chance is greater than 70 but less than 90 (20% chance)
+        else if (chance > 70 && chance < 90)
+        {
+            //Spawn double score plant
 			plantComponentType = PlantComponentType.DOUBLESCOREPLANT;
-		} else {
+		}
+        //otherwise just spawn a generic 1 point plant (70%)
+        else
+        {
+            //Spawn Normal Plant
 			plantComponentType = PlantComponentType.NORMALPLANT;
 		}
 
-
 		m_animator.SetTrigger ("Spawn");
-		//plantComponentType = (PlantComponentType) Random.Range (0, 3);
-
-		//plantComponentType = 0;
 
 		switch (plantComponentType) {
 		case PlantComponentType.NORMALPLANT:
@@ -125,9 +139,6 @@ public class PlantScriptManager : MonoBehaviour
 		
 			break;
 		}    
-
-
-
 		FirstTimeSpawn = false;
 	}
 
@@ -138,20 +149,35 @@ public class PlantScriptManager : MonoBehaviour
 		int tempScore = 0;
 		plant = basePlant;
 
+        //if the plant is already active
 		if (basePlant.GetActive ()) {
+
+            //get the score from the plant
 			tempScore = basePlant.GetScore ();
 			Debug.Log (basePlant.GetScore ());
 
-			//if the plant is type of double plant
-			if (basePlant is DoubleScorePlant) {
-				//white text
-				FloatingTextManager.CreateFloatingText ("+" + basePlant.GetScore ().ToString (), basePlant.transform, Color.white);
-			} else {
-				//yellow text
-				FloatingTextManager.CreateFloatingText ("+" + basePlant.GetScore ().ToString (), basePlant.transform);
-			}
-
+            //if the plant is type of double plant
+            if (basePlant is DoubleScorePlant)
+            {
+                //white text
+                FloatingTextManager.CreateFloatingText("+" + basePlant.GetScore().ToString(), basePlant.transform, Color.white);
+            }
+            else if (basePlant is NormalPlant)
+            {
+                //yellow text
+                FloatingTextManager.CreateFloatingText("+" + basePlant.GetScore().ToString(), basePlant.transform);
+            }
+            else if (basePlant is DebuffPlant)
+            {
+                FloatingTextManager.CreateFloatingText("+" + basePlant.GetScore().ToString(), basePlant.transform, Color.blue);
+                DebuffPlant debuff = basePlant as DebuffPlant;
+               
+            }
+  
+            //activate the dead plant animation
 			m_animator.SetTrigger ("DeadPlant");
+
+            //Set the plant state to be inactive
 			basePlant.SetActive (false);
 
 			for (int i = 0; i < emmiters.Count; i++) {
@@ -164,8 +190,10 @@ public class PlantScriptManager : MonoBehaviour
 	//kill the plant
 	public void KillPlant()
 	{
-		
+		//the game has ended
 		endGame = true;
+        
+        //Kill the plant and don't respawn
 		basePlant.SetActive (false);
 		m_animator.SetTrigger ("DeadPlant");
 		for (int i = 0; i < emmiters.Count; i++) {
@@ -190,14 +218,19 @@ public class PlantScriptManager : MonoBehaviour
     //update
 	void Update()
 	{
+        //keep refreshing the state information on the animator
 		m_stateInfo = m_animator.GetCurrentAnimatorStateInfo (0);
+
 		//if the base plant isn't active
 		if (!basePlant.GetActive ()) {  
+            //Start respawning a plant
 			basePlant.SetSprite(sprites[4]);
             StartTimer ();
 		}
 
+        //if the baseplant is a debuff plant
 		if (basePlant is DebuffPlant) {
+            //start swapping the lightning buff on the plant
 			SwapLightningDebuff ();
 		}
 
@@ -206,17 +239,27 @@ public class PlantScriptManager : MonoBehaviour
     //starts the timer to remove plant component
 	void StartTimer()
 	{
+        //if it's not the end of the game 
 		if (!endGame) {
-			//start timer 
+            //if we haven't started the spawn cycle yet
+			if (!bStartSpawn)
+            {
+                //set a random respawn time between the times specified in the editor
+                startSpawnTime = Random.Range(lowestSpawnTime, highestSpawnTime);
+                bStartSpawn = true;
+            }
+ 
+            //start timer 
 			timer += Time.deltaTime;
 
 			//if time has reached the limit 
-			if (timer > 2.0f) {
+			if (timer > startSpawnTime) {
 				//remove component, add a new one
 				basePlant.RemoveComponent ();
 				AddNewPlantComponent ();
 				timer = 0f;
-			}
+                bStartSpawn = false;
+            }
 		}
 	}
 

@@ -30,9 +30,17 @@ enum GameState
 //Manager script
 public class ManagerScript : MonoBehaviour {
 
+
+	//Direction vectors for mathematikz
+	private Vector2 m_touchBegin;
+	private Vector2 m_touchEnd;
+	private Vector2 m_swipeDirection;
+	private Vector2 m_distance;
 	private GameObject m_tutorialCanvas;
 	public GameObject fade;
 	GameObject GameOverCanvas;
+
+    GameObject MolePlaneAnim;
 	//swipe object
 	GameObject swipe;
 
@@ -42,7 +50,14 @@ public class ManagerScript : MonoBehaviour {
 	//stop animation script at end of the game
 	GameObject stopText;
 
-	//fade in transition
+
+    //Mole animation
+    bool bMoleAnimationInstantiated = false;
+    private StopAnimationScript MoleAnimation;
+
+    //fade in transition
+    private StopAnimationScript FadeOutAnimation;
+    bool bFadeOutAnimationInstantiated = false;
 	private StopAnimationScript FadeInAnimation;
 
 	//stop animation script (end of game)
@@ -148,7 +163,8 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
-		FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
+        //FadeOutAnimation = GameObject.Find("FadeOut").GetComponent<StopAnimationScript>();
+        FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
 		fade.SetActive (false);
 		//get all portrait script objects
 		m_portraits = GameObject.FindGameObjectsWithTag ("Portrait");
@@ -197,8 +213,6 @@ public class ManagerScript : MonoBehaviour {
 		stopText.transform.localPosition = new Vector3 (0, 0, 1.0f);
 		stopAnimationScript = stopText.GetComponent<StopAnimationScript> ();
 	}
-		
-
 
 	//set up local multiplayer info so score only goes up on the local player
 	void SetUpLocalPlayer()
@@ -223,102 +237,132 @@ public class ManagerScript : MonoBehaviour {
 	void Update()
 	{
 
-		//for every game state 
-		switch (m_gameState) {
+        //for every game state 
+        switch (m_gameState) {
 
-		//transition between overworld and minigame
-		case GameState.transition:
+            //transition between overworld and minigame
+            case GameState.transition:
 
-			//fade in animation
-			if (FadeInAnimation.AnimationEnded ()) {
+                //fade in animation
+                if (FadeInAnimation.AnimationEnded()) {
 
-				//Display tutorial
-				if (!bTutorialCanvasInstantiated) {
-					InstantiateTutorialCanvasOnce ();
-				}
-
-
-				////if player wants to continue
-				//if (Input.GetMouseButtonDown (0)) {
-
-					Destroy (m_tutorialCanvas);
-
-					//Instantiate mole plane animation
-					Instantiate (Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane"));
-
-					//Instantiate countdown text for countdown phase
-					GameObject countDownObject = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
-					countDownObject.transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
-					countDownObject.transform.localPosition = new Vector3 (0.0f, 0.0f, 1.0f);
-					countDownScript = GameObject.Find ("CountDownText(Clone)").GetComponent<CountDownScript> ();
-					m_gameState = GameState.countdown;
-				//}
-			}
+                    //Display tutorial
+                    if (!bTutorialCanvasInstantiated) {
+                        InstantiateTutorialCanvasOnce();
+                        Destroy(m_tutorialCanvas);
+                    }
 
 
+                
 
-			//Transition period between overworld and minigame before game countdown
-			//Possible tutorial page
-			//wait for everyone to be connected and synced
-			break;
+                    if (!bMoleAnimationInstantiated)
+                    {
+                        //Instantiate mole plane animation
+                        MolePlaneAnim = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane")) as GameObject;
+                        MoleAnimation = MolePlaneAnim.GetComponent<StopAnimationScript>();
+                        bMoleAnimationInstantiated = true;
+                    }
 
-		//countdown before game begins
-		case GameState.countdown:
-			//if the countdown animation ended
-			if (countDownScript.AnimationEnded()) {
-				//start game and switch gamestate 
-				m_gameState = GameState.playing;
-			}
-			break;
 
-		//playing the game
-		case GameState.playing:
+                    if (MoleAnimation.AnimationEnded())
+                    {
+                        //Instantiate countdown text for countdown phase
+                        GameObject countDownObject = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
+                        countDownObject.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
+                        countDownObject.transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
+                        countDownScript = GameObject.Find("CountDownText(Clone)").GetComponent<CountDownScript>();
+                        m_gameState = GameState.countdown;
+                    }
+                }
 
-			//if the garden hasn't been generated yet 
-			if (!m_gridGenerated) {
-				//generate it only once
-				pGrid.CreateGrid (width, height);
-				m_gridGenerated = true;
-			}
-			//if the game hasn't ended
-			if (!GameEnded ()) {
-				//update game logic
-				CountDown ();
-				if (bSwipeLockout == false) {
-					OnTileClick ();
-				} else {
-					LockOutTimer ();
-				}
-			
 
-			} 
-			//if the game HAS ended
-			else if (GameEnded()) {
-				// if stop animation hasn't been instantiated
-				if (!StopAnimInstantiated) {
-					//instantiate only once
-					SpawnStopAnimation ();
-					StopAnimInstantiated = true;
-					//if it has been instantiated
-				} else if (StopAnimInstantiated) {
-					//check if it has finished animating, if it has
-					if (stopAnimationScript.AnimationEnded ()) {
-						//Kill plants in the scene, end the minigame
-						if (pGrid.KillGame ()) {
-							m_gameState = GameState.counting;
-						}
-					}
-				}
-			}
+
+                //Transition period between overworld and minigame before game countdown
+                //Possible tutorial page
+                //wait for everyone to be connected and synced
+                break;
+
+            //countdown before game begins
+            case GameState.countdown:
+                //if the countdown animation ended
+                if (countDownScript.AnimationEnded()) {
+                    //start game and switch gamestate 
+                    Destroy(MolePlaneAnim);
+                    m_gameState = GameState.playing;
+                }
+                break;
+
+            //playing the game
+            case GameState.playing:
+
+                //if the garden hasn't been generated yet 
+                if (!m_gridGenerated) {
+                    //generate it only once
+                    pGrid.CreateGrid(width, height);
+                    m_gridGenerated = true;
+                }
+                //if the game hasn't ended
+                if (!GameEnded())
+                {
+                    //update game logic
+                    CountDown();
+                    if (bSwipeLockout == false)
+                    {
+                        SwipeLine();
+                        OnTileClick();
+                    }
+                    else
+                    {
+                        LockOutTimer();
+                    }
+                }
+                //if the game HAS ended
+                else if (GameEnded())
+                {
+                    // if stop animation hasn't been instantiated
+                    if (!StopAnimInstantiated)
+                    {
+                        //instantiate only once
+                        SpawnStopAnimation();
+                        StopAnimInstantiated = true;
+                        //if it has been instantiated
+                    }
+                    else if (StopAnimInstantiated)
+                    {
+                        //check if it has finished animating, if it has
+                        if (stopAnimationScript.AnimationEnded())
+                        {
+                            //Kill plants in the scene, end the minigame
+                            if (pGrid.KillGame())
+                            {
+                                //if the fade out animation hasn't been instantiated
+                                if (!bFadeOutAnimationInstantiated)
+                                {
+                                    //instantiate it 
+                                    GameObject FadeOutObj = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/FadeOut")) as GameObject;
+                                    FadeOutObj.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
+                                    FadeOutObj.transform.localScale = new Vector3(100, 100, 100);
+                                    FadeOutAnimation = FadeOutObj.GetComponent<StopAnimationScript>();
+                                    bFadeOutAnimationInstantiated = true;
+                                }
+                                //if the fade out animation hasn't finished yet 
+                                if (FadeOutAnimation.AnimationEnded())
+                                {
+                                    Debug.Log("Hello puny animals");
+                                    m_gameState = GameState.counting;
+                                }
+                            }
+                        }
+                    }
+                }
 			break;
 		//game is counting score and return to overworld
 		case GameState.counting:
 			//if the game over canvas has not been instantiated yet 
 			if (GameOverCanvas == null) {
 				//Instantiate the game over canvas
-				GameOverCanvas = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/GameOverCanvas")) as GameObject;
+				GameOverCanvas = Instantiate (Resources.Load ("Minigames/UniversalMinigamePrefabs/GameOverCanvas")) as GameObject;
 			}
-
 			break;
 		}
 	}
@@ -337,8 +381,6 @@ public class ManagerScript : MonoBehaviour {
 			swipeLockoutTimer = 0;
 		}
 	}
-
-
 
     //mouse input class
 	void OnTileClick()
@@ -371,7 +413,6 @@ public class ManagerScript : MonoBehaviour {
 			Vector2 directionPreNorm = direction;
 
 			direction = direction.normalized;
-
 
 			RaycastHit2D[] hits = Physics2D.RaycastAll (m_StartDrag, direction, directionPreNorm.magnitude);
 
@@ -408,8 +449,6 @@ public class ManagerScript : MonoBehaviour {
 				}
 			}
 
-
-
 			for (int i = 0; i < m_plantsHit.Count; i++) {
 				m_plantScore.Add (0);
 				int temp;
@@ -440,5 +479,93 @@ public class ManagerScript : MonoBehaviour {
 			m_plantsHit.Clear ();
 		}
 		m_oldMouseDown = m_newMouseDown;
+	}
+
+
+
+	//does Kevins work but appeals to touch controls for the specific minigame
+	void SwipeLine()
+	{
+		//if there is touch input
+		if (Input.touchCount == 1)
+		{
+			//get that touch input
+			Touch touch = Input.GetTouch(0);
+
+			switch (touch.phase)
+			{
+			//if the touch has began
+			case TouchPhase.Began:
+				{
+					//store that start position
+					m_touchBegin = touch.position;
+				}
+				break;
+
+				//if the touch has ended
+			case TouchPhase.Ended:
+				{
+					//store the end position
+					m_touchEnd = touch.position;
+
+					var ray2 = Camera.main.ScreenPointToRay(m_touchBegin);
+
+					Vector2 directionPreNorm = (m_touchEnd - m_touchBegin);
+					m_swipeDirection = (m_touchEnd - m_touchBegin);
+
+					m_swipeDirection = NegativePositiveFunction (m_swipeDirection);
+
+					//normalize
+					m_swipeDirection.Normalize();
+
+					//check for multiple hits from a raycast and store them
+					RaycastHit2D[] hit = Physics2D.RaycastAll(ray2.origin, m_swipeDirection, m_swipeDirection.magnitude);
+
+					//for everything hit by the raycast
+					for (int i = 0; i < hit.Length; i++)
+					{
+						//check if any of them are plants, if they are
+						if (hit[i].collider.tag == "Plant")
+						{
+							//Get that plants script and set it to swiped
+							PlantScriptManager tempPlantScript = hit[i].collider.gameObject.GetComponent<PlantScriptManager>();
+
+							//add the plants score to the list of scores
+							tempPlantScript.Swiped (out plantHit);
+							//add the plants score to the list of scores
+							//m_plantScore.Add(tempPlantScript.Swiped());
+
+							//if the plant hit is a debuff plant (lightning plant
+							if (plantHit is DebuffPlant) {
+								//Upcase the baseplant to debuff plant since we're sure it's a debuffplant
+								DebuffPlant tempPlant = plantHit as DebuffPlant;
+
+								//if the debuff plants lightning is active
+								if (tempPlant.GetLightning ()) {
+									//lock out swiping for 2 seconds
+									bSwipeLockout = true;
+								}
+								//else 
+								else {
+									//do nothing
+								}
+							}
+						}
+					}
+
+					//for each score swiped
+					for (int i = 0; i < m_plantScore.Count; i++)
+					{
+						//add that to the game score (DO SOMETHING FUNKY WITH MULTIPLIERS HERE)
+						m_combinedScore += m_plantScore[i];
+					}
+					m_combinedScore *= m_plantScore.Count;
+					//manager.IncrementScore(m_combinedScore);
+					m_combinedScore = 0;
+					m_plantScore.Clear();
+				}
+				break;
+			}
+		}
 	}
 }

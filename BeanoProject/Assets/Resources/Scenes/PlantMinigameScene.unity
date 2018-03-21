@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fade: {fileID: 2085366579}
-  gameDuration: 30
+  gameDuration: 10
   height: 3
   width: 4
   timer: {fileID: 855452496}
@@ -990,7 +990,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1055334930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c9604e37850cc3448c7d5796d928079, type: 3}
+  m_Script: {fileID: 11500000, guid: e051fbf4f4e763f479431a083a1e79d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_portraitPositions:
