@@ -280,6 +280,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114030884327833510, guid: 8bebb7eb7dbaf2449a8bc7be5dc651e1,
+        type: 2}
+      propertyPath: orthoCamera
+      value: 
+      objectReference: {fileID: 20628520746862996, guid: 8bebb7eb7dbaf2449a8bc7be5dc651e1,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8bebb7eb7dbaf2449a8bc7be5dc651e1, type: 2}
   m_IsPrefabParent: 0

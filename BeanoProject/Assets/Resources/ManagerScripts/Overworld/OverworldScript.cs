@@ -203,6 +203,8 @@ public class OverworldScript : MonoBehaviour
     public void Resume()
     {
         cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        cloneCamera.SetActive(true);
+        FindObjectOfType<PlayerScript>().GetComponent<SpriteRenderer>().enabled = true;
         SceneManager.UnloadSceneAsync(Selector.activeMinigames[indexInMinigameList]);
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
         foreach (PlayerScript player in players)
