@@ -22,17 +22,19 @@ public class PortaitScript : MonoBehaviour {
 	private int playerScore = 0;
 	public GameObject[] portaitSprites;
 	CustomLobby networkPlayerInfo;
+	public Sprite[] sprites;
+
 
 	//get the score from the portrait script
 	public int GetScore()
 	{
-		if (networkPlayerInfo != null) {
-			return networkPlayerInfo.playerDetails.MiniScore;
-		} else {
+		//if (networkPlayerInfo != null) {
+		//	return networkPlayerInfo.playerDetails.MiniScore;
+		//} else {
 			return playerScore;
-		}
+		//}
 
-		return 0;
+		//return 0;
 	}
 
 	//check the portrait is the local player's portrait
@@ -61,6 +63,18 @@ public class PortaitScript : MonoBehaviour {
 	public void HandPlayerNetworkLobby(CustomLobby player)
 	{
 		networkPlayerInfo = player;
+		SetSpriteWithCustomLobby (true);
+	}
+
+	//sets the sprite with the network player info avatar int
+	public void SetSpriteWithCustomLobby(bool usingCustomLobby)
+	{
+		if (usingCustomLobby) {
+			Image sr = GetComponent<Image> ();
+			sr.sprite = sprites [(int)networkPlayerInfo.playerDetails.Identifier.Value];
+		} else {
+			
+		}
 	}
 
 
