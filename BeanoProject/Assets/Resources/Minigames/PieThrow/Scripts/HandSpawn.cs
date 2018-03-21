@@ -83,4 +83,9 @@ public class HandSpawn : MonoBehaviour
 			}
 		}
 	}
+
+	public void Destroy()
+	{
+		Destroy (clone);
+	}
 }

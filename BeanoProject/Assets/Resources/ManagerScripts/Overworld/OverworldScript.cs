@@ -20,6 +20,8 @@ public class OverworldScript : MonoBehaviour
     public Biome minigameBiome;
     private string m_lastPlayed;
 
+    int indexInMinigameList;
+
     private GameObject m_playerIDObject;
 
     public SpriteRenderer background;
@@ -110,11 +112,11 @@ public class OverworldScript : MonoBehaviour
                 {
                     Debug.Log("START GAME FOR NODE: " + m_currNode);
 
-                    
+                    minigameBiome = (Biome)node.GetComponent<NodeScript>().GetBiomeType();
 
                     if (m_clientID.Value == 1) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
                     {
-                        LoadMinigameHost((Biome)node.GetComponent<NodeScript>().GetBiomeType());
+                        LoadMinigameHost();
                     }
 
                     Stop();
@@ -129,12 +131,12 @@ public class OverworldScript : MonoBehaviour
         mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
     }
 
-    public void LoadMinigameHost(Biome currBiome)
+    public void LoadMinigameHost()
     {
-        minigameBiome = currBiome;
+        
         float chance = 100/Selector.activeMinigames.Count;
         int x = Random.Range(0, 100);
-        int indexInMinigameList = 0;
+        indexInMinigameList = 0;
         for (float i=chance; i<=100; i+=chance)
         {
             if (x<i)
@@ -186,6 +188,7 @@ public class OverworldScript : MonoBehaviour
 
     public void Resume()
     {
+        SceneManager.UnloadSceneAsync(Selector.activeMinigames[indexInMinigameList]);
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
         foreach (PlayerScript player in players)
         {
