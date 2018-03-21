@@ -87,8 +87,8 @@ public class MoleGameManagerScript : MonoBehaviour
         switch (m_currState)
         {
             case GameState.Setup:
-                InitGame(0, 1);
-                //InitGame((int)m_overworldGM.GetComponent<OverworldScript>().minigameBiome, 1);
+                //InitGame(0, 1);
+                InitGame((int)m_overworldGM.GetComponent<OverworldScript>().minigameBiome, int.Parse(CustomLobby.local.playerDetails.Identifier.ToString()));
                 break;
             case GameState.Waiting:
                 // users ready up // Fed instructions
@@ -173,6 +173,7 @@ public class MoleGameManagerScript : MonoBehaviour
             case GameState.Endscreen:
                 // Show scores
                 // Return to overworld button
+                CustomLobby.local.EndMiniGame();
                 break;
             default:
                 m_currState = GameState.Endscreen;
