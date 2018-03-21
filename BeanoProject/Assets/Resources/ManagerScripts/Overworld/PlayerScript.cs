@@ -31,7 +31,8 @@ public class PlayerScript : MonoBehaviour
     {
         Playing,
         InGame,
-        EndGame
+        EndGame,
+        Waiting
     };
     public GameState gameState;
 
@@ -162,6 +163,10 @@ public class PlayerScript : MonoBehaviour
         else if (gameState == GameState.InGame)
         {
             this.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        else if (gameState == GameState.Waiting)
+        {
+
         }
     }
 
