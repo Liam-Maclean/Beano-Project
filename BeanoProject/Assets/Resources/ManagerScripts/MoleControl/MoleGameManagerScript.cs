@@ -121,11 +121,11 @@ public class MoleGameManagerScript : MonoBehaviour
 
                         if (Input.GetMouseButtonDown(0))
                         {
-                            pointPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                            pointPos = Camera.current.ScreenToWorldPoint(Input.mousePosition);
                         }
                         else
                         {
-                            pointPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+                            pointPos = Camera.current.ScreenToWorldPoint(Input.GetTouch(0).position);
                         }
 
                         // Set to 0 for current player CHANGE TO HAMMER ID/CUSTOMLOBBY ID

@@ -183,8 +183,8 @@ public class OverworldScript : MonoBehaviour
 
     public void LoadMiniGameClient(int sceneID)
     {
-        Stop();
-        SceneManager.LoadSceneAsync(sceneID);
+        //Stop();
+        //SceneManager.LoadSceneAsync(sceneID);
         
     }
 
