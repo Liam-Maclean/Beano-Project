@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 95255788790081680}
   m_Layer: 0
   m_Name: Male_Enemy-1-2
-  m_TagString: EnemyAnim
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

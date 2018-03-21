@@ -44,12 +44,6 @@ public class PieThrowManagerScript : MonoBehaviour
 
 	public GameObject endGameCanvas;
 	private GameObject newCanvas;
-
-    public GameObject tutorialCanvas;
-    private GameObject newTutCanvas;
-
-    public float startDelayTimer;
-
 	private bool isEnd;
 
 	public GameObject handSpawn;
@@ -71,7 +65,6 @@ public class PieThrowManagerScript : MonoBehaviour
         {
             m_spawnRateRand[i] = Random.Range(spawnRateMin, spawnRateMax);
         }
-        newTutCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
     }
 
 	// Use this for initialization
@@ -99,27 +92,23 @@ public class PieThrowManagerScript : MonoBehaviour
 			}
 
 		}
+
+
 		handSpawnScript = handSpawn.GetComponent<HandSpawn> ();
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
 
+
+
 		switch (m_currState)
         {
             case GAMESTATE.Start:
                 //start FUNC only;
-
-
-                startDelayTimer -= Time.deltaTime;
-
-                if (startDelayTimer <= 0.0f)
-                {
-                    Destroy(newTutCanvas);
-                    m_currState = GAMESTATE.Playing;
-                }
-
+				m_currState = GAMESTATE.Playing;
                 break;
 		case GAMESTATE.Playing:
                 // Normal Gameplay
@@ -205,15 +194,17 @@ public class PieThrowManagerScript : MonoBehaviour
         else
         {
 			typeHelper = Random.Range(basicPedTypes, specialTypes);
+            //typeHelper += basicPedTypes;
         }
 
         if (isLeft)
         {
 
             newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x, targetPos.y, zPos), Quaternion.identity);
-
+           // if (isBasic)
+           // {
                 newPed.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-
+            //}
         }
         else
         {
@@ -223,9 +214,10 @@ public class PieThrowManagerScript : MonoBehaviour
 
         m_pedObjects.Add(newPed);
 
-
+     //   if (isBasic)
+     //   {
             m_pedObjects[m_pedObjects.Count - 1].GetComponent<PedScript>().InitPed(isLeft, zPos);
-
+     //   }
     }
 
     void GameTimer()
