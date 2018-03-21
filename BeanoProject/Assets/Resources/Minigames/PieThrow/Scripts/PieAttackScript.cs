@@ -12,12 +12,18 @@ public class PieAttackScript : MonoBehaviour {
 	private PieThrowManagerScript gameManagerScript;
 
 	private SpriteRenderer sr;
+	private PieSpriteChanger pieSpriteManager;
+
+	public Sprite pieSplat;
+
+
 	private bool isHit;
 	private float hitScore;
 
     // Use this for initialization
     void Start ()
     {
+		FloatingTextManager.Initialise ();
 		//find the two spawners to acces scripts
         pieSpawner = GameObject.FindGameObjectWithTag("PieSpawner");
 		pedSpawner = GameObject.FindGameObjectWithTag ("PedSpawner");
@@ -26,6 +32,7 @@ public class PieAttackScript : MonoBehaviour {
         pieScript = pieSpawner.GetComponent<PieScript>();
 		gameManagerScript = pedSpawner.GetComponent<PieThrowManagerScript>();
 		sr = gameObject.GetComponent<SpriteRenderer>();
+		pieSpriteManager = gameObject.GetComponent<PieSpriteChanger> ();
 	
 		isHit = false;
    }
@@ -54,14 +61,17 @@ public class PieAttackScript : MonoBehaviour {
                     hitScore = pedScript.GetScore();
 					//add the score to the player's score
 					gameManagerScript.AddScore (hitScore);
+					FloatingTextManager.CreateFloatingText (hitScore.ToString(), hit [i].collider.transform, Color.red);
+
+
+					pieSpriteManager.SetPieSprite (pieSplat);
 					//destroy the object the pie has collided with
 					Destroy (hit [i].collider.gameObject);
 					//respawn the pie
 					pieScript.Respawn ();
+
 					//stop the velocity of the pie for animation purposes
 					pieScript.SetDistance (new Vector3 (0.0f, 0.0f, 0.0f));
-					//destroy the pie
-					pieScript.Destroy ();
 					break;
 				}      
 			}

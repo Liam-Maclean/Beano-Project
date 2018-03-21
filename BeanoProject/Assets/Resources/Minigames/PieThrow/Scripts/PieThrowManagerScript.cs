@@ -75,14 +75,17 @@ public class PieThrowManagerScript : MonoBehaviour
         // Set Powerup state
 
         // Call start menu
-        StartMenu();
+//        StartMenu();
 
 		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
 
+		//Iterate through the length of the portrait scripts
 		for (int i = 0; i < portraits.Length; i++) 
 		{
+			//add the portraits locally
 			portraitScripts.Add (portraits [i].GetComponent<PortaitScript> ());
 
+			//find the local player ad set it to the relative portrait
 			if (portraitScripts [i].IsLocalPlayerPortrait ())
 			{
 				localPortrait = portraitScripts [i];
@@ -111,15 +114,12 @@ public class PieThrowManagerScript : MonoBehaviour
                 // Normal Gameplay
 				//Overall game timer
 			GameTimer ();
-			DisplayScore ();
+			//DisplayScore ();
 			SpawnPed ();
-			if (timeLeft <= 0.0f) 
-			{
+			if (timeLeft <= 0.0f) {
 				m_currState = GAMESTATE.Finished;
 				isEnd = true;
 			}
-
-
                 break;
             case GAMESTATE.Finished:
                 // Outro Plz
@@ -133,16 +133,11 @@ public class PieThrowManagerScript : MonoBehaviour
 	}
 
     // Called at the begining of the game to make sure all users are loaded into the game correctly
-    void StartMenu()
-    {
-        readyMenuAnim.SetBool("Active", true);
-    }
-
-    // Called to start the active game & timers
-    void StartGame()
-    {
-     	   
-    }
+ //   void StartMenu()
+ //   {
+  //      readyMenuAnim.SetBool("Active", true);
+  //  }
+		
 	void SpawnPed()
 	{
 		for (int i = 0; i < maxZDist - minZDist; i++)
@@ -232,31 +227,43 @@ public class PieThrowManagerScript : MonoBehaviour
         //convert to integer
         int tempTime = (int)timeLeft;
 
+		//set & display the current time in the scene
         timer.text = tempTime.ToString();
+
+		if (timeLeft < 11.0f) 
+		{
+			timer.color = Color.red;
+			Animator textAnimator = timer.GetComponent<Animator> ();
+
+			textAnimator.SetTrigger(0);
+			textAnimator.Play("TimeLeft");	
+		}
     }
 
     void GameOver()
     {
 		if (isEnd) {
-			
+
+			//create the endgame canvas and spawn it in the scene
 			newCanvas = Instantiate (endGameCanvas, new Vector3(0.0f,0.0f, 0.0f), Quaternion.identity);
 			isEnd = false;
 
 			//destroy the hand object and for mouse controls set the cursor to visible
 			handSpawnScript.Destroy ();
+			//delete the current game canva
 			Destroy (gameCanvas);
-			DisplayScore ();
+			//DisplayScore ();
 			Cursor.visible = true;
 		}
     }
 
-	void DisplayScore()
-	{
-		//convert to integer
-		int tempScore = (int)playerScore;
-
-		//score.text = tempScore.ToString();
-	}
+//void DisplayScore()
+//{
+//	//convert to integer
+//	int tempScore = (int)playerScore;
+//
+//	//score.text = tempScore.ToString();
+//}
 
 	//GETTERS
 	public float GetScore()
@@ -272,12 +279,16 @@ public class PieThrowManagerScript : MonoBehaviour
 
 	public void AddScore(float newScore)
 	{
-		if (localPortrait) {
-			localPortrait.IncrementScore ((int)newScore);
+
+		if (localPortrait)
+		{
+			//increment the score of the portraits
 			playerScore += newScore;
+			localPortrait.IncrementScore ((int)newScore);
 		}
 		else
 		{
+			//increment the score offline (for debugging purposes)
 			portraitScripts[0].IncrementScore((int)newScore);
 		}
 	}
