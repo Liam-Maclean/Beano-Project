@@ -133,13 +133,14 @@ public class CanvasPortraitSetup : MonoBehaviour
             m_potraitScripts[i].HandPlayerNetworkLobby(m_opponents[i].GetComponent<CustomLobby>());
         }
        
-		foreach (GameObject opponent in m_opponents)
-        {
-			CustomLobby.local.SendDetailsRequestForNetId(opponent.GetComponent<CustomLobby>().playerDetails.Identifier);
+		for (int i = 0; i < m_opponents.Length; i++) {
+			//if (m_opponents [i].GetComponent<CustomLobby> ().isLocalPlayer == false) {
+				CustomLobby.local.SendDetailsRequestForNetId (m_opponents [i].GetComponent<CustomLobby> ().playerDetails.Identifier);
+			//}
         }
 
         //order the portraits every frame (bit inefficient)
-        OrderPortraits();
+        //OrderPortraits();
     }
 }
 

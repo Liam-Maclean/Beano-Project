@@ -51,14 +51,14 @@ public class GameOverCanvasScript : MonoBehaviour {
 		case 3:
 			//three players
 			positions [0] = new Vector3 (-600, 0, 0);
-			positions [1] = new Vector3 (0, 400, 0);
+			positions [1] = new Vector3 (0, 0, 0);
 			positions [2] = new Vector3 (600, 0, 0);
 			break;
 		case 4:
 			//four players
 			positions [0] = new Vector3 (-600, 0, 0);
-			positions [1] = new Vector3 (0, -200, 0);
-			positions [2] = new Vector3 (0, 200, 0);
+			positions [1] = new Vector3 (-300, 0, 0);
+			positions [2] = new Vector3 (300, 0, 0);
 			positions [3] = new Vector3 (600, 0, 0);
 			break;
 		default:
