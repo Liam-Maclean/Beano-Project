@@ -42,8 +42,17 @@ public class PedScript : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+
+	//GETTERS
 	public float GetScore()
 	{
 		return m_score;
+	}
+
+	//SETTERS
+	public void SetMoveSpeed(float speed)
+	{
+		moveSpeed = speed;
+
 	}
 }

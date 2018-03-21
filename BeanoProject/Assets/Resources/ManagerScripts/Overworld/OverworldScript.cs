@@ -20,6 +20,10 @@ public class OverworldScript : MonoBehaviour
     public Biome minigameBiome;
     private string m_lastPlayed;
 
+    private GameObject mainCamera;
+    private GameObject cloneCamera;
+
+
     int indexInMinigameList;
 
     private GameObject m_playerIDObject;
@@ -37,6 +41,10 @@ public class OverworldScript : MonoBehaviour
         m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
         m_clientID = m_playerIDObject.GetComponent<CustomLobby>().playerDetails.Identifier;
         currPlayersTESTING = FindObjectsOfType<CustomLobby>().Length;
+
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        Destroy(mainCamera);
 
         Debug.Log("Network ID: " + m_clientID);
 
@@ -76,7 +84,11 @@ public class OverworldScript : MonoBehaviour
         {
             Debug.Log("EndGame Function Hit");
             m_currNode = 0;
-			SceneManager.LoadScene ("PlantMinigameScene");
+            for (int i = 0; i < currPlayersTESTING; i++)
+            {
+                m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(m_currNode));
+            }
+            SceneManager.LoadScene ("PlantMinigameScene");
             //SceneManager.LoadScene("Menu");
         }
     }
@@ -127,8 +139,8 @@ public class OverworldScript : MonoBehaviour
 
         PushNode();
 
-        GameObject mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
+       
+        cloneCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
     }
 
     public void LoadMinigameHost()
@@ -178,22 +190,35 @@ public class OverworldScript : MonoBehaviour
 
     protected void Stop()
     {
+        CustomLobby.local.ReadyPlayerFUN(false);
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
         foreach (PlayerScript player in players)
         {
             player.gameState = PlayerScript.GameState.InGame;
         }
+        Destroy(cloneCamera);
         background.enabled = false;
     }
 
     public void Resume()
     {
+        cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         SceneManager.UnloadSceneAsync(Selector.activeMinigames[indexInMinigameList]);
+        PlayerScript[] players = FindObjectsOfType<PlayerScript>();
+        foreach (PlayerScript player in players)
+        {
+            CustomLobby.local.ReadyPlayerFUN(true);
+            player.gameState = PlayerScript.GameState.Waiting;
+        }
+        background.enabled = true; ;
+    }
+
+    public void Go()
+    {
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
         foreach (PlayerScript player in players)
         {
             player.gameState = PlayerScript.GameState.Playing;
         }
-        background.enabled = true; ;
     }
 }

@@ -57,4 +57,11 @@ public class PieSpriteChanger : MonoBehaviour {
             sr.sprite = angledRightPie;
         }
     }
+
+
+	public void SetPieSprite(Sprite sprite)
+	{
+		sr.sprite = sprite;
+	}
+
 }
