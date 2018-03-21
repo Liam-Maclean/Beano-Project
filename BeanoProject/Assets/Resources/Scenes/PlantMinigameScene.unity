@@ -804,10 +804,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_portraitPositions:
-  - {x: -1068, y: 311, z: 0}
-  - {x: -1068, y: 0, z: 0}
-  - {x: -1068, y: -311, z: 0}
-  - {x: -1068, y: 0, z: 0}
+  - {x: -1068, y: 550, z: 0}
+  - {x: -1068, y: 200, z: 0}
+  - {x: -1068, y: -150, z: 0}
+  - {x: -1068, y: -500, z: 0}
 --- !u!1001 &1370751316
 Prefab:
   m_ObjectHideFlags: 0
