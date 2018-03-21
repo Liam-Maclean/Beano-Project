@@ -203,7 +203,7 @@ public class PieScript : MonoBehaviour
 		if (respawnTime <= 0.0f)
 		{
             isReloading = true;
-			Destroy (pie);
+		    Destroy (pie);
             //instansiate the new pie at the respawn position
 			pie = (GameObject)Instantiate(piePrefab, pieSpawnPosition, Quaternion.identity);
 			sr = pie.GetComponent<SpriteRenderer>();
@@ -218,8 +218,8 @@ public class PieScript : MonoBehaviour
 	public void Destroy()
 	{
 		isDestroyed = true;
-		Destroy (sr);
-		Destroy (pie.gameObject,2.0f);
+		Destroy (sr,0.5f);
+	//	Destroy (pie , 0.5f);
 	}
 
 

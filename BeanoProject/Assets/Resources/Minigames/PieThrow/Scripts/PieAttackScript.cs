@@ -80,6 +80,7 @@ public class PieAttackScript : MonoBehaviour {
 					
 					//set the pie sprite to a splat 
 					pieSpriteManager.SetPieSprite (pieSplat);
+                    pieScript.Destroy();
 						//respawn the pie
 						pieScript.Respawn ();
 

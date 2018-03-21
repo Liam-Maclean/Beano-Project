@@ -160,6 +160,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fade: {fileID: 2085366579}
+  tutorialCanvas: {fileID: 1685409219040130, guid: 1b63982628d6fbd42af70c33aec9d678,
+    type: 2}
+  tutorialTime: 5
   gameDuration: 10
   height: 3
   width: 4
