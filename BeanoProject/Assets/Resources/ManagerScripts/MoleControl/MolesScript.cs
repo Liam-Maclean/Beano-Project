@@ -7,6 +7,9 @@ public class MolesScript : MonoBehaviour
     public enum MoleType { Normal, Evil, Frozen };
     private MoleType m_currMole;
 
+    public enum MoleState { Enter, Idle, Hit, Exit };
+    private MoleState m_currState;
+
     public Sprite[] moleSprites;
 
     private int m_posID;
@@ -18,6 +21,8 @@ public class MolesScript : MonoBehaviour
     private float m_currTime;
 
     private GameObject m_moleManager;
+
+    private bool m_hitOnce;
 
     private void Awake()
     {
@@ -41,21 +46,45 @@ public class MolesScript : MonoBehaviour
             m_currMole = MoleType.Evil;
         }
 
+        m_hitOnce = false;
+
         this.GetComponent<SpriteRenderer>().sprite = moleSprites[(int)m_currMole];
         //this.GetComponent<Animator>().con = moleSprites[(int)m_currMole];
+
+        m_currState = MoleState.Enter;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if (m_currTime > 0)
+        switch(m_currState)
         {
-            m_currTime -= Time.deltaTime;
-        }
-        else
-        {
-            m_moleManager.GetComponent<MoleGameManagerScript>().ResetSpawner(m_posID);
-            Object.Destroy(this.gameObject);
+            case MoleState.Enter:
+                // Enter Animation
+                m_currState = MoleState.Idle;
+                break;
+            case MoleState.Idle:
+                if (m_currTime > 0)
+                {
+                    m_currTime -= Time.deltaTime;
+                }
+                else
+                {
+                    m_currState = MoleState.Exit; 
+                }
+                break;
+            case MoleState.Hit:
+                m_moleManager.GetComponent<MoleGameManagerScript>().ResetSpawner(m_posID);
+                // Hit Animation
+                Object.Destroy(this.gameObject);
+                break;
+            case MoleState.Exit:
+                m_moleManager.GetComponent<MoleGameManagerScript>().ResetSpawner(m_posID);
+                // Leave Aniamtion
+                Object.Destroy(this.gameObject);
+                break;
+            default:
+                break;
         }
 	}
 
@@ -99,5 +128,46 @@ public class MolesScript : MonoBehaviour
                 transform.position = new Vector3(0.0f, 0.0f, -1.0f);
                 break;
         }
+    }
+
+    public void Hit()
+    {
+        switch (m_currMole)
+        {
+            case MoleType.Normal:
+                // REMOVE SCORE
+                m_currState = MoleState.Hit;
+                Debug.Log("Normal Mole Hit");
+                break;
+            case MoleType.Frozen:
+                if (m_hitOnce == false)
+                {
+                    // Ice Break animation
+                    // ADD SCORE
+                    Debug.Log("Ice Mole Hit");
+                    m_hitOnce = true;
+                }
+                else
+                {
+                    // Ice Break animation
+                    // ADD Bonus SCORE
+                    m_currMole = MoleType.Normal;
+                    this.GetComponent<SpriteRenderer>().sprite = moleSprites[(int)m_currMole];
+                    Debug.Log("Ice Mole Convert");
+                }
+                break;
+            case MoleType.Evil:
+                // ADD SCORE
+                m_currState = MoleState.Hit;
+                Debug.Log("Bad Mole Hit");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void End()
+    {
+        m_currState = MoleState.Exit;
     }
 }

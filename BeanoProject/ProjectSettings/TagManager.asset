@@ -18,6 +18,7 @@ TagManager:
   - PedSpawner
   - Friendly
   - Background
+  - Mole
   layers:
   - Default
   - TransparentFX

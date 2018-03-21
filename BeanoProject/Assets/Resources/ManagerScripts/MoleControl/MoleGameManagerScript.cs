@@ -6,16 +6,15 @@ using UnityEngine.Networking;
 
 public class MoleGameManagerScript : MonoBehaviour
 {
+    public enum GameState { Setup, Waiting, Starting, Playing, Timeup, Endscreen };
+    private GameState m_currState;
+
     public enum Biome { Residential, School, Park, Forest, Downtown, Beanoland };
     private GameObject m_background;
 
     public enum Actor { Aqua, Blue, Green, Red };
-    public GameObject portraitPrefab;
-    private List<GameObject> m_portraits;
-
-    /// <summary>
-    /// INSERT ICON TOUCHES HERE
-    /// </summary>
+    public GameObject hammerPrefab;
+    private List<GameObject> m_hammers;
 
     public GameObject molePrefab;
     private List<GameObject> m_moles;
@@ -24,6 +23,11 @@ public class MoleGameManagerScript : MonoBehaviour
     public float maxSpawnTime;
     public float minSpawnTime;
 
+    public float startTime;
+    private float m_gameTime;
+
+    private bool m_isOldTouch;
+
     private GameObject m_playerIDObject;
     private int m_playerCount;
     //private NetworkInstanceId m_clientID;
@@ -31,7 +35,9 @@ public class MoleGameManagerScript : MonoBehaviour
     // Called on launch
     void Awake()
     {
-        m_portraits = new List<GameObject>();
+        m_currState = GameState.Setup;
+
+        m_hammers = new List<GameObject>();
 
         m_spawner = new float[SPAWNERS];
 
@@ -48,42 +54,111 @@ public class MoleGameManagerScript : MonoBehaviour
         //m_clientID = m_playerIDObject.GetComponent<CustomLobby>().playerDetails.Identifier; 
 
         m_background = GameObject.FindGameObjectWithTag("Background");
+
+        m_gameTime = startTime;
+
+        m_isOldTouch = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < SPAWNERS; i++)
+        switch (m_currState)
         {
-            if (m_spawner[i] > 0)
-            {
-                m_spawner[i] -= Time.deltaTime;
-
-                if (m_spawner[i] <= 0)
+            case GameState.Setup:
+                InitGame(Biome.Residential, 1);
+                break;
+            case GameState.Waiting:
+                // users ready up // Fed instructions
+                m_currState = GameState.Starting;
+                break;
+            case GameState.Starting:
+                // countdown and intro animation
+                m_currState = GameState.Playing;
+                break;
+            case GameState.Playing:
+                if (m_gameTime > 0)
                 {
-                    GameObject newMole = (GameObject)Instantiate(molePrefab, new Vector3(0.0f, 0.0f, -1.0f), Quaternion.identity);
-                    newMole.GetComponent<MolesScript>().InitMole(i);
-                    m_moles.Add(newMole);
-                }
-            }
-        }
+                    for (int i = 0; i < SPAWNERS; i++)
+                    {
+                        if (m_spawner[i] > 0)
+                        {
+                            m_spawner[i] -= Time.deltaTime;
 
-        // DEBUG CALL AND SETUP
-        if (Input.GetKey("1") && m_portraits.Count == 0)
-        {
-            InitGame(Biome.Residential, 1);
-        }
-        else if (Input.GetKey("2") && m_portraits.Count == 0)
-        {
-            InitGame(Biome.Downtown, 2);
-        }
-        else if (Input.GetKey("3") && m_portraits.Count == 0)
-        {
-            InitGame(Biome.Forest, 3);
-        }
-        else if (Input.GetKey("4") && m_portraits.Count == 0)
-        {
-            InitGame(Biome.Park, 4);
+                            if (m_spawner[i] <= 0)
+                            {
+                                GameObject newMole = (GameObject)Instantiate(molePrefab, new Vector3(0.0f, 0.0f, -1.0f), Quaternion.identity);
+                                newMole.GetComponent<MolesScript>().InitMole(i);
+                                m_moles.Add(newMole);
+                            }
+                        }
+                    }
+
+                    if ((Input.GetMouseButtonDown(0) || Input.touchCount > 0) && m_isOldTouch == false)
+                    {
+                        Debug.Log("Input detected");
+                        
+                        Vector3 pointPos = new Vector3(0.0f,0.0f,0.0f);
+
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            pointPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        }
+                        else
+                        {
+                            pointPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+                        }
+
+                        // Set to 0 for current player CHANGE TO HAMMER ID/CUSTOMLOBBY ID
+                        m_hammers[0].GetComponent<IconHandlerScripts>().Touched(pointPos.x, pointPos.y);
+
+                        RaycastHit2D[] hits = Physics2D.RaycastAll(pointPos, new Vector2(0.0f, 0.0f));
+
+                        for (int i = 0; i < hits.Length; i++)
+                        {
+                            if (hits[i].collider.tag == "Mole")
+                            {
+                                GameObject hitMole = hits[i].collider.gameObject;
+                                hitMole.GetComponent<MolesScript>().Hit();
+                            }
+                        }
+
+                        m_isOldTouch = true;
+                    }
+                    else if (Input.GetMouseButtonDown(0) == false && Input.touchCount == 0)
+                    {
+                        m_isOldTouch = false;
+                    }
+
+                    m_gameTime -= Time.deltaTime;
+                }
+                else
+                {
+                    m_currState = GameState.Timeup;
+                }
+                break;
+            case GameState.Timeup:
+
+                GameObject[] endMoles = GameObject.FindGameObjectsWithTag("Mole");
+
+                foreach (GameObject mole in endMoles)
+                {
+                    mole.GetComponent<MolesScript>().End();
+                }
+
+                Debug.Log("End Game");
+                // Play outro animation
+                // Fade screen
+                m_currState = GameState.Endscreen;
+                break;
+            case GameState.Endscreen:
+                // Show scores
+                // Return to overworld button
+                break;
+            default:
+                m_currState = GameState.Endscreen;
+                Debug.Log("Error! gamemode unidentified");
+                break;
         }
     }
 
@@ -96,17 +171,22 @@ public class MoleGameManagerScript : MonoBehaviour
 
         for(int i = 0; i < playerCount; i++)
         {
-            GameObject newPortrait = (GameObject)Instantiate(portraitPrefab, new Vector3(0.0f, 0.0f, -3.0f), Quaternion.identity);
-            m_portraits.Add(newPortrait);
+            GameObject newHammer = (GameObject)Instantiate(hammerPrefab, new Vector3(0.0f, 0.0f, -3.0f), Quaternion.identity);
+            m_hammers.Add(newHammer);
 
             // Get saved char from lobby script from I wherever saved character info is stored
-            Actor currActor = Actor.Aqua; // Set as default
-            m_portraits[i].GetComponent<PortraitsHandlerScript>().InitPortrait(playerCount, (int)currActor ,i);
+            Actor currActor = Actor.Aqua; // Set as default to blue
+            m_hammers[i].GetComponent<IconHandlerScripts>().InitHammer(playerCount, (int)currActor ,i);
         }
+
+        m_currState = GameState.Waiting;
     }
 
     public void ResetSpawner(int pos)
     {
-        m_spawner[pos] = Random.Range(minSpawnTime, maxSpawnTime);
+        if (m_currState == GameState.Playing)
+        {
+            m_spawner[pos] = Random.Range(minSpawnTime, maxSpawnTime);
+        }
     }
 }
