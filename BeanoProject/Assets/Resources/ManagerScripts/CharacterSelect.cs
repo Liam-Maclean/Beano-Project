@@ -154,7 +154,7 @@ public class CharacterSelect : MonoBehaviour {
                     }
                 }
             }
-            touchOldPos = touchNewPos;0
+            touchOldPos = touchNewPos;
         }
         else
         {
