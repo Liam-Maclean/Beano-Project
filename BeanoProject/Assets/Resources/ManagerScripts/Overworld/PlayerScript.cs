@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -163,6 +164,18 @@ public class PlayerScript : MonoBehaviour
         else if (gameState == GameState.InGame)
         {
             this.GetComponent<SpriteRenderer>().enabled = false;
+            //if (SceneManager.sceneCount != 3)
+            //{
+            //    SceneManager.LoadScene(FindObjectOfType<OverworldScript>().SceneToUnload, LoadSceneMode.Additive);
+            //}
+            if (SceneManager.GetSceneByBuildIndex(FindObjectOfType<OverworldScript>().SceneToUnload).isLoaded == false)
+            {
+                SceneManager.LoadScene(FindObjectOfType<OverworldScript>().SceneToUnload, LoadSceneMode.Additive);
+            }
+            if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
+            {
+                SceneManager.UnloadSceneAsync(0);
+            }
         }
         else if (gameState == GameState.Waiting)
         {

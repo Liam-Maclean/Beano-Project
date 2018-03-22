@@ -45,7 +45,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 342}
   m_MaxSize: {x: 12008, y: 8042}
   vertical: 0
-  controlID: 53
+  controlID: 104
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -89,8 +89,8 @@ MonoBehaviour:
     y: 0
     width: 506
     height: 795
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 342}
   m_MaxSize: {x: 8006, y: 8042}
   vertical: 1
-  controlID: 107
+  controlID: 22
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 108
+  controlID: 23
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -325,19 +325,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Resources/Scenes
+    - Assets/Resources/ManagerScripts/Overworld
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Scenes
+  - Assets/Resources/ManagerScripts/Overworld
   m_LastFoldersGridSize: -1
   m_LastProjectPath: F:\DES301\Beano-Project\Beano-Project\BeanoProject
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 541}
-    m_SelectedIDs: d23f0000
-    m_LastClickedID: 16338
-    m_ExpandedIDs: 000000007c300000923000009e300000ac300000f63700007039000082390000f63a00001c3b0000dc3b0000fa3c0000ee3d00000e3e0000e23e000050400000564000000842000096420000e2420000fc43000058440000f0440000a4470000a6470000a8470000aa47000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 241}
+    m_SelectedIDs: 9e2a0000
+    m_LastClickedID: 10910
+    m_ExpandedIDs: 000000004406000048060000660600007006000046270000082900001e290000c82a0000ee2a0000ce2b00002c2d00004c2e0000722e00006c2f00001c3100002631000022330000d03300002a3400006c350000e035000092360000ce390000d0390000d2390000d439000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -365,7 +365,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007c300000923000009e300000ac300000f63700007039000082390000f63a00001c3b0000dc3b0000fa3c0000ee3d00000e3e0000e23e000050400000564000000842000096420000e2420000fc43000058440000f0440000a4470000a6470000a8470000aa470000
+    m_ExpandedIDs: 000000004406000048060000660600007006000046270000082900001e290000c82a0000ee2a0000ce2b00002c2d00004c2e0000722e00006c2f00001c3100002631000022330000d03300002a3400006c350000e035000092360000ce390000d0390000d2390000d4390000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -419,7 +419,7 @@ MonoBehaviour:
     m_NewAssetIndexInList: -1
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
-  m_DirectoriesAreaWidth: 115
+  m_DirectoriesAreaWidth: 257
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -483,7 +483,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 1012fdffd812fdff1e14fdff2814fdff5414fdff2c15fdff3c15fdff4615fdff4a15fdff8e1cfdff561dfdff9c1efdffa61efdffd21efdffaa1ffdffba1ffdffc41ffdffc81ffdff32dbfdff4269feffc26bfeffaeaafeff4cacfeffb8c3feff6ac5feffceeefeff9cf6feff8e0cffff340effff6652ffff0c54ffff60daffff10dcffff44e9fffff4ffffff00000000ce4500005a660000
+    m_ExpandedIDs: ba1effffaa1ffffff020fffffa20ffff2621fffffe21ffff0e22ffff1822ffff1c22ffff8a6affff746bffffbe6cffffcc6cfffffc6cffffd86dffffec6dfffffa6dffff026effffce91ffff8692ffffcc93ffffd693ffff0294ffffda94ffffea94fffff494fffff894ffff0efcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -502,7 +502,6 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
   m_ExpandedScenes:
-  - Overworld
   - Menu
   m_CurrenRootInstanceID: 0
   m_Locked: 0
@@ -610,15 +609,15 @@ MonoBehaviour:
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
   m_Stats: 0
-  m_SelectedSizes: 00000000000000000000000011000000000000000000000000000000000000000000000000000000
+  m_SelectedSizes: 08000000000000000000000011000000000000000000000000000000000000000000000000000000
   m_TargetDisplay: 0
   m_ZoomArea:
     m_HRangeLocked: 0
     m_VRangeLocked: 0
-    m_HBaseRangeMin: -766
-    m_HBaseRangeMax: 766
-    m_VBaseRangeMin: -378.5
-    m_VBaseRangeMax: 378.5
+    m_HBaseRangeMin: -1280
+    m_HBaseRangeMax: 1280
+    m_VBaseRangeMin: -720
+    m_VBaseRangeMax: 720
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -650,7 +649,7 @@ MonoBehaviour:
       width: 2914.2405
       height: 1440
     m_MinimalGUI: 1
-  m_defaultScale: 1
+  m_defaultScale: 0.52569443
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
   m_LastWindowPixelSize: {x: 1532, y: 774}
