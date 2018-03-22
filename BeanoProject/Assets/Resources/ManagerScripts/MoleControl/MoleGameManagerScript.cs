@@ -25,6 +25,8 @@ public class MoleGameManagerScript : MonoBehaviour
     public float startTime;
     private float m_gameTime;
 
+    public Text timeRemaining;
+
     private bool m_isOldTouch;
 
     private GameObject m_playerIDObject;
@@ -88,7 +90,7 @@ public class MoleGameManagerScript : MonoBehaviour
         {
             case GameState.Setup:
                 //InitGame(0, 1);
-                InitGame((int)m_overworldGM.GetComponent<OverworldScript>().minigameBiome, int.Parse(CustomLobby.local.playerDetails.Identifier.ToString()));
+                InitGame((int)m_overworldGM.GetComponent<OverworldScript>().minigameBiome, 1);
                 break;
             case GameState.Waiting:
                 // users ready up // Fed instructions
@@ -121,11 +123,11 @@ public class MoleGameManagerScript : MonoBehaviour
 
                         if (Input.GetMouseButtonDown(0))
                         {
-                            pointPos = Camera.current.ScreenToWorldPoint(Input.mousePosition);
+                            pointPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                         }
                         else
                         {
-                            pointPos = Camera.current.ScreenToWorldPoint(Input.GetTouch(0).position);
+                            pointPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
                         }
 
                         // Set to 0 for current player CHANGE TO HAMMER ID/CUSTOMLOBBY ID
@@ -147,6 +149,17 @@ public class MoleGameManagerScript : MonoBehaviour
                     else if (Input.GetMouseButtonDown(0) == false && Input.touchCount == 0)
                     {
                         m_isOldTouch = false;
+                    }
+
+                    timeRemaining.text = ((int)m_gameTime).ToString();
+
+                    if (m_gameTime < 11.0f)
+                    {
+                        timeRemaining.color = Color.red;
+                        Animator timeAnimator = timeRemaining.GetComponent<Animator>();
+
+                        timeAnimator.SetTrigger(0);
+                        timeAnimator.Play("TimeLeft");
                     }
 
                     m_gameTime -= Time.deltaTime;
@@ -216,14 +229,12 @@ public class MoleGameManagerScript : MonoBehaviour
 
         if (m_localPortrait)
         {
-            //m_localPortrait.IncrementScore(scoreChange);
+            m_localPortrait.IncrementScore(scoreChange);
         }
         else
         {
-            //m_portraits[0].IncrementScore(scoreChange);
+            m_portraits[0].IncrementScore(scoreChange);
         }
-
-        m_portraits[0].IncrementScore(scoreChange);
 
         Transform tempPos = this.transform;
         tempPos.position = new Vector3(xPos, yPos, -3.5f);
