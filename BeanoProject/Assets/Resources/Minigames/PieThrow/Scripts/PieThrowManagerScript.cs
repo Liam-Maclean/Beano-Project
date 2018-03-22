@@ -245,7 +245,9 @@ public class PieThrowManagerScript : MonoBehaviour
 		if (isEnd) {
 
 			//create the endgame canvas and spawn it in the scene
-			newCanvas = Instantiate (endGameCanvas, new Vector3(0.0f,0.0f, 0.0f), Quaternion.identity);
+			//newCanvas = Instantiate (endGameCanvas, new Vector3(0.0f,0.0f, 0.0f), Quaternion.identity);
+
+
 			isEnd = false;
 
 			//destroy the hand object and for mouse controls set the cursor to visible
@@ -254,7 +256,12 @@ public class PieThrowManagerScript : MonoBehaviour
 			Destroy (gameCanvas);
 			//DisplayScore ();
 			Cursor.visible = true;
-		}
+
+            GameObject pie = GameObject.FindGameObjectWithTag("pie");
+            Destroy(pie);
+
+            CustomLobby.local.EndMiniGame();
+        }
     }
 
 //void DisplayScore()

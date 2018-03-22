@@ -122,6 +122,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 c6eca3c0e68b65e8a60a78c70d60525b Assembly-CSharp.dll:.PlantGameCanvas
 7941c4156675dbf180791771b796c56a Assembly-CSharp.dll:.PortaitScript
+6c7dfd36b385195bb97cc4394379a106 Assembly-CSharp.dll:.PieAttackScript
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Orientor
 15ecba6b5ce92edf04a1bb018dda1c3b Assembly-CSharp.dll:.CameraScript
 c6eca3c0e68b65e8a60a78c70d60525b Assembly-CSharp.dll:.CanvasPortraitSetup
@@ -164,7 +165,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 4e6f2b84f2f4ea321c73d8a34cbbbced Assembly-CSharp.dll:.PlantScriptManager
 b46c9649eab67fc760045ab7ecb1613e Assembly-CSharp.dll:.EnemyManagerScript
-cf16f5cbc7563e69db70c7561cc9f88f Assembly-CSharp.dll:.MoleGameManagerScript
+3c3fe531d9f925327aabd862581775a8 Assembly-CSharp.dll:.MoleGameManagerScript
 7f2ba957c6092f4788f2412d966c36ed Assembly-CSharp.dll:.TouchEffector
 4d15ddb9d5c2271fca3938421da2916b Assembly-CSharp.dll:.ManagerScript
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
