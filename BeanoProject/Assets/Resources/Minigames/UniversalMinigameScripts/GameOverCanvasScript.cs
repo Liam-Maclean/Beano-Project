@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //global game over screen for every minigame hopefully
 //should work on every mini game by using gameobject.find
@@ -11,6 +12,10 @@ public class GameOverCanvasScript : MonoBehaviour {
 	//portraits in game with the game's score in it
 	public GameObject[] portraits;
 
+	private Text countDownText;
+
+	float timer = 15;
+	bool timeElapsed = false;
 	//positions of the portraits that are spawned on the canvas
 	private List<Vector3> positions = new List<Vector3>();
 
@@ -20,6 +25,7 @@ public class GameOverCanvasScript : MonoBehaviour {
 		//find all the objects in the scene with the tag portriats
 		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
 
+		countDownText = GameObject.Find("GameOverTimer").GetComponent<Text>();
 
         //add a new position for each portrait in the list of positions
 		for (int i = 0; i < portraits.Length; i++) {
@@ -29,6 +35,26 @@ public class GameOverCanvasScript : MonoBehaviour {
         //set up and reparent portraits from the main game
 		SetUpPortraitPositions ();
 		ReparentPortraits ();
+	}
+
+	public void CountDownTimerToEnd()
+	{
+		countDownText.text = "" + (int)timer;
+		if (timer > 0) {
+			timer -= Time.deltaTime;
+		} else {
+			timeElapsed = true;	
+		}
+	}
+
+	void Update()
+	{
+		CountDownTimerToEnd ();
+		//if time has elapsed at the end of hte minigame
+		if (timeElapsed) {
+			//return to the overworld
+			CustomLobby.local.EndMiniGame ();
+		}
 	}
 
 	//Sets up the positions for the end game portraits dependant on how many players available
