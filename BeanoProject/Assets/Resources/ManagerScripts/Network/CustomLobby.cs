@@ -282,6 +282,11 @@ public class CustomLobby : NetworkLobbyPlayer {
 
     public void ChangeScene(int scene)
     {
+        if(scene == 0)
+        {
+            return;
+        }
+        FindObjectOfType<OverworldScript>().SceneToUnload = scene;
         SceneManager.LoadScene(scene, LoadSceneMode.Additive);
     }
 
