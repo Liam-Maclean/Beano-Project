@@ -373,8 +373,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 969357731}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.021, y: -0.041, z: 20}
-  m_LocalScale: {x: 1.196665, y: 1.0248744, z: 1}
+  m_LocalPosition: {x: 0.005, y: -0.01, z: 20}
+  m_LocalScale: {x: 1.125567, y: 1.0233039, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1071,23 +1071,24 @@ MonoBehaviour:
   minZDist: 8
   maxZDist: 10
   timer: {fileID: 1225035494}
-  timeLeft: 30
-  spawnRateMin: 1
-  spawnRateMax: 3
-  aircraftOdds: 0.5
-  basicPedTypes: 8
+  timeLeft: 45
+  spawnRateMin: 3
+  spawnRateMax: 5
+  aircraftOdds: 0.25
+  basicPedTypes: 9
   specialTypes: 1
   targetPos: {x: -14, y: 0}
   xFlipDistance: 28
   pedPrefabs:
-  - {fileID: 1182034805023658, guid: 4713ace04b17f8e44aa4ad1c7310a9ae, type: 2}
+  - {fileID: 1677604071873134, guid: 69f2a25b497220d4e9a95bb2fa13037e, type: 2}
   - {fileID: 1851017793039470, guid: 214f7b03bd8b16641bb52f9facd04ded, type: 2}
-  - {fileID: 1855251622661186, guid: c4221108dac76424b84ba06be48ac594, type: 2}
-  - {fileID: 1883354798948832, guid: 6dc9cd92a00505d409a5b415313920db, type: 2}
-  - {fileID: 1926289350274030, guid: 7fd504fb4f7a6d144b901332f553086d, type: 2}
-  - {fileID: 1851017793039470, guid: 214f7b03bd8b16641bb52f9facd04ded, type: 2}
-  - {fileID: 1077714396971936, guid: 6c5447a9e13ee3846a714d3b531ee964, type: 2}
   - {fileID: 1261889647321828, guid: 405d1297f1fb2dc47bc0ef2a919792fc, type: 2}
+  - {fileID: 1855251622661186, guid: c4221108dac76424b84ba06be48ac594, type: 2}
+  - {fileID: 1182034805023658, guid: 4713ace04b17f8e44aa4ad1c7310a9ae, type: 2}
+  - {fileID: 1077714396971936, guid: 6c5447a9e13ee3846a714d3b531ee964, type: 2}
+  - {fileID: 1883354798948832, guid: 6dc9cd92a00505d409a5b415313920db, type: 2}
+  - {fileID: 1677604071873134, guid: 69f2a25b497220d4e9a95bb2fa13037e, type: 2}
+  - {fileID: 1277921582355682, guid: ae12e720724d49a4cbc6bf948226016f, type: 2}
   - {fileID: 1643570215377598, guid: 98be89e943128054b9b379119b014fd1, type: 2}
   readyMenuAnim: {fileID: 0}
   readyMenu: {fileID: 0}

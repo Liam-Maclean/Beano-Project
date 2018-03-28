@@ -171,7 +171,7 @@ public class PieScript : MonoBehaviour
         //normalize the distance
         distance = new Vector3(Mathf.Clamp(distance.x, -maxStretch, maxStretch), Mathf.Clamp(distance.y, -maxStretch, maxStretch), distance.z);
 
-        distance *= 0.15f;  
+        distance *= 0.2f;  
 
 
         hasLaunched = true;
@@ -232,7 +232,7 @@ public class PieScript : MonoBehaviour
 	{
 		isDestroyed = true;
 		Destroy (sr);
-		Destroy (pie.gameObject,2.0f);
+		Destroy (pie.gameObject, 2.0f);
 	}
 
 
