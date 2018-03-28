@@ -52,6 +52,7 @@ public class PieAttackScript : MonoBehaviour {
 				{
 					
 					isHit = true;
+                    pieScript.SetHit(isHit);
                     PedScript pedScript;
 
 					//get the ped script of the object that the pie has collided with
@@ -81,13 +82,19 @@ public class PieAttackScript : MonoBehaviour {
 					//set the pie sprite to a splat 
 					pieSpriteManager.SetPieSprite (pieSplat);
 						//respawn the pie
+
+                       
 						pieScript.Respawn ();
+                        pieScript.SetPieScale(new Vector3(0.5f, 0.5f, 1.0f));
+
 
 						//stop the velocity of the pie for animation purposes
 						pieScript.SetDistance (new Vector3 (0.0f, 0.0f, 0.0f));
 					break;
 				}      
 			}
+                         
+            pieScript.SetHit(isHit);
 		}
 	}
 }
