@@ -21,6 +21,7 @@ public class PieScript : MonoBehaviour
     //bool variables
 	private bool isReloading;
 	private bool isDestroyed;
+    private bool isHit;
 	private static bool hasLaunched;
 	private bool oldMouseDown;
     private bool newMouseDown;
@@ -71,47 +72,56 @@ public class PieScript : MonoBehaviour
 	}
 
 
-	void Update()
+    void Update()
     {
-		if (managerScript.GetState () == 1) {
-			//Mouse Controls
-			if (!isReloading && !hasLaunched) {
-				OnMouseDown ();
-			}
-			//Touch Controls
-			if (Input.touchCount == 1) {
-				Touch touch = Input.GetTouch (0);
+        if (managerScript.GetState() == 1)
+        {
+            //Mouse Controls
+            if (!isReloading && !hasLaunched)
+            {
+                OnMouseDown();
+            }
+            //Touch Controls
+            if (Input.touchCount == 1)
+            {
+                Touch touch = Input.GetTouch(0);
 
-				//Switch statement determining which type of touch it is
-				switch (touch.phase) {
-				case TouchPhase.Began:
-                    //store the initial position
-					pieStartPosition = pie.transform.position;
-					break;
-				case TouchPhase.Moved:
-					m_touch = touch.position;
-					if (!isReloading && !hasLaunched) {
-						Dragging ();
-					}
-					break;
-				case TouchPhase.Ended:
-					pieEndPosition = pie.transform.position;
-					Launch ();
-					break;
-				}
-			}
-			//only respawn if the pie has been launched 
-			if (hasLaunched || isDestroyed)
-			{
+                //Switch statement determining which type of touch it is
+                switch (touch.phase)
+                {
+                    case TouchPhase.Began:
+                        //store the initial position
+                        pieStartPosition = pie.transform.position;
+                        break;
+                    case TouchPhase.Moved:
+                        m_touch = touch.position;
+                        if (!isReloading && !hasLaunched)
+                        {
+                            Dragging();
+                        }
+                        break;
+                    case TouchPhase.Ended:
+                        pieEndPosition = pie.transform.position;
 
-				//translates the pies position
-				pie.transform.position += distance;
+                        Launch();
+                        break;
+                }
+            }
+        }
+        //only respawn if the pie has been launched 
+        if (hasLaunched || isDestroyed)
+        {
+            //translates the pies position
+            pie.transform.position += distance;
+            Respawn();
 
-
-				Respawn ();
-			}	
-		}
-	}
+        }
+        if ( hasLaunched && !isHit)
+        {
+            pie.transform.localScale -= new Vector3(0.005f, 0.005f, 0.0f);
+            distance.y -= 0.005f;
+        }
+    }
 
 	void Dragging()
 	{
@@ -154,13 +164,16 @@ public class PieScript : MonoBehaviour
 
     void Launch()
 	{
-
         //calculate the distance the pie has travelled
         distance = (pieStartPosition - pieEndPosition);
 
-		
-		//normalize the distance
-		distance.Normalize();
+       // distance.Normalize();
+        //normalize the distance
+        distance = new Vector3(Mathf.Clamp(distance.x, -maxStretch, maxStretch), Mathf.Clamp(distance.y, -maxStretch, maxStretch), distance.z);
+
+        distance *= 0.15f;  
+
+
         hasLaunched = true;
 	}
 
@@ -209,8 +222,8 @@ public class PieScript : MonoBehaviour
 			sr = pie.GetComponent<SpriteRenderer>();
             //reset pie variables 
 			respawnTime = tempTime;
-            isReloading = false;
             hasLaunched = false;
+            isReloading = false;
             isDestroyed = false;
         }
     }
@@ -247,4 +260,15 @@ public class PieScript : MonoBehaviour
 	{
 		distance = dist;
 	}
+
+    public void SetPieScale(Vector3 scale)
+    {
+        pie.transform.localScale = scale;
+    }
+
+    public void SetHit(bool hit)
+    {
+        isHit = hit;
+    }
+
 }
