@@ -187,24 +187,35 @@ public class PieThrowManagerScript : MonoBehaviour
         GameObject newPed;
         int typeHelper = 0;
 
+        //get a random basic pedestrian
         if (isBasic)
         {
             typeHelper = Random.Range(0, basicPedTypes);
         }
+        //get a random special pedestrian
         else
         {
-			typeHelper = Random.Range(basicPedTypes, specialTypes);
-            //typeHelper += basicPedTypes;
+            //random range between 0 and the end position of the array to access a random basic ped prefab
+            typeHelper = Random.Range(0, basicPedTypes);
+            //add on the position of the special pedestrian in the array to access the prefab
+            typeHelper += specialTypes;
         }
 
         if (isLeft)
         {
 
             newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x, targetPos.y, zPos), Quaternion.identity);
-           // if (isBasic)
-           // {
+            //if it is a basic pedestrian then flip it so they walk left to right
+            if (typeHelper < basicPedTypes)
+            {
                 newPed.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-            //}
+            }
+            //if it is a special pedestrian then flip it so they walk left to right
+            else
+            {
+                newPed.transform.localScale = new Vector3(1.5f, 1.5f, 1.0f);
+            }
+
         }
         else
         {
@@ -213,12 +224,10 @@ public class PieThrowManagerScript : MonoBehaviour
         }
 
         m_pedObjects.Add(newPed);
-
-     //   if (isBasic)
-     //   {
-            m_pedObjects[m_pedObjects.Count - 1].GetComponent<PedScript>().InitPed(isLeft, zPos);
-     //   }
+        m_pedObjects[m_pedObjects.Count - 1].GetComponent<PedScript>().InitPed(isLeft, zPos);
     }
+
+
 
     void GameTimer()
     {
