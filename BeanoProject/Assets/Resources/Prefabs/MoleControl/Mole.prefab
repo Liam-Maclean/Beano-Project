@@ -66,7 +66,11 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
+<<<<<<< HEAD
   m_Size: {x: 10, y: 10}
+=======
+  m_Size: {x: 10, y: 6}
+>>>>>>> parent of 33e7e22... Revert "Merge pull request #55 from Liam-Maclean/MoleControl"
   m_EdgeRadius: 0
 --- !u!95 &95813922785397998
 Animator:
@@ -75,7 +79,11 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1867318878682682}
+<<<<<<< HEAD
   m_Enabled: 1
+=======
+  m_Enabled: 0
+>>>>>>> parent of 33e7e22... Revert "Merge pull request #55 from Liam-Maclean/MoleControl"
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 0b2f3e0881e16f948bc21ed0e5380dc0, type: 2}
   m_CullingMode: 0
