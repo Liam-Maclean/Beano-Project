@@ -49,15 +49,7 @@ public class MolesScript : MonoBehaviour
         m_hitOnce = false;
 
         this.GetComponent<SpriteRenderer>().sprite = moleSprites[(int)m_currMole];
-        
-        if (m_currMole == MoleType.Evil)
-        {
-            this.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.1f, 0.1f, 1.0f);
-        }
-        else if (m_currMole == MoleType.Frozen)
-        {
-            this.GetComponent<SpriteRenderer>().color = new Color(0.1f, 0.5f, 1.0f, 1.0f);
-        }
+        //this.GetComponent<Animator>().con = moleSprites[(int)m_currMole];
 
         m_currState = MoleState.Enter;
     }
@@ -103,33 +95,33 @@ public class MolesScript : MonoBehaviour
         switch (m_posID)
         {
             case 0:
-                transform.position = new Vector3(-3.0f, 2.5f, -1.00f);
+                transform.position = new Vector3(-3.0f, 2.0f, -1.00f);
                 break;
             case 1:
-                transform.position = new Vector3(0.0f, 2.5f, -1.01f);
+                transform.position = new Vector3(0.0f, 2.0f, -1.01f);
                 break;
             case 2:
-                transform.position = new Vector3(3.0f, 2.5f, -1.02f);
+                transform.position = new Vector3(3.0f, 2.0f, -1.02f);
                 break;
 
             case 3:
-                transform.position = new Vector3(-3.0f, -0.5f, -1.10f);
+                transform.position = new Vector3(-3.0f, 0.0f, -1.10f);
                 break;
             case 4:
-                transform.position = new Vector3(0.0f, -0.5f, -1.11f);
+                transform.position = new Vector3(0.0f, 0.0f, -1.11f);
                 break;
             case 5:
-                transform.position = new Vector3(3.0f, -0.5f, -1.12f);
+                transform.position = new Vector3(3.0f, 0.0f, -1.12f);
                 break;
 
             case 6:
-                transform.position = new Vector3(-3.0f, -3.5f, -1.20f);
+                transform.position = new Vector3(-3.0f, -2.0f, -1.20f);
                 break;
             case 7:
-                transform.position = new Vector3(0.0f, -3.5f, -1.21f);
+                transform.position = new Vector3(0.0f, -2.0f, -1.21f);
                 break;
             case 8:
-                transform.position = new Vector3(3.0f, -3.5f, -1.22f);
+                transform.position = new Vector3(3.0f, -2.0f, -1.22f);
                 break;
 
             default:
@@ -159,7 +151,6 @@ public class MolesScript : MonoBehaviour
                 {
                     m_currMole = MoleType.Normal;
                     this.GetComponent<SpriteRenderer>().sprite = moleSprites[(int)m_currMole];
-                    this.GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
                     Debug.Log("Ice Mole Convert");
                     m_moleManager.GetComponent<MoleGameManagerScript>().IncrementScore(15, this.transform.position.x, this.transform.position.y);
                 }
