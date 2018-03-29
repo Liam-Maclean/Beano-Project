@@ -4,10 +4,20 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - EnemyAnim
+  - Plant
+  - Text
+  - GameManager
+  - Node
   - pie
   - Enemy
+  - slingshot
+  - Kill
   - Portrait
+  - PieSpawner
+  - Hand
+  - PedSpawner
+  - Friendly
+  - EnemyAnim
   layers:
   - Default
   - TransparentFX
@@ -17,8 +27,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Foreground
+  - MiddleGround
   - 
   - 
   - 
