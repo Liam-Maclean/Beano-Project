@@ -23,6 +23,7 @@ public class OverworldScript : MonoBehaviour
     private GameObject mainCamera;
     private GameObject cloneCamera;
 
+    public int SceneToUnload;
 
     int indexInMinigameList;
 
@@ -88,7 +89,7 @@ public class OverworldScript : MonoBehaviour
             {
                 m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(m_currNode));
             }
-            SceneManager.LoadScene ("PlantMinigameScene");
+            //SceneManager.LoadScene ("PlantMinigameScene");
             //SceneManager.LoadScene("Menu");
         }
     }
@@ -183,8 +184,8 @@ public class OverworldScript : MonoBehaviour
 
     public void LoadMiniGameClient(int sceneID)
     {
-        Stop();
-        SceneManager.LoadSceneAsync(sceneID);
+        //Stop();
+        //SceneManager.LoadSceneAsync(sceneID);
         
     }
 
@@ -202,15 +203,19 @@ public class OverworldScript : MonoBehaviour
 
     public void Resume()
     {
-        cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-        SceneManager.UnloadSceneAsync(Selector.activeMinigames[indexInMinigameList]);
+       
+        FindObjectOfType<PlayerScript>().GetComponent<SpriteRenderer>().enabled = true;
+        SceneManager.UnloadSceneAsync(SceneToUnload);
+       // m_playerIDObject.GetComponent<CustomLobby>().Scene = 0;
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
         foreach (PlayerScript player in players)
         {
             //CustomLobby.local.ReadyPlayerFUN(true);
             player.gameState = PlayerScript.GameState.Playing;
         }
-        background.enabled = true; ;
+        background.enabled = true;
+        cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        cloneCamera.SetActive(true);
     }
 
     public void Go()
