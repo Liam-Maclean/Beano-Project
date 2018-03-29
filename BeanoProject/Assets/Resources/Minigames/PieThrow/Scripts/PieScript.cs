@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PieScript : MonoBehaviour 
 {
@@ -14,6 +15,7 @@ public class PieScript : MonoBehaviour
 	private float tempTime;
 
 	//distance variables
+	public Vector3 pieSpawnPosition;
 	private Vector3 pieStartPosition;
 	private Vector3 pieEndPosition;
 	private Vector3 distance;
@@ -42,8 +44,8 @@ public class PieScript : MonoBehaviour
     //Collider variables
     private CircleCollider2D circle;
 
+	public Slider powerSlider;
 
-	public Vector3 pieSpawnPosition;
 
     void Awake()
     {
@@ -118,7 +120,9 @@ public class PieScript : MonoBehaviour
         }
         if ( hasLaunched && !isHit)
         {
-            pie.transform.localScale -= new Vector3(0.005f, 0.005f, 0.0f);
+            //lower the pie's scale so that the game looks as if it has depth
+            pie.transform.localScale -= new Vector3(0.008f, 0.008f, 0.0f);
+            //gravity value
             distance.y -= 0.005f;
         }
     }
@@ -132,8 +136,11 @@ public class PieScript : MonoBehaviour
 			//get the distance from the slingshot to the touch
 			Vector2 slingToTouch = new Vector2 ((objPos.x - slingshot.transform.position.x), (objPos.y - slingshot.transform.position.y));
 
-			//this basically ensures that if the player stretches further than max stretch then it will still be aligned
-			if (slingToTouch.sqrMagnitude > maxStretchSqr) {
+            //set the value of the slider = to the distance between the slingshot and the mouse input;
+            powerSlider.value = -slingToTouch.y;
+
+            //this basically ensures that if the player stretches further than max stretch then it will still be aligned
+            if (slingToTouch.sqrMagnitude > maxStretchSqr) {
 				rayToTouch.direction = slingToTouch;
 				objPos = rayToTouch.GetPoint (maxStretch);
 			}
@@ -148,9 +155,21 @@ public class PieScript : MonoBehaviour
         //get the world position of the touch
         Vector2 objPos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		//get the distance from the slingshot to the touch]
-		if (objPos.y <= -2f) {
+		if (objPos.y <= -2.5f)
+        {
 			Vector2 slingToTouch = new Vector3 ((objPos.x - slingshot.transform.position.x), (objPos.y - slingshot.transform.position.y), 0.0f);
 
+
+            float poo = slingToTouch.magnitude / maxStretch;
+
+
+            distance = (pieStartPosition - pie.transform.position);
+            float x = (distance.x * distance.x);
+            float y = (distance.y * distance.y);
+          
+            //set the value of the slider = to the distance between the slingshot and the mouse input;
+                powerSlider.value = poo;
+           
 			//this ensures that if the player stretches further than max stretch then it will still be aligned
 			if (slingToTouch.sqrMagnitude > maxStretchSqr) {
 				rayToTouch.direction = slingToTouch;
@@ -167,13 +186,12 @@ public class PieScript : MonoBehaviour
         //calculate the distance the pie has travelled
         distance = (pieStartPosition - pieEndPosition);
 
-       // distance.Normalize();
+        //distance.Normalize();
         //normalize the distance
         distance = new Vector3(Mathf.Clamp(distance.x, -maxStretch, maxStretch), Mathf.Clamp(distance.y, -maxStretch, maxStretch), distance.z);
 
+        //dampen the speed of the pie so that it doesn't go as fast
         distance *= 0.2f;  
-
-
         hasLaunched = true;
 	}
 
@@ -228,6 +246,8 @@ public class PieScript : MonoBehaviour
         }
     }
 
+
+    //destroy method for the pie
 	public void Destroy()
 	{
 		isDestroyed = true;
