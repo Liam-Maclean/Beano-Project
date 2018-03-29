@@ -19,7 +19,6 @@ public class PieThrowManagerScript : MonoBehaviour
 	private List<PortaitScript> portraitScripts = new List<PortaitScript>();
 	private PortaitScript localPortrait;
 
-
     public float spawnRateMin;
     public float spawnRateMax;
     private float[] m_spawnTimer;
@@ -100,10 +99,7 @@ public class PieThrowManagerScript : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update ()
-    {
-
-
-
+	{
 		switch (m_currState)
         {
             case GAMESTATE.Start:
@@ -239,11 +235,13 @@ public class PieThrowManagerScript : MonoBehaviour
 		//set & display the current time in the scene
         timer.text = tempTime.ToString();
 
+		//if the timer hits 10 seconds left
 		if (timeLeft < 11.0f) 
 		{
+			//set the text colour to red
+			//play the animation that scales the text 
 			timer.color = Color.red;
 			Animator textAnimator = timer.GetComponent<Animator> ();
-
 			textAnimator.SetTrigger(0);
 			textAnimator.Play("TimeLeft");	
 		}
