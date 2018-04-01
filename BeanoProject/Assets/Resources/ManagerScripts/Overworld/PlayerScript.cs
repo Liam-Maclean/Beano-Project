@@ -172,6 +172,10 @@ public class PlayerScript : MonoBehaviour
             {
                 SceneManager.LoadScene(FindObjectOfType<OverworldScript>().SceneToUnload, LoadSceneMode.Additive);
             }
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
+            {
+                SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(FindObjectOfType<OverworldScript>().SceneToUnload));
+            }
             if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
             {
                 SceneManager.UnloadSceneAsync(0);

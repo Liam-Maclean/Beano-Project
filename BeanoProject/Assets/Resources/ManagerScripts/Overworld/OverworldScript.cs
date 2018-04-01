@@ -44,8 +44,8 @@ public class OverworldScript : MonoBehaviour
         currPlayersTESTING = FindObjectsOfType<CustomLobby>().Length;
 
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-        mainCamera.SetActive(false);
+        //cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        //mainCamera.SetActive(false);
 
         Debug.Log("Network ID: " + m_clientID);
 
@@ -197,7 +197,7 @@ public class OverworldScript : MonoBehaviour
         {
             player.gameState = PlayerScript.GameState.InGame;
         }
-        Destroy(cloneCamera);
+        mainCamera.SetActive(false);
         background.enabled = false;
     }
 
@@ -214,8 +214,9 @@ public class OverworldScript : MonoBehaviour
             player.gameState = PlayerScript.GameState.Playing;
         }
         background.enabled = true;
-        cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-        cloneCamera.SetActive(true);
+        mainCamera.SetActive(true);
+        //cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        //cloneCamera.SetActive(true);
     }
 
     public void Go()
