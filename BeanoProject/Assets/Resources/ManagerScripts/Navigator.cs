@@ -13,7 +13,7 @@ public class Navigator : MonoBehaviour {
 	public Canvas select;
 	public SceneTransition transitionScript;
 
-
+    bool started = false;
 	//menu fun stuff
 	public GameObject touchEffect;
 
@@ -40,12 +40,16 @@ public class Navigator : MonoBehaviour {
 		}
 	}
 
-	//progress from title screen
-	public void TapToStart()
-	{
-		//titleCard.enabled = false;
-		mainMenu.enabled = true;
-	}
+    //progress from title screen
+    public void TapToStart()
+    {
+        //titleCard.enabled = false;
+        if (!started)
+        {
+            mainMenu.enabled = true;
+            started = true;
+        }
+    }
 
 	//open lobby
 	public void StartShortGame()
