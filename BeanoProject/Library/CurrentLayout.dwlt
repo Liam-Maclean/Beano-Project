@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -42,10 +42,10 @@ MonoBehaviour:
     y: 30
     width: 1600
     height: 768
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 14002, y: 14042}
+  m_MinSize: {x: 683, y: 492}
+  m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 106
+  controlID: 11
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -64,8 +64,8 @@ MonoBehaviour:
     y: 0
     width: 310
     height: 768
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 277, y: 71}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -207,10 +207,10 @@ MonoBehaviour:
     y: 0
     width: 1290
     height: 768
-  m_MinSize: {x: 404, y: 492}
+  m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 52
+  controlID: 12
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -231,10 +231,10 @@ MonoBehaviour:
     y: 0
     width: 1290
     height: 497
-  m_MinSize: {x: 404, y: 221}
-  m_MaxSize: {x: 8004, y: 4021}
+  m_MinSize: {x: 406, y: 221}
+  m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 53
+  controlID: 13
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -255,14 +255,14 @@ MonoBehaviour:
     height: 497
   m_MinSize: {x: 204, y: 221}
   m_MaxSize: {x: 4004, y: 4021}
-  m_ActualView: {fileID: 18}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 18}
   - {fileID: 19}
   - {fileID: 14}
   - {fileID: 13}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -421,19 +421,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Resources/ManagerScripts
+    - Assets/Resources/Minigames/UniversalMinigameScripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/ManagerScripts
+  - Assets/Resources/Minigames/UniversalMinigameScripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Oswald Maximus\Desktop\Beano\Beano-Project\BeanoProject
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 151}
-    m_SelectedIDs: a8480000
-    m_LastClickedID: 18600
-    m_ExpandedIDs: 00000000763200008c32000098320000a6320000183c0000c23d0000d63d0000583e00004c3f0000703f0000923f0000c83f00004a40000070400000c4410000ce410000ee4200003843000000440000be450000c645000076470000be470000524800007c480000a8480000dc490000464a0000f44a0000a24b0000d24d0000d44d0000d64d0000d84d0000da4d0000dc4d000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 1227}
+    m_SelectedIDs: 782a0000
+    m_LastClickedID: 10872
+    m_ExpandedIDs: 000000002e06000032060000500600005a060000b2260000cc280000e828000082290000ae2a0000d82a0000fe2a00003c2b0000da2b00000a2c0000b62d0000c42d00003c2f0000922f00008a300000a6320000b4320000c83400001c35000024350000da3500000a36000044360000b43700003e3800001c390000f63900000e3d0000103d0000123d0000143d0000163d0000183d000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -461,7 +461,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000763200008c32000098320000a6320000183c0000c23d0000d63d0000583e00004c3f0000703f0000923f0000c83f00004a40000070400000c4410000ce410000ee4200003843000000440000be450000c645000076470000be470000524800007c480000a8480000dc490000464a0000f44a0000a24b0000d24d0000d44d0000d64d0000d84d0000da4d0000dc4d0000
+    m_ExpandedIDs: 000000002e06000032060000500600005a060000b2260000cc280000e828000082290000ae2a0000d82a0000fe2a00003c2b0000da2b00000a2c0000b62d0000c42d00003c2f0000922f00008a300000a6320000b4320000c834000024350000da3500000a36000044360000b43700003e3800001c390000f63900000e3d0000103d0000123d0000143d0000163d0000183d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -488,7 +488,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000763e000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -577,9 +577,9 @@ MonoBehaviour:
     height: 476
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e4050000
+    m_SelectedIDs: de060000
     m_LastClickedID: 0
-    m_ExpandedIDs: 74e0ffff00000000
+    m_ExpandedIDs: 18fcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -597,8 +597,7 @@ MonoBehaviour:
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
-  m_ExpandedScenes:
-  - Menu
+  m_ExpandedScenes: []
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
