@@ -34,6 +34,8 @@ public class PlantScriptManager : MonoBehaviour
 	private AnimatorStateInfo m_stateInfo;
 	private bool FirstTimeSpawn = true;
 
+	bool spawnOnceLightning = false;
+	GameObject lightning;
 	//enum for plants
 	PlantComponentType plantComponentType;
 	SpriteRenderer sr;
@@ -87,13 +89,13 @@ public class PlantScriptManager : MonoBehaviour
 		int chance = Random.Range (0, 100);
 
         //if the chance is greater than 90 (10% chance)
-		if (chance >= 90)
+		if (chance >= 75)
         {
             //spawn debuff plant (lightning plant)
 			plantComponentType = PlantComponentType.DEBUFFPLANT;
 		}
         //if the chance is greater than 70 but less than 90 (20% chance)
-        else if (chance > 70 && chance < 90)
+        else if (chance > 55 && chance < 75)
         {
             //Spawn double score plant
 			plantComponentType = PlantComponentType.DOUBLESCOREPLANT;
@@ -171,7 +173,7 @@ public class PlantScriptManager : MonoBehaviour
             {
                 FloatingTextManager.CreateFloatingText("+" + basePlant.GetScore().ToString(), basePlant.transform, Color.blue);
                 DebuffPlant debuff = basePlant as DebuffPlant;
-               
+				Destroy (lightning);
             }
   
             //activate the dead plant animation
@@ -204,14 +206,24 @@ public class PlantScriptManager : MonoBehaviour
 	//swaps over lightning debuff on plant 
 	void SwapLightningDebuff()
 	{
-		if ((m_stateInfo.normalizedTime % 1) <= 0.5f) {
-			DebuffPlant debuff = basePlant as DebuffPlant;
-			debuff.SetLightning (true);
-			debuff.SetScore (0);
-		} else {
-			DebuffPlant debuff = basePlant as DebuffPlant;
-			debuff.SetLightning (false);
-			debuff.SetScore (2);
+		if (basePlant.GetActive ()) {
+			if ((m_stateInfo.normalizedTime % 1) <= 0.5f) {
+				DebuffPlant debuff = basePlant as DebuffPlant;
+				debuff.SetLightning (true);
+				debuff.SetScore (0);
+				if (spawnOnceLightning == false) {
+					lightning = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/LightningStrike")) as GameObject;
+					lightning.transform.SetParent (basePlant.transform);
+					lightning.transform.localPosition = new Vector3 (0, 0, -1);
+					spawnOnceLightning = true;
+				}
+
+			} else {
+				spawnOnceLightning = false;
+				DebuffPlant debuff = basePlant as DebuffPlant;
+				debuff.SetLightning (false);
+				debuff.SetScore (2);
+			}
 		}
 	}
 
