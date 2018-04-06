@@ -224,7 +224,13 @@ public class CustomLobby : NetworkLobbyPlayer {
     /// </summary>
     public void EndMiniGame()
     {
-        local.playerDetails.MetaScore += local.playerDetails.MiniScore;
+        foreach (CustomLobby opp in FindObjectsOfType<CustomLobby>())
+        {
+            if (local.playerDetails.MiniScore >= opp.playerDetails.MiniScore)
+            {
+                local.playerDetails.MetaScore += 25;
+            }
+        }
         local.playerDetails.MiniScore = 0;
         SendDetails(local.playerDetails);
         FindObjectOfType<OverworldScript>().Resume();
