@@ -74,6 +74,7 @@ public class MolesScript : MonoBehaviour
                     m_currState = MoleState.Idle;
                 }
                 break;
+
             case MoleState.Idle:
                 if (m_currTime > 0)
                 {
@@ -163,6 +164,7 @@ public class MolesScript : MonoBehaviour
                     m_currMole = MoleType.Normal;
                     this.GetComponent<SpriteRenderer>().sprite = moleSprites[(int)m_currMole];
                     Debug.Log("Ice Mole Convert");
+                    animtor.Play("NormalIDLE");
                     m_moleManager.GetComponent<MoleGameManagerScript>().IncrementScore(15, this.transform.position.x, this.transform.position.y);
                 }
                 break;
