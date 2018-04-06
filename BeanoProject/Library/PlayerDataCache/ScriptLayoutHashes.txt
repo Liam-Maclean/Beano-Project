@@ -134,7 +134,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 60b2bb652410a5867a5ab9a01cd38461 Assembly-CSharp.dll:.LobbyDiscovery
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Events
 54ee3e2b4df0d2de7788fc51ae985a41 Assembly-CSharp.dll:.Settings
-9d4f6fea6a38b8f432ee99ea9e7b0f0d Assembly-CSharp.dll:.PieScript
+374693457497e1c6ed0f42e81d6153c5 Assembly-CSharp.dll:.PieScript
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Human
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.PlantGrid
 277eea69bd43eefac67ce3b1535fea5b Assembly-CSharp.dll:.FloatingText
@@ -190,5 +190,6 @@ d5614c16b77cce98f9627728aa860e37 Assembly-CSharp.dll:.IconHandlerScripts
 57c53557df0372991800567ca4efcd05 Assembly-CSharp.dll:.DataDisplay
 950c1930dc16a252e84f462b3bd0295d Assembly-CSharp.dll:.Navigator
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SwipeScript
-8b9c074c5f2003ed050e5b2fc1649124 Assembly-CSharp.dll:.MolesScript
+0f8abb4b3a1691ae6352c09a52f68fb5 Assembly-CSharp.dll:.MolesScript
 477a8900d9d28ab2c2f38c40b3658881 Assembly-CSharp.dll:.NormalPlant
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.KillObjectScript
