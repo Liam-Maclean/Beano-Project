@@ -339,7 +339,7 @@ public class ManagerScript : MonoBehaviour {
                                 if (!bFadeOutAnimationInstantiated)
                                 {
                                     //instantiate it 
-                                    GameObject FadeOutObj = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/FadeOut")) as GameObject;
+								GameObject FadeOutObj = Instantiate(Resources.Load("Minigames/UniversalMinigamePrefabs/FadeOut")) as GameObject;
                                     FadeOutObj.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
                                     FadeOutObj.transform.localScale = new Vector3(100, 100, 100);
                                     FadeOutAnimation = FadeOutObj.GetComponent<StopAnimationScript>();
