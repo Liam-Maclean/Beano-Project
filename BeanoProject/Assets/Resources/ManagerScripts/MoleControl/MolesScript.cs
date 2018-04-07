@@ -10,6 +10,7 @@ public class MolesScript : MonoBehaviour
     public enum MoleState { Enter, Idle, Hit, Exit };
     private MoleState m_currState;
 
+    public Animator animtor;
     public Sprite[] moleSprites;
 
     private int m_posID;
@@ -33,22 +34,29 @@ public class MolesScript : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        animtor = GetComponent<Animator>();
         if (Random.Range(0.0f, 1.0f) <= goodRate)
         {
             m_currMole = MoleType.Normal;
+
+            animtor.Play("NormalIN");
         }
         else if (Random.Range(0.0f, 1.0f) <= freezeRate)
         {
             m_currMole = MoleType.Frozen;
+
+            animtor.Play("IceIN");
         }
         else
         {
             m_currMole = MoleType.Evil;
+
+            animtor.Play("BadIN");
         }
 
         m_hitOnce = false;
 
-        this.GetComponent<SpriteRenderer>().sprite = moleSprites[(int)m_currMole];
+        //this.GetComponent<SpriteRenderer>().sprite = moleSprites[(int)m_currMole];
         //this.GetComponent<Animator>().con = moleSprites[(int)m_currMole];
 
         m_currState = MoleState.Enter;
@@ -60,9 +68,13 @@ public class MolesScript : MonoBehaviour
         switch(m_currState)
         {
             case MoleState.Enter:
-                // Enter Animation
-                m_currState = MoleState.Idle;
+
+                if (!animtor.GetCurrentAnimatorStateInfo(0).IsName("NormalIN") || !animtor.GetCurrentAnimatorStateInfo(0).IsName("IceIN")|| !animtor.GetCurrentAnimatorStateInfo(0).IsName("BadIN"))
+                {
+                    m_currState = MoleState.Idle;
+                }
                 break;
+
             case MoleState.Idle:
                 if (m_currTime > 0)
                 {
@@ -152,6 +164,7 @@ public class MolesScript : MonoBehaviour
                     m_currMole = MoleType.Normal;
                     this.GetComponent<SpriteRenderer>().sprite = moleSprites[(int)m_currMole];
                     Debug.Log("Ice Mole Convert");
+                    animtor.Play("NormalIDLE");
                     m_moleManager.GetComponent<MoleGameManagerScript>().IncrementScore(15, this.transform.position.x, this.transform.position.y);
                 }
                 break;
