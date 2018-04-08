@@ -107,6 +107,26 @@ public class PieThrowManagerScript : MonoBehaviour
 		handSpawnScript = handSpawn.GetComponent<HandSpawn> ();
 
 	}
+
+
+    void DisplayTutorial()
+    {
+
+        //timer for the tutorial canvas
+        tutorialTimer -= Time.deltaTime;
+
+        //cast to integer
+        int tempTime = (int)tutorialTimer;
+        //display current time left on the tutorial canvas
+        tutorialTimerTxt.text = tempTime.ToString();
+
+        if (tutorialTimer <= 0.0f)
+        {
+            //destroy the tutorial canvas and set state to playing 
+            Destroy(newCanvas);
+            m_currState = GAMESTATE.Playing;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -114,35 +134,20 @@ public class PieThrowManagerScript : MonoBehaviour
 		switch (m_currState)
         {
             case GAMESTATE.Start:
-                //start FUNC only;
-                
-                //timer for the tutorial canvas
-                tutorialTimer -= Time.deltaTime;
-
-                //cast to integer
-                int tempTime = (int)tutorialTimer;
-                //display current time left on the tutorial canvas
-                tutorialTimerTxt.text = tempTime.ToString();
-
-                if (tutorialTimer <= 0.0f)
-                {
-                    //destroy the tutorial canvas and set state to playing 
-                    Destroy(newCanvas);
-                    m_currState = GAMESTATE.Playing;
-                }
+                //Tutorial canvas
+                DisplayTutorial();
                 break;
-		case GAMESTATE.Playing:
-                // Normal Gameplay
-				//Overall game timer
-			GameTimer ();
-			//DisplayScore ();
-			SpawnPed ();
+		    case GAMESTATE.Playing:   
+			    //Overall game timer
+			    GameTimer ();
+			    //DisplayScore ();
+			    SpawnPed ();
 
 
-			if (timeLeft <= 0.0f) {
-				m_currState = GAMESTATE.Finished;
-				isEnd = true;
-			}
+			    if (timeLeft <= 0.0f) {
+			    	m_currState = GAMESTATE.Finished;
+			    	isEnd = true;
+			    }
                 break;
             case GAMESTATE.Finished:
                 // Outro Plz

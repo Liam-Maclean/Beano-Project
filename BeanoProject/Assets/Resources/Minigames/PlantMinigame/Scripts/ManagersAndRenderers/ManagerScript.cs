@@ -241,8 +241,28 @@ public class ManagerScript : MonoBehaviour {
 		}
 	}
 
+    void DisplayTutorial()
+    {
+        //tutorial timer
+        tutorialTimer -= Time.deltaTime;
+
+        //cast to integer
+        int tempTime = (int)tutorialTimer;
+
+        //display current tutorial time
+        tutorialTimeTxt.text = tempTime.ToString();
+
+
+        if (tutorialTimer <= 0.0f)
+        {
+            //when the timer hits 0 destroy the tutorial canvas and change states
+            Destroy(newCanvas);
+            m_gameState = GameState.transition;
+        }
+    }
+
     //update function
-	void Update()
+    void Update()
 	{
 
         //for every game state 
@@ -250,25 +270,7 @@ public class ManagerScript : MonoBehaviour {
 
             //start state for the tutorial scene
             case GameState.start:
-                
-                //timer for tutorial canvas
-                tutorialTimer -= Time.deltaTime;
-
-                //cast to integer
-                int tempTime = (int)tutorialTimer;
-
-                //display current time left on tutorial screen
-                tutorialTimeTxt.text = tempTime.ToString();
-
-
-                if (tutorialTimer <= 0.0f)
-                {
-                    //destroy the tutorial screen and move on to the transition state
-                    Destroy(newCanvas);
-                    m_gameState = GameState.transition;
-                }
-
-
+                DisplayTutorial();
                 break;
             //transition between overworld and minigame
             case GameState.transition:
