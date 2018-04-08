@@ -45,6 +45,12 @@ public class PieThrowManagerScript : MonoBehaviour
 	private GameObject newCanvas;
 	private bool isEnd;
 
+    public GameObject tutorialCanvas;
+    public float tutorialTimer;
+    private Text tutorialTimerTxt;
+
+
+
 	public GameObject handSpawn;
 	private HandSpawn handSpawnScript;
 
@@ -78,6 +84,13 @@ public class PieThrowManagerScript : MonoBehaviour
 
 		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
 
+        newCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+
+        tutorialTimerTxt = GUIText.FindObjectOfType<Text>();
+        
+       
+
+
 		//Iterate through the length of the portrait scripts
 		for (int i = 0; i < portraits.Length; i++) 
 		{
@@ -104,7 +117,16 @@ public class PieThrowManagerScript : MonoBehaviour
         {
             case GAMESTATE.Start:
                 //start FUNC only;
-				m_currState = GAMESTATE.Playing;
+                tutorialTimer -= Time.deltaTime;
+                int tempTime = (int)tutorialTimer;
+
+                tutorialTimerTxt.text = tempTime.ToString();
+
+                if (tutorialTimer <= 0.0f)
+                {
+                    Destroy(newCanvas);
+                    m_currState = GAMESTATE.Playing;
+                }
                 break;
 		case GAMESTATE.Playing:
                 // Normal Gameplay
@@ -112,6 +134,8 @@ public class PieThrowManagerScript : MonoBehaviour
 			GameTimer ();
 			//DisplayScore ();
 			SpawnPed ();
+
+
 			if (timeLeft <= 0.0f) {
 				m_currState = GAMESTATE.Finished;
 				isEnd = true;
@@ -259,7 +283,7 @@ public class PieThrowManagerScript : MonoBehaviour
 
 			//destroy the hand object and for mouse controls set the cursor to visible
 			handSpawnScript.Destroy ();
-			//delete the current game canva
+			//delete the current game canvas
 			Destroy (gameCanvas);
 			//DisplayScore ();
 			Cursor.visible = true;

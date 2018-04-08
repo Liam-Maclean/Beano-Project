@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/Scenes/MoleControl.unity
+- path: Assets/Resources/Scenes/PieThrowScene.unity
   isLoaded: 1
   isActive: 1
