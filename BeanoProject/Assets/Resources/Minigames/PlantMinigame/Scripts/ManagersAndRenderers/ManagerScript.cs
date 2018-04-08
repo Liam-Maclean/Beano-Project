@@ -19,6 +19,7 @@ using UnityEngine.UI;
 //gamestates for the game
 enum GameState
 {
+    start,
 	transition,
 	countdown,
 	playing,
@@ -84,7 +85,7 @@ public class ManagerScript : MonoBehaviour {
 	private PortaitScript m_LocalPlayerStats;
 
 	//gamestate 
-	private GameState m_gameState = GameState.transition;
+	private GameState m_gameState = GameState.start;
 
 	//The plant grid has been instantiated.
 	private bool m_gridGenerated = false;
@@ -113,6 +114,11 @@ public class ManagerScript : MonoBehaviour {
 	private List<PortaitScript> m_portraitScripts = new List<PortaitScript> ();
 	private GameObject[] m_portraits;
 
+    //Tutorial variables
+    public Canvas tutorialCanvas;
+    private Canvas newCanvas;
+    private Text tutorialTimeTxt;
+    public float tutorialTimer;
 
 	//Game Ended boolean function
 	public bool GameEnded()
@@ -179,10 +185,12 @@ public class ManagerScript : MonoBehaviour {
 			}
 		}
 
+        newCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        tutorialTimeTxt = GUIText.FindObjectOfType<Text>();
 
 
-		//initialise timer
-		m_gameTimer = (int)gameDuration;
+        //initialise timer
+        m_gameTimer = (int)gameDuration;
 
 		//floating text manager public static utility class initialisation
 		FloatingTextManager.Initialise ();
@@ -240,47 +248,69 @@ public class ManagerScript : MonoBehaviour {
         //for every game state 
         switch (m_gameState) {
 
-            //transition between overworld and minigame
-            case GameState.transition:
-
-                //fade in animation
-                if (FadeInAnimation.AnimationEnded()) {
-
-                    //Display tutorial
-                    if (!bTutorialCanvasInstantiated) {
-                        InstantiateTutorialCanvasOnce();
-                        Destroy(m_tutorialCanvas);
-                    }
-
-
+            //start state for the tutorial scene
+            case GameState.start:
                 
+                //timer for tutorial canvas
+                tutorialTimer -= Time.deltaTime;
 
-                    if (!bMoleAnimationInstantiated)
-                    {
-                        //Instantiate mole plane animation
-                        MolePlaneAnim = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane")) as GameObject;
-                        MoleAnimation = MolePlaneAnim.GetComponent<StopAnimationScript>();
-                        bMoleAnimationInstantiated = true;
-                    }
+                //cast to integer
+                int tempTime = (int)tutorialTimer;
+
+                //display current time left on tutorial screen
+                tutorialTimeTxt.text = tempTime.ToString();
 
 
-                    if (MoleAnimation.AnimationEnded())
-                    {
-                        //Instantiate countdown text for countdown phase
-                        GameObject countDownObject = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
-                        countDownObject.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
-                        countDownObject.transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
-                        countDownScript = GameObject.Find("CountDownText(Clone)").GetComponent<CountDownScript>();
-                        m_gameState = GameState.countdown;
-                    }
+                if (tutorialTimer <= 0.0f)
+                {
+                    //destroy the tutorial screen and move on to the transition state
+                    Destroy(newCanvas);
+                    m_gameState = GameState.transition;
                 }
 
 
-
-                //Transition period between overworld and minigame before game countdown
-                //Possible tutorial page
-                //wait for everyone to be connected and synced
                 break;
+            //transition between overworld and minigame
+            case GameState.transition:
+
+                    //fade in animation
+                if (FadeInAnimation.AnimationEnded())
+                {
+ 
+
+                        //Display tutorial
+                      //  if (!bTutorialCanvasInstantiated)
+                      //  {
+                      //      InstantiateTutorialCanvasOnce();
+                      //      Destroy(m_tutorialCanvas);
+                      //  }
+
+                        if (!bMoleAnimationInstantiated)
+                        {
+                            //Instantiate mole plane animation
+                            MolePlaneAnim = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane")) as GameObject;
+                            MoleAnimation = MolePlaneAnim.GetComponent<StopAnimationScript>();
+                            bMoleAnimationInstantiated = true;
+                        }
+
+
+                        if (MoleAnimation.AnimationEnded())
+                        {
+                            //Instantiate countdown text for countdown phase
+                            GameObject countDownObject = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
+                            countDownObject.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
+                            countDownObject.transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
+                            countDownScript = GameObject.Find("CountDownText(Clone)").GetComponent<CountDownScript>();
+                            m_gameState = GameState.countdown;
+                        }
+                    
+
+
+                }
+                    //Transition period between overworld and minigame before game countdown
+                    //Possible tutorial page
+                    //wait for everyone to be connected and synced
+                    break;
 
             //countdown before game begins
             case GameState.countdown:
@@ -290,6 +320,8 @@ public class ManagerScript : MonoBehaviour {
                     Destroy(MolePlaneAnim);
                     m_gameState = GameState.playing;
                 }
+        
+
                 break;
 
             //playing the game

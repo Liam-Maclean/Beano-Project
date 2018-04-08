@@ -158,6 +158,9 @@ MonoBehaviour:
   Player2: {fileID: 0}
   Player3: {fileID: 0}
   Player4: {fileID: 0}
+  tutorialCanvas: {fileID: 223936917447364224, guid: f0cd1c6ba6559934a80e7852cac022c9,
+    type: 2}
+  tutorialTimer: 6
 --- !u!114 &82647357
 MonoBehaviour:
   m_ObjectHideFlags: 0

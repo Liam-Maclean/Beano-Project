@@ -49,8 +49,6 @@ public class PieThrowManagerScript : MonoBehaviour
     public float tutorialTimer;
     private Text tutorialTimerTxt;
 
-
-
 	public GameObject handSpawn;
 	private HandSpawn handSpawnScript;
 
@@ -117,13 +115,18 @@ public class PieThrowManagerScript : MonoBehaviour
         {
             case GAMESTATE.Start:
                 //start FUNC only;
+                
+                //timer for the tutorial canvas
                 tutorialTimer -= Time.deltaTime;
-                int tempTime = (int)tutorialTimer;
 
+                //cast to integer
+                int tempTime = (int)tutorialTimer;
+                //display current time left on the tutorial canvas
                 tutorialTimerTxt.text = tempTime.ToString();
 
                 if (tutorialTimer <= 0.0f)
                 {
+                    //destroy the tutorial canvas and set state to playing 
                     Destroy(newCanvas);
                     m_currState = GAMESTATE.Playing;
                 }
