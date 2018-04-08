@@ -40,6 +40,13 @@ public class MoleGameManagerScript : MonoBehaviour
 
     private PortaitScript m_localPortrait;
 
+    public Canvas tutorialCanvas;
+    private Canvas newCanvas;
+    public float tutorialTimer;
+    private Text tutorialTimerTxt;
+
+
+
     // Called on launch
     void Awake()
     {
@@ -76,12 +83,38 @@ public class MoleGameManagerScript : MonoBehaviour
             }
         }
 
+
+        newCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+
         m_background = GameObject.FindGameObjectWithTag("Background");
+        tutorialTimerTxt = GUIText.FindObjectOfType<Text>();
+
 
         m_gameTime = startTime;
 
         m_isOldTouch = false;
     }
+
+    void DisplayTutorial()
+    {
+        //tutorial timer
+        tutorialTimer -= Time.deltaTime;
+
+        //cast to integer
+        int tempTime = (int)tutorialTimer;
+
+        //display current tutorial time
+        tutorialTimerTxt.text = tempTime.ToString();
+
+
+        if (tutorialTimer <= 0.0f)
+        {
+            //when the timer hits 0 destroy the tutorial canvas and change states
+            Destroy(newCanvas);
+            m_currState = GameState.Playing;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -98,7 +131,8 @@ public class MoleGameManagerScript : MonoBehaviour
                 break;
             case GameState.Starting:
                 // countdown and intro animation
-                m_currState = GameState.Playing;
+
+                DisplayTutorial();
                 break;
             case GameState.Playing:
                 if (m_gameTime > 0)
