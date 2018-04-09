@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
-public class Networker : MonoBehaviour {
+public class Networker : NetworkBehaviour {
 
 	public int persistentCurrency;
     public string handle;
@@ -30,8 +32,15 @@ public class Networker : MonoBehaviour {
 
 	}
 
-	//to be used both when purchasing and being rewarded, changes currency by passed amount
-	void UpdatePersistentCurrency(int change)
+    [ClientRpc]
+    public void RpcLoadGame(int sceneIndex)
+    {
+        SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+        FindObjectOfType<OverworldScript>().SceneToUnload = sceneIndex;
+    }
+
+    //to be used both when purchasing and being rewarded, changes currency by passed amount
+    void UpdatePersistentCurrency(int change)
 	{
 		persistentCurrency += change;
 		PlayerPrefs.SetInt("Currency", persistentCurrency);

@@ -20,6 +20,8 @@ public class PlayerScript : MonoBehaviour
 
     private bool m_oldTargetMet;
 
+    bool loadingScene = false;
+
     //PUBLIC FOR TESTING PERPOSES ONLY ---to be made private!---
     public int m_playerID;
     public int m_sausageCount;
@@ -58,6 +60,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (gameState == GameState.Playing)
         {
+            loadingScene = false;
             m_currPos = transform.position;
 
             if (m_oldTargetMet)
@@ -168,13 +171,17 @@ public class PlayerScript : MonoBehaviour
             //{
             //    SceneManager.LoadScene(FindObjectOfType<OverworldScript>().SceneToUnload, LoadSceneMode.Additive);
             //}
-            if (SceneManager.GetSceneByBuildIndex(FindObjectOfType<OverworldScript>().SceneToUnload).isLoaded == false)
+            if (FindObjectOfType<OverworldScript>().SceneToUnload != 0)
             {
-                SceneManager.LoadScene(FindObjectOfType<OverworldScript>().SceneToUnload, LoadSceneMode.Additive);
-            }
-            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
-            {
-                SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(FindObjectOfType<OverworldScript>().SceneToUnload));
+                if (!loadingScene)
+                {
+                   // SceneManager.LoadScene(FindObjectOfType<OverworldScript>().SceneToUnload, LoadSceneMode.Additive);
+                    loadingScene = true;
+                }
+                if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
+                {
+                    SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(FindObjectOfType<OverworldScript>().SceneToUnload));
+                }
             }
             if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
             {

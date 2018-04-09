@@ -17,6 +17,7 @@ TagManager:
   - slingshot
   - PedSpawner
   - txt
+  - SceneController
   layers:
   - Default
   - TransparentFX

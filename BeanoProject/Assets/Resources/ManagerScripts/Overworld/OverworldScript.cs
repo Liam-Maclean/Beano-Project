@@ -40,7 +40,7 @@ public class OverworldScript : MonoBehaviour
     void Start()
     {
         m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
-        m_clientID = m_playerIDObject.GetComponent<CustomLobby>().playerDetails.Identifier;
+        m_clientID = CustomLobby.local.playerDetails.Identifier;
         currPlayersTESTING = FindObjectsOfType<CustomLobby>().Length;
 
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -127,11 +127,11 @@ public class OverworldScript : MonoBehaviour
 
                     minigameBiome = (Biome)node.GetComponent<NodeScript>().GetBiomeType();
 
-                    if (m_clientID.Value == 1) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
+                    if (CustomLobby.local.isServer) // NEED TO MATCH ALL CLIENTS TO THE SAME GAME (player 1 will select minigame and will signal the other players the option chosen)
                     {
                         LoadMinigameHost();
                     }
-
+                    
                     Stop();
                 }
                 break;
@@ -141,7 +141,7 @@ public class OverworldScript : MonoBehaviour
         PushNode();
 
        
-        cloneCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
+        mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
     }
 
     public void LoadMinigameHost()
@@ -153,7 +153,11 @@ public class OverworldScript : MonoBehaviour
         {
             if (x<i)
             {
-                m_playerIDObject.GetComponent<CustomLobby>().Scene = Selector.activeMinigames[indexInMinigameList];
+                GameObject sceneControlObj = GameObject.FindGameObjectWithTag("SceneController");
+                sceneControlObj.GetComponent<Networker>().RpcLoadGame(Selector.activeMinigames[indexInMinigameList]);
+                SceneToUnload = Selector.activeMinigames[indexInMinigameList];
+               // FindObjectOfType<Networker>().RpcLoadGame(Selector.activeMinigames[indexInMinigameList]);
+                // SceneManager.LoadSceneAsync(Selector.activeMinigames[indexInMinigameList], LoadSceneMode.Additive);
                 goto BreakOut;
             }
             ++indexInMinigameList;
