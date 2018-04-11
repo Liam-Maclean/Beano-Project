@@ -241,7 +241,7 @@ public class PieThrowManagerScript : MonoBehaviour
             //if it is a special pedestrian then flip it so they walk left to right
             else
             {
-                newPed.transform.localScale = new Vector3(1.5f, 1.5f, 1.0f);
+                newPed.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             }
 
         }

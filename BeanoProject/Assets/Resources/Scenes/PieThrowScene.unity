@@ -562,8 +562,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 969357731}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.005, y: -0.01, z: 20}
-  m_LocalScale: {x: 1.125567, y: 1.0233039, z: 1}
+  m_LocalPosition: {x: -0.006, y: -0.01, z: 20}
+  m_LocalScale: {x: 1.0220606, y: 1.0233039, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1099,6 +1099,7 @@ GameObject:
   - component: {fileID: 1546968122}
   - component: {fileID: 1546968121}
   - component: {fileID: 1546968120}
+  - component: {fileID: 1546968125}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1176,6 +1177,86 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1546968125
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1546968119}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: c16652db44518894db5e15a206a8f564, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1777160535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,11 +1443,11 @@ MonoBehaviour:
   maxZDist: 10
   timer: {fileID: 1225035494}
   timeLeft: 45
-  spawnRateMin: 3
-  spawnRateMax: 5
+  spawnRateMin: 2
+  spawnRateMax: 2
   aircraftOdds: 0.25
   basicPedTypes: 9
-  specialTypes: 1
+  specialTypes: 2
   targetPos: {x: -14, y: 0}
   xFlipDistance: 28
   pedPrefabs:
@@ -1379,6 +1460,7 @@ MonoBehaviour:
   - {fileID: 1883354798948832, guid: 6dc9cd92a00505d409a5b415313920db, type: 2}
   - {fileID: 1677604071873134, guid: 69f2a25b497220d4e9a95bb2fa13037e, type: 2}
   - {fileID: 1277921582355682, guid: ae12e720724d49a4cbc6bf948226016f, type: 2}
+  - {fileID: 1643570215377598, guid: 98be89e943128054b9b379119b014fd1, type: 2}
   - {fileID: 1643570215377598, guid: 98be89e943128054b9b379119b014fd1, type: 2}
   readyMenuAnim: {fileID: 0}
   readyMenu: {fileID: 0}
