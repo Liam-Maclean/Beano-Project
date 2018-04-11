@@ -60,6 +60,10 @@ public class PieAttackScript : MonoBehaviour {
 
 					//get the animator component to transition the animation states
 					Animator pedAnimator = hit [i].collider.gameObject.GetComponent<Animator> ();
+                    AudioSource pedSound = hit[i].collider.gameObject.GetComponent<AudioSource>();
+
+                    pedSound.Play();
+
 					pedAnimator.Play ("Impact");
 					//stop the move speed to allow the animation to play
 					pedScript.SetMoveSpeed (0.0f);
