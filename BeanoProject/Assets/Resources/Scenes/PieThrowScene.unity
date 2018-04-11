@@ -473,7 +473,7 @@ RectTransform:
   - {fileID: 1777160536}
   - {fileID: 826257971}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.869}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -992,7 +992,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1497697680
 RectTransform:
@@ -1385,6 +1385,9 @@ MonoBehaviour:
   gameCanvas: {fileID: 946144203}
   endGameCanvas: {fileID: 1055955927050498, guid: 4f488da5c6e3963438e3228c4d2ba357,
     type: 2}
+  tutorialCanvas: {fileID: 1410451226646154, guid: 8ff09ef6d642d524f922506d449eecd4,
+    type: 2}
+  tutorialTimer: 6
   handSpawn: {fileID: 313527899}
 --- !u!4 &1872624345
 Transform:

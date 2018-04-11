@@ -19,6 +19,7 @@ using UnityEngine.UI;
 //gamestates for the game
 enum GameState
 {
+    start,
 	transition,
 	countdown,
 	playing,
@@ -84,7 +85,7 @@ public class ManagerScript : MonoBehaviour {
 	private PortaitScript m_LocalPlayerStats;
 
 	//gamestate 
-	private GameState m_gameState = GameState.transition;
+	private GameState m_gameState = GameState.start;
 
 	//The plant grid has been instantiated.
 	private bool m_gridGenerated = false;
@@ -113,6 +114,11 @@ public class ManagerScript : MonoBehaviour {
 	private List<PortaitScript> m_portraitScripts = new List<PortaitScript> ();
 	private GameObject[] m_portraits;
 
+    //Tutorial variables
+    public Canvas tutorialCanvas;
+    private Canvas newCanvas;
+    private Text tutorialTimeTxt;
+    public float tutorialTimer;
 
 	//Game Ended boolean function
 	public bool GameEnded()
@@ -179,10 +185,12 @@ public class ManagerScript : MonoBehaviour {
 			}
 		}
 
+        newCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+        tutorialTimeTxt = GUIText.FindObjectOfType<Text>();
 
 
-		//initialise timer
-		m_gameTimer = (int)gameDuration;
+        //initialise timer
+        m_gameTimer = (int)gameDuration;
 
 		//floating text manager public static utility class initialisation
 		FloatingTextManager.Initialise ();
@@ -233,54 +241,78 @@ public class ManagerScript : MonoBehaviour {
 		}
 	}
 
+    void DisplayTutorial()
+    {
+        //tutorial timer
+        tutorialTimer -= Time.deltaTime;
+
+        //cast to integer
+        int tempTime = (int)tutorialTimer;
+
+        //display current tutorial time
+        tutorialTimeTxt.text = tempTime.ToString();
+
+
+        if (tutorialTimer <= 0.0f)
+        {
+            //when the timer hits 0 destroy the tutorial canvas and change states
+            Destroy(newCanvas);
+            m_gameState = GameState.transition;
+        }
+    }
+
     //update function
-	void Update()
+    void Update()
 	{
 
         //for every game state 
         switch (m_gameState) {
 
+            //start state for the tutorial scene
+            case GameState.start:
+                DisplayTutorial();
+                break;
             //transition between overworld and minigame
             case GameState.transition:
 
-                //fade in animation
-                if (FadeInAnimation.AnimationEnded()) {
+                    //fade in animation
+                if (FadeInAnimation.AnimationEnded())
+                {
+ 
 
-                    //Display tutorial
-                    if (!bTutorialCanvasInstantiated) {
-                        InstantiateTutorialCanvasOnce();
-                        Destroy(m_tutorialCanvas);
-                    }
+                        //Display tutorial
+                      //  if (!bTutorialCanvasInstantiated)
+                      //  {
+                      //      InstantiateTutorialCanvasOnce();
+                      //      Destroy(m_tutorialCanvas);
+                      //  }
+
+                        if (!bMoleAnimationInstantiated)
+                        {
+                            //Instantiate mole plane animation
+                            MolePlaneAnim = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane")) as GameObject;
+                            MoleAnimation = MolePlaneAnim.GetComponent<StopAnimationScript>();
+                            bMoleAnimationInstantiated = true;
+                        }
 
 
-                
+                        if (MoleAnimation.AnimationEnded())
+                        {
+                            //Instantiate countdown text for countdown phase
+                            GameObject countDownObject = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
+                            countDownObject.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
+                            countDownObject.transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
+                            countDownScript = GameObject.Find("CountDownText(Clone)").GetComponent<CountDownScript>();
+                            m_gameState = GameState.countdown;
+                        }
+                    
 
-                    if (!bMoleAnimationInstantiated)
-                    {
-                        //Instantiate mole plane animation
-                        MolePlaneAnim = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane")) as GameObject;
-                        MoleAnimation = MolePlaneAnim.GetComponent<StopAnimationScript>();
-                        bMoleAnimationInstantiated = true;
-                    }
 
-
-                    if (MoleAnimation.AnimationEnded())
-                    {
-                        //Instantiate countdown text for countdown phase
-                        GameObject countDownObject = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
-                        countDownObject.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
-                        countDownObject.transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
-                        countDownScript = GameObject.Find("CountDownText(Clone)").GetComponent<CountDownScript>();
-                        m_gameState = GameState.countdown;
-                    }
                 }
-
-
-
-                //Transition period between overworld and minigame before game countdown
-                //Possible tutorial page
-                //wait for everyone to be connected and synced
-                break;
+                    //Transition period between overworld and minigame before game countdown
+                    //Possible tutorial page
+                    //wait for everyone to be connected and synced
+                    break;
 
             //countdown before game begins
             case GameState.countdown:
@@ -290,6 +322,8 @@ public class ManagerScript : MonoBehaviour {
                     Destroy(MolePlaneAnim);
                     m_gameState = GameState.playing;
                 }
+        
+
                 break;
 
             //playing the game
@@ -339,7 +373,7 @@ public class ManagerScript : MonoBehaviour {
                                 if (!bFadeOutAnimationInstantiated)
                                 {
                                     //instantiate it 
-                                    GameObject FadeOutObj = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/FadeOut")) as GameObject;
+								GameObject FadeOutObj = Instantiate(Resources.Load("Minigames/UniversalMinigamePrefabs/FadeOut")) as GameObject;
                                     FadeOutObj.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
                                     FadeOutObj.transform.localScale = new Vector3(100, 100, 100);
                                     FadeOutAnimation = FadeOutObj.GetComponent<StopAnimationScript>();

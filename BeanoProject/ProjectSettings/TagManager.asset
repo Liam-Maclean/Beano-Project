@@ -8,6 +8,16 @@ TagManager:
   - pie
   - Enemy
   - Portrait
+  - Mole
+  - Hand
+  - Friendly
+  - Background
+  - MoleManager
+  - PieSpawner
+  - slingshot
+  - PedSpawner
+  - txt
+  - SceneController
   layers:
   - Default
   - TransparentFX

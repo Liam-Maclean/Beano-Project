@@ -214,6 +214,17 @@ Prefab:
       propertyPath: timeRemaining
       value: 
       objectReference: {fileID: 1821659972}
+    - target: {fileID: 114369465384332140, guid: 04076f20c962fd24ab5e45fd310716e2,
+        type: 2}
+      propertyPath: tutorialTimer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114369465384332140, guid: 04076f20c962fd24ab5e45fd310716e2,
+        type: 2}
+      propertyPath: tutorialCanvas
+      value: 
+      objectReference: {fileID: 223510670166754918, guid: 18b87008c0d3fc34f9d60c6f68174c49,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04076f20c962fd24ab5e45fd310716e2, type: 2}
   m_IsPrefabParent: 0

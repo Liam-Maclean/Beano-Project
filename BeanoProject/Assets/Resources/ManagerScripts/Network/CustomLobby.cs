@@ -293,8 +293,8 @@ public class CustomLobby : NetworkLobbyPlayer {
             return;
         }
         FindObjectOfType<OverworldScript>().SceneToUnload = scene;
-        SceneManager.LoadScene(scene, LoadSceneMode.Additive);
-        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(scene));
+        //SceneManager.LoadScene(scene, LoadSceneMode.Additive);
+        //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(scene));
     }
 
     public void ReadyPlayerFUN(bool loaded)
