@@ -18,6 +18,7 @@ TagManager:
   - PedSpawner
   - txt
   - SceneController
+  - UItag
   layers:
   - Default
   - TransparentFX

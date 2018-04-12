@@ -194,6 +194,12 @@ Prefab:
       propertyPath: timeRemaining
       value: 
       objectReference: {fileID: 1821659972}
+    - target: {fileID: 114369465384332140, guid: 04076f20c962fd24ab5e45fd310716e2,
+        type: 2}
+      propertyPath: fadeOutPrefab
+      value: 
+      objectReference: {fileID: 1482002012006218, guid: 1e901396d49114f41a1bfd87e52534bc,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04076f20c962fd24ab5e45fd310716e2, type: 2}
   m_IsPrefabParent: 0
@@ -209,7 +215,7 @@ GameObject:
   - component: {fileID: 872375457}
   m_Layer: 5
   m_Name: Timer Background
-  m_TagString: Untagged
+  m_TagString: txt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,7 +375,7 @@ GameObject:
   - component: {fileID: 1593732508}
   m_Layer: 5
   m_Name: MinigameCanvas
-  m_TagString: Untagged
+  m_TagString: UItag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
