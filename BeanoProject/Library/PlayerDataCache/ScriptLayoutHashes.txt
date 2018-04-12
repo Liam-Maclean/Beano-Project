@@ -1,4 +1,4 @@
-iOS
+Android
 477a8900d9d28ab2c2f38c40b3658881 Assembly-CSharp.dll:.DoubleScorePlant
 6bd51d8fb884a1ff56df57b2f7717447 Assembly-CSharp.dll:.FingerScript
 dc07d7ad69b399a46e92c483bf1c04ca UnityEngine.Analytics.dll:UnityEngine.Analytics.AnalyticsTracker
@@ -166,7 +166,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 4e6f2b84f2f4ea321c73d8a34cbbbced Assembly-CSharp.dll:.PlantScriptManager
 b46c9649eab67fc760045ab7ecb1613e Assembly-CSharp.dll:.EnemyManagerScript
-ade9116465a89f24ee92c199dd332f2e Assembly-CSharp.dll:.MoleGameManagerScript
+86dfc03698ed2345722de62943462de9 Assembly-CSharp.dll:.MoleGameManagerScript
 7f2ba957c6092f4788f2412d966c36ed Assembly-CSharp.dll:.TouchEffector
 20515b42751dd8d4b47eb1e2bcd5945b Assembly-CSharp.dll:.ManagerScript
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
