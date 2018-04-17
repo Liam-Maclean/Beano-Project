@@ -31,7 +31,7 @@ public class OverworldScript : MonoBehaviour
 
     public SpriteRenderer background;
 
-
+	private GameObject animationSprites;
     void Awake()
     {
         m_players = new List<GameObject>();
@@ -40,6 +40,7 @@ public class OverworldScript : MonoBehaviour
 
     void Start()
     {
+		animationSprites = GameObject.Find ("OverworldBackground");
         m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
         m_clientID = CustomLobby.local.playerDetails.Identifier;
         currPlayersTESTING = FindObjectsOfType<CustomLobby>().Length;
@@ -205,11 +206,13 @@ public class OverworldScript : MonoBehaviour
 			
         mainCamera.SetActive(false);
         background.enabled = false;
+		animationSprites.SetActive (false);
     }
 
     public void Resume()
     {
        
+
         FindObjectOfType<PlayerScript>().GetComponent<SpriteRenderer>().enabled = true;
         SceneManager.UnloadSceneAsync(SceneToUnload);
        // m_playerIDObject.GetComponent<CustomLobby>().Scene = 0;
@@ -221,6 +224,7 @@ public class OverworldScript : MonoBehaviour
         }
         background.enabled = true;
         mainCamera.SetActive(true);
+		animationSprites.SetActive (true);
         //cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         //cloneCamera.SetActive(true);
     }

@@ -183,10 +183,11 @@ public class PlayerScript : MonoBehaviour
                 }
                 if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
                 {
+					//if a transition has not already been instantiated
 					if (GameObject.FindGameObjectsWithTag ("Transition").Length == 0) {
+						//instantiate a transition to the scene we want to load
 						transition.InstantiateTransitionPrefab (FindObjectOfType<OverworldScript> ().SceneToUnload.ToString (), LoadSceneMode.Additive, true);
 					}
-                    //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(FindObjectOfType<OverworldScript>().SceneToUnload));
                 }
             }
             if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
