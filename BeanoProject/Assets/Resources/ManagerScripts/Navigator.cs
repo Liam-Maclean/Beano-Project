@@ -54,7 +54,7 @@ public class Navigator : MonoBehaviour {
 	//open lobby
 	public void StartShortGame()
 	{
-		transitionScript.InstantiateTransitionPrefab ("Loading", LoadSceneMode.Single);
+		transitionScript.InstantiateTransitionPrefab ("Loading", LoadSceneMode.Single,false);
 		transitionScript.Transition();
 		//needs variable for game length added
 		PlayerPrefs.SetInt("Game Length", 5);                       //Variable added, will look at other ways to do this; it is not automatically zeroed on game start. This can be added or it may not be
@@ -64,7 +64,7 @@ public class Navigator : MonoBehaviour {
 	//open lobby
 	public void StartLongGame()
 	{
-		transitionScript.InstantiateTransitionPrefab ("Loading", LoadSceneMode.Single);
+		transitionScript.InstantiateTransitionPrefab ("Loading", LoadSceneMode.Single, false);
 		transitionScript.Transition();
 		//needs variable for game length added
 		PlayerPrefs.SetInt("Game Length", 20);                      //Variable added

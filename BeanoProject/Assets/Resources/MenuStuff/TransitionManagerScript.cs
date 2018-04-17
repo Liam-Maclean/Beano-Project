@@ -8,7 +8,17 @@ public class TransitionManagerScript : MonoBehaviour {
 	private Animator m_animator;
 	private string m_sceneNumberToChangeTo;
 	private LoadSceneMode m_loadSceneMode;
+	private bool m_loadAsynchronously;
 
+	public bool GetLoadAsynchronously()
+	{
+		return m_loadAsynchronously;
+	}
+
+	public void SetLoadAsynchronously(bool sync)
+	{
+		m_loadAsynchronously = sync;
+	}
 
 	public LoadSceneMode GetLoadSceneMode()
 	{

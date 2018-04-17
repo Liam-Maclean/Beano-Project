@@ -39,8 +39,11 @@ public class PlayerScript : MonoBehaviour
     };
     public GameState gameState;
 
+	public SceneTransition transition;
+
     void Start ()
     {
+		transition = GameObject.Find ("Transition").GetComponent<SceneTransition>();
         m_oldTargetMet = false;
         m_currPos = transform.position;
         m_oldPos = m_currPos;
@@ -180,7 +183,10 @@ public class PlayerScript : MonoBehaviour
                 }
                 if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3))
                 {
-                    SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(FindObjectOfType<OverworldScript>().SceneToUnload));
+					if (GameObject.FindGameObjectsWithTag ("Transition").Length == 0) {
+						transition.InstantiateTransitionPrefab (FindObjectOfType<OverworldScript> ().SceneToUnload.ToString (), LoadSceneMode.Additive, true);
+					}
+                    //SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(FindObjectOfType<OverworldScript>().SceneToUnload));
                 }
             }
             if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
