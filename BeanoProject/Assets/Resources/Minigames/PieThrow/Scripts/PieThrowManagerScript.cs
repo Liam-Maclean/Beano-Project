@@ -45,6 +45,10 @@ public class PieThrowManagerScript : MonoBehaviour
 	private GameObject newCanvas;
 	private bool isEnd;
 
+    public GameObject tutorialCanvas;
+    public float tutorialTimer;
+    private Text tutorialTimerTxt;
+
 	public GameObject handSpawn;
 	private HandSpawn handSpawnScript;
 
@@ -78,6 +82,13 @@ public class PieThrowManagerScript : MonoBehaviour
 
 		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
 
+        newCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+
+        tutorialTimerTxt = GUIText.FindObjectOfType<Text>();
+        
+       
+
+
 		//Iterate through the length of the portrait scripts
 		for (int i = 0; i < portraits.Length; i++) 
 		{
@@ -96,6 +107,26 @@ public class PieThrowManagerScript : MonoBehaviour
 		handSpawnScript = handSpawn.GetComponent<HandSpawn> ();
 
 	}
+
+
+    void DisplayTutorial()
+    {
+
+        //timer for the tutorial canvas
+        tutorialTimer -= Time.deltaTime;
+
+        //cast to integer
+        int tempTime = (int)tutorialTimer;
+        //display current time left on the tutorial canvas
+        tutorialTimerTxt.text = tempTime.ToString();
+
+        if (tutorialTimer <= 0.0f)
+        {
+            //destroy the tutorial canvas and set state to playing 
+            Destroy(newCanvas);
+            m_currState = GAMESTATE.Playing;
+        }
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -103,19 +134,20 @@ public class PieThrowManagerScript : MonoBehaviour
 		switch (m_currState)
         {
             case GAMESTATE.Start:
-                //start FUNC only;
-				m_currState = GAMESTATE.Playing;
+                //Tutorial canvas
+                DisplayTutorial();
                 break;
-		case GAMESTATE.Playing:
-                // Normal Gameplay
-				//Overall game timer
-			GameTimer ();
-			//DisplayScore ();
-			SpawnPed ();
-			if (timeLeft <= 0.0f) {
-				m_currState = GAMESTATE.Finished;
-				isEnd = true;
-			}
+		    case GAMESTATE.Playing:   
+			    //Overall game timer
+			    GameTimer ();
+			    //DisplayScore ();
+			    SpawnPed ();
+
+
+			    if (timeLeft <= 0.0f) {
+			    	m_currState = GAMESTATE.Finished;
+			    	isEnd = true;
+			    }
                 break;
             case GAMESTATE.Finished:
                 // Outro Plz
@@ -209,7 +241,7 @@ public class PieThrowManagerScript : MonoBehaviour
             //if it is a special pedestrian then flip it so they walk left to right
             else
             {
-                newPed.transform.localScale = new Vector3(1.5f, 1.5f, 1.0f);
+                newPed.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
             }
 
         }
@@ -259,7 +291,7 @@ public class PieThrowManagerScript : MonoBehaviour
 
 			//destroy the hand object and for mouse controls set the cursor to visible
 			handSpawnScript.Destroy ();
-			//delete the current game canva
+			//delete the current game canvas
 			Destroy (gameCanvas);
 			//DisplayScore ();
 			Cursor.visible = true;
