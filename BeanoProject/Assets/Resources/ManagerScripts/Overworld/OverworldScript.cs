@@ -31,6 +31,7 @@ public class OverworldScript : MonoBehaviour
 
     public SpriteRenderer background;
 
+
     void Awake()
     {
         m_players = new List<GameObject>();
@@ -201,6 +202,7 @@ public class OverworldScript : MonoBehaviour
         {
             player.gameState = PlayerScript.GameState.InGame;
         }
+			
         mainCamera.SetActive(false);
         background.enabled = false;
     }

@@ -15,21 +15,24 @@ public class SceneTransition : MonoBehaviour {
 		DontDestroyOnLoad (transitionPrefab);
 		//DontDestroyOnLoad(gameObject);
 		DontDestroyOnLoad(canvas);
+		canvas.enabled = true;
 	}
 
 	// Use this for initialization
 	void Start () {
-
+		
 	}
 
 	//Instantiates transition Prefab
-	public void InstantiateTransitionPrefab(string sceneToChangeTo, LoadSceneMode sceneMode)
+	public void InstantiateTransitionPrefab(string sceneToChangeTo, LoadSceneMode sceneMode, bool loadAsync)
 	{
 		transitionPrefab = Instantiate (Resources.Load ("MenuStuff/TransitionPrefab")) as GameObject;
 		transitionPrefab.transform.SetParent (canvas.transform);
 		transitionPrefab.transform.localPosition = new Vector3 (0, 0, 0);
 		transitionPrefab.GetComponent<TransitionManagerScript> ().SetSceneNumberToChangeTo (sceneToChangeTo);
 		transitionPrefab.GetComponent<TransitionManagerScript> ().SetLoadSceneMode (sceneMode);
+		transitionPrefab.GetComponent<TransitionManagerScript> ().SetLoadAsynchronously (loadAsync);
+	
 	}
 
 
@@ -50,7 +53,7 @@ public class SceneTransition : MonoBehaviour {
 
 	public void Transition()
 	{
-		canvas.enabled = !canvas.enabled;
+		canvas.enabled = true;
 		startTransition = !startTransition;
 	}
 }
