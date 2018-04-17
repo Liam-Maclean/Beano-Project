@@ -1,13 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// <summary>
+/// Transition Behaviour
+/// 
+/// contains the functions for the states at which the animation is in
+/// 
+/// Destroys self on enter state
+/// 
+/// Liam MacLean 14:41, 17/04/2018
+/// </summary>
 
 public class TransitionBehaviour : StateMachineBehaviour {
+	//the gameobject this animation is attached to
 	GameObject thisObject;
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+
+		//get a reference to this object 
 		thisObject = GameObject.FindGameObjectWithTag ("Transition");
+
+		//destroy it 
 		Destroy (thisObject);
 	}
 

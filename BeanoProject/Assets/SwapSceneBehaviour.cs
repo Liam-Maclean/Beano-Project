@@ -2,9 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// Swap scene behaviour.
+/// 
+/// Creates the transition between scenes (loads the scene)
+/// 
+/// can be loaded asynchronously or not, and can define loadmode
+/// 
+/// Liam Maclean 17/04/2018 14:42
+/// </summary>
 public class SwapSceneBehaviour : StateMachineBehaviour {
 
+	//variables
 	GameObject thisGameObject;
 	string sceneToTransitionTo;
 	LoadSceneMode loadMode;
@@ -13,30 +22,30 @@ public class SwapSceneBehaviour : StateMachineBehaviour {
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+
+		//get this object that has the tag "transition"
 		thisGameObject = GameObject.FindGameObjectWithTag ("Transition");
+
+		//Get the values from the transition
 		sceneToTransitionTo = thisGameObject.GetComponent<TransitionManagerScript> ().GetSceneNumberToChangeTo();
 		loadMode = thisGameObject.GetComponent<TransitionManagerScript> ().GetLoadSceneMode ();
 		isAsynchronous = thisGameObject.GetComponent<TransitionManagerScript> ().GetLoadAsynchronously ();
 
-		Debug.Log (loadMode);
-		Debug.Log(sceneToTransitionTo);
-
+		//if it is loaded Asynchronously
 		if (isAsynchronous) {
-
+			//load scene asynchronously
 			SceneManager.LoadSceneAsync(int.Parse(sceneToTransitionTo), loadMode);
-			Debug.Log(SceneManager.GetActiveScene ().buildIndex);
-			Debug.Log ("I got here");
 		}
 		else
 		{
+			//load scene normally
 			SceneManager.LoadScene (sceneToTransitionTo, loadMode);
 		}
-
-		//Destroy (thisGameObject);
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+		//on the next frame (this has to be called on the next frame as the active scene is can only be changed after the first frame)
 		if (sceneToTransitionTo == "4")
 			SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(4));
 		if (sceneToTransitionTo == "5")

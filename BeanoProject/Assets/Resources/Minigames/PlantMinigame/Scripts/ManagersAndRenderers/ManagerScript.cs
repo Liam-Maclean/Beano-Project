@@ -216,7 +216,7 @@ public class ManagerScript : MonoBehaviour {
 	public void SpawnStopAnimation()
 	{
 		//SET UP DIALOGUE BOX SPAWN POINT TO BE REALITVE TO PLAYERS PORTRAIT POSITION
-		stopText = Instantiate (Resources.Load ("Minigames/PlantMinigame/Prefabs/StopText")) as GameObject;
+		stopText = Instantiate (Resources.Load ("Minigames/UniversalMinigamePrefabs/StopText")) as GameObject;
 		stopText.transform.SetParent (GameObject.Find ("MinigameCanvas").transform);
 		stopText.transform.localPosition = new Vector3 (0, 0, 1.0f);
 		stopAnimationScript = stopText.GetComponent<StopAnimationScript> ();
@@ -299,7 +299,7 @@ public class ManagerScript : MonoBehaviour {
                         if (MoleAnimation.AnimationEnded())
                         {
                             //Instantiate countdown text for countdown phase
-                            GameObject countDownObject = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/CountDownText")) as GameObject;
+                            GameObject countDownObject = Instantiate(Resources.Load("Minigames/UniversalMinigamePrefabs/CountDownText")) as GameObject;
                             countDownObject.transform.SetParent(GameObject.Find("MinigameCanvas").transform);
                             countDownObject.transform.localPosition = new Vector3(0.0f, 0.0f, 1.0f);
                             countDownScript = GameObject.Find("CountDownText(Clone)").GetComponent<CountDownScript>();
