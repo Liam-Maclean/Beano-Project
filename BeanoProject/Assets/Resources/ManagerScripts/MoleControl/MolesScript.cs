@@ -7,7 +7,7 @@ public class MolesScript : MonoBehaviour
     public enum MoleType { Normal, Evil, Frozen };
     private MoleType m_currMole;
 
-    public enum MoleState { Enter, Idle, Hit, Exit };
+    public enum MoleState { Enter, Idle, Hit, Exit, EndIt };
     private MoleState m_currState;
 
     public Animator animtor;
@@ -56,9 +56,6 @@ public class MolesScript : MonoBehaviour
 
         m_hitOnce = false;
 
-        //this.GetComponent<SpriteRenderer>().sprite = moleSprites[(int)m_currMole];
-        //this.GetComponent<Animator>().con = moleSprites[(int)m_currMole];
-
         m_currState = MoleState.Enter;
     }
 	
@@ -74,7 +71,6 @@ public class MolesScript : MonoBehaviour
                     m_currState = MoleState.Idle;
                 }
                 break;
-
             case MoleState.Idle:
                 if (m_currTime > 0)
                 {
@@ -91,9 +87,28 @@ public class MolesScript : MonoBehaviour
                 Object.Destroy(this.gameObject);
                 break;
             case MoleState.Exit:
-                m_moleManager.GetComponent<MoleGameManagerScript>().ResetSpawner(m_posID);
-                // Leave Aniamtion
-                Object.Destroy(this.gameObject);
+                switch (m_currMole)
+                {
+                    case MoleType.Normal:
+                        animtor.Play("NormalOUT");
+                        break;
+                    case MoleType.Frozen:
+                        animtor.Play("IceOUT");
+                        break;
+                    case MoleType.Evil:
+                        animtor.Play("BadOUT");
+                        break;
+                    default:
+                        break;
+                }
+                m_currState = MoleState.EndIt;
+                break;
+            case MoleState.EndIt:
+                if (animtor.GetCurrentAnimatorStateInfo(0).IsName("blank"))
+                {
+                    m_moleManager.GetComponent<MoleGameManagerScript>().ResetSpawner(m_posID);
+                    Object.Destroy(this.gameObject);
+                }
                 break;
             default:
                 break;
