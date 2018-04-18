@@ -54,19 +54,21 @@ public class Navigator : MonoBehaviour {
 	//open lobby
 	public void StartShortGame()
 	{
+		transitionScript.InstantiateTransitionPrefab ("Loading", LoadSceneMode.Single,false);
 		transitionScript.Transition();
 		//needs variable for game length added
 		PlayerPrefs.SetInt("Game Length", 5);                       //Variable added, will look at other ways to do this; it is not automatically zeroed on game start. This can be added or it may not be
-		SceneManager.LoadScene("Loading", LoadSceneMode.Single);    // necessary, depending on if and how it is handled during actual gameplay
+		//SceneManager.LoadScene("Loading", LoadSceneMode.Single);    // necessary, depending on if and how it is handled during actual gameplay
 	}
 
 	//open lobby
 	public void StartLongGame()
 	{
+		transitionScript.InstantiateTransitionPrefab ("Loading", LoadSceneMode.Single, false);
 		transitionScript.Transition();
 		//needs variable for game length added
 		PlayerPrefs.SetInt("Game Length", 20);                      //Variable added
-		SceneManager.LoadScene("Loading", LoadSceneMode.Single);
+		//SceneManager.LoadScene("Loading", LoadSceneMode.Single);
 	}
 
 	//go from unlock screen to main menu
