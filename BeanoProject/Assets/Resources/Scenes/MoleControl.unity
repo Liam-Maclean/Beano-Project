@@ -189,26 +189,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1030301905682366, guid: 04076f20c962fd24ab5e45fd310716e2, type: 2}
-      propertyPath: m_TagString
-      value: MoleManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 114369465384332140, guid: 04076f20c962fd24ab5e45fd310716e2,
-        type: 2}
-      propertyPath: hammerPrefab
-      value: 
-      objectReference: {fileID: 1310622919004660, guid: 683c1826fa919f2448f9d533440812b1,
-        type: 2}
-    - target: {fileID: 114369465384332140, guid: 04076f20c962fd24ab5e45fd310716e2,
-        type: 2}
-      propertyPath: startTime
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 114369465384332140, guid: 04076f20c962fd24ab5e45fd310716e2,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114369465384332140, guid: 04076f20c962fd24ab5e45fd310716e2,
         type: 2}
       propertyPath: timeRemaining
@@ -216,14 +196,9 @@ Prefab:
       objectReference: {fileID: 1821659972}
     - target: {fileID: 114369465384332140, guid: 04076f20c962fd24ab5e45fd310716e2,
         type: 2}
-      propertyPath: tutorialTimer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114369465384332140, guid: 04076f20c962fd24ab5e45fd310716e2,
-        type: 2}
-      propertyPath: tutorialCanvas
+      propertyPath: fadeOutPrefab
       value: 
-      objectReference: {fileID: 223510670166754918, guid: 18b87008c0d3fc34f9d60c6f68174c49,
+      objectReference: {fileID: 1482002012006218, guid: 1e901396d49114f41a1bfd87e52534bc,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04076f20c962fd24ab5e45fd310716e2, type: 2}
@@ -240,7 +215,7 @@ GameObject:
   - component: {fileID: 872375457}
   m_Layer: 5
   m_Name: Timer Background
-  m_TagString: Untagged
+  m_TagString: txt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -400,7 +375,7 @@ GameObject:
   - component: {fileID: 1593732508}
   m_Layer: 5
   m_Name: MinigameCanvas
-  m_TagString: Untagged
+  m_TagString: UItag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

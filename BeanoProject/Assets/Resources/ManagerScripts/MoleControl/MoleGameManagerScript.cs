@@ -45,7 +45,9 @@ public class MoleGameManagerScript : MonoBehaviour
     public float tutorialTimer;
     private Text tutorialTimerTxt;
 
-
+    public GameObject levelOutPrefab;
+    public GameObject fadeOutPrefab;
+    private bool m_isEndCalled = false;
 
     // Called on launch
     void Awake()
@@ -218,9 +220,25 @@ public class MoleGameManagerScript : MonoBehaviour
                 m_currState = GameState.Endscreen;
                 break;
             case GameState.Endscreen:
-                // Show scores
-                // Return to overworld button
-                CustomLobby.local.EndMiniGame();
+                if (m_isEndCalled == false)
+                {
+                    GameObject levelOut;
+                    levelOut = Instantiate(levelOutPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+
+                    GameObject fadeOut;
+                    fadeOut = Instantiate(fadeOutPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+                    fadeOut.transform.localScale += new Vector3(3.0f, 3.0f, 0.0f);
+                    GameObject realCanvas;
+                    realCanvas = GameObject.FindGameObjectWithTag("UItag");
+                    fadeOut.transform.SetParent(realCanvas.transform, false);
+
+                    GameObject timerbox;
+                    timerbox = GameObject.FindGameObjectWithTag("txt");
+                    Destroy(timerbox);
+
+                    m_isEndCalled = true;
+                }
+                //CustomLobby.local.EndMiniGame();
                 break;
             default:
                 m_currState = GameState.Endscreen;
