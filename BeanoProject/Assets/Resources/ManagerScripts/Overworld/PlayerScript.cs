@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour
 
     private bool m_oldTargetMet;
 
+	bool loadingTransition = false;
     bool loadingScene = false;
 
     //PUBLIC FOR TESTING PERPOSES ONLY ---to be made private!---
@@ -63,6 +64,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (gameState == GameState.Playing)
         {
+			loadingTransition = false;
             loadingScene = false;
             m_currPos = transform.position;
 
@@ -185,8 +187,11 @@ public class PlayerScript : MonoBehaviour
                 {
 					//if a transition has not already been instantiated
 					if (GameObject.FindGameObjectsWithTag ("Transition").Length == 0) {
-						//instantiate a transition to the scene we want to load
-						transition.InstantiateTransitionPrefab (FindObjectOfType<OverworldScript> ().SceneToUnload.ToString (), LoadSceneMode.Additive, true);
+						if (loadingTransition == false) {
+							loadingTransition = true;
+							//instantiate a transition to the scene we want to load
+							transition.InstantiateTransitionPrefab (FindObjectOfType<OverworldScript> ().SceneToUnload.ToString (), LoadSceneMode.Additive, true);
+						}
 					}
                 }
             }
