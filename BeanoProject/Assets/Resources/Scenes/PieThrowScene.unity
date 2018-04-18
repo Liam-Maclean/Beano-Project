@@ -1443,8 +1443,8 @@ MonoBehaviour:
   maxZDist: 10
   timer: {fileID: 1225035494}
   timeLeft: 45
-  spawnRateMin: 2
-  spawnRateMax: 2
+  spawnRateMin: 3
+  spawnRateMax: 5
   aircraftOdds: 0.25
   basicPedTypes: 9
   specialTypes: 2

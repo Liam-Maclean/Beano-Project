@@ -284,7 +284,7 @@ public class PieThrowManagerScript : MonoBehaviour
 		if (isEnd) {
 
 			//create the endgame canvas and spawn it in the scene
-			//newCanvas = Instantiate (endGameCanvas, new Vector3(0.0f,0.0f, 0.0f), Quaternion.identity);
+			newCanvas = Instantiate (endGameCanvas, new Vector3(0.0f,0.0f, 0.0f), Quaternion.identity);
 
 
 			isEnd = false;
