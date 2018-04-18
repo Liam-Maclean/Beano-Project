@@ -14,7 +14,7 @@ public class GameOverCanvasScript : MonoBehaviour {
 
 	private Text countDownText;
 
-	float timer = 15;
+	public float timer = 10;
 	bool timeElapsed = false;
 	//positions of the portraits that are spawned on the canvas
 	private List<Vector3> positions = new List<Vector3>();

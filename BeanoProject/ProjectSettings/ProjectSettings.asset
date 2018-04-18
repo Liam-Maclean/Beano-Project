@@ -125,7 +125,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.003
+  bundleVersion: 1.0
   preloadedAssets: []
   metroInputSource: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -148,7 +148,7 @@ PlayerSettings:
     Android: com.gtgames.beanoproject
     Standalone: unity.DefaultCompany.BeanoProject
     Tizen: com.Company.ProductName
-    iOS: com.goodtimegames.funforce
+    iOS: com.Company.ProductName
     tvOS: com.Company.ProductName
   buildNumber:
     iOS: 
@@ -246,10 +246,7 @@ PlayerSettings:
       m_Height: 128
   m_BuildTargetBatching: []
   m_BuildTargetGraphicsAPIs: []
-  m_BuildTargetVRSettings:
-  - m_BuildTarget: iOS
-    m_Enabled: 0
-    m_Devices: []
+  m_BuildTargetVRSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
   webPlayerTemplate: APPLICATION:Default

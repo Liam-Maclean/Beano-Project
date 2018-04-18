@@ -18,7 +18,9 @@ TagManager:
   - PedSpawner
   - txt
   - SceneController
-  - UItag
+  - Transition
+  - Node
+  - GameManager
   layers:
   - Default
   - TransparentFX
@@ -55,4 +57,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3706178503
+    locked: 0
+  - name: YellowMarker
+    uniqueID: 3802468711
+    locked: 0
+  - name: Player
+    uniqueID: 79668403
+    locked: 0
+  - name: Foreground
+    uniqueID: 4163580685
     locked: 0
