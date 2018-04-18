@@ -10,7 +10,6 @@ public class Networker : NetworkBehaviour {
     public string handle;
     public int avatar;
 
-
     private void Awake()
 	{
 		//keep stuff alive, unsure if neccessary, better safe than sorry until researched and tested
@@ -35,7 +34,7 @@ public class Networker : NetworkBehaviour {
     [ClientRpc]
     public void RpcLoadGame(int sceneIndex)
     {
-        SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
+        //SceneManager.LoadSceneAsync(sceneIndex, LoadSceneMode.Additive);
         FindObjectOfType<OverworldScript>().SceneToUnload = sceneIndex;
     }
 

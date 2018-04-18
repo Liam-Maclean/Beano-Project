@@ -19,6 +19,8 @@ public class GameOverCanvasScript : MonoBehaviour {
 	//positions of the portraits that are spawned on the canvas
 	private List<Vector3> positions = new List<Vector3>();
 
+	SceneTransition transition;
+
 	// Use this for initialization
 	void Start () {
 
