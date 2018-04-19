@@ -189,9 +189,9 @@ MonoBehaviour:
   portaitSprites: []
   sprites:
   - {fileID: 21300000, guid: 337d980729c84f54fb626737515376bd, type: 3}
-  - {fileID: 21300000, guid: f5965b57d44feab459fb6c3a88c21fa5, type: 3}
   - {fileID: 21300000, guid: e176d5f4b60637146b994e60373c9751, type: 3}
   - {fileID: 21300000, guid: 257a22cea9c6f0d4e99fa72cb0e8b33a, type: 3}
+  - {fileID: 21300000, guid: f5965b57d44feab459fb6c3a88c21fa5, type: 3}
   - {fileID: 21300000, guid: 337d980729c84f54fb626737515376bd, type: 3}
 --- !u!114 &114865001624054718
 MonoBehaviour:

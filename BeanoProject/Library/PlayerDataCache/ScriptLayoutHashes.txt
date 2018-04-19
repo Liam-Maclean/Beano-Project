@@ -17,7 +17,7 @@ c24a21b131bfa67be1162db2cba4b52b UnityEngine.Timeline.dll:UnityEngine.Timeline.T
 477a8900d9d28ab2c2f38c40b3658881 Assembly-CSharp.dll:.BasePlant
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TouchScript
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SplashScript
-394e47dac3274e93b367fe9aa0706a69 Assembly-CSharp.dll:.PlayerScript
+e7efc31b3530f05b9448d24633812a36 Assembly-CSharp.dll:.PlayerScript
 277eea69bd43eefac67ce3b1535fea5b Assembly-CSharp.dll:.StopAnimationScript
 042770878022dce4306f8c4c647dafad Assembly-CSharp.dll:.CustomLobby
 a35dc9cca2faebc5f5f1aeb9e8e47bbe UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
@@ -122,6 +122,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 c6eca3c0e68b65e8a60a78c70d60525b Assembly-CSharp.dll:.PlantGameCanvas
 7941c4156675dbf180791771b796c56a Assembly-CSharp.dll:.PortaitScript
+6c7dfd36b385195bb97cc4394379a106 Assembly-CSharp.dll:.PieAttackScript
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Orientor
 15ecba6b5ce92edf04a1bb018dda1c3b Assembly-CSharp.dll:.CameraScript
 c6eca3c0e68b65e8a60a78c70d60525b Assembly-CSharp.dll:.CanvasPortraitSetup
@@ -165,7 +166,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 528ea1fd7c01796fc60c4e2f172ea229 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 4e6f2b84f2f4ea321c73d8a34cbbbced Assembly-CSharp.dll:.PlantScriptManager
 b46c9649eab67fc760045ab7ecb1613e Assembly-CSharp.dll:.EnemyManagerScript
-4068634fee5cb40271bfdf73a8d364d3 Assembly-CSharp.dll:.MoleGameManagerScript
+86dfc03698ed2345722de62943462de9 Assembly-CSharp.dll:.MoleGameManagerScript
 7f2ba957c6092f4788f2412d966c36ed Assembly-CSharp.dll:.TouchEffector
 20515b42751dd8d4b47eb1e2bcd5945b Assembly-CSharp.dll:.ManagerScript
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
@@ -178,7 +179,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
 73cedaadfb249cdcb3536bafe7cbfe86 Assembly-CSharp.dll:.NodeScript
-eb510ba50d382d7b808424b527a039c5 Assembly-CSharp.dll:.GameOverCanvasScript
+032f595430cd128080ddbf9d263d03dc Assembly-CSharp.dll:.GameOverCanvasScript
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.FloatingTextManager
 892b2ef03d36b6acb2864d6ebc410435 Assembly-CSharp.dll:.BackgroundScript
 3ebcd5ba2cf312d19c872d874a59b5dc Assembly-CSharp.dll:.PedScript
@@ -192,3 +193,7 @@ d5614c16b77cce98f9627728aa860e37 Assembly-CSharp.dll:.IconHandlerScripts
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SwipeScript
 0f8abb4b3a1691ae6352c09a52f68fb5 Assembly-CSharp.dll:.MolesScript
 477a8900d9d28ab2c2f38c40b3658881 Assembly-CSharp.dll:.NormalPlant
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TransitionManagerScript
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SwapSceneBehaviour
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TransitionBehaviour
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CameraRatioScript

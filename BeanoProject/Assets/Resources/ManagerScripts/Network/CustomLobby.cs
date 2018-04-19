@@ -246,11 +246,14 @@ public class CustomLobby : NetworkLobbyPlayer {
         
         if (isServer)
         {
-            GameObject sendingPlayerObject = NetworkServer.FindLocalObject(local.playerDetails.Identifier);
-            CustomLobby sendingPlayer = sendingPlayerObject.GetComponent<CustomLobby>();
-
-            sendingPlayer.hasPlayerDetails = true;
-            sendingPlayer.playerDetails = local.playerDetails;
+            CustomLobby[] players = FindObjectsOfType<CustomLobby>();
+            foreach(CustomLobby player in players)
+            {
+                if(player.playerDetails.Identifier == local.playerDetails.Identifier)
+                {
+                    player.RpcUpdateScore(scoreChange);
+                }
+            }
         }
 
         SendDetails(local.playerDetails);
@@ -306,6 +309,15 @@ public class CustomLobby : NetworkLobbyPlayer {
         else
         {
             NLM.Unready();
+        }
+    }
+
+    [ClientRpc]
+    void RpcUpdateScore(int scoreChange)
+    {
+        if (!isServer)
+        {
+            this.playerDetails.MiniScore += scoreChange;
         }
     }
 }
