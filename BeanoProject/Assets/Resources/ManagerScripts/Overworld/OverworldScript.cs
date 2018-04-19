@@ -100,6 +100,7 @@ public class OverworldScript : MonoBehaviour
 			{
 				GameObject gameOut;
 				gameOut = Instantiate(gameOutPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+				gameOut.GetComponent<OverworldOverScript> ().enabled = true;
 
 				GameObject fadeOut;
 				fadeOut = Instantiate(fadeOutPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
@@ -107,6 +108,8 @@ public class OverworldScript : MonoBehaviour
 				GameObject realCanvas;
 				realCanvas = GameObject.FindGameObjectWithTag("OverworldCanvas");
 				fadeOut.transform.SetParent(realCanvas.transform, false);
+				//realCanvas.AddComponent<CanvasPortraitSetup> ();
+				//realCanvas.GetComponent<CanvasPortraitSetup> ().enabled = true;
 
 				// Remove Score box if created
 				//GameObject timerbox;
@@ -256,7 +259,7 @@ public class OverworldScript : MonoBehaviour
 
 	public void EndOverworld()
 	{
-		//SceneManager.LoadScene ("Menu", LoadSceneMode.Additive);
+		SceneManager.LoadScene ("Menu");
 		SceneManager.UnloadSceneAsync ("Overworld");
 	}
 
