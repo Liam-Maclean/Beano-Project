@@ -252,8 +252,8 @@ MonoBehaviour:
     y: 0
     width: 1152
     height: 573
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -325,19 +325,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets
+    - Assets/Resources/ManagerScripts/Overworld
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Resources/ManagerScripts/Overworld
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\ashle\Documents\GitHub\Beano-Project\BeanoProject
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 50270000
-    m_LastClickedID: 10064
-    m_ExpandedIDs: 000000003a0600003e0600005c0600006606000050270000fa280000de2a00000a2b0000ea2b0000102e0000582e0000b42e0000f22e0000582f0000ac2f0000563200008232000094320000b434000024350000e6360000963a0000a83a0000523e0000c63e0000e23e0000f03f000032400000ac4000000243000028450000784600006c4900006e4900007049000072490000744900007649000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 192}
+    m_SelectedIDs: 2a2d0000
+    m_LastClickedID: 11562
+    m_ExpandedIDs: 000000003a0600003e0600005c06000066060000ca26000074280000582a0000842a0000642b0000902d0000d82d0000342e0000722e0000d82e00002c2f0000dc310000083200001a3200003a340000ae340000743600002a3a00003c3a0000e63d00005a3e0000763e0000843f0000c63f000040400000964200007c430000c24400001246000026490000284900002a4900002c4900002e4900003049000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -365,7 +365,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003a0600003e0600005c0600006606000050270000fa280000de2a00000a2b0000ea2b0000102e0000582e0000b42e0000f22e0000582f0000ac2f0000563200008232000094320000b434000024350000e6360000963a0000a83a0000523e0000c63e0000e23e0000f03f000032400000ac4000000243000028450000784600006c4900006e49000070490000724900007449000076490000
+    m_ExpandedIDs: 000000003a0600003e0600005c06000066060000ca26000074280000582a0000842a0000642b0000902d0000d82d0000342e0000722e0000d82e00002c2f0000dc310000083200001a3200003a340000ae340000743600002a3a00003c3a0000e63d00005a3e0000763e0000843f0000c63f000040400000964200007c430000c24400001246000026490000284900002a4900002c4900002e49000030490000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -392,8 +392,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c6230000
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c6230000fc380000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -483,7 +483,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 62e6ffff3ee7ffff8ce8ffff98e8ffffc4e8ffff9ce9ffffaee9ffffb8e9ffffbce9ffff12fcffff00000000
+    m_ExpandedIDs: ca7effffd280ffff8a89ffff2493ffffe29affffc69bffff149dffff209dffff4c9dffff249effff369effff409effff449effff1afcffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -533,14 +533,14 @@ MonoBehaviour:
     width: 1148
     height: 552
   m_SceneLighting: 1
-  lastFramingTime: 0
+  lastFramingTime: 926.0167281889527
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: 1310.8774, y: 707.09436, z: 0}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: 1310.8774, y: 707.09436, z: 0}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -567,9 +567,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 10
+    m_Target: 22
     speed: 2
-    m_Value: 10
+    m_Value: 22
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -609,7 +609,7 @@ MonoBehaviour:
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
   m_Stats: 0
-  m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_SelectedSizes: 0000000000000000000000000f000000000000000000000000000000000000000000000000000000
   m_TargetDisplay: 0
   m_ZoomArea:
     m_HRangeLocked: 0

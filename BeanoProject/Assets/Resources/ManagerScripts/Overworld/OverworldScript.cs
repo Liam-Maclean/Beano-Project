@@ -259,8 +259,8 @@ public class OverworldScript : MonoBehaviour
 
 	public void EndOverworld()
 	{
-		SceneManager.LoadScene ("Menu");
-		SceneManager.UnloadSceneAsync ("Overworld");
+		SceneManager.LoadScene ("Loading");
+		//SceneManager.UnloadSceneAsync ("Overworld");
 	}
 
     public void Go()
