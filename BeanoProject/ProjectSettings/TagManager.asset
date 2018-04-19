@@ -21,6 +21,8 @@ TagManager:
   - Transition
   - Node
   - GameManager
+  - UItag
+  - OverworldCanvas
   layers:
   - Default
   - TransparentFX

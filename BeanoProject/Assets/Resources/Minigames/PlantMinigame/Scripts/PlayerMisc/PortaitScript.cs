@@ -24,6 +24,8 @@ public class PortaitScript : MonoBehaviour {
 	CustomLobby networkPlayerInfo;
 	public Sprite[] sprites;
 
+	private bool m_isMetaScore = false;
+
 
 	//get the score from the portrait script
 	public int GetScore()
@@ -94,15 +96,30 @@ public class PortaitScript : MonoBehaviour {
 
 	}
 
+	public void DisplayMetaScores()
+	{
+		Debug.Log("ShowingMeta");
+		m_isMetaScore = true;
+	}
+
 	//update function
 	void Update()
 	{
-		if (networkPlayerInfo) {
-			playerScoreText.text = "Score: " + networkPlayerInfo.playerDetails.MiniScore;
-		} else {
-			playerScoreText.text = "Score: " + playerScore;
+		if (m_isMetaScore) 
+		{
+			playerScoreText.text = "Score: " + networkPlayerInfo.playerDetails.MetaScore;
 		}
-
+		else
+		{
+			if (networkPlayerInfo) 
+			{
+				playerScoreText.text = "Score: " + networkPlayerInfo.playerDetails.MiniScore;
+			} 
+			else 
+			{
+				playerScoreText.text = "Score: " + playerScore;
+			}
+		}
 	}
 
 	//loads dialogue database
