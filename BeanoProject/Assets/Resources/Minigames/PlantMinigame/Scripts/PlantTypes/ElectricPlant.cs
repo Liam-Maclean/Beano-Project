@@ -16,11 +16,11 @@ public class ElectricPlant : BasePlant {
 		//Initialise variables (score and color)
 		sr = this.gameObject.GetComponent<SpriteRenderer> ();
 		sr.color = new Color (255, 255, 255);
-		SetScore (3);
+		SetScore (30);
 	}
 	//override activate plant method (not in use)
 	public override void ActivatePlant(out int score)
 	{
-		score = GetScore ();
+		base.ActivatePlant (out score);
 	}
 }

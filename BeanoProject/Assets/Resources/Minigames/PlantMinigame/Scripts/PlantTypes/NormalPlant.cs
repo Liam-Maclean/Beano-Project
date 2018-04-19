@@ -18,13 +18,13 @@ public class NormalPlant : BasePlant {
 		//initialise values (score and color)
 		sr = this.gameObject.GetComponent<SpriteRenderer> ();
 		sr.color = new Color (255, 255, 255);
-		SetScore (1);
+		SetScore (10);
 	}
 
 	//override activate plant method (not in use)
 	public override void ActivatePlant(out int score)
 	{
-		score = GetScore ();
+		base.ActivatePlant (out score);
 	}
 }
 

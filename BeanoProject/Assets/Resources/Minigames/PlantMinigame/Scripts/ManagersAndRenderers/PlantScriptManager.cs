@@ -88,6 +88,7 @@ public class PlantScriptManager : MonoBehaviour
         //Set up a random percentage chance
 		int chance = Random.Range (0, 100);
 
+
         //if the chance is greater than 90 (10% chance)
 		if (chance >= 75)
         {
@@ -141,6 +142,7 @@ public class PlantScriptManager : MonoBehaviour
 		
 			break;
 		}    
+		basePlant.SetActive (true);
 		FirstTimeSpawn = false;
 	}
 
@@ -222,7 +224,7 @@ public class PlantScriptManager : MonoBehaviour
 				spawnOnceLightning = false;
 				DebuffPlant debuff = basePlant as DebuffPlant;
 				debuff.SetLightning (false);
-				debuff.SetScore (2);
+				debuff.SetScore (20);
 			}
 		}
 	}
