@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class PieThrowManagerScript : MonoBehaviour
 {
     private enum GAMESTATE { Start, Playing, Finished};
@@ -56,26 +56,29 @@ public class PieThrowManagerScript : MonoBehaviour
 
     void Awake()
     {
-        playerScore = 0.0f;
-        m_currState = GAMESTATE.Start;
-
-        m_pedObjects = new List<GameObject>();
-
-        m_spawnTimer = new float[maxZDist - minZDist];
-        m_spawnRateRand = new float[maxZDist - minZDist];
-
-        for (int i = 0; i < maxZDist - minZDist; i++)
-        {
-            m_spawnRateRand[i] = Random.Range(spawnRateMin, spawnRateMax);
-        }
+	//	SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (5));
+      
     }
 
 	// Use this for initialization
 	void Start ()
     {
+		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (5));
         // Set Client ID
         // Set Portraits
         // Set Powerup state
+		playerScore = 0.0f;
+		m_currState = GAMESTATE.Start;
+
+		m_pedObjects = new List<GameObject>();
+
+		m_spawnTimer = new float[maxZDist - minZDist];
+		m_spawnRateRand = new float[maxZDist - minZDist];
+
+		for (int i = 0; i < maxZDist - minZDist; i++)
+		{
+			m_spawnRateRand[i] = Random.Range(spawnRateMin, spawnRateMax);
+		}
 
         // Call start menu
 //        StartMenu();
@@ -284,7 +287,7 @@ public class PieThrowManagerScript : MonoBehaviour
 		if (isEnd) {
 
 			//create the endgame canvas and spawn it in the scene
-			newCanvas = Instantiate (endGameCanvas, new Vector3(0.0f,0.0f, 0.0f), Quaternion.identity);
+			newCanvas = Instantiate (Resources.Load ("Minigames/UniversalMinigamePrefabs/GameOverCanvas")) as GameObject;
 
 
 			isEnd = false;
@@ -292,14 +295,14 @@ public class PieThrowManagerScript : MonoBehaviour
 			//destroy the hand object and for mouse controls set the cursor to visible
 			handSpawnScript.Destroy ();
 			//delete the current game canvas
-			Destroy (gameCanvas);
+			//Destroy (gameCanvas);
 			//DisplayScore ();
 			Cursor.visible = true;
 
             GameObject pie = GameObject.FindGameObjectWithTag("pie");
             Destroy(pie);
 
-            CustomLobby.local.EndMiniGame();
+            //CustomLobby.local.EndMiniGame();
         }
     }
 

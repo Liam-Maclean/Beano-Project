@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 //==============================================
 //
 // Manager Script
@@ -169,6 +170,7 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
+		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (4));
         //FadeOutAnimation = GameObject.Find("FadeOut").GetComponent<StopAnimationScript>();
         FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
 		fade.SetActive (false);
