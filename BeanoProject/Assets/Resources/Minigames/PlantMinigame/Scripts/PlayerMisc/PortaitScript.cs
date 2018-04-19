@@ -73,7 +73,7 @@ public class PortaitScript : MonoBehaviour {
 	{
 		if (usingCustomLobby) {
 			Image sr = GetComponent<Image> ();
-			sr.sprite = sprites [(int)networkPlayerInfo.playerDetails.Identifier.Value];
+			sr.sprite = sprites [networkPlayerInfo.playerDetails.Avatar];
 		} else {
 			
 		}
