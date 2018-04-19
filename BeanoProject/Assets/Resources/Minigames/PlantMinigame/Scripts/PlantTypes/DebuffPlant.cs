@@ -96,5 +96,6 @@ public class DebuffPlant : BasePlant {
 	public override void ActivatePlant(out int score)
 	{
 		base.ActivatePlant (out score);
+		//base.ActivatePlant (out score);
 	}
 }
