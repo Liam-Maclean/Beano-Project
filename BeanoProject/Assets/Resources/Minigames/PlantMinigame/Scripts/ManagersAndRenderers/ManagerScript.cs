@@ -464,7 +464,7 @@ public class ManagerScript : MonoBehaviour {
 					//get plant component
 					m_plantsHit.Add(tempPlantScript.GetPlantComponent ());
 
-					tempPlantScript.Swiped (out plantHit);
+					m_plantScore.Add(tempPlantScript.Swiped (out plantHit));
 					//add the plants score to the list of scores
 					//m_plantScore.Add(tempPlantScript.Swiped());
 
@@ -486,12 +486,12 @@ public class ManagerScript : MonoBehaviour {
 				}
 			}
 
-			for (int i = 0; i < m_plantsHit.Count; i++) {
-				m_plantScore.Add (0);
-				int temp;
-				m_plantsHit [i].ActivatePlant (out temp);
-				m_plantScore [m_plantScore.Count-1] = temp;
-			}
+			//for (int i = 0; i < m_plantsHit.Count; i++) {
+			//	m_plantScore.Add (0);
+			//	int temp;
+			//	m_plantsHit [i].ActivatePlant (out temp);
+			//	m_plantScore [m_plantScore.Count-1] = temp;
+			//}
 
 			//for each score swiped
 			for (int i = 0; i < m_plantScore.Count; i++)
@@ -568,7 +568,7 @@ public class ManagerScript : MonoBehaviour {
 							PlantScriptManager tempPlantScript = hit[i].collider.gameObject.GetComponent<PlantScriptManager>();
 
 							//add the plants score to the list of scores
-							tempPlantScript.Swiped (out plantHit);
+							m_plantScore.Add(tempPlantScript.Swiped (out plantHit));
 							//add the plants score to the list of scores
 							//m_plantScore.Add(tempPlantScript.Swiped());
 

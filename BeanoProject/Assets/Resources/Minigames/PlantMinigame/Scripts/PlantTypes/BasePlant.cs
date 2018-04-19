@@ -93,7 +93,11 @@ public class BasePlant : MonoBehaviour
 	//override activate plant method (not in use)
 	public virtual void ActivatePlant(out int score)
 	{
-		score = GetScore ();
+		if (bActive) {
+			score = GetScore ();
+		} else {
+			score = 0;
+		}
 	}
 
 }
