@@ -211,8 +211,6 @@ public class OverworldScript : MonoBehaviour
 
     public void Resume()
     {
-       
-
         FindObjectOfType<PlayerScript>().GetComponent<SpriteRenderer>().enabled = true;
         SceneManager.UnloadSceneAsync(SceneToUnload);
        // m_playerIDObject.GetComponent<CustomLobby>().Scene = 0;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class MoleGameManagerScript : MonoBehaviour
 {
@@ -52,21 +53,26 @@ public class MoleGameManagerScript : MonoBehaviour
     // Called on launch
     void Awake()
     {
-        m_currState = GameState.Setup;
 
-        m_hammers = new List<GameObject>();
-
-        m_spawner = new float[SPAWNERS];
-
-        for (int i = 0; i < SPAWNERS; i++)
-        {
-            m_spawner[i] = Random.Range(0.1f, maxSpawnTime);
-        }
+      
     }
 
     // Use this for initialization
     void Start()
     {
+		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (6));
+
+		m_currState = GameState.Setup;
+
+		m_hammers = new List<GameObject>();
+
+		m_spawner = new float[SPAWNERS];
+
+		for (int i = 0; i < SPAWNERS; i++)
+		{
+			m_spawner[i] = Random.Range(0.1f, maxSpawnTime);
+		}
+
         FloatingTextManager.Initialise();
 
         m_playerIDS = GameObject.FindGameObjectsWithTag("Portrait");
