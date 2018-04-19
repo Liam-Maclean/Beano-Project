@@ -21,7 +21,7 @@ public class OverworldScript : MonoBehaviour
     private string m_lastPlayed;
 
     private GameObject mainCamera;
-    private GameObject cloneCamera;
+    //private GameObject cloneCamera;
 
     public int SceneToUnload;
 
@@ -170,8 +170,8 @@ public class OverworldScript : MonoBehaviour
 
         PushNode();
 
-       
-        mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
+        GameObject thisCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        thisCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
     }
 
     public void LoadMinigameHost()
