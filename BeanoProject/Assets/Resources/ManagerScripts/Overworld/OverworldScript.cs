@@ -21,7 +21,7 @@ public class OverworldScript : MonoBehaviour
     private string m_lastPlayed;
 
     private GameObject mainCamera;
-    private GameObject cloneCamera;
+    //private GameObject cloneCamera;
 
     public int SceneToUnload;
 
@@ -30,6 +30,10 @@ public class OverworldScript : MonoBehaviour
     private GameObject m_playerIDObject;
 
     public SpriteRenderer background;
+
+	public GameObject gameOutPrefab;
+	public GameObject fadeOutPrefab;
+	private bool m_isEndCalled = false;
 
 	private GameObject animationSprites;
     void Awake()
@@ -86,11 +90,35 @@ public class OverworldScript : MonoBehaviour
         else
         {
             Debug.Log("EndGame Function Hit");
-            m_currNode = 0;
-            for (int i = 0; i < currPlayersTESTING; i++)
-            {
-                m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(m_currNode));
-            }
+            //m_currNode = 0;
+            //for (int i = 0; i < currPlayersTESTING; i++)
+            //{
+            //    m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(m_currNode));
+            //}
+
+			if (m_isEndCalled == false)
+			{
+				GameObject gameOut;
+				gameOut = Instantiate(gameOutPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+				gameOut.GetComponent<OverworldOverScript> ().enabled = true;
+
+				GameObject fadeOut;
+				fadeOut = Instantiate(fadeOutPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+				fadeOut.transform.localScale += new Vector3(3.0f, 3.0f, 0.0f);
+				GameObject realCanvas;
+				realCanvas = GameObject.FindGameObjectWithTag("OverworldCanvas");
+				fadeOut.transform.SetParent(realCanvas.transform, false);
+				//realCanvas.AddComponent<CanvasPortraitSetup> ();
+				//realCanvas.GetComponent<CanvasPortraitSetup> ().enabled = true;
+
+				// Remove Score box if created
+				//GameObject timerbox;
+				//timerbox = GameObject.FindGameObjectWithTag("txt");
+				//Destroy(timerbox);
+
+				m_isEndCalled = true;
+			}
+
             //SceneManager.LoadScene ("PlantMinigameScene");
             //SceneManager.LoadScene("Menu");
         }
@@ -142,8 +170,8 @@ public class OverworldScript : MonoBehaviour
 
         PushNode();
 
-       
-        mainCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
+        GameObject thisCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        thisCamera.GetComponent<CameraScript>().SetTargets(GetNodePos(m_currNode));
     }
 
     public void LoadMinigameHost()
@@ -226,6 +254,12 @@ public class OverworldScript : MonoBehaviour
         //cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         //cloneCamera.SetActive(true);
     }
+
+	public void EndOverworld()
+	{
+		SceneManager.LoadScene ("Loading");
+		//SceneManager.UnloadSceneAsync ("Overworld");
+	}
 
     public void Go()
     {

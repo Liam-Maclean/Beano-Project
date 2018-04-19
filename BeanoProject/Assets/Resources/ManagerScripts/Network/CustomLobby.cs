@@ -237,6 +237,16 @@ public class CustomLobby : NetworkLobbyPlayer {
     }
 
     /// <summary>
+    /// End overworld
+    /// </summary>
+    public void EndOverworld()
+    {
+        local.playerDetails.MetaScore = 0;
+        SendDetails(local.playerDetails);
+        FindObjectOfType<OverworldScript>().EndOverworld();
+    }
+
+    /// <summary>
     ///update score and send new details
     ///</summary>
     ///<param name="scoreChange">the amount to change the player's score by</param>
@@ -246,11 +256,14 @@ public class CustomLobby : NetworkLobbyPlayer {
         
         if (isServer)
         {
-            GameObject sendingPlayerObject = NetworkServer.FindLocalObject(local.playerDetails.Identifier);
-            CustomLobby sendingPlayer = sendingPlayerObject.GetComponent<CustomLobby>();
-
-            sendingPlayer.hasPlayerDetails = true;
-            sendingPlayer.playerDetails = local.playerDetails;
+            CustomLobby[] players = FindObjectsOfType<CustomLobby>();
+            foreach(CustomLobby player in players)
+            {
+                if(player.playerDetails.Identifier == local.playerDetails.Identifier)
+                {
+                    player.RpcUpdateScore(scoreChange);
+                }
+            }
         }
 
         SendDetails(local.playerDetails);
@@ -306,6 +319,15 @@ public class CustomLobby : NetworkLobbyPlayer {
         else
         {
             NLM.Unready();
+        }
+    }
+
+    [ClientRpc]
+    void RpcUpdateScore(int scoreChange)
+    {
+        if (!isServer)
+        {
+            this.playerDetails.MiniScore += scoreChange;
         }
     }
 }
