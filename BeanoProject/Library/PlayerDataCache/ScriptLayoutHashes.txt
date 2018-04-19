@@ -198,3 +198,7 @@ d5614c16b77cce98f9627728aa860e37 Assembly-CSharp.dll:.IconHandlerScripts
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SwipeScript
 0f8abb4b3a1691ae6352c09a52f68fb5 Assembly-CSharp.dll:.MolesScript
 477a8900d9d28ab2c2f38c40b3658881 Assembly-CSharp.dll:.NormalPlant
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TransitionManagerScript
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SwapSceneBehaviour
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TransitionBehaviour
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CameraRatioScript
