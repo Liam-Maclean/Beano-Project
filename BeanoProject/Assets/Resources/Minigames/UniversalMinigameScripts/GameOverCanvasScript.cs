@@ -21,6 +21,13 @@ public class GameOverCanvasScript : MonoBehaviour {
 
 	SceneTransition transition;
 
+	void Awake()
+	{
+		CanvasPortraitSetup portaitSetup;
+		portaitSetup = GameObject.Find("OverworldCanvas").GetComponent<CanvasPortraitSetup>();
+		portaitSetup.enabled = true;
+	}
+
 	// Use this for initialization
 	void Start () {
 
@@ -110,6 +117,7 @@ public class GameOverCanvasScript : MonoBehaviour {
 		//for each portrait
 		for (int i = 0; i < portraits.Length; i++) {
 			//reparent to the end game screen
+			portraits[i].GetComponent<PortaitScript>().DisplayMetaScores();
 			portraits[i].transform.SetParent (this.transform);
 			portraits[i].transform.localPosition = positions[i];
 		}
