@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class NLM : NetworkLobbyManager {
 
@@ -10,6 +11,9 @@ public class NLM : NetworkLobbyManager {
     public Canvas hostJoin;
     public Canvas inGame;
     protected static bool[] readyList = new bool[Selector.activeMinigames.Count];
+    public Image readyButton;
+    public Sprite isReady;
+    public Sprite isntReady;
 
     /// <summary>
     /// when server connects, start the host
@@ -112,10 +116,12 @@ public class NLM : NetworkLobbyManager {
                 if (shouldReady)
                 {
                     player.SendReadyToBeginMessage();
+                    readyButton.sprite = isReady;
                 }
                 else
                 {
                     player.SendNotReadyToBeginMessage();
+                    readyButton.sprite = isntReady;
                 }
             }
             //CheckReadyToBegin();
