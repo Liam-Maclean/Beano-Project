@@ -19,6 +19,7 @@ public class PortraitSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        index = 0;
         CustomLobby[] players = FindObjectsOfType<CustomLobby>();
         Check:;
         if (players.Length > clones.Count)
@@ -44,6 +45,7 @@ public class PortraitSpawner : MonoBehaviour {
             {
                 clones[index].GetComponent<LobbyPortaitScript>().readyStatus.GetComponent<SpriteRenderer>().sprite = clones[index].GetComponent<LobbyPortaitScript>().readyList[0];
             }
+            ++index;
         }
 	}
 }
