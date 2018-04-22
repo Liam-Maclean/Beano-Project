@@ -8,7 +8,7 @@ public class Networker : NetworkBehaviour {
 
 	public int persistentCurrency;
     public string handle;
-    public int avatar;
+    public static int avatar;
 
     private void Awake()
 	{

@@ -70,7 +70,7 @@ public class CustomLobby : NetworkLobbyPlayer {
         
         local = this;
 
-        local.playerDetails.Avatar = PlayerPrefs.GetInt("Avatar");
+        local.playerDetails.Avatar = Networker.avatar;
         local.playerDetails.Handle = PlayerPrefs.GetString("Handle");
         local.playerDetails.Identifier = netId;
         local.playerDetails.MetaScore = 0;

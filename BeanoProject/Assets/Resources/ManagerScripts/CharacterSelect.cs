@@ -110,7 +110,7 @@ public class CharacterSelect : MonoBehaviour {
 
 	public void ConfirmButton()
 	{
-		PlayerPrefs.SetInt ("Avatar", index);
+        Networker.avatar = index;
         //PlayerPrefs.SetString("Handle", handle.text);
         //SceneManager.UnloadSceneAsync(2);
         //FindObjectOfType<Navigator>().GetComponent<Navigator>().ReturnFromSelect();
