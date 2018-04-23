@@ -31,7 +31,7 @@ public class CanvasPortraitSetup : MonoBehaviour
     private List<GameObject> opponents = new List<GameObject>();
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {	
 		
         //get gameobjects with the tag portraits in the scene
