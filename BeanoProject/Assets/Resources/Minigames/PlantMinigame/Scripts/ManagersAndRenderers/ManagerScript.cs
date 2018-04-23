@@ -120,6 +120,10 @@ public class ManagerScript : MonoBehaviour {
     private Canvas newCanvas;
     private Text tutorialTimeTxt;
     public float tutorialTimer;
+    private GameObject backgroundMusic;
+    private MusicFadeOut m_musicFadeOut;
+
+
 
 	//Game Ended boolean function
 	public bool GameEnded()
@@ -187,10 +191,16 @@ public class ManagerScript : MonoBehaviour {
 			}
 		}
 
+        
         newCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         tutorialTimeTxt = GUIText.FindObjectOfType<Text>();
 
-
+        //if the background music prefab isnt in the scene then it will not try and search for it 
+        if (GameObject.FindGameObjectWithTag("BGMusic") != null)
+        {
+            backgroundMusic = GameObject.FindGameObjectWithTag("BGMusic");
+            m_musicFadeOut = backgroundMusic.GetComponent<MusicFadeOut>();
+        }
         //initialise timer
         m_gameTimer = (int)gameDuration;
 
@@ -400,6 +410,11 @@ public class ManagerScript : MonoBehaviour {
                 	GameOverCanvas = Instantiate (Resources.Load ("Minigames/UniversalMinigamePrefabs/GameOverCanvas")) as GameObject;
                 }
 
+                //fade out  
+                m_musicFadeOut.FadeOut();
+                //INSERT CULL BACKGROUND MUSIC HERE
+
+                
                 //CustomLobby.local.EndMiniGame();
 
                 break;

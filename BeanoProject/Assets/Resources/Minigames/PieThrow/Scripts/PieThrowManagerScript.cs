@@ -52,7 +52,12 @@ public class PieThrowManagerScript : MonoBehaviour
 	public GameObject handSpawn;
 	private HandSpawn handSpawnScript;
 
-	private float playerScore;
+    private float playerScore;
+
+
+    public GameObject backgroundMusic;
+    private MusicFadeOut m_musicFadeOut;
+
 
     void Awake()
     {
@@ -81,7 +86,11 @@ public class PieThrowManagerScript : MonoBehaviour
 		}
 
         // Call start menu
-//        StartMenu();
+        //        StartMenu();
+
+        m_musicFadeOut = backgroundMusic.GetComponent<MusicFadeOut>();
+
+  
 
 		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
 
@@ -153,7 +162,7 @@ public class PieThrowManagerScript : MonoBehaviour
 			    }
                 break;
             case GAMESTATE.Finished:
-                // Outro Plz
+                // Outro 
 				GameOver();
                	break;
             default:
@@ -284,18 +293,20 @@ public class PieThrowManagerScript : MonoBehaviour
 
     void GameOver()
     {
-		if (isEnd) {
+
+        m_musicFadeOut.FadeOut();
+        if (isEnd) {
 
 			//create the endgame canvas and spawn it in the scene
 			newCanvas = Instantiate (Resources.Load ("Minigames/UniversalMinigamePrefabs/GameOverCanvas")) as GameObject;
 
-
+ 
 			isEnd = false;
 
 			//destroy the hand object and for mouse controls set the cursor to visible
 			handSpawnScript.Destroy ();
 			//delete the current game canvas
-			//Destroy (gameCanvas);
+		    Destroy (gameCanvas);
 			//DisplayScore ();
 			Cursor.visible = true;
 
