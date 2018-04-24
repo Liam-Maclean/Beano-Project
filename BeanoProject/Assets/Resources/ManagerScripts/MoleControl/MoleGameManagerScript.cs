@@ -75,21 +75,12 @@ public class MoleGameManagerScript : MonoBehaviour
 
         FloatingTextManager.Initialise();
 
-        m_playerIDS = GameObject.FindGameObjectsWithTag("Portrait");
+        
         m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
         m_overworldGM = GameObject.FindGameObjectWithTag("GameManager");
 
         //m_clientID = m_playerIDObject.GetComponent<CustomLobby>().playerDetails.Identifier; 
 
-        for (int i = 0; i < m_playerIDS.Length; i++)
-        {
-            m_portraits.Add(m_playerIDS[i].GetComponent<PortaitScript>());
-
-            if (m_portraits[i].IsLocalPlayerPortrait())
-            {
-                m_localPortrait = m_portraits[i];
-            }
-        }
 
 
         newCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
@@ -259,6 +250,17 @@ public class MoleGameManagerScript : MonoBehaviour
         m_playerCount = playerCount;
 
         m_background.GetComponent<BackgroundScript>().SetSprite(currBiomeID);
+
+		m_playerIDS = GameObject.FindGameObjectsWithTag("Portrait");
+		for (int i = 0; i < m_playerIDS.Length; i++)
+		{
+			m_portraits.Add(m_playerIDS[i].GetComponent<PortaitScript>());
+
+			if (m_portraits[i].IsLocalPlayerPortrait())
+			{
+				m_localPortrait = m_portraits[i];
+			}
+		}
 
         for(int i = 0; i < playerCount; i++)
         {

@@ -30,6 +30,12 @@ public class CanvasPortraitSetup : MonoBehaviour
     private GameObject[] m_opponents;
     private List<GameObject> opponents = new List<GameObject>();
 
+	void Awake()
+	{
+		
+	}
+
+
     // Use this for initialization
     void Start()
     {	

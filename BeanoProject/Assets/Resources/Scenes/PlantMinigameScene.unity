@@ -361,7 +361,7 @@ Prefab:
     - target: {fileID: 224811468168253834, guid: df29487247b255942a599b775af967bd,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -724
+      value: -701
       objectReference: {fileID: 0}
     - target: {fileID: 224811468168253834, guid: df29487247b255942a599b775af967bd,
         type: 2}
@@ -403,7 +403,8 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 95760440714885772, guid: df29487247b255942a599b775af967bd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: df29487247b255942a599b775af967bd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &308806378
@@ -807,10 +808,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_portraitPositions:
-  - {x: -1000, y: 550, z: 0}
-  - {x: -1000, y: 200, z: 0}
-  - {x: -1000, y: -150, z: 0}
-  - {x: -1000, y: -500, z: 0}
+  - {x: -1100, y: 500, z: 0}
+  - {x: -1100, y: 200, z: 0}
+  - {x: -1100, y: -100, z: 0}
+  - {x: -1100, y: -400, z: 0}
 --- !u!1001 &1370751316
 Prefab:
   m_ObjectHideFlags: 0

@@ -105,7 +105,7 @@ public class OverworldScript : MonoBehaviour
 			{
 				GameObject gameOut;
 				gameOut = Instantiate(gameOutPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
-				gameOut.GetComponent<OverworldOverScript> ().enabled = true;
+				//gameOut.GetComponent<OverworldOverScript> ().enabled = true;
 
 				GameObject fadeOut;
 				fadeOut = Instantiate(fadeOutPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);

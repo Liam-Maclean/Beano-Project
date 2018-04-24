@@ -178,18 +178,7 @@ public class ManagerScript : MonoBehaviour {
         //FadeOutAnimation = GameObject.Find("FadeOut").GetComponent<StopAnimationScript>();
         FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
 		fade.SetActive (false);
-		//get all portrait script objects
-		m_portraits = GameObject.FindGameObjectsWithTag ("Portrait");
 
-		//for every object found
-		for (int i = 0; i < m_portraits.Length; i++) {
-			//get the portrait script inside it
-			m_portraitScripts.Add (m_portraits [i].GetComponent<PortaitScript> ());
-			//check if the player is the local player, if it is, contain it in localplayerportrait
-			if (m_portraitScripts [i].IsLocalPlayerPortrait ()) {
-				LocalPlayerPortrait = m_portraitScripts [i];
-			}
-		}
 
         
         newCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
@@ -305,6 +294,19 @@ public class ManagerScript : MonoBehaviour {
                             MolePlaneAnim = Instantiate(Resources.Load("Minigames/PlantMinigame/Prefabs/MolePlane")) as GameObject;
                             MoleAnimation = MolePlaneAnim.GetComponent<StopAnimationScript>();
                             bMoleAnimationInstantiated = true;
+
+							//get all portrait script objects
+							m_portraits = GameObject.FindGameObjectsWithTag ("Portrait");
+							
+							//for every object found
+							for (int i = 0; i < m_portraits.Length; i++) {
+								//get the portrait script inside it
+								m_portraitScripts.Add (m_portraits [i].GetComponent<PortaitScript> ());
+								//check if the player is the local player, if it is, contain it in localplayerportrait
+								if (m_portraitScripts [i].IsLocalPlayerPortrait ()) {
+									LocalPlayerPortrait = m_portraitScripts [i];
+								}
+							}
                         }
 
 
@@ -525,8 +527,10 @@ public class ManagerScript : MonoBehaviour {
 			//increment the local players score
 			if (LocalPlayerPortrait) {
 				LocalPlayerPortrait.IncrementScore (m_combinedScore);
-			} else {
-				m_portraitScripts[0].IncrementScore (m_combinedScore);
+			} else
+			{
+				m_portraitScripts [0].GetComponent<PortaitScript> ().IncrementScore (m_combinedScore);
+				//GameObject.FindGameObjectWithTag("Portrait").GetComponent<PortaitScript>().IncrementScore (m_combinedScore);
 			}
 			m_combinedScore = 0;
 			m_plantScore.Clear();
