@@ -23,6 +23,7 @@ TagManager:
   - GameManager
   - UItag
   - OverworldCanvas
+  - BGMusic
   layers:
   - Default
   - TransparentFX
