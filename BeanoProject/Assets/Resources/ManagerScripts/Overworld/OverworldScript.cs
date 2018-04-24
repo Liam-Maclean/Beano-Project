@@ -38,6 +38,12 @@ public class OverworldScript : MonoBehaviour
 	private bool m_isEndCalled = false;
 
 	private GameObject animationSprites;
+
+
+	//Background Music
+	private GameObject m_backgroundMusic;
+	private AudioSource m_backgroundAudio;
+
     void Awake()
     {
         m_players = new List<GameObject>();
@@ -54,6 +60,14 @@ public class OverworldScript : MonoBehaviour
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         //cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         //mainCamera.SetActive(false);
+
+
+		if (GameObject.FindGameObjectWithTag ("BGMusic") != null)
+		{
+			m_backgroundMusic = GameObject.FindGameObjectWithTag ("BGMusic");
+			m_backgroundAudio = m_backgroundMusic.GetComponent<AudioSource> ();
+		}
+
 
         Debug.Log("Network ID: " + m_clientID);
 
@@ -240,6 +254,7 @@ public class OverworldScript : MonoBehaviour
         mainCamera.SetActive(false);
         background.enabled = false;
 		animationSprites.SetActive (false);
+		m_backgroundAudio.Stop ();
     }
 
     public void Resume()
@@ -256,6 +271,7 @@ public class OverworldScript : MonoBehaviour
         background.enabled = true;
         mainCamera.SetActive(true);
 		animationSprites.SetActive (true);
+		m_backgroundAudio.Play ();
         //cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         //cloneCamera.SetActive(true);
     }
