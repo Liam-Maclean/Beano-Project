@@ -25,6 +25,8 @@ public class OverworldScript : MonoBehaviour
 
     public int SceneToUnload;
 
+    public NLM nlm;
+
     int indexInMinigameList;
 
     private GameObject m_playerIDObject;
@@ -55,8 +57,11 @@ public class OverworldScript : MonoBehaviour
 
         Debug.Log("Network ID: " + m_clientID);
 
+        nlm = FindObjectOfType<NLM>();
+
         InitiWorld();
         NodeReached();
+        nlm.ReadyButton();
     }
 
     void InitiWorld()
@@ -257,7 +262,8 @@ public class OverworldScript : MonoBehaviour
 
 	public void EndOverworld()
 	{
-		SceneManager.LoadScene ("Loading");
+        //SceneManager.LoadScene ("Loading");
+        nlm.ServerReturnToLobby();
 		//SceneManager.UnloadSceneAsync ("Overworld");
 	}
 
