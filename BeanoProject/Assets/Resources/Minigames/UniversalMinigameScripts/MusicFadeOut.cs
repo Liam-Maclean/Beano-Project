@@ -5,8 +5,8 @@ using UnityEngine;
 public class MusicFadeOut : MonoBehaviour {
 
 
-
-    private AudioSource m_backgroundMusic;
+	public float fadeOutRate;
+    private static AudioSource m_backgroundMusic;
 
 	// Use this for initialization
 	void Start ()
@@ -16,7 +16,12 @@ public class MusicFadeOut : MonoBehaviour {
 
     public void FadeOut()
     {
-        m_backgroundMusic.volume -= 0.0005f;
+		m_backgroundMusic.volume -= fadeOutRate / 1000;
     }
 
+
+	public static void SetMusicSettings(float vol)
+	{
+		m_backgroundMusic.volume = vol;
+	}
 }

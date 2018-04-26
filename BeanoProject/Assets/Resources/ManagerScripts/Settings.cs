@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+ 
 public class Settings : MonoBehaviour {
 
     public float musicVolume;
@@ -29,6 +29,7 @@ public class Settings : MonoBehaviour {
     {
         //change music volume to match slider value and store it
         musicVolume = music.value;
+		MusicFadeOut.SetMusicSettings (musicVolume);
         PlayerPrefs.SetFloat("Music Volume", musicVolume);
     }
 

@@ -13,11 +13,11 @@ public class PieAttackScript : MonoBehaviour {
 
 	private SpriteRenderer m_sr;
 	private PieSpriteChanger m_pieSpriteManager;
-    private AudioSource m_pieSplatSound;
 
 	public Sprite pieSplat;
 
-
+	private AudioSource m_hitSound;
+	private HitSoundScript m_hitSoundPlay;
 	private bool m_isHit;
 	private float m_hitScore;
 
@@ -29,7 +29,8 @@ public class PieAttackScript : MonoBehaviour {
         m_pieSpawner = GameObject.FindGameObjectWithTag("PieSpawner");
         m_pedSpawner = GameObject.FindGameObjectWithTag ("PedSpawner");
 
-        m_pieSplatSound = this.GetComponent<AudioSource>();
+		m_hitSound = this.GetComponent<AudioSource> ();
+		m_hitSoundPlay = this.GetComponent<HitSoundScript> ();
 
         //get the script and component references
         m_pieScript = m_pieSpawner.GetComponent<PieScript>();
@@ -68,7 +69,7 @@ public class PieAttackScript : MonoBehaviour {
 
                     //play impact sounds
                     pedSound.Play();
-                    m_pieSplatSound.Play();
+					m_hitSoundPlay.HitPlay ();
 
 					pedAnimator.Play ("Impact");
 					//stop the move speed to allow the animation to play

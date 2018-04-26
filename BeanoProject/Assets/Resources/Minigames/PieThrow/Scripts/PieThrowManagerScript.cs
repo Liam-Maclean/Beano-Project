@@ -54,7 +54,6 @@ public class PieThrowManagerScript : MonoBehaviour
 
     private float playerScore;
 
-
     public GameObject backgroundMusic;
     private MusicFadeOut m_musicFadeOut;
 
@@ -312,6 +311,8 @@ public class PieThrowManagerScript : MonoBehaviour
 
             GameObject pie = GameObject.FindGameObjectWithTag("pie");
             Destroy(pie);
+
+			Destroy (timer);
 
             //CustomLobby.local.EndMiniGame();
         }
