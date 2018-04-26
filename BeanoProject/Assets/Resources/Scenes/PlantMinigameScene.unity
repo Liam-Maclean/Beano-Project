@@ -403,8 +403,7 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 95760440714885772, guid: df29487247b255942a599b775af967bd, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df29487247b255942a599b775af967bd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &308806378
@@ -590,12 +589,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundSprites:
-  - {fileID: 21300000, guid: b03b35912a06a77468233a95d1152bae, type: 3}
-  - {fileID: 21300000, guid: 59e061894c6161147b9a29e065190ed7, type: 3}
-  - {fileID: 21300000, guid: 761d0c6ee53aadb449f425c295289c46, type: 3}
-  - {fileID: 21300000, guid: 2468575e7d9360d44a47b67f3621caab, type: 3}
   - {fileID: 21300000, guid: 422c1c2ac47373c48b5fe1af289de06e, type: 3}
   - {fileID: 21300000, guid: e751f06344fd5a24d9a6b2b666da597a, type: 3}
+  - {fileID: 21300000, guid: 761d0c6ee53aadb449f425c295289c46, type: 3}
+  - {fileID: 21300000, guid: 2468575e7d9360d44a47b67f3621caab, type: 3}
+  - {fileID: 21300000, guid: 59e061894c6161147b9a29e065190ed7, type: 3}
+  - {fileID: 21300000, guid: b03b35912a06a77468233a95d1152bae, type: 3}
 --- !u!1 &701096795
 GameObject:
   m_ObjectHideFlags: 0

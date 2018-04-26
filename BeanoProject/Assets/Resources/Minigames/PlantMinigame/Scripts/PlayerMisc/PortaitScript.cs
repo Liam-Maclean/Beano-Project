@@ -21,7 +21,7 @@ public class PortaitScript : MonoBehaviour {
 	public ScoreScriptAnimations animScript;
 	private int playerScore = 0;
 	public GameObject[] portaitSprites;
-	CustomLobby networkPlayerInfo;
+	public CustomLobby networkPlayerInfo;
 	public Sprite[] sprites;
 
 	private bool m_isMetaScore = false;
