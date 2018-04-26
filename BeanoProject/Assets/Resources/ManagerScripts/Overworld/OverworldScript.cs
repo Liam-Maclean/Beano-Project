@@ -246,6 +246,7 @@ public class OverworldScript : MonoBehaviour
     {
         FindObjectOfType<PlayerScript>().GetComponent<SpriteRenderer>().enabled = true;
         SceneManager.UnloadSceneAsync(SceneToUnload);
+        SceneToUnload = 0;
        // m_playerIDObject.GetComponent<CustomLobby>().Scene = 0;
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
         foreach (PlayerScript player in players)
