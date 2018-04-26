@@ -743,12 +743,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundSprites:
-  - {fileID: 21300000, guid: e180aecc87a1dfc4eb1426d9b164255d, type: 3}
-  - {fileID: 21300000, guid: 1313e31ed9a4ea74b874efb8ecd78499, type: 3}
-  - {fileID: 21300000, guid: 90104c0c7f3a401449ffc422bced749f, type: 3}
-  - {fileID: 21300000, guid: b33773075fdecc343a29a680f22cc23d, type: 3}
   - {fileID: 21300000, guid: 4f9ff1a7181cf72478c2835a92c33231, type: 3}
   - {fileID: 21300000, guid: 89de673d1a703404a822c1d1ac860256, type: 3}
+  - {fileID: 21300000, guid: b33773075fdecc343a29a680f22cc23d, type: 3}
+  - {fileID: 21300000, guid: 90104c0c7f3a401449ffc422bced749f, type: 3}
+  - {fileID: 21300000, guid: 1313e31ed9a4ea74b874efb8ecd78499, type: 3}
+  - {fileID: 21300000, guid: e180aecc87a1dfc4eb1426d9b164255d, type: 3}
 --- !u!1 &1108100158
 GameObject:
   m_ObjectHideFlags: 0
