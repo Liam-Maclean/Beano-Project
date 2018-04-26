@@ -20,11 +20,14 @@ public class Navigator : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
+		transitionScript = GameObject.Find ("Transition").GetComponent<SceneTransition> ();
 		// find all the canvasses and disable them
 		Canvas[] canvasses = FindObjectsOfType(typeof(Canvas)) as Canvas[];
 		foreach (Canvas canvas in canvasses)
 		{
-			canvas.enabled = false;
+			if (canvas.name != "Transition") {
+				canvas.enabled = false;
+			}
 		}
 		//enable title card
 		titleCard.enabled = true;
