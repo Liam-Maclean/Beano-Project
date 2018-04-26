@@ -73,8 +73,7 @@ public class PieScript : MonoBehaviour
 		isReloading = false;
 		isDestroyed = false;
 	}
-
-
+		
     void Update()
     {
         if (managerScript.GetState() == 1)
@@ -95,13 +94,14 @@ public class PieScript : MonoBehaviour
                     case TouchPhase.Began:
                         //store the initial position
                         pieStartPosition = pie.transform.position;
+						m_touch = touch.position;
+						if (!isReloading && !hasLaunched)
+						{
+							Dragging();
+						}
                         break;
                     case TouchPhase.Moved:
-                        m_touch = touch.position;
-                        if (!isReloading && !hasLaunched)
-                        {
-                            Dragging();
-                        }
+
                         break;
                     case TouchPhase.Ended:
                         pieEndPosition = pie.transform.position;

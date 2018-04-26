@@ -68,16 +68,28 @@ public class PieAttackScript : MonoBehaviour {
 
 
                     //play impact sounds
-                    pedSound.Play();
+					if (pedSound != null)
+					{
+						pedSound.Play ();
+					}
+
 					m_hitSoundPlay.HitPlay ();
 
 					pedAnimator.Play ("Impact");
 					//stop the move speed to allow the animation to play
 					pedScript.SetMoveSpeed (0.0f);
-					//add a delay to the destruction of the enemy to allow for the animation to play
-					Destroy (hit [i].collider.gameObject, 1.0f);
 
 
+					if (GameObject.FindGameObjectWithTag("SpecialEnemy") == hit[i].collider.gameObject) 
+					{
+						//if it is the mole plane destroy it immediately
+						Destroy (hit [i].collider.gameObject);
+					}
+					else 
+					{
+						//add a delay to the destruction of the enemy to allow for the animation to play
+						Destroy (hit [i].collider.gameObject, 1.0f);
+					}
                     //get the unique score of the collided object
                     m_hitScore = pedScript.GetScore ();
                     //add the score to the player's score

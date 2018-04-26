@@ -24,6 +24,7 @@ TagManager:
   - UItag
   - OverworldCanvas
   - BGMusic
+  - SpecialEnemy
   layers:
   - Default
   - TransparentFX

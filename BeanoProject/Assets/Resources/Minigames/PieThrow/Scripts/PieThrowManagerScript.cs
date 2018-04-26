@@ -243,23 +243,37 @@ public class PieThrowManagerScript : MonoBehaviour
         if (isLeft)
         {
 
-            newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x, targetPos.y, zPos), Quaternion.identity);
             //if it is a basic pedestrian then flip it so they walk left to right
             if (typeHelper < basicPedTypes)
             {
+				newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x, targetPos.y, zPos), Quaternion.identity);
                 newPed.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
             }
             //if it is a special pedestrian then flip it so they walk left to right
             else
             {
-                newPed.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+				newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x, targetPos.y + 3.0f, zPos), Quaternion.identity);
+                newPed.transform.localScale = new Vector3(2.0f, 2.0f, 1.0f);
             }
 
         }
         else
         {
 
-           newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y, zPos), Quaternion.identity);
+           
+			//if it is a basic pedestrian then flip it so they walk left to right
+			if (typeHelper < basicPedTypes)
+			{
+				newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y, zPos), Quaternion.identity);
+			}
+			//if it is a special pedestrian then flip it so they walk left to right
+			else
+			{
+				newPed = (GameObject)Instantiate(pedPrefabs[typeHelper], new Vector3(targetPos.x + xFlipDistance, targetPos.y + 3.0f, zPos), Quaternion.identity);
+
+			}
+
+
         }
 
         m_pedObjects.Add(newPed);
@@ -299,13 +313,12 @@ public class PieThrowManagerScript : MonoBehaviour
 			//create the endgame canvas and spawn it in the scene
 			newCanvas = Instantiate (Resources.Load ("Minigames/UniversalMinigamePrefabs/GameOverCanvas")) as GameObject;
 
- 
 			isEnd = false;
 
 			//destroy the hand object and for mouse controls set the cursor to visible
 			handSpawnScript.Destroy ();
 			//delete the current game canvas
-		    Destroy (gameCanvas);
+		   // Destroy (gameCanvas);
 			//DisplayScore ();
 			Cursor.visible = true;
 
