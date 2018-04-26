@@ -18,15 +18,17 @@ public class GameOverCanvasScript : MonoBehaviour {
 	bool timeElapsed = false;
 	//positions of the portraits that are spawned on the canvas
 	private List<Vector3> positions = new List<Vector3>();
-
+	private GameObject youText;
 	SceneTransition transition;
+
+
 
 	// Use this for initialization
 	void Start () {
 
 		//find all the objects in the scene with the tag portriats
 		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
-
+		youText = GameObject.Find ("YouText");
 		countDownText = GameObject.Find("GameOverTimer").GetComponent<Text>();
 
         //add a new position for each portrait in the list of positions
@@ -112,6 +114,9 @@ public class GameOverCanvasScript : MonoBehaviour {
 			//reparent to the end game screen
 			portraits[i].transform.SetParent (this.transform);
 			portraits[i].transform.localPosition = positions[i];
+			//if (portraits [i].GetComponent<PortaitScript> ().IsLocalPlayerPortrait()) {
+				portraits [i].transform.Find ("YouText").gameObject.SetActive (true);//(1).gameObject.SetActive(true);
+			//
 		}
 	}
 }
