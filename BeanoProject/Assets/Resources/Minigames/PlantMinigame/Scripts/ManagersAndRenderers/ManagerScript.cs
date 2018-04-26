@@ -413,7 +413,7 @@ public class ManagerScript : MonoBehaviour {
                 }
 
                 //fade out  
-                m_musicFadeOut.FadeOut();
+                //m_musicFadeOut.FadeOut();
                 //INSERT CULL BACKGROUND MUSIC HERE
 
                 
