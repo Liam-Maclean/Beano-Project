@@ -68,7 +68,7 @@ public class PieThrowManagerScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (5));
+		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (6));
         // Set Client ID
         // Set Portraits
         // Set Powerup state

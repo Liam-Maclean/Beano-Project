@@ -60,7 +60,7 @@ public class MoleGameManagerScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (6));
+		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (7));
 
 		m_currState = GameState.Setup;
 

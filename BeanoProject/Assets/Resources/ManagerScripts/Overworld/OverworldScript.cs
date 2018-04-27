@@ -44,7 +44,7 @@ public class OverworldScript : MonoBehaviour
     void Start()
     {
         m_bugFixer = GameObject.FindGameObjectWithTag("BugFixer");
-        m_bugFixer.GetComponent<BugFixScript>().SetWorldCanvas();
+        //m_bugFixer.GetComponent<BugFixScript>().SetWorldCanvas();
 
         m_players = new List<GameObject>();
         m_playerChars = new List<int>();
@@ -274,7 +274,7 @@ public class OverworldScript : MonoBehaviour
 
 	public void EndOverworld()
 	{
-        m_bugFixer.GetComponent<BugFixScript>().SetMenuCanvas();
+        //m_bugFixer.GetComponent<BugFixScript>().SetMenuCanvas();
         //SceneManager.LoadScene ("Loading");
         nlm.ServerReturnToLobby();
 		//SceneManager.UnloadSceneAsync ("Overworld");
