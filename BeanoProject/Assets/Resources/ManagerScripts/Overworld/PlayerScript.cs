@@ -175,13 +175,13 @@ public class PlayerScript : MonoBehaviour
                 if (playerRot >= -90.0f && playerRot < 90.0f)
                 {
                     transform.rotation = Quaternion.AngleAxis(playerRot, Vector3.forward);
-                    transform.localScale = new Vector3(0.15f, transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(0.5f, transform.localScale.y, transform.localScale.z);
                 }
                 else
                 {
                     playerRot -= 180;
                     transform.rotation = Quaternion.AngleAxis(playerRot, Vector3.forward);
-                    transform.localScale = new Vector3(-0.15f, transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(-0.5f, transform.localScale.y, transform.localScale.z);
                 }
             }
 
