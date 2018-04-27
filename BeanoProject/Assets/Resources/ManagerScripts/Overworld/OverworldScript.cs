@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class OverworldScript : MonoBehaviour
 {
-    public int currPlayersTESTING;
+    private int m_currPlayers;
     private int m_currNode;
 
     public int maxNodes;
@@ -38,18 +38,20 @@ public class OverworldScript : MonoBehaviour
 	private bool m_isEndCalled = false;
 
 	private GameObject animationSprites;
-    void Awake()
-    {
-        m_players = new List<GameObject>();
-        Orientor.pieThrow = false;
-    }
+    private GameObject m_bugFixer;
 
     void Start()
     {
-		animationSprites = GameObject.Find ("OverworldBackground");
+        m_bugFixer = GameObject.FindGameObjectWithTag("BugFixer");
+        m_bugFixer.GetComponent<BugFixScript>().SetWorldCanvas();
+
+        m_players = new List<GameObject>();
+        Orientor.pieThrow = false;
+
+        animationSprites = GameObject.Find ("OverworldBackground");
         m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
         m_clientID = CustomLobby.local.playerDetails.Identifier;
-        currPlayersTESTING = FindObjectsOfType<CustomLobby>().Length;
+        m_currPlayers = FindObjectsOfType<CustomLobby>().Length;
 
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         //cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
@@ -66,7 +68,7 @@ public class OverworldScript : MonoBehaviour
 
     void InitiWorld()
     {
-        for (int i = 0; i < currPlayersTESTING; i++)
+        for (int i = 0; i < m_currPlayers; i++)
         {
             GameObject newPlayer;
 
@@ -87,7 +89,7 @@ public class OverworldScript : MonoBehaviour
         if (m_currNode + 1 < maxNodes)
         {
             m_currNode++;
-            for (int i = 0; i < currPlayersTESTING; i++)
+            for (int i = 0; i < m_currPlayers; i++)
             {
                 m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(m_currNode));
             }
@@ -262,6 +264,7 @@ public class OverworldScript : MonoBehaviour
 
 	public void EndOverworld()
 	{
+        m_bugFixer.GetComponent<BugFixScript>().SetMenuCanvas();
         //SceneManager.LoadScene ("Loading");
         nlm.ServerReturnToLobby();
 		//SceneManager.UnloadSceneAsync ("Overworld");
