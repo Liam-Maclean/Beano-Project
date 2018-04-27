@@ -270,6 +270,12 @@ public class OverworldScript : MonoBehaviour
 		animationSprites.SetActive (true);
         //cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         //cloneCamera.SetActive(true);
+
+        GameObject[] chibis = GameObject.FindGameObjectsWithTag("Chibi");
+        foreach (GameObject chibi in chibis)
+        {
+            chibi.GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
 	public void EndOverworld()
@@ -283,11 +289,18 @@ public class OverworldScript : MonoBehaviour
     public void Go()
     {
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
+        
 
         foreach (PlayerScript player in players)
         {
             player.gameState = PlayerScript.GameState.Playing;
-            player.GetComponent<SpriteRenderer>().enabled = true;
+            //player.GetComponent<SpriteRenderer>().enabled = true;
+        }
+
+        GameObject[] chibis = GameObject.FindGameObjectsWithTag("Chibi");
+        foreach (GameObject chibi in chibis)
+        {
+            chibi.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 }
