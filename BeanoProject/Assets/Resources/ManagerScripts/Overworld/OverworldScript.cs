@@ -15,6 +15,7 @@ public class OverworldScript : MonoBehaviour
 
     private NetworkInstanceId m_clientID; // CustomLobby.playerdetails.identifiyer
     private List<GameObject> m_players;
+    private List<int> m_playerChars;
 
     public enum Biome { Residential, School, Park, Forest, Downtown, Beanoland };
     public Biome minigameBiome;
@@ -46,6 +47,7 @@ public class OverworldScript : MonoBehaviour
         m_bugFixer.GetComponent<BugFixScript>().SetWorldCanvas();
 
         m_players = new List<GameObject>();
+        m_playerChars = new List<int>();
         Orientor.pieThrow = false;
 
         animationSprites = GameObject.Find ("OverworldBackground");
@@ -68,6 +70,12 @@ public class OverworldScript : MonoBehaviour
 
     void InitiWorld()
     {
+        foreach (CustomLobby opp in FindObjectsOfType<CustomLobby>())
+        {
+            int tempPlayerChar = opp.GetCharID();
+            m_playerChars.Add(tempPlayerChar);
+        }
+
         for (int i = 0; i < m_currPlayers; i++)
         {
             GameObject newPlayer;
@@ -75,7 +83,8 @@ public class OverworldScript : MonoBehaviour
             newPlayer = (GameObject)Instantiate(playerPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
             m_players.Add(newPlayer);
 
-            m_players[i].GetComponent<PlayerScript>().InitPlayer(i, i % 2, 0);
+            // Set players character here based from custom lobby
+            m_players[i].GetComponent<PlayerScript>().InitPlayer(i, m_playerChars[i]);
         }
     }
 
