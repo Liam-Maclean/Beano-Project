@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Resources/Scenes/ComicStrip.unity
+    guid: bc677a483228a604b87e130204917aaa
+  - enabled: 1
     path: Assets/Resources/Scenes/Menu.unity
     guid: aaf7798979016814288b1dee12de818d
   - enabled: 1
