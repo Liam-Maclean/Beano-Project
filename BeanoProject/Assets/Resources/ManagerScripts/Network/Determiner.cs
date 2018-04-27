@@ -13,7 +13,8 @@ public class Determiner : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         if (FindObjectOfType<CustomLobby>())
         {
             inGame.enabled = true;

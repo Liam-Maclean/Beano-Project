@@ -24,6 +24,9 @@ TagManager:
   - UItag
   - OverworldCanvas
   - BGMusic
+  - Plant
+  - Kill
+  - BugFixer
   layers:
   - Default
   - TransparentFX
