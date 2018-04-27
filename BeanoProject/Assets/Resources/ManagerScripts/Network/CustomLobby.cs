@@ -81,6 +81,11 @@ public class CustomLobby : NetworkLobbyPlayer {
         SendDetails(new MinigamePlayerDetails(local.playerDetails.MiniScore, local.playerDetails.MetaScore, local.playerDetails.Identifier, local.playerDetails.Handle, local.playerDetails.Avatar));
     }
 
+    public int GetCharID()
+    {
+        return Networker.avatar;
+    }
+
     /// <summary>
     /// list of IDs to request details for
     /// </summary>

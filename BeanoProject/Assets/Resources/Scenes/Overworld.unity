@@ -5467,9 +5467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e981cd0871b2f2a4e9f6d0fb03d5389f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currPlayersTESTING: 4
   maxNodes: 33
-  playerPrefab: {fileID: 1949163199634524, guid: 9f3c15cc8acc2e7488e12bc46321be5b,
+  playerPrefab: {fileID: 1275271734244034, guid: 8eab0686ed2e9da4bbdb9fd590fbac0f,
     type: 2}
   minigameBiome: 0
   SceneToUnload: 0

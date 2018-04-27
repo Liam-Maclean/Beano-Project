@@ -27,6 +27,7 @@ TagManager:
   - Plant
   - Kill
   - BugFixer
+  - Chibi
   layers:
   - Default
   - TransparentFX

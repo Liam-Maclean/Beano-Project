@@ -210,6 +210,12 @@ Prefab:
       propertyPath: startTime
       value: 45
       objectReference: {fileID: 0}
+    - target: {fileID: 114369465384332140, guid: 04076f20c962fd24ab5e45fd310716e2,
+        type: 2}
+      propertyPath: holePrefab
+      value: 
+      objectReference: {fileID: 1638941802107708, guid: d43a81c1f7dc28e4ca18207f8a1c17d5,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 04076f20c962fd24ab5e45fd310716e2, type: 2}
   m_IsPrefabParent: 0
@@ -584,10 +590,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_portraitPositions:
-  - {x: -780, y: 400, z: 0}
-  - {x: -780, y: 200, z: 0}
-  - {x: -780, y: 0, z: 0}
-  - {x: -780, y: -200, z: 0}
+  - {x: -800, y: 500, z: 0}
+  - {x: -800, y: 190, z: 0}
+  - {x: -800, y: -120, z: 0}
+  - {x: -800, y: -430, z: 0}
 --- !u!1 &1821659969
 GameObject:
   m_ObjectHideFlags: 0
