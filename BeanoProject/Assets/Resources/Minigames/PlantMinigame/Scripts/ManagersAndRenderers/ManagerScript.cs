@@ -174,7 +174,7 @@ public class ManagerScript : MonoBehaviour {
     //start function
 	void Start()
 	{
-		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (4));
+		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (5));
         //FadeOutAnimation = GameObject.Find("FadeOut").GetComponent<StopAnimationScript>();
         FadeInAnimation = GameObject.Find ("FadeIn").GetComponent<StopAnimationScript> ();
 		fade.SetActive (false);
