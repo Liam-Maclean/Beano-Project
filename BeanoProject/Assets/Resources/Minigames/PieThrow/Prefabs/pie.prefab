@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114133704571085762}
   - component: {fileID: 61107689284345098}
   - component: {fileID: 82245959722550856}
+  - component: {fileID: 114309690854372730}
   m_Layer: 8
   m_Name: pie
   m_TagString: pie
@@ -182,6 +183,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieSplat: {fileID: 21300000, guid: 9c5b24deecef50f4cbbb10d4c4ea508b, type: 3}
+--- !u!114 &114309690854372730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1986721381973192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec762046025c6d343adb713dbf817e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114671150272939500
 MonoBehaviour:
   m_ObjectHideFlags: 1

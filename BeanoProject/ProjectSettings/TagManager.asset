@@ -24,10 +24,7 @@ TagManager:
   - UItag
   - OverworldCanvas
   - BGMusic
-  - Plant
-  - Kill
-  - BugFixer
-  - Chibi
+  - SpecialEnemy
   layers:
   - Default
   - TransparentFX

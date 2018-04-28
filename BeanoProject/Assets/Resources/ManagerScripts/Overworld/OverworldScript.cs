@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class OverworldScript : MonoBehaviour
 {
-    private int m_currPlayers;
+    public int currPlayersTESTING;
     private int m_currNode;
 
     public int maxNodes;
@@ -15,7 +15,6 @@ public class OverworldScript : MonoBehaviour
 
     private NetworkInstanceId m_clientID; // CustomLobby.playerdetails.identifiyer
     private List<GameObject> m_players;
-    private List<int> m_playerChars;
 
     public enum Biome { Residential, School, Park, Forest, Downtown, Beanoland };
     public Biome minigameBiome;
@@ -39,25 +38,36 @@ public class OverworldScript : MonoBehaviour
 	private bool m_isEndCalled = false;
 
 	private GameObject animationSprites;
-    private GameObject m_bugFixer;
+
+
+	//Background Music
+	private GameObject m_backgroundMusic;
+	private AudioSource m_backgroundAudio;
+
+    void Awake()
+    {
+        m_players = new List<GameObject>();
+        Orientor.pieThrow = false;
+    }
 
     void Start()
     {
-        m_bugFixer = GameObject.FindGameObjectWithTag("BugFixer");
-        //m_bugFixer.GetComponent<BugFixScript>().SetWorldCanvas();
-
-        m_players = new List<GameObject>();
-        m_playerChars = new List<int>();
-        Orientor.pieThrow = false;
-
-        animationSprites = GameObject.Find ("OverworldBackground");
+		animationSprites = GameObject.Find ("OverworldBackground");
         m_playerIDObject = GameObject.FindGameObjectWithTag("Player");
         m_clientID = CustomLobby.local.playerDetails.Identifier;
-        m_currPlayers = FindObjectsOfType<CustomLobby>().Length;
+        currPlayersTESTING = FindObjectsOfType<CustomLobby>().Length;
 
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         //cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         //mainCamera.SetActive(false);
+
+
+		if (GameObject.FindGameObjectWithTag ("BGMusic") != null)
+		{
+			m_backgroundMusic = GameObject.FindGameObjectWithTag ("BGMusic");
+			m_backgroundAudio = m_backgroundMusic.GetComponent<AudioSource> ();
+		}
+
 
         Debug.Log("Network ID: " + m_clientID);
 
@@ -70,21 +80,14 @@ public class OverworldScript : MonoBehaviour
 
     void InitiWorld()
     {
-        foreach (CustomLobby opp in FindObjectsOfType<CustomLobby>())
-        {
-            int tempPlayerChar = opp.GetCharID();
-            m_playerChars.Add(tempPlayerChar);
-        }
-
-        for (int i = 0; i < m_currPlayers; i++)
+        for (int i = 0; i < currPlayersTESTING; i++)
         {
             GameObject newPlayer;
 
             newPlayer = (GameObject)Instantiate(playerPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
             m_players.Add(newPlayer);
 
-            // Set players character here based from custom lobby
-            m_players[i].GetComponent<PlayerScript>().InitPlayer(i, m_playerChars[i]);
+            m_players[i].GetComponent<PlayerScript>().InitPlayer(i, i % 2);
         }
     }
 
@@ -98,7 +101,7 @@ public class OverworldScript : MonoBehaviour
         if (m_currNode + 1 < maxNodes)
         {
             m_currNode++;
-            for (int i = 0; i < m_currPlayers; i++)
+            for (int i = 0; i < currPlayersTESTING; i++)
             {
                 m_players[i].GetComponent<PlayerScript>().SetTargetPos(GetNodePos(m_currNode));
             }
@@ -202,8 +205,7 @@ public class OverworldScript : MonoBehaviour
                 GameObject sceneControlObj = GameObject.FindGameObjectWithTag("SceneController");
                 sceneControlObj.GetComponent<Networker>().RpcLoadGame(Selector.activeMinigames[indexInMinigameList]);
                 SceneToUnload = Selector.activeMinigames[indexInMinigameList];
-
-                // FindObjectOfType<Networker>().RpcLoadGame(Selector.activeMinigames[indexInMinigameList]);
+               // FindObjectOfType<Networker>().RpcLoadGame(Selector.activeMinigames[indexInMinigameList]);
                 // SceneManager.LoadSceneAsync(Selector.activeMinigames[indexInMinigameList], LoadSceneMode.Additive);
                 goto BreakOut;
             }
@@ -252,6 +254,7 @@ public class OverworldScript : MonoBehaviour
         mainCamera.SetActive(false);
         background.enabled = false;
 		animationSprites.SetActive (false);
+		m_backgroundAudio.Stop ();
     }
 
     public void Resume()
@@ -268,19 +271,13 @@ public class OverworldScript : MonoBehaviour
         background.enabled = true;
         mainCamera.SetActive(true);
 		animationSprites.SetActive (true);
+		m_backgroundAudio.Play ();
         //cloneCamera = Instantiate(mainCamera, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
         //cloneCamera.SetActive(true);
-
-        GameObject[] chibis = GameObject.FindGameObjectsWithTag("Chibi");
-        foreach (GameObject chibi in chibis)
-        {
-            chibi.GetComponent<SpriteRenderer>().enabled = true;
-        }
     }
 
 	public void EndOverworld()
 	{
-        //m_bugFixer.GetComponent<BugFixScript>().SetMenuCanvas();
         //SceneManager.LoadScene ("Loading");
         nlm.ServerReturnToLobby();
 		//SceneManager.UnloadSceneAsync ("Overworld");
@@ -289,18 +286,9 @@ public class OverworldScript : MonoBehaviour
     public void Go()
     {
         PlayerScript[] players = FindObjectsOfType<PlayerScript>();
-        
-
         foreach (PlayerScript player in players)
         {
             player.gameState = PlayerScript.GameState.Playing;
-            //player.GetComponent<SpriteRenderer>().enabled = true;
-        }
-
-        GameObject[] chibis = GameObject.FindGameObjectsWithTag("Chibi");
-        foreach (GameObject chibi in chibis)
-        {
-            chibi.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 }
