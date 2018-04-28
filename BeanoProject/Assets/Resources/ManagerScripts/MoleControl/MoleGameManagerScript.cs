@@ -18,6 +18,7 @@ public class MoleGameManagerScript : MonoBehaviour
     private List<GameObject> m_hammers;
 
     public GameObject molePrefab;
+    public GameObject holePrefab;
     private float[] m_spawner;
     const int SPAWNERS = 9;
     public float maxSpawnTime;
@@ -50,17 +51,20 @@ public class MoleGameManagerScript : MonoBehaviour
     public GameObject fadeOutPrefab;
     private bool m_isEndCalled = false;
 
+    private GameObject[] m_holes;
+    private bool[] m_isHole;
+
     // Called on launch
     void Awake()
     {
-
-      
+        m_holes = new GameObject[9];
+        m_isHole = new bool[9];
     }
 
     // Use this for initialization
     void Start()
     {
-		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (6));
+		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (7));
 
 		m_currState = GameState.Setup;
 
@@ -146,6 +150,43 @@ public class MoleGameManagerScript : MonoBehaviour
                             {
                                 GameObject newMole = (GameObject)Instantiate(molePrefab, new Vector3(0.0f, 0.0f, -1.0f), Quaternion.identity);
                                 newMole.GetComponent<MolesScript>().InitMole(i);
+
+                                if (!m_isHole[i])
+                                {
+                                    switch (i)
+                                    {
+                                        case 0:
+                                            m_holes[i] = (GameObject)Instantiate(holePrefab, new Vector3(-3.1f, 1.25f, -0.50f), Quaternion.identity);
+                                            break;
+                                        case 1:
+                                            m_holes[i] = (GameObject)Instantiate(holePrefab, new Vector3(-0.1f, 1.25f, -0.51f), Quaternion.identity);
+                                            break;
+                                        case 2:
+                                            m_holes[i] = (GameObject)Instantiate(holePrefab, new Vector3(2.9f, 1.25f, -0.52f), Quaternion.identity);
+                                            break;
+
+                                        case 3:
+                                            m_holes[i] = (GameObject)Instantiate(holePrefab, new Vector3(-3.1f, -0.75f, -0.60f), Quaternion.identity);
+                                            break;
+                                        case 4:
+                                            m_holes[i] = (GameObject)Instantiate(holePrefab, new Vector3(-0.1f, -0.75f, -0.61f), Quaternion.identity);
+                                            break;
+                                        case 5:
+                                            m_holes[i] = (GameObject)Instantiate(holePrefab, new Vector3(2.9f, -0.75f, -0.62f), Quaternion.identity);
+                                            break;
+
+                                        case 6:
+                                            m_holes[i] = (GameObject)Instantiate(holePrefab, new Vector3(-3.1f, -2.75f, -0.70f), Quaternion.identity);
+                                            break;
+                                        case 7:
+                                            m_holes[i] = (GameObject)Instantiate(holePrefab, new Vector3(-0.1f, -2.75f, -0.71f), Quaternion.identity);
+                                            break;
+                                        case 8:
+                                            m_holes[i] = (GameObject)Instantiate(holePrefab, new Vector3(2.9f, -2.75f, -0.72f), Quaternion.identity);
+                                            break;
+                                    }
+                                    m_isHole[i] = true;
+                                }
                             }
                         }
                     }

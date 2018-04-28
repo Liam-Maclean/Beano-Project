@@ -121,7 +121,7 @@ public class NLM : NetworkLobbyManager {
                 else
                 {
                     player.SendNotReadyToBeginMessage();
-                    readyButton.sprite = isntReady;
+                    //readyButton.sprite = isntReady;
                 }
             }
             //CheckReadyToBegin();

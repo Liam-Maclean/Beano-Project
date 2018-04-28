@@ -653,7 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ba9be245df5ee44922ff599628f476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 5
+  sceneIndex: 6
   onButton: {fileID: 1238183622}
   offButton: {fileID: 85051}
   indicator: {fileID: 1889970527}
@@ -2114,7 +2114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ba9be245df5ee44922ff599628f476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 4
+  sceneIndex: 5
   onButton: {fileID: 165380647}
   offButton: {fileID: 61957872}
   indicator: {fileID: 526750120}
@@ -2293,7 +2293,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 962644688}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -2871,7 +2871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ba9be245df5ee44922ff599628f476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneIndex: 6
+  sceneIndex: 7
   onButton: {fileID: 78178033}
   offButton: {fileID: 79280028}
   indicator: {fileID: 1887417711}
@@ -3109,7 +3109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030518, y: 451.4001}
+  m_AnchoredPosition: {x: -0.000030518, y: -469}
   m_SizeDelta: {x: 1345.4, y: 288.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1481822602
@@ -3218,7 +3218,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.2, y: -542}
+  m_AnchoredPosition: {x: 1000, y: 500}
   m_SizeDelta: {x: 206.6, y: 187.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1704332608

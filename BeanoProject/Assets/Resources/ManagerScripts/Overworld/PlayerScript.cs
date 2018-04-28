@@ -9,6 +9,9 @@ public class PlayerScript : MonoBehaviour
     public float moveSpeed;
     public float spaceBuffer;
 
+    public Sprite[] characterSprites;
+    public Animator characterAnim;
+
     private float newSpaceBuffer;
     private float m_momentum = 0;
     private Vector3 m_moveVelo = new Vector3(0, 0, 0);
@@ -25,10 +28,8 @@ public class PlayerScript : MonoBehaviour
 
     //PUBLIC FOR TESTING PERPOSES ONLY ---to be made private!---
     public int m_playerID;
-    public int m_sausageCount;
-    public int m_ranking; // To be utailised once scoring is inplace
 
-    enum CharacterID {Dennis, Gnasher, Walter, DennisDad}; // This needs updated with a FULL list
+    enum CharacterID {Dennis, Pieface, JJ, Ruby};
     private CharacterID m_currChar;
 
     public enum GameState
@@ -44,19 +45,36 @@ public class PlayerScript : MonoBehaviour
 
     void Start ()
     {
-		transition = GameObject.Find ("Transition").GetComponent<SceneTransition>();
+        characterAnim = GetComponent<Animator>();
+
+        transition = GameObject.Find ("Transition").GetComponent<SceneTransition>();
         m_oldTargetMet = false;
         m_currPos = transform.position;
         m_oldPos = m_currPos;
     }
 
-    public void InitPlayer(int playerID, int currChar, int sausageCount)
+    public void InitPlayer(int playerID, int currChar)
     {
         m_playerID = playerID;
         m_currChar = (CharacterID)currChar;
-        m_sausageCount = sausageCount;
 
-        /// CHANGE PLAYER ID WITH RANKINGS WHEN IMPLEMENTED
+        if (m_currChar == CharacterID.Dennis)
+        {
+            characterAnim.Play("dennisWalk");
+        }
+        else if (m_currChar == CharacterID.Pieface)
+        {
+            characterAnim.Play("pieWalk");
+        }
+        else if (m_currChar == CharacterID.JJ)
+        {
+            characterAnim.Play("jjWalk");
+        }
+        else if (m_currChar == CharacterID.Ruby)
+        {
+            characterAnim.Play("rubyWalk");
+        }
+
         newSpaceBuffer = spaceBuffer + playerID;
     }
 
@@ -157,13 +175,13 @@ public class PlayerScript : MonoBehaviour
                 if (playerRot >= -90.0f && playerRot < 90.0f)
                 {
                     transform.rotation = Quaternion.AngleAxis(playerRot, Vector3.forward);
-                    transform.localScale = new Vector3(0.15f, transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(0.5f, transform.localScale.y, transform.localScale.z);
                 }
                 else
                 {
                     playerRot -= 180;
                     transform.rotation = Quaternion.AngleAxis(playerRot, Vector3.forward);
-                    transform.localScale = new Vector3(-0.15f, transform.localScale.y, transform.localScale.z);
+                    transform.localScale = new Vector3(-0.5f, transform.localScale.y, transform.localScale.z);
                 }
             }
 
