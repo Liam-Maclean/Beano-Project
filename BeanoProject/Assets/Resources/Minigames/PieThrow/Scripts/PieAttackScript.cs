@@ -105,6 +105,7 @@ public class PieAttackScript : MonoBehaviour {
 				}      
 			}
 
+            //set hit condition to true
             m_pieScript.SetHit(m_isHit);
 		}
 	}

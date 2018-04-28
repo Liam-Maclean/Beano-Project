@@ -87,7 +87,7 @@ public class OverworldScript : MonoBehaviour
             newPlayer = (GameObject)Instantiate(playerPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
             m_players.Add(newPlayer);
 
-            m_players[i].GetComponent<PlayerScript>().InitPlayer(i, i % 2, 0);
+            m_players[i].GetComponent<PlayerScript>().InitPlayer(i, i % 2);
         }
     }
 

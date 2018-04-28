@@ -5,12 +5,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class PieThrowManagerScript : MonoBehaviour
 {
+    //GAMESTATE
     private enum GAMESTATE { Start, Playing, Finished};
     private GAMESTATE m_currState;
 
+    //depth variables
     public int minZDist;
     public int maxZDist;
 
+    //timer variables
     public Text timer;
     public float timeLeft;
 
@@ -19,19 +22,24 @@ public class PieThrowManagerScript : MonoBehaviour
 	private List<PortaitScript> portraitScripts = new List<PortaitScript>();
 	private PortaitScript localPortrait;
 
+    //spawn variables
     public float spawnRateMin;
     public float spawnRateMax;
     private float[] m_spawnTimer;
     private float[] m_spawnRateRand;
 
+    //odds of a mole plane spawning
     public float aircraftOdds;
 
+    //enemy types variables
     public int basicPedTypes;
     public int specialTypes;
 
+    //spawning position variables
     public Vector2 targetPos;
     public float xFlipDistance;
 
+    //list of enemies
     public GameObject[] pedPrefabs;
     private List<GameObject> m_pedObjects;
 
@@ -39,21 +47,26 @@ public class PieThrowManagerScript : MonoBehaviour
     public GameObject readyMenu;
 
 
+    //canvas variables
 	public GameObject gameCanvas;
-
 	public GameObject endGameCanvas;
 	private GameObject newCanvas;
 	private bool isEnd;
+
 
     public GameObject tutorialCanvas;
     public float tutorialTimer;
     private Text tutorialTimerTxt;
 
+
+    //hand variables
 	public GameObject handSpawn;
 	private HandSpawn handSpawnScript;
 
+    //player's score
     private float playerScore;
 
+    //music variables
     public GameObject backgroundMusic;
     private MusicFadeOut m_musicFadeOut;
 
@@ -68,9 +81,9 @@ public class PieThrowManagerScript : MonoBehaviour
 	void Start ()
     {
 		SceneManager.SetActiveScene (SceneManager.GetSceneByBuildIndex (6));
-        // Set Client ID
-        // Set Portraits
-        // Set Powerup state
+
+
+        //Init variables
 		playerScore = 0.0f;
 		m_currState = GAMESTATE.Start;
 
@@ -84,21 +97,17 @@ public class PieThrowManagerScript : MonoBehaviour
 			m_spawnRateRand[i] = Random.Range(spawnRateMin, spawnRateMax);
 		}
 
-        // Call start menu
-        //        StartMenu();
 
+        //grab fade out script from background music game object
         m_musicFadeOut = backgroundMusic.GetComponent<MusicFadeOut>();
 
-  
+		handSpawnScript = handSpawn.GetComponent<HandSpawn> ();
 
 		portraits = GameObject.FindGameObjectsWithTag ("Portrait");
 
         newCanvas = Instantiate(tutorialCanvas, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
 
         tutorialTimerTxt = GUIText.FindObjectOfType<Text>();
-        
-       
-
 
 		//Iterate through the length of the portrait scripts
 		for (int i = 0; i < portraits.Length; i++) 
@@ -115,7 +124,6 @@ public class PieThrowManagerScript : MonoBehaviour
 		}
 
 
-		handSpawnScript = handSpawn.GetComponent<HandSpawn> ();
 
 	}
 
@@ -154,7 +162,7 @@ public class PieThrowManagerScript : MonoBehaviour
 			    //DisplayScore ();
 			    SpawnPed ();
 
-
+                //if the timer hits 0 transition to end game state
 			    if (timeLeft <= 0.0f) {
 			    	m_currState = GAMESTATE.Finished;
 			    	isEnd = true;
@@ -179,6 +187,8 @@ public class PieThrowManagerScript : MonoBehaviour
 		
 	void SpawnPed()
 	{
+
+
 		for (int i = 0; i < maxZDist - minZDist; i++)
 		{
 			if (m_spawnTimer[i] >= m_spawnRateRand[i])
@@ -306,7 +316,6 @@ public class PieThrowManagerScript : MonoBehaviour
 
     void GameOver()
     {
-
         m_musicFadeOut.FadeOut();
         if (isEnd) {
 
@@ -317,17 +326,13 @@ public class PieThrowManagerScript : MonoBehaviour
 
 			//destroy the hand object and for mouse controls set the cursor to visible
 			handSpawnScript.Destroy ();
-			//delete the current game canvas
-		   // Destroy (gameCanvas);
-			//DisplayScore ();
+
 			Cursor.visible = true;
 
             GameObject pie = GameObject.FindGameObjectWithTag("pie");
             Destroy(pie);
 
 			Destroy (timer);
-
-            //CustomLobby.local.EndMiniGame();
         }
     }
 

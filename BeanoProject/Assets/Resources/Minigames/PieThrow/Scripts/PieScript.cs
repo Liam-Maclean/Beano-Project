@@ -94,7 +94,11 @@ public class PieScript : MonoBehaviour
                     case TouchPhase.Began:
                         //store the initial position
                         pieStartPosition = pie.transform.position;
+
+                        //get the current touch position
 						m_touch = touch.position;
+
+                        //if the pie hasnt launched move the pie with the touch
 						if (!isReloading && !hasLaunched)
 						{
 							Dragging();
@@ -104,8 +108,9 @@ public class PieScript : MonoBehaviour
 
                         break;
                     case TouchPhase.Ended:
+                        //store the last pie position
                         pieEndPosition = pie.transform.position;
-
+                        //launch when the touch has ended
                         Launch();
                         break;
                 }
@@ -137,11 +142,8 @@ public class PieScript : MonoBehaviour
 			//get the distance from the slingshot to the touch
 			Vector2 slingToTouch = new Vector2 ((objPos.x - slingshot.transform.position.x), (objPos.y - slingshot.transform.position.y));
 
+            //power calculation
 			float power = slingToTouch.magnitude / maxStretch;
-
-			distance = (pieStartPosition - pie.transform.position);
-			float x = (distance.x * distance.x);
-			float y = (distance.y * distance.y);
 
 			//set the value of the slider = to the distance between the slingshot and the mouse input;
 			powerSlider.value = power;
@@ -168,9 +170,6 @@ public class PieScript : MonoBehaviour
 
 			//power calculation
 			float power = slingToTouch.magnitude / maxStretch;
-            distance = (pieStartPosition - pie.transform.position);
-            float x = (distance.x * distance.x);
-            float y = (distance.y * distance.y);
           
             //set the value of the slider = to the distance between the slingshot and the mouse input;
             powerSlider.value = power;
@@ -217,6 +216,7 @@ public class PieScript : MonoBehaviour
         //if the click is being held down
         if (newMouseDown && oldMouseDown)
 		{
+            //move the pie wit the mouse
 	        MouseDragging ();
 		}
  
@@ -243,6 +243,8 @@ public class PieScript : MonoBehaviour
             //instansiate the new pie at the respawn position
 			pie = (GameObject)Instantiate(piePrefab, pieSpawnPosition, Quaternion.identity);
 			sr = pie.GetComponent<SpriteRenderer>();
+
+
             //reset pie variables 
 			respawnTime = tempTime;
             hasLaunched = false;
