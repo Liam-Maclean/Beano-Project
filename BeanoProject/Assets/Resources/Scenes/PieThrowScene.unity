@@ -145,7 +145,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4745601876262102, guid: efd71c575ccf6284998a7f63d7a5100f, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 82139283575542736, guid: efd71c575ccf6284998a7f63d7a5100f,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c16652db44518894db5e15a206a8f564, type: 3}
+    - target: {fileID: 82139283575542736, guid: efd71c575ccf6284998a7f63d7a5100f,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: efd71c575ccf6284998a7f63d7a5100f, type: 2}
@@ -481,7 +491,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &836120511
 MonoBehaviour:
@@ -1403,6 +1413,17 @@ GameObject:
   m_PrefabParentObject: {fileID: 1483457107445138, guid: efd71c575ccf6284998a7f63d7a5100f,
     type: 2}
   m_PrefabInternal: {fileID: 122507852}
+--- !u!114 &1803435239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1803435236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0916e5aea3dee5c4e998d6a9f4a88330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1842480934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,7 +1541,7 @@ MonoBehaviour:
   maxZDist: 10
   timer: {fileID: 1225035494}
   timeLeft: 45
-  spawnRateMin: 2
+  spawnRateMin: 3
   spawnRateMax: 5
   aircraftOdds: 0.25
   basicPedTypes: 9
