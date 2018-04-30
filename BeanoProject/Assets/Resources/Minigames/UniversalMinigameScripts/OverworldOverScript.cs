@@ -49,7 +49,6 @@ public class OverworldOverScript : MonoBehaviour {
 
 	public void CountDownTimerToEnd()
 	{
-		
 		countDownText.text = "" + (int)timer;
 		if (timer > 0) {
 			timer -= Time.deltaTime;

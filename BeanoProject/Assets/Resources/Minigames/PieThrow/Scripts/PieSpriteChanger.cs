@@ -58,7 +58,7 @@ public class PieSpriteChanger : MonoBehaviour {
         }
     }
 
-    //SETTER
+
 	public void SetPieSprite(Sprite sprite)
 	{
 		sr.sprite = sprite;

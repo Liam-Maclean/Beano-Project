@@ -61,7 +61,6 @@ public class PieScript : MonoBehaviour
         //initialise the rays
         rayToTouch = new Ray(pie.transform.position, Vector3.zero);
 
-		//init sprite renderer, game manager and attack script
 		sr = pie.GetComponent<SpriteRenderer>();
 		managerScript = gameManager.GetComponent<PieThrowManagerScript> ();
 		pieAttackScript = pie.GetComponent<PieAttackScript> ();
@@ -73,7 +72,8 @@ public class PieScript : MonoBehaviour
 		isReloading = false;
 		isDestroyed = false;
 	}
-		
+
+
     void Update()
     {
         if (managerScript.GetState() == 1)
@@ -94,23 +94,17 @@ public class PieScript : MonoBehaviour
                     case TouchPhase.Began:
                         //store the initial position
                         pieStartPosition = pie.transform.position;
-
-                        //get the current touch position
-						m_touch = touch.position;
-
-                        //if the pie hasnt launched move the pie with the touch
-						if (!isReloading && !hasLaunched)
-						{
-							Dragging();
-						}
                         break;
                     case TouchPhase.Moved:
-
+                        m_touch = touch.position;
+                        if (!isReloading && !hasLaunched)
+                        {
+                            Dragging();
+                        }
                         break;
                     case TouchPhase.Ended:
-                        //store the last pie position
                         pieEndPosition = pie.transform.position;
-                        //launch when the touch has ended
+
                         Launch();
                         break;
                 }
@@ -142,11 +136,8 @@ public class PieScript : MonoBehaviour
 			//get the distance from the slingshot to the touch
 			Vector2 slingToTouch = new Vector2 ((objPos.x - slingshot.transform.position.x), (objPos.y - slingshot.transform.position.y));
 
-            //power calculation
-			float power = slingToTouch.magnitude / maxStretch;
-
-			//set the value of the slider = to the distance between the slingshot and the mouse input;
-			powerSlider.value = power;
+            //set the value of the slider = to the distance between the slingshot and the mouse input;
+            powerSlider.value = -slingToTouch.y;
 
             //this basically ensures that if the player stretches further than max stretch then it will still be aligned
             if (slingToTouch.sqrMagnitude > maxStretchSqr) {
@@ -166,13 +157,18 @@ public class PieScript : MonoBehaviour
 		//get the distance from the slingshot to the touch]
 		if (objPos.y <= -2.5f)
         {
-			Vector2 slingToTouch = new Vector2 ((objPos.x - slingshot.transform.position.x), (objPos.y - slingshot.transform.position.y));
+			Vector2 slingToTouch = new Vector3 ((objPos.x - slingshot.transform.position.x), (objPos.y - slingshot.transform.position.y), 0.0f);
 
-			//power calculation
-			float power = slingToTouch.magnitude / maxStretch;
+
+            float poo = slingToTouch.magnitude / maxStretch;
+
+
+            distance = (pieStartPosition - pie.transform.position);
+            float x = (distance.x * distance.x);
+            float y = (distance.y * distance.y);
           
             //set the value of the slider = to the distance between the slingshot and the mouse input;
-            powerSlider.value = power;
+                powerSlider.value = poo;
            
 			//this ensures that if the player stretches further than max stretch then it will still be aligned
 			if (slingToTouch.sqrMagnitude > maxStretchSqr) {
@@ -216,7 +212,6 @@ public class PieScript : MonoBehaviour
         //if the click is being held down
         if (newMouseDown && oldMouseDown)
 		{
-            //move the pie wit the mouse
 	        MouseDragging ();
 		}
  
@@ -243,8 +238,6 @@ public class PieScript : MonoBehaviour
             //instansiate the new pie at the respawn position
 			pie = (GameObject)Instantiate(piePrefab, pieSpawnPosition, Quaternion.identity);
 			sr = pie.GetComponent<SpriteRenderer>();
-
-
             //reset pie variables 
 			respawnTime = tempTime;
             hasLaunched = false;

@@ -13,11 +13,11 @@ public class PieAttackScript : MonoBehaviour {
 
 	private SpriteRenderer m_sr;
 	private PieSpriteChanger m_pieSpriteManager;
+    private AudioSource m_pieSplatSound;
 
 	public Sprite pieSplat;
 
-	private AudioSource m_hitSound;
-	private HitSoundScript m_hitSoundPlay;
+
 	private bool m_isHit;
 	private float m_hitScore;
 
@@ -29,8 +29,7 @@ public class PieAttackScript : MonoBehaviour {
         m_pieSpawner = GameObject.FindGameObjectWithTag("PieSpawner");
         m_pedSpawner = GameObject.FindGameObjectWithTag ("PedSpawner");
 
-		m_hitSound = this.GetComponent<AudioSource> ();
-		m_hitSoundPlay = this.GetComponent<HitSoundScript> ();
+        m_pieSplatSound = this.GetComponent<AudioSource>();
 
         //get the script and component references
         m_pieScript = m_pieSpawner.GetComponent<PieScript>();
@@ -68,28 +67,16 @@ public class PieAttackScript : MonoBehaviour {
 
 
                     //play impact sounds
-					if (pedSound != null)
-					{
-						pedSound.Play ();
-					}
-
-					m_hitSoundPlay.HitPlay ();
+                    pedSound.Play();
+                    m_pieSplatSound.Play();
 
 					pedAnimator.Play ("Impact");
 					//stop the move speed to allow the animation to play
 					pedScript.SetMoveSpeed (0.0f);
+					//add a delay to the destruction of the enemy to allow for the animation to play
+					Destroy (hit [i].collider.gameObject, 1.0f);
 
 
-					if (GameObject.FindGameObjectWithTag("SpecialEnemy") == hit[i].collider.gameObject) 
-					{
-						//if it is the mole plane destroy it immediately
-						Destroy (hit [i].collider.gameObject);
-					}
-					else 
-					{
-						//add a delay to the destruction of the enemy to allow for the animation to play
-						Destroy (hit [i].collider.gameObject, 1.0f);
-					}
                     //get the unique score of the collided object
                     m_hitScore = pedScript.GetScore ();
                     //add the score to the player's score
@@ -105,7 +92,6 @@ public class PieAttackScript : MonoBehaviour {
 				}      
 			}
 
-            //set hit condition to true
             m_pieScript.SetHit(m_isHit);
 		}
 	}
