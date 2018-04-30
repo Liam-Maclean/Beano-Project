@@ -29,7 +29,7 @@ public class PlayerScript : MonoBehaviour
     //PUBLIC FOR TESTING PERPOSES ONLY ---to be made private!---
     public int m_playerID;
 
-    enum CharacterID {Dennis, Pieface, JJ, Ruby};
+    enum CharacterID {Dennis, Ruby, JJ, Pieface};
     private CharacterID m_currChar;
 
     public enum GameState
