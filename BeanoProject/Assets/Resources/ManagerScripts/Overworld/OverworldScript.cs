@@ -116,6 +116,10 @@ public class OverworldScript : MonoBehaviour
 			{
 				GameObject gameOut;
 				gameOut = Instantiate(gameOutPrefab, new Vector3(0.0f, 0.0f, 0.0f), Quaternion.identity);
+
+                
+
+
 				//gameOut.GetComponent<OverworldOverScript> ().enabled = true;
 
 				GameObject fadeOut;
@@ -281,8 +285,8 @@ public class OverworldScript : MonoBehaviour
 	public void EndOverworld()
 	{
         //m_bugFixer.GetComponent<BugFixScript>().SetMenuCanvas();
-        //SceneManager.LoadScene ("Loading");
-        nlm.ServerReturnToLobby();
+        // nlm.ServerReturnToLobby();
+        SceneManager.LoadScene ("Menu");
 		//SceneManager.UnloadSceneAsync ("Overworld");
 	}
 

@@ -310,7 +310,8 @@ public class PieThrowManagerScript : MonoBehaviour
 			//create the endgame canvas and spawn it in the scene
 			newCanvas = Instantiate (Resources.Load ("Minigames/UniversalMinigamePrefabs/GameOverCanvas")) as GameObject;
 
- 
+            Destroy(timer);
+
 			isEnd = false;
 
 			//destroy the hand object and for mouse controls set the cursor to visible
